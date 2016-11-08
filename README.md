@@ -1,2 +1,2 @@
-# stablexui-designer
+# StablexUI-Designer
 comming soon...
