@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Radio
+	top="0"
+	left="0"
+	selected="true"
+	group="'group1'"
+	skinName="'defaultRadio'"
+	states-up-text="'option'"
+	states-up-skinName="'defaultRadioUnselected'"
+	states-up-ico-skinName="'defaultRadioUnselectedIco'"
+	states-down-text="'option'"
+	states-down-skinName="'defaultRadioSelected'"
+	states-down-ico-skinName="'defaultRadioSelectedIco'"/>

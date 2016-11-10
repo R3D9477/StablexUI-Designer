@@ -1,0 +1,7 @@
+{
+	"title": "Radio Button",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.Radio",
+	"properties": [ ]
+}

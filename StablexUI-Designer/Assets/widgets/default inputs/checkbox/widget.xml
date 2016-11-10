@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Checkbox
+	top="0"
+	left="0"
+	skinName="'defaultCheckbox'"
+	states-up-text="'check me'"
+	states-up-skinName="'defaultCheckboxUnchecked'"
+	states-up-ico-skinName="'defaultRadioUncheckedIco'"
+	states-down-text="'uncheck me'"
+	states-down-skinName="'defaultCheckboxChecked'"
+	states-down-ico-skinName="'defaultRadioCheckedIco'"/>

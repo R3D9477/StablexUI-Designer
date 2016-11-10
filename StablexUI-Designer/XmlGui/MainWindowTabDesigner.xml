@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabPage
+	name="'tabDesigner'"
+	widthPt="100"
+	heightPt="100"
+	title-text="'Designer'"
+	title-padding="5"
+	title-highlightFormat-color="0xFF0000"
+	title-highlightFormat-bold="true"
+	title-highlightOnSelect="true"
+	skin:Paint-color="0xC0C0C0"
+	skin:Paint-border="1"
+	skin:Paint-borderColor="0x000000">
+	<VBox
+		widthPt="100"
+		heightPt="100"
+		align="'top,left'"
+		layout:Row-rows="[50, -1]"
+		layout:Row-cellPadding="0">
+		<HBox
+			widthPt="100"
+			heightPt="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			layout:Column-cols="[35, 35, 150, -1]"
+			layout:Column-paddingTop="2"
+			layout:Column-paddingBottom="2">
+			<WgtSelector
+				name="'wlSelectBtn'"
+				widthPt="100"
+				heightPt="100"
+				tip:Tip-text="'Selection mode'"
+				ico-src="'graphics/tools/select.png'" />
+			<WgtSelector
+				name="'wlDeleteBtn'"
+				widthPt="100"
+				heightPt="100"
+				tip:Tip-text="'Delete widget'"
+				ico-src="'graphics/tools/delete.png'" />
+			<Options
+				name="'wgtGroupsLst'"
+				heightPt="100"
+				box-skin:Paint-alpha="0.9"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x000000"
+				list-skin:Paint-color="0x454545"
+				list-skin:Paint-alpha="1" />
+			<Scroll
+				heightPt="100"
+				hBar-visible="true"
+				vBar-visible="false"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x000000"
+				vBar-slider-skin:Paint-color="0x002200"
+				hBar-slider-skin:Paint-color="0x002200"
+				hBar-skin:Paint-color="0x777777"
+				vBar-skin:Paint-color="0x777777">
+				<HBox name="'wgtsLst'" />
+			</Scroll>
+		</HBox>
+		<HBox
+			widthPt="100"
+			heightPt="100"
+			layout:Column-cols="[-1, 200]">
+			<DesignerArea/>
+			<WgtsPropsLst/>
+		</HBox>
+	</VBox>
+</TabPage>

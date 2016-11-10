@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skins>
+	<defaultClock:Paint
+		color="0xC0C0C0"
+		border="1"
+		borderColor="0x000000"/>
+	<defaultProgress:Paint
+		color="0xC0C0C0"
+		border="1"
+		borderColor="0x000000"/>
+	<defaultProgressBar:Gradient
+		corners="[10]"
+		colors="[0xAAAAAA, 0xFFFFFF]"/>
+	<defaultText:Skin/>
+</Skins>

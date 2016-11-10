@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabPage
+	name="'tabXml'"
+	widthPt="100"
+	heightPt="100"
+	title-text="'XML'"
+	title-padding="5"
+	title-highlightFormat-color="0xFF0000"
+	title-highlightFormat-bold="true"
+	title-highlightOnSelect="true"
+	skin:Paint-color="0xC0C0C0"
+	skin:Paint-border="1"
+	skin:Paint-borderColor="0x000000">
+	<Scroll
+		widthPt="100"
+		heightPt="100"
+		hBar-visible="true"
+		vBar-visible="true"
+		skin:Paint-color="0xC0C0C0"
+		vBar-slider-skin:Paint-color="0x002200"
+		hBar-slider-skin:Paint-color="0x002200"
+		hBar-skin:Paint-color="0x777777"
+		vBar-skin:Paint-color="0x777777">
+		<InputText
+			name="'xmlSource'"
+			autoSize="true"
+			skin:Paint-color="0xC0C0C0"
+			label-wordWrap="false"
+			label-multiline="true"
+			label-selectable="true"/>
+	</Scroll>
+</TabPage>

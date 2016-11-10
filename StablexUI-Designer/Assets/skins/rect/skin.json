@@ -1,0 +1,14 @@
+{
+	"className": "ru.stablex.ui.skins.Rect",
+	"properties": [
+		"border",
+		"borderColor",
+		"borderAlpha",
+		"corners",
+		"paddingTop",
+		"paddingRight",
+		"paddingBottom",
+		"paddingLeft",
+		"padding"
+	]
+}

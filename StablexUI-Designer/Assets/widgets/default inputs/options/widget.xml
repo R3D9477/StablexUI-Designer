@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Options
+	h="20"
+	w="150"
+	top="0"
+	left="0"
+	skinName="'defaultOptions'"
+	box-skinName="'defaultOptionsBox'"
+	list-skinName="'defaultOptionsList'"/>

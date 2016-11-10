@@ -1,0 +1,7 @@
+{
+	"title": "Text Label",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.Text",
+	"properties": [ ]
+}

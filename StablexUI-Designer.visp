@@ -1,0 +1,141 @@
+ ⦑ StablexUI-Designer ⦒
+	⦑ Assets ⦒
+		⦑ font ⦒
+			 04B_03__.eot
+			 04B_03__.ttf
+		⦑ graphics ⦒
+			⦑ tools ⦒
+				 load.png
+				 new.png
+				 save.png
+				 select.png
+			⦑ treeview ⦒
+				 0.png
+				 1.png
+				 2.png
+				 3.png
+				 4.png
+				 5.png
+				 6.png
+				 7.png
+				 8.png
+				 9.png
+				 default.png
+		⦑ widgets ⦒
+			⦑ generic ⦒
+				⦑ bmp ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ box ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ button ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ hbox ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ text ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ vbox ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+		⦑ windows ⦒
+			⦑ generic ⦒
+				 window.json
+				 window.xml
+		 openfl.svg
+	⦑ Export ⦒
+		⦑ linux64 ⦒
+			⦑ neko ⦒
+				⦑ release ⦒
+					⦑ bin ⦒
+						⦑ font ⦒
+							 04B_03__.ttf
+						⦑ graphics ⦒
+							⦑ tools ⦒
+								 load.png
+								 new.png
+								 save.png
+								 select.png
+							⦑ treeview ⦒
+								 0.png
+								 1.png
+								 2.png
+								 3.png
+								 4.png
+								 5.png
+								 6.png
+								 7.png
+								 8.png
+								 9.png
+								 default.png
+						⦑ widgets ⦒
+							⦑ generic ⦒
+								⦑ bmp ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ box ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ button ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ hbox ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ text ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ vbox ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+						⦑ windows ⦒
+							⦑ generic ⦒
+								 window.json
+								 window.xml
+						 StablexUI-Designer
+						 StablexUI-Designer.json
+						 StablexUI-Designer.n
+						 libneko.so
+						 lime.ndll
+						 manifest
+						 regexp.ndll
+						 sqlite.ndll
+						 std.ndll
+						 systools.ndll
+						 zlib.ndll
+					⦑ haxe ⦒
+						 ApplicationMain.hx
+						 DefaultAssetLibrary.hx
+						 NMEPreloader.hx
+						 debug.hxml
+						 final.hxml
+						 release.hxml
+					⦑ obj ⦒
+						 ApplicationMain.n
+	⦑ Source ⦒
+		⦑ ui ⦒
+			 EditorArea.xml
+			 StablexUIDesigner.xml
+			 WgtPropRow.xml
+			 WgtSelector.xml
+			 WgtsPropsLst.xml
+		 Init.hx
+		 StablexUIDesigner.hx
+	 project.xml
+	 project.xml.hxml
+	 run.sh

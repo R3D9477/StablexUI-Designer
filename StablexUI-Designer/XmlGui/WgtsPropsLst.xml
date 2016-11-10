@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VBox layout:Row-rows="[30, 20, -1]">
+	<Scroll
+		vBar-visible="false"
+		hBar-visible="true"
+		hBar-skin:Paint-color="0x777777"
+		vBar-skin:Paint-color="0x777777"
+		vBar-slider-skin:Paint-color="0x002200"
+		hBar-slider-skin:Paint-color="0x002200">
+		<Options
+			name="'guiWgtsList'"
+			box-skin:Paint-alpha="0.9"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x909090"
+			list-skin:Paint-color="0x454545"
+			list-skin:Paint-alpha="1"/>
+	</Scroll>
+	<HBox
+		layout:Column-cols="[20, 20, 20]"
+		layout:Column-cellPadding="2"
+		layout:Column-paddingLeft="3"
+		layout:Column-paddingTop="3"
+		layout:Column-paddingRight="2"
+		layout:Column-paddingBottom="2"
+		skin:Paint-border="1"
+		skin:Paint-borderColor="0x000000">
+		<Button
+			name="'showWgtPropsBtn'"
+			text="'A'"
+			tip:Tip-text="'Add New Property'"
+			skin:Paint-color="0x13A225"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+		<Button
+			name="'showEditWgtPropBtn'"
+			text="'E'"
+			tip:Tip-text="'Edit Selected Property'"
+			skin:Paint-color="0xD8A225"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+		<Button
+			name="'deleteWgtPropBtn'"
+			text="'D'"
+			tip:Tip-text="'Delete Selected Property'"
+			skin:Paint-color="0xD82525"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</HBox>
+	<Scroll
+		vBar-visible="true"
+		hBar-visible="true"
+		hBar-skin:Paint-color="0x777777"
+		vBar-skin:Paint-color="0x777777"
+		vBar-slider-skin:Paint-color="0x002200"
+		hBar-slider-skin:Paint-color="0x002200">
+		<VBox
+			name="'wgtsPropsLst'" 
+			layout:Row-cellPadding="5"
+			layout:Row-paddingLeft="5"
+			layout:Row-paddingTop="5"
+			layout:Row-paddingRight="5"
+			layout:Row-paddingBottom="5"/>
+	</Scroll>
+</VBox>

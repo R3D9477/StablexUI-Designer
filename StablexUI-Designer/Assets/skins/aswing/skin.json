@@ -1,0 +1,30 @@
+{
+	"className": "ru.stablex.ui.skins.Aswing",
+	"properties": [
+		"border",
+		"borderColor",
+		"borderAlpha",
+		"corners",
+		"paddingTop",
+		"paddingRight",
+		"paddingBottom",
+		"paddingLeft",
+		"padding",
+		"type",
+		"alphas",
+		"ratios",
+		"width",
+		"height",
+		"rotation",
+		"tx",
+		"ty",
+		"color",
+		"gradFactor",
+		"mode",
+		"borderFactor",
+		"bevelAmmount",
+		"bevelBlur",
+		"bevelAlpha",
+		"bevelAngle"
+	]
+}

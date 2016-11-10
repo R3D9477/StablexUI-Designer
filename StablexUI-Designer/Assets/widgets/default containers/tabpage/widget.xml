@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabPage
+	w="50"
+	h="50"
+	top="0"
+	left="0"
+	title-padding="5"
+	title-text="'Tab Page'"
+	title-highlightOnSelect="true"
+	title-highlightFormat-bold="true"
+	title-highlightFormat-color="0xFF0000"
+	skinName="'defaultTabPage'"/>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabPage
+	name="'tabProject'"
+	widthPt="100"
+	heightPt="100"
+	title-text="'Project'"
+	title-padding="5"
+	title-highlightFormat-color="0xFF0000"
+	title-highlightFormat-bold="true"
+	title-highlightOnSelect="true"
+	skin:Paint-color="0xC0C0C0">
+	<Scroll
+		widthPt="100"
+		heightPt="100"
+		skin:Paint-color="0xC0C0C0"
+		hBar-visible="false"
+		vBar-visible="true"
+		vBar-slider-skin:Paint-color="0x002200"
+		vBar-skin:Paint-color="0x777777">
+		<VBox
+			widthPt="100"
+			align="'top,left'"
+			layout:Row-rows="[0, 0, 0, 0]"
+			layout:Row-paddingTop="10"
+			layout:Row-cellPadding="10"
+			layout:Row-paddingLeft="10"
+			layout:Row-paddingRight="20">
+			<VBox
+				h="30"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0]"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<HBox
+					layout:Column-cols="[0, -1]"
+					layout:Column-cellPadding="10">
+					<Text text="'Current GUI Name:'" />
+					<InputText
+						name="'guiName'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+				</HBox>
+			</VBox>
+			<VBox
+				h="250"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0, 0, 0, 0, 0, 0, 0, 0]"
+				layout:Row-cellPadding="10"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<Text text="'Widget\'s sources action:'" />
+				<HBox
+					layout:Column-cols="[0, -1, 0]"
+					layout:Column-cellPadding="10">
+					<Text text="'OpenFL/Lime project:'"/>
+					<InputText
+						name="'projectPath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+					<Button
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+				</HBox>
+				<Radio
+					name="'wgtSrcActNoth'"
+					text="'noting'"
+					tabEnabled="true"
+					group="'wgtSrcAct'"
+					label-visible="true"
+					align="'middle,left'"
+					states-up-ico-src="'graphics/tools/radio_up.png'"
+					states-down-ico-src="'graphics/tools/radio_down.png'"
+					selected="true" />
+				<HBox
+					layout:Column-cols="[0]"
+					layout:Column-cellPadding="10">
+					<Radio
+						name="'wgtSrcActLink'"
+						text="'add sources dir to openfl or lime project'"
+						tabEnabled="true"
+						group="'wgtSrcAct'"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/radio_up.png'"
+						states-down-ico-src="'graphics/tools/radio_down.png'" />
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1, 0]"
+					layout:Column-cellPadding="10">
+					<Radio
+						name="'wgtSrcActCopy'"
+						text="'copy sources to spec directory:'"
+						tabEnabled="true"
+						group="'wgtSrcAct'"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/radio_up.png'"
+						states-down-ico-src="'graphics/tools/radio_down.png'" />
+					<InputText
+						name="'wgtSrcDirPath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+					<Button
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1]"
+					layout:Column-cellPadding="10">
+					<Checkbox
+						name="'wgtMakeUiInst'"
+						text="'make instance:'"
+						tabEnabled="true"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/check_up.png'"
+						states-down-ico-src="'graphics/tools/check_down.png'"
+						selected="true"/>
+					<Options
+						name="'guiInstanceTemplate'"
+						box-skin:Paint-alpha="0.9"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x909090"
+						list-skin:Paint-color="0x454545"
+						list-skin:Paint-alpha="1"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1, 0]"
+					layout:Column-cellPadding="10">
+					<Text text="'Instance file:'"/>
+					<InputText
+						name="'guiInstancePath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Button
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1]"
+					layout:Column-cellPadding="10">
+					<Text text="'Root widget name:'"/>
+					<InputText
+						name="'rootName'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+				</HBox>
+			</VBox>
+			<HBox
+				layout:Column-cols="[0, -1]"
+				layout:Column-cellPadding="10">
+				<Text text="'Presets:'" />
+				<Options
+					name="'presetsList'"
+					box-skin:Paint-alpha="0.9"
+					options="[ ['none', null] ]"
+					value="'none'"
+					skin:Paint-color="0xC0C0C0"
+					skin:Paint-border="1"
+					skin:Paint-borderColor="0x909090"
+					list-skin:Paint-color="0x454545"
+					list-skin:Paint-alpha="1"/>
+			</HBox>
+			<VBox
+				h="90"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0, 0, 0]"
+				layout:Row-cellPadding="10"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<Text text="'Window\'s settings:'" />
+				<HBox
+					layout:Column-cols="[0, -1]"
+					layout:Column-cellPadding="10">
+					<Text text="'Frame:'" />
+					<Options
+						name="'framesList'"
+						box-skin:Paint-alpha="0.9"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x909090"
+						list-skin:Paint-color="0x454545"
+						list-skin:Paint-alpha="1"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, 100, 0, 100, -1]"
+					layout:Column-cellPadding="10">
+					<Text text="'Window size:'" />
+					<InputText
+						name="'guiWidth'"
+						text="'640'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+					<Text text="'x'" />
+					<InputText
+						name="'guiHeight'"
+						text="'480'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+					<Checkbox
+						name="'fixedWindowSize'"
+						text="'use fixed window size'"
+						tabEnabled="true"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/check_up.png'"
+						states-down-ico-src="'graphics/tools/check_down.png'"
+						selected="false" />
+				</HBox>
+			</VBox>
+		</VBox>
+	</Scroll>
+</TabPage>

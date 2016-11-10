@@ -1,0 +1,24 @@
+{
+	"vaxe": {
+		"project": "project.xml",
+		"target": "linux -64 -neko"
+	},
+	"vimStudio": {
+		"charNotFound_l": " ",
+		"charNotFound_r": "",
+		"charSubitem": "\t",
+		"charProject_l": " ⦑ ",
+		"charProject_r": " ⦒",
+		"charLink_l": " ",
+		"charLink_r": "",
+		"sortByName": 1,
+		"sortByType": 1,
+		"charFile_l": " ",
+		"charFile_r": "",
+		"addHidden": false,
+		"projectType": "lime",
+		"charDirectory_l": "⦑ ",
+		"charDirectory_r": " ⦒",
+		"treeBarWidth": 40
+	}
+}

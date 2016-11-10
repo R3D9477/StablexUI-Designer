@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Defaults>
+	<Text>
+		<Default format-size="16" format-bold="false"/>
+	</Text>
+	<Button>
+		<Default format-size="14" format-color="0xff0000" format-bold="true"/>
+	</Button>
+</Defaults>

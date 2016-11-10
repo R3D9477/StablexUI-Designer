@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HBox
+	layout:Column-cols="[0, 0, 0]"
+	layout:Column-cellPadding="5"
+	skin:Paint-border="0"
+	skin:Paint-borderColor="0xff0000">
+	<Text autoSize="true" name="'propLabel'" text="'null'"/>
+	<Text autoSize="true" text="':'"/>
+	<Text autoSize="true" name="'propValue'" text="'null'"/>
+</HBox>

@@ -1,0 +1,7 @@
+{
+	"title": "Vertical Box",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.VBox",
+	"properties": [ ]
+}

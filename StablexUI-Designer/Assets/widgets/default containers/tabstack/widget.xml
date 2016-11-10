@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabStack
+	w="100"
+	h="100"
+	top="0"
+	left="0"
+	wrap="true"
+	tabBar-paddingLeft="5"
+	tabBar-childPadding="5"
+	skinName="'defaultTabStack'"/>

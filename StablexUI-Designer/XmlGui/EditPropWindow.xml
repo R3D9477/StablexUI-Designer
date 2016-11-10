@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Floating
+	w="300"
+	h="130"
+	skin:Paint-color="0xC0C0C0"
+	skin:Paint-border="1"
+	skin:Paint-borderColor="0xFFFFFF">
+	<VBox
+		widthPt="100"
+		heightPt="100"
+		skin:Paint-color="0xC0C0C0"
+		layout:Row-rows="[0, 0, 0, 0]"
+		layout:Row-paddingTop="10"
+		layout:Row-cellPadding="10"
+		layout:Row-paddingLeft="10"
+		layout:Row-paddingRight="10">
+		<HBox
+			layout:Column-cols="[0, -1]"
+			layout:Column-cellPadding="10">
+			<Text text="'Name:'"/>
+			<Text name="'editPropName'" text="'null'"/>
+		</HBox>
+		<HBox
+			layout:Column-cols="[0, -1]"
+			layout:Column-cellPadding="10">
+			<Text text="'Type:'"/>
+			<Text name="'editPropType'" text="'null'"/>
+		</HBox>
+		<HBox
+			layout:Column-cols="[0, -1]"
+			layout:Column-cellPadding="10">
+			<Text text="'Value:'"/>
+			<InputText
+				name="'editPropValue'"
+				widthPt="100"
+				text="'null'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x909090"/>
+		</HBox>
+		<Button
+			name="'editPropValueSaveBtn'"
+			text="'Save'"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x909090"/>
+	</VBox>
+</Floating>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Slider
+	h="20"
+	w="100"
+	top="0"
+	left="0"
+	min="-100"
+	max="100"
+	value="0"
+	vertical="false"
+	skinName="'defaultSlider'"
+	slider-w="50"
+	slider-heightPt="100"
+	slider-skin:Gradient-corners="[20]"
+	slider-skinName="'defaultSliderSlider'"/>

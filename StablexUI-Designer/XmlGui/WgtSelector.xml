@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Radio
+	states-up-skin:Paint-color="0xC0C0C0"
+	states-up-skin:Paint-border="1"
+	states-up-skin:Paint-borderColor="0x000000"
+	states-down-skin:Paint-color="0x8F8F8F"
+	states-down-skin:Paint-border="1"
+	states-down-skin:Paint-borderColor="0xFFFFFF"
+	tabEnabled="false"
+	group="'elements'"
+	label-visible="false" />

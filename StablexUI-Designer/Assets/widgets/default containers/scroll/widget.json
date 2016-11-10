@@ -1,0 +1,7 @@
+{
+	"title": "Scroll",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.Scroll",
+	"properties": [ "left", "top", "w", "h" ]
+}

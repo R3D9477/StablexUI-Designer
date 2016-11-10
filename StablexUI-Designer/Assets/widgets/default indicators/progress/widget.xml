@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Progress
+	h="20"
+	w="200"
+	top="0"
+	left="0"
+	max="100"
+	value="65"
+	skinName="'defaultProgress'"
+	bar-skinName="'defaultProgressBar'"/>

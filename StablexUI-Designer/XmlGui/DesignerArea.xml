@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scroll
+	widthPt="100"
+	heightPt="100"
+	skin:Paint-color="0xC0C0C0"
+	vBar-slider-skin:Paint-color="0x002200"
+	hBar-slider-skin:Paint-color="0x002200"
+	hBar-skin:Paint-color="0x777777"
+	vBar-skin:Paint-color="0x777777"
+	vBar-visible="true"
+	hBar-visible="true">
+	<VBox
+		name="'wgtMainWndContainer'"
+		align="'top,left'"
+		layout:Row-rows="[-1]"
+		layout:Row-paddingLeft="10"
+		layout:Row-paddingTop="10"
+		layout:Row-paddingRight="20"
+		layout:Row-paddingBottom="20">
+	</VBox>
+</Scroll>

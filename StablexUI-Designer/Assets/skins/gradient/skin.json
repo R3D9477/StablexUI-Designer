@@ -1,0 +1,14 @@
+{
+	"className": "ru.stablex.ui.skins.Gradient",
+	"properties": [
+		"type",
+		"colors",
+		"alphas",
+		"ratios",
+		"width",
+		"height",
+		"rotation",
+		"tx",
+		"ty"
+	]
+}

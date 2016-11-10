@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Switch
+	w="100"
+	h="20"
+	top="0"
+	left="0"
+	skinName="'defaultSwitch'"
+	slider-w="50"
+	slider-heightPt="100"
+	slider-skinName="'defaultSwitchSlider'"/>

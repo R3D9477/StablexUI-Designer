@@ -1,0 +1,7 @@
+{
+	"title": "Slider",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.Slider",
+	"properties": [ ]
+}

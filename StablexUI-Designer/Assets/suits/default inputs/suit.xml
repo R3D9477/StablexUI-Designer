@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Skins>
+	<defaultBmp:Paint color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultButton:Paint color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultCheckbox:Skin/>
+	<defaultCheckboxChecked:Skin/>
+	<defaultCheckboxCheckedIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/checkbox_checked.png']))"/>
+	<defaultCheckboxUnchecked:Skin/>
+	<defaultCheckboxUncheckedIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/checkbox_unchecked.png']))"/>
+	<defaultInputText:Paint color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultOptions:Paint color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultOptionsBox:Paint alpha="0.9"/>
+	<defaultOptionsList:Paint color="0xC0C0C0" alpha="1"/>
+	<defaultRadio:Skin/>
+	<defaultRadioSelected:Skin/>
+	<defaultRadioSelectedIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/radio_selected.png']))"/>
+	<defaultRadioUnselected:Skin/>
+	<defaultRadioUnselectedIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/radio_unselected.png']))"/>
+	<defaultSlider:Paint corners="[10]" color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultSliderSlider:Gradient corners="[10]" colors="[0xAAAAAA, 0xFFFFFF]"/>
+	<defaultStateButton:Skin/>
+	<defaultStateButtonState1:Skin/>
+	<defaultStateButtonState1Ico:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/statebutton_state1.png']))"/>
+	<defaultStateButtonState2:Skin/>
+	<defaultStateButtonState2Ico:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/statebutton_state2.png']))"/>
+	<defaultStateButtonState3:Skin/>
+	<defaultStateButtonState3Ico:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/statebutton_state3.png']))"/>
+	<defaultSwitch:Paint corners="[10]" color="0xC0C0C0" border="1" borderColor="0x000000"/>
+	<defaultSwitchSlider:Gradient corners="[10]" colors="[0xAAAAAA, 0xFFFFFF]"/>
+	<defaultToggle:Skin/>
+	<defaultToggleOn:Skin/>
+	<defaultToggleOnIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/toggle_on.png']))"/>
+	<defaultToggleOff:Skin/>
+	<defaultToggleOffIco:Img bitmapData="$BitmapData.fromFile($Path.join([%SUIDCWD, 'suits/default inputs/img/toggle_off.png']))"/>
+</Skins>

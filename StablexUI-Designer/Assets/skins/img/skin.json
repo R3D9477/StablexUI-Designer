@@ -1,0 +1,10 @@
+{
+	"className": "ru.stablex.ui.skins.Paint",
+	"properties": [
+		"src",
+		"smooth",
+		"scaleImg",
+		"keepAspect",
+		"crop"
+	]
+}
