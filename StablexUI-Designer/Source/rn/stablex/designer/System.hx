@@ -151,7 +151,7 @@ class System {
 	public static function onBoxClick (e:MouseEvent) : Void {
 		var selWgt:Dynamic = null;
 		
-		if (System.selWgtData != null) {
+		if (System.selWgtData != null)
 			if (FileSystem.exists(System.selWgtData.xml.escNull())) {
 				if (FileSystem.exists(System.selWgtData.bin.escNull())) {
 					
@@ -169,7 +169,7 @@ class System {
 				
 				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
 				
-				var targetWgt:Widget = e.currentTarget;
+				var targetWgt:Widget = cast(e.currentTarget, Widget);
 				targetWgt.addChild(selWgt);
 				
 				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
@@ -178,7 +178,6 @@ class System {
 				System.wgtUiXmlMap.set(selWgt, selXml);
 				System.setWgtEventHandlers(selWgt);
 			}
-		}
 		
 		MainWindowInstance.wlSelectBtn.selected = true;
 		
