@@ -41,6 +41,7 @@ class MainWindowInstance {
 	public static var wgtSrcActNoth:Radio;
 	public static var wgtSrcActLink:Radio;
 	public static var projectPath:InputText;
+	public static var chooseProject:Button;
 	public static var wgtSrcActCopy:Radio;
 	public static var wgtSrcDirPath:InputText;
 	
@@ -109,6 +110,7 @@ class MainWindowInstance {
 		MainWindowInstance.wgtSrcActNoth = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActNoth"), Radio);
 		MainWindowInstance.wgtSrcActLink = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActLink"), Radio);
 		MainWindowInstance.projectPath = cast(MainWindowInstance.mainWnd.getChild("projectPath"), InputText);
+		MainWindowInstance.chooseProject = cast(MainWindowInstance.mainWnd.getChild("chooseProject"), Button);
 		MainWindowInstance.wgtSrcActCopy = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActCopy"), Radio);
 		MainWindowInstance.wgtSrcDirPath = cast(MainWindowInstance.mainWnd.getChild("wgtSrcDirPath"), InputText);
 		

@@ -112,6 +112,11 @@ class MainWindow extends Sprite {
 		MainWindowInstance.guiName.addEventListener(Event.CHANGE, this.onChangeGuiName);
 		
 		//-----------------------------------------------------------------------------------------------
+		// on choose openfl project
+		
+		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
+		
+		//-----------------------------------------------------------------------------------------------
 		// load presets
 		
 		MainWindowInstance.presetsList.addEventListener(Event.CHANGE, this.onSelectPreset);
@@ -347,7 +352,14 @@ class MainWindow extends Sprite {
 	}
 	
 	//-----------------------------------------------------------------------------------------------
-	// tab Project: window settings
+	// tab Project
+	
+	function onChooseOpenflProject (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
+		
+		if (oFiles != null)
+			MainWindowInstance.projectPath.text = oFiles[0];
+	}
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
 		if (MainWindowInstance.guiName.text == "")
