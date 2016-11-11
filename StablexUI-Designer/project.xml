@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<meta title="StablexUI-Designer" package="" version="1.0.0" company=""/>
-	<app file="StablexUI-Designer" path="Export" main="MainWindow"/>
+	<meta title="StablexUI-Designer" package="rn.stablex.designer" version="1.0.0" company=""/>
+	<app file="StablexUI-Designer" path="Export" main="rn.stablex.designer.MainWindow"/>
 	
 	<window background="0xFFFFFF" fps="60"/>
 	<window width="640" height="480" unless="mobile"/>
 	<window if="html5 || flash" width="0" height="0"/>
 	
 	<source path="Source"/>
-	<source path="Export/linux64/cpp/haxe"/>
-	<source path="Export/linux64/neko/haxe"/>
 	
 	<haxelib name="openfl"/>
 	<haxelib name="systools"/>
@@ -32,5 +30,5 @@
 	
 	<assets rename="GuiElements.xml" path="XmlGui/GuiElements.xml"/>
 	
-	<haxeflag name="--macro" value="MainWindowInstance.geInit()"/>
+	<haxeflag name="--macro" value="rn.stablex.designer.MainWindowInstance.geInit()"/>
 </project>

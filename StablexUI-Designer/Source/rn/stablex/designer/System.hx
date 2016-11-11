@@ -1,4 +1,4 @@
-package;
+package rn.stablex.designer;
 
 import neko.vm.Loader;
 import neko.vm.Module;

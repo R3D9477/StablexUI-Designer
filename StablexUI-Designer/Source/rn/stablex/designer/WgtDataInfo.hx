@@ -1,4 +1,4 @@
-package;
+package rn.stablex.designer;
 
 typedef WgtDataInfo = {
 	var title:String;

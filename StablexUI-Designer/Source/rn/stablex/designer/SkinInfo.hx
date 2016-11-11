@@ -1,4 +1,4 @@
-package;
+package rn.stablex.designer;
 
 typedef SkinInfo = {
 	var name:String;

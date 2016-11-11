@@ -1,4 +1,4 @@
-package;
+package rn.stablex.designer;
 
 typedef FrameInfo = {
 	var width:Float;

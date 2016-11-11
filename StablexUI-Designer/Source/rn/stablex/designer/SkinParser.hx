@@ -1,4 +1,4 @@
-package;
+package rn.stablex.designer;
 
 import ru.stablex.ui.*;
 import ru.stablex.ui.skins.*;
