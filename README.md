@@ -14,7 +14,7 @@ Graphical designer for library StablexUI.
 * manually editing xml of current gui
 
 ###Requirements:<br/>
-* haxe 3.2.1 or later
+* [haxe](https://haxe.org) 3.2.1 or later
 * [lime](https://github.com/openfl/lime)
 * [openfl](https://github.com/openfl/openfl)
 * [hscript](https://github.com/HaxeFoundation/hscript)
