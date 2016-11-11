@@ -12,3 +12,14 @@ Graphical designer for library StablexUI.
 * auto-insertion sources path of custom widgets at current xml-project
 * auto-generate file with declaration of objects  for widgets with names (to easy access to widgets from source code)
 * manually editing xml of current gui
+
+###Requirements:<br/>
+* haxe 3.2.1 or later
+* [lime](https://github.com/openfl/lime)
+* [openfl](https://github.com/openfl/openfl)
+* [hscript](https://github.com/HaxeFoundation/hscript)
+* [stablexui](https://github.com/RealyUniqueName/StablexUI)
+* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
+* [tjson](https://github.com/martamius/TJSON)
+* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
+* [typext](https://github.com/r3d9u11/haxe-typext)
