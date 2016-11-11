@@ -115,6 +115,8 @@ class MainWindow extends Sprite {
 		// on choose openfl project
 		
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
+		MainWindowInstance.chooseSrcDirPath.addEventListener(MouseEvent.CLICK, this.onChooseSrcDirPath);
+		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load presets
@@ -359,6 +361,20 @@ class MainWindow extends Sprite {
 		
 		if (oFiles != null)
 			MainWindowInstance.projectPath.text = oFiles[0];
+	}
+	
+	function onChooseSrcDirPath (e:MouseEvent) : Void {
+		var srcDir:String = Dialogs.folder("Select sources dir", "Select directory of current OpenFL/Lime project");
+		
+		if (srcDir > "")
+			MainWindowInstance.wgtSrcDirPath.text = srcDir;
+	}
+	
+	function onChooseInstancePath (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
+		
+		if (oFiles != null)
+			MainWindowInstance.guiInstancePath.text = oFiles[0];
 	}
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {

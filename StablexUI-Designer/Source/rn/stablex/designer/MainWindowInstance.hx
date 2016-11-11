@@ -44,10 +44,12 @@ class MainWindowInstance {
 	public static var chooseProject:Button;
 	public static var wgtSrcActCopy:Radio;
 	public static var wgtSrcDirPath:InputText;
+	public static var chooseSrcDirPath:Button;
 	
 	public static var wgtMakeUiInst:Checkbox;
 	public static var guiInstanceTemplate:Options;
 	public static var guiInstancePath:InputText;
+	public static var chooseInstancePath:Button;
 	public static var rootName:InputText;
 	public static var presetsList:Options;
 	public static var guiWidth:InputText;
@@ -113,10 +115,12 @@ class MainWindowInstance {
 		MainWindowInstance.chooseProject = cast(MainWindowInstance.mainWnd.getChild("chooseProject"), Button);
 		MainWindowInstance.wgtSrcActCopy = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActCopy"), Radio);
 		MainWindowInstance.wgtSrcDirPath = cast(MainWindowInstance.mainWnd.getChild("wgtSrcDirPath"), InputText);
+		MainWindowInstance.chooseSrcDirPath = cast(MainWindowInstance.mainWnd.getChild("chooseSrcDirPath"), Button);
 		
 		MainWindowInstance.wgtMakeUiInst = cast(MainWindowInstance.mainWnd.getChild("wgtMakeUiInst"), Checkbox);
 		MainWindowInstance.guiInstanceTemplate = cast(MainWindowInstance.mainWnd.getChild("guiInstanceTemplate"), Options);
 		MainWindowInstance.guiInstancePath = cast(MainWindowInstance.mainWnd.getChild("guiInstancePath"), InputText);
+		MainWindowInstance.chooseInstancePath = cast(MainWindowInstance.mainWnd.getChild("chooseInstancePath"), Button);
 		MainWindowInstance.rootName = cast(MainWindowInstance.mainWnd.getChild("rootName"), InputText);
 		MainWindowInstance.presetsList = cast(MainWindowInstance.mainWnd.getChild("presetsList"), Options);
 		MainWindowInstance.guiWidth = cast(MainWindowInstance.mainWnd.getChild("guiWidth"), InputText);
