@@ -349,7 +349,7 @@ class MainWindow extends Sprite {
 	//-----------------------------------------------------------------------------------------------
 	// tab Project: window settings
 	
-	function onChangeGuiName (e:WidgetEvent) {
+	function onChangeGuiName (e:WidgetEvent) : Void {
 		if (MainWindowInstance.guiName.text == "")
 			MainWindowInstance.guiName.text = MainWindowInstance.mainWnd.name;
 		
@@ -548,12 +548,12 @@ class MainWindow extends Sprite {
 	//-----------------------------------------------------------------------------------------------
 	// tab Xml: widget's xml source
 	
-	function onXmlSourceResize (e:WidgetEvent) {
+	function onXmlSourceResize (e:WidgetEvent) : Void {
 		MainWindowInstance.xmlSource.w = Math.max(cast(MainWindowInstance.xmlSource.parent, Scroll).w, MainWindowInstance.xmlSource.label.textWidth + cast(MainWindowInstance.xmlSource.parent, Scroll).vBar.w + 5);
 		MainWindowInstance.xmlSource.h = Math.max(cast(MainWindowInstance.xmlSource.parent, Scroll).h, MainWindowInstance.xmlSource.label.textHeight + cast(MainWindowInstance.xmlSource.parent, Scroll).hBar.h + 5);
 	}
 	
-	function onXmlSourceChange (e:KeyboardEvent) { // workaround for TextField https://github.com/openfl/openfl/issues/1254
+	function onXmlSourceChange (e:KeyboardEvent) : Void { // workaround for TextField https://github.com/openfl/openfl/issues/1254
 		if (e.keyCode == 13) {
 			MainWindowInstance.xmlSource.text = MainWindowInstance.xmlSource.text.substring(0, MainWindowInstance.xmlSource.label.caretIndex) + "\n" + MainWindowInstance.xmlSource.text.substring(MainWindowInstance.xmlSource.label.caretIndex, MainWindowInstance.xmlSource.text.length);
 			MainWindowInstance.xmlSource.label.setSelection(MainWindowInstance.xmlSource.label.caretIndex + 1, MainWindowInstance.xmlSource.label.caretIndex + 1);
