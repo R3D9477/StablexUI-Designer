@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	<meta title="StablexUI-Designer" package="" version="1.0.0" company=""/>
-	<app file="StablexUI-Designer" path="Export" main="StablexUIDesigner"/>
+	<app file="StablexUI-Designer" path="Export" main="MainWindow"/>
 	
-	<window height="480" background="0xFFFFFF" width="640" fps="60"/>
-	<window if="html5 || flash" height="0" width="0"/>
+	<window background="0xFFFFFF" fps="60"/>
+	<window width="640" height="510" unless="mobile"/>
+	<window if="html5 || flash" width="0" height="0"/>
 	
 	<source path="Source"/>
+	<source path="Export/linux64/cpp/haxe"/>
+	<source path="Export/linux64/neko/haxe"/>
 	
 	<haxelib name="openfl"/>
-	<haxelib name="actuate"/>
+	<haxelib name="systools"/>
 	<haxelib name="stablexui"/>
+	<haxelib name="typext"/>
+	<haxelib name="tjson"/>
+	<haxelib name="tjsonStyleCl"/>
+	<haxelib name="haxe-crypto"/>
+	<haxelib name="hscript"/>
 	
-	<assets rename="assets" path="Assets"/>
-<source path="Export/linux64/cpp/haxe"/></project>
+	<assets rename="font" include="*.ttf" path="Assets/font"/>
+	<assets rename="graphics" path="Assets/graphics"/>
+	
+	<assets rename="presets" path="Assets/presets"/>
+	<assets rename="suits" path="Assets/suits"/>
+	<assets rename="frames" path="Assets/frames"/>
+	<assets rename="widgets" path="Assets/widgets"/>
+	<assets rename="skins" path="Assets/skins"/>
+	<assets rename="instances" path="Assets/instances"/>
+	
+	<assets rename="GuiElements.xml" path="XmlGui/GuiElements.xml"/>
+	
+	<haxeflag name="--macro" value="rn.stablex.designer.MainWindowInstance.geInit()"/>
+</project>
