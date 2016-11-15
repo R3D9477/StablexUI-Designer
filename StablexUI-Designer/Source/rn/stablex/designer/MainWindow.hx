@@ -581,12 +581,6 @@ class MainWindow extends Sprite {
 		MainWindowInstance.xmlSource.h = Math.max(cast(MainWindowInstance.xmlSource.parent, Scroll).h, MainWindowInstance.xmlSource.label.textHeight + cast(MainWindowInstance.xmlSource.parent, Scroll).hBar.h + 5);
 	}
 	
-	function onXmlSourceChange (e:KeyboardEvent) : Void { // workaround for TextField https://github.com/openfl/openfl/issues/1254
-		if (e.keyCode == 13) {
-			MainWindowInstance.xmlSource.text = MainWindowInstance.xmlSource.text.substring(0, MainWindowInstance.xmlSource.label.caretIndex) + "\n" + MainWindowInstance.xmlSource.text.substring(MainWindowInstance.xmlSource.label.caretIndex, MainWindowInstance.xmlSource.text.length);
-			MainWindowInstance.xmlSource.label.setSelection(MainWindowInstance.xmlSource.label.caretIndex + 1, MainWindowInstance.xmlSource.label.caretIndex + 1);
-		}
-		
+	function onXmlSourceChange (e:KeyboardEvent) : Void
 		MainWindowInstance.xmlSource.parent.dispatchEvent(new WidgetEvent(WidgetEvent.RESIZE));
-	}
 }

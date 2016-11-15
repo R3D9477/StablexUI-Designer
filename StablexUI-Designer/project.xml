@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<meta title="StablexUI-Designer" package="" version="1.0.0" company=""/>
-	<app file="StablexUI-Designer" path="Export" main="MainWindow"/>
+	<meta title="StablexUI-Designer" package="rn.stablex.designer" version="1.0.0" company=""/>
+	<app file="StablexUI-Designer" path="Export" main="rn.stablex.designer.MainWindow"/>
 	
 	<window background="0xFFFFFF" fps="60"/>
 	<window width="640" height="510" unless="mobile"/>
