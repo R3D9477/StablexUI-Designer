@@ -1,0 +1,6 @@
+<Floating name="&#039;testGui&#039;">
+	<!--{"wgtInstTemplate": "Default.hx","wndWidth": 640,"srcDir": "","wndTemplate": "default","project": "/home/eugene/Desktop/StablexUI-Designer/StablexUI-Designer/project.xml","wgtSrcAct": 0,"wgtInstPath": "/home/eugene/Desktop/StablexUI-Designer/Test/Source/TestInstance.hx","wgtRootName": "","wndHeight": 480,"makeInstance": true,"fixedWndSize": false,"guiName": "testGui","guiUuid": "2fdf75b9-461a-4044-9dce-a8dbb1061cfc"}-->
+	<GuiElements>
+		<Button name="&#039;myBtn&#039;" text="&#039;123&#039;"/>
+	</GuiElements>
+</Floating>

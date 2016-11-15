@@ -1,0 +1,11 @@
+<Floating>
+   <GuiElements>
+      <VBox name="&#039;vbox1&#039;" heightPt="100" layout:Row-rows="[20, 20, 20]" widthPt="100">
+         <Button name="&#039;btn1&#039;" skin:Paint-color="0x97B34C" skin:Paint-border="1" top="30" text="&#039;B11&#039;" heightPt="100" widthPt="100" left="0" skin:Paint-borderColor="0x000000"/>
+      </VBox>
+      <Widget name="&#039;wgt1&#039;" h="200" skin:Paint-color="0xC0C0C0" skin:Paint-border="1" top="135" left="134" w="200" skin:Paint-borderColor="0x000000"/>
+      <Button name="&#039;btn2&#039;" skin:Paint-color="0xC0C0C0" skin:Paint-border="1" top="71" text="&#039;Button&#039;" left="303" skin:Paint-borderColor="0x000000"/>
+      <Text name="&#039;txt1&#039;" label-selectable="false" skin:Paint-color="0xC0C0C0" skin:Paint-border="1" top="78" text="&#039;Text&#039;" left="37" skin:Paint-borderColor="0x000000"/>
+   </GuiElements>
+   <!--{"wndWidth": 640,"srcDir": "","wndTemplate": "generic","project": "","wgtSrcAct": 0,"wndHeight": 480,"makeInstance": true,"fixedWndSize": false}-->
+</Floating>
