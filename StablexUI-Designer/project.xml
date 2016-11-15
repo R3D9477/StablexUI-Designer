@@ -4,10 +4,10 @@
 	<app file="StablexUI-Designer" path="Export" main="rn.stablex.designer.MainWindow"/>
 	
 	<window background="0xFFFFFF" fps="60"/>
-	<window width="640" height="510" unless="mobile"/>
-	<window if="html5 || flash" width="0" height="0"/>
+	<window height="510" unless="mobile" width="640"/>
+	<window if="html5 || flash" height="0" width="0"/>
 	
-	<source path="Source"/>
+	
 	<source path="Export/linux64/cpp/haxe"/>
 	<source path="Export/linux64/neko/haxe"/>
 	

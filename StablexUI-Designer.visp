@@ -299,12 +299,11 @@
 									 widget.json
 									 widget.xml
 						 GuiElements.xml
-						  StablexUI-Designer
-						  StablexUI-Designer.json
-						  StablexUI-Designer.n
-						  lime.ndll
+						 StablexUI-Designer
+						 StablexUI-Designer.n
+						 lime.ndll
 						 manifest
-						  systools.ndll
+						 systools.ndll
 					⦑ haxe ⦒
 						 ApplicationMain.hx
 						 DefaultAssetLibrary.hx
@@ -312,8 +311,8 @@
 						 final.hxml
 						 release.hxml
 					⦑ obj ⦒
-						  ApplicationMain
-						  ApplicationMain.n
+						 ApplicationMain
+						 ApplicationMain.n
 	⦑ Source ⦒
 		⦑ rn ⦒
 			⦑ stablex ⦒
