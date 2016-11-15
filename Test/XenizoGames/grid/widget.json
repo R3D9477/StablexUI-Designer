@@ -1,8 +1,0 @@
-{
-	"title": "Grid",
-	"bin": "module/Bin/GridWidget.n",
-	"xml": "widget.xml",
-	"ico": "ico.png",
-	"className": "com.xenizogames.widgets.GridWidget",
-	"properties": [ ]
-}
