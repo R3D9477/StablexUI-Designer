@@ -23,8 +23,9 @@ import rn.typext.hlp.FileSystemHelper;
 
 using Lambda;
 using StringTools;
-using rn.typext.ext.StringExtender;
+using rn.typext.ext.XmlExtender;
 using rn.typext.ext.IterExtender;
+using rn.typext.ext.StringExtender;
 
 class MainWindow extends Sprite {
 	private var origCwd:String;
@@ -303,7 +304,7 @@ class MainWindow extends Sprite {
 			guiInstanceTemplate: "Default.hx",
 			guiInstancePath: "",
 			rootName: "",
-			preset: "",
+			preset: "default.xml",
 			frameTemplate: "default",
 			guiWidth: 0,
 			guiHeight: 0,
@@ -358,8 +359,17 @@ class MainWindow extends Sprite {
 	function onChooseOpenflProject (e:MouseEvent) : Void {
 		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
 		
-		if (oFiles != null)
+		if (oFiles != null) {
 			MainWindowInstance.projectPath.text = oFiles[0];
+			
+			if (MainWindowInstance.guiInstancePath.text == "") {
+				MainWindowInstance.guiInstancePath.text = Path.join([
+					Path.directory(MainWindowInstance.projectPath.text),
+					Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path"),
+					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
+				]);
+			}
+		}
 	}
 	
 	function onChooseSrcDirPath (e:MouseEvent) : Void {
@@ -512,8 +522,14 @@ class MainWindow extends Sprite {
 	
 	function wgtAddPropBtnClick (e:MouseEvent) : Void {
 		if (System.selWgt != null && MainWindowInstance.wgtPropNamesLst.value != null) {
-			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropNamesLst.value, Std.string(Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropNamesLst.value)).replace(",", "."));
-			System.addPropRow(MainWindowInstance.wgtPropNamesLst.value, Std.string(Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropNamesLst.value)).replace(",", "."));
+			var prop:Dynamic = Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropNamesLst.value);
+			var value:String = Std.string(prop).replace(",", ".");
+			
+			if (Std.is(prop, String))
+				value = "'" + value + "'";
+			
+			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropNamesLst.value, value);
+			System.addPropRow(MainWindowInstance.wgtPropNamesLst.value, value);
 			
 			var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
 			proplst.remove(MainWindowInstance.wgtPropNamesLst.value);
