@@ -136,9 +136,6 @@ class System {
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		
-		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
-		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
-		
 		if (System.guiSettings.guiWidth > 0) {
 			MainWindowInstance.guiWidth.text = Std.string(System.guiSettings.guiWidth);
 			MainWindowInstance.guiWidth.dispatchEvent(new Event(Event.CHANGE));
@@ -150,6 +147,9 @@ class System {
 		}
 		
 		MainWindowInstance.fixedWindowSize.selected = System.guiSettings.fixedWindowSize;
+		
+		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
+		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
 	}
 	
 	//-----------------------------------------------------------------------------------------------
