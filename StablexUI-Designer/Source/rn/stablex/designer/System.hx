@@ -350,6 +350,8 @@ class System {
 			System.frameWgt = cast(wgtDyn, Widget);
 			System.frameXml = xml;
 			
+			System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+			
 			if (savedGuiElemsWgt != null && savedGuiElemsXml != null) {
 				System.guiElementsWgt = savedGuiElemsWgt;
 				
