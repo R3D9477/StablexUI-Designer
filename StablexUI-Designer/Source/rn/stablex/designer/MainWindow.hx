@@ -27,6 +27,8 @@ using rn.typext.ext.StringExtender;
 using rn.typext.ext.IterExtender;
 
 class MainWindow extends Sprite {
+	private var origCwd:String;
+	
 	//-----------------------------------------------------------------------------------------------
 	// setup main window
 	
@@ -38,6 +40,8 @@ class MainWindow extends Sprite {
 		
 		//-----------------------------------------------------------------------------------------------
 		// set current workdir
+		
+		this.origCwd = Sys.getCwd();
 		
 		Sys.setCwd(Path.directory(FileSystem.fullPath(
 			#if neko
@@ -59,7 +63,7 @@ class MainWindow extends Sprite {
 				#end
 			), "json");
 		
-		var configData:Dynamic = FileSystem.exists(configPath) ? TJSON.parse(File.getContent(configPath)) : {
+		var configData:Dynamic = FileSystem.exists(configPath) ? haxe.Json.parse(File.getContent(configPath)) : {
 			x: Lib.application.window.x,
 			y: Lib.application.window.y,
 			width: Lib.application.window.width,
@@ -332,13 +336,17 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
-		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", System.uiDirPath > "" ? System.uiDirPath : Sys.getCwd(), { count: 1,  descriptions: ["XML files"], extensions: ["*.xml"] });
+		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd), { count: 1,  descriptions: ["XML files"], extensions: ["*.xml"] });
 		
-		if (sFile > "")
+		if (sFile > "") {
+			if (Path.extension(sFile).toLowerCase() != "xml")
+				sFile += ".xml";
+			
 			if (System.saveUiToFile(sFile))
 				Dialogs.message("neko-systools", "UI was succefully saved to Xml!", false);
 			else
 				Dialogs.message("neko-systools", "UI was not saved to Xml!", true);
+		}
 	}
 	
 	//-----------------------------------------------------------------------------------------------

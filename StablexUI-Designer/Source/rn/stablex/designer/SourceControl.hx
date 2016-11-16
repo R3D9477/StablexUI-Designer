@@ -29,6 +29,7 @@ class SourceControl {
 			var ili:Int = -1;
 			
 			var gUuidStr:String = 'guiUuid=${System.guiSettings.guiUuid}';
+			
 			var gXmlName:String = Path.withoutDirectory(System.uiXmlPath);
 			var gXmlRelPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath);
 			var rootWgtName:String = System.guiSettings.rootName > "" ? System.guiSettings.rootName : System.guiSettings.guiName;

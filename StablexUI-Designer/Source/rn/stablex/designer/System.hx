@@ -402,11 +402,13 @@ class System {
 		System.saveUiSettingsToXml();
 		
 		if (System.loadUiFromXml(System.parseXml(MainWindowInstance.xmlSource.text).firstElement())) {
+			System.uiDirPath = Path.directory(xmlPath);
+			System.uiXmlPath = xmlPath;
+			
+			File.saveContent(System.uiXmlPath, System.printXml(System.frameXml, "	"));
+			
 			if (System.guiSettings.makeInstance)
 				SourceControl.makeInstance();
-			
-			
-			File.saveContent(xmlPath, System.printXml(System.frameXml, "	"));
 			
 			return true;
 		}
