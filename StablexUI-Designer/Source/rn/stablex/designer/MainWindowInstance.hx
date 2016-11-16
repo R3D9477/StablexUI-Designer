@@ -96,6 +96,8 @@ class MainWindowInstance {
 		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(strValue, "SUIDCWD", Sys.getCwd());
 		UIBuilder.init(null, true);
 		
+		StablexUIMod.setRtxmlMod();
+		
 		MainWindowInstance.mainWnd = UIBuilder.buildFn("XmlGui/MainWindow.xml")();
 		
 		MainWindowInstance.guiName = cast(MainWindowInstance.mainWnd.getChild("guiName"), InputText);

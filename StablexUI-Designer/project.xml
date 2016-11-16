@@ -7,9 +7,7 @@
 	<window height="510" unless="mobile" width="640"/>
 	<window if="html5 || flash" height="0" width="0"/>
 	
-	
-	<source path="Export/linux64/cpp/haxe"/>
-	<source path="Export/linux64/neko/haxe"/>
+	<source path="Source"/>
 	
 	<haxelib name="openfl"/>
 	<haxelib name="systools"/>
