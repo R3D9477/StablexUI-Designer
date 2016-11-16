@@ -3,5 +3,5 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Widget",
-	"properties": [ "left", "top", "w", "h" ]
+	"properties": [ "name", "left", "top", "w", "h" ]
 }

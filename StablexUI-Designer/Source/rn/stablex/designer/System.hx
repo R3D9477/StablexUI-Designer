@@ -113,9 +113,6 @@ class System {
 	}
 	
 	public static function refreshGuiSettings () : Void {
-		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
-		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
-		
 		switch(System.guiSettings.wgtSrcAct) {
 			case 1:
 				MainWindowInstance.wgtSrcActLink.selected = true;
@@ -130,6 +127,7 @@ class System {
 		
 		MainWindowInstance.wgtMakeUiInst.selected = System.guiSettings.makeInstance;
 		MainWindowInstance.guiInstanceTemplate.value = System.guiSettings.guiInstanceTemplate;
+		MainWindowInstance.guiInstanceTemplate.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		MainWindowInstance.guiInstancePath.text = System.guiSettings.guiInstancePath.escNull();
 		MainWindowInstance.rootName.text = System.guiSettings.rootName.escNull();
 		
@@ -138,9 +136,18 @@ class System {
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		
-		MainWindowInstance.guiWidth.text = Std.string(System.guiSettings.guiWidth);
-		MainWindowInstance.guiHeight.text = Std.string(System.guiSettings.guiHeight);
-		MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
+		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
+		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
+		
+		if (System.guiSettings.guiWidth > 0) {
+			MainWindowInstance.guiWidth.text = Std.string(System.guiSettings.guiWidth);
+			MainWindowInstance.guiWidth.dispatchEvent(new Event(Event.CHANGE));
+		}
+		
+		if (System.guiSettings.guiHeight > 0) {
+			MainWindowInstance.guiHeight.text = Std.string(System.guiSettings.guiHeight);
+			MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
+		}
 		
 		MainWindowInstance.fixedWindowSize.selected = System.guiSettings.fixedWindowSize;
 	}
@@ -316,8 +323,6 @@ class System {
 	
 	public static function loadUiFromXml (xml:Xml) : Bool {
 		//try {
-			//var xml:Xml = System.parseXml(xmlStr).firstElement();
-			
 			if (xml.nodeName == "GuiElements") {
 				System.guiElementsWgt = null;
 				System.guiElementsXml = System.guiElementsXml.replaceWith(xml);
@@ -334,6 +339,7 @@ class System {
 			MainWindowInstance.wgtMainWndContainer.freeChildren(true);
 			MainWindowInstance.guiWgtsList.options = [ ["", null] ];
 			MainWindowInstance.wgtsPropsLst.freeChildren(true);
+			
 			System.wgtUiXmlMap = new Map<{}, Xml>();
 			
 			var wgtDyn:Dynamic = RTXml.buildFn(System.printXml(xml, "   "))();

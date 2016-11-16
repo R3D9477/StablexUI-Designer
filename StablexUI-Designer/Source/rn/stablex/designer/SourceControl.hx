@@ -58,19 +58,21 @@ class SourceControl {
 					.map (function (hxLine:String) : String {
 						if (hxLine.indexOf("// create source of GuiElements class") >= 0)
 							gii = cli + 1;
-						else if (hxLine.indexOf("// instance fields") >= 0)
+						else if (hxLine.indexOf("// fields of instances") >= 0)
 							fli = cli + 1;
-						else if (hxLine.indexOf("// UIBUilder initialization") >= 0)
+						else if (hxLine.indexOf("// UIBuilder initialization") >= 0)
 							bii = cli + 1;
 						else if (hxLine.indexOf("// skins registration") >= 0)
 							rli = cli + 1;
-						else if (hxLine.indexOf("// instance initialization") >= 0)
+						else if (hxLine.indexOf("// initialization of instances") >= 0)
 							ili = cli + 1;
 						
 						cli++;
 						
 						return hxLine;
 					});
+			
+			trace(gii, fli, bii, rli, ili);
 			
 			var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Sys.getCwd());
 			
@@ -118,7 +120,7 @@ class SourceControl {
 					instLines.insert(fli, '	public static var $wgtName:$wgtClassName; // $gUuidStr ($gXmlName)');
 					
 					if (wgtName == System.guiSettings.guiName) {
-						if (System.guiSettings.guiName == rootWgtName)
+						if (wgtName == rootWgtName)
 							instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
 						else
 							instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');

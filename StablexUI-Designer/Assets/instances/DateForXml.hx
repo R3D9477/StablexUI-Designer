@@ -17,7 +17,7 @@ class %InstanceName% {
 	@:noCompletion macro public static function geInit () : Void // create source of GuiElements class
 	
 	#if !macro
-	// instance fields
+	// fields of instances
 	
 	public static function load () {
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
@@ -25,11 +25,11 @@ class %InstanceName% {
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		ru.stablex.ui.UIBuilder.regClass("%InstancePackage%.ClockTime");
 		
-		// UIBUilder initialization
+		// UIBuilder initialization
 		
 		// skins registration
 		
-		// instance initialization
+		// initialization of instances
 	}
 	#end
 }

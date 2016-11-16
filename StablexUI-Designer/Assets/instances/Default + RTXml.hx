@@ -12,18 +12,18 @@ class %InstanceName% {
 	@:noCompletion macro public static function geInit () : Void // create source of GuiElements class
 	
 	#if !macro
-	// instance fields
+	// fields of instances
 	
 	public static function load () {
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		
-		// UIBUilder initialization + RTXml
+		// UIBuilder initialization + RTXml
 		
 		// skins registration
 		
-		// instance initialization
+		// initialization of instances
 	}
 	#end
 }

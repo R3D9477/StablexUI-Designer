@@ -272,27 +272,8 @@ class MainWindow extends Sprite {
 	// main menu
 	
 	function onNewXmlBtnClick (e:MouseEvent) : Void {
-		System.guiSettings = {
-			guiUuid: "",
-			guiName: "",
-			wgtSrcAct: 0,
-			project: "",
-			srcDir: "",
-			makeInstance: false,
-			guiInstanceTemplate: "",
-			guiInstancePath: "",
-			rootName: "",
-			preset: "",
-			frameTemplate: "",
-			guiWidth: 0,
-			guiHeight: 0,
-			fixedWindowSize: false
-		}
-		
 		System.uiDirPath = null;
 		System.uiXmlPath = null;
-		
-		MainWindowInstance.xmlSource.text = "";
 		
 		System.frameXml = null;
 		System.frameData = null;
@@ -305,24 +286,34 @@ class MainWindow extends Sprite {
 		System.moveWgtY = 0;
 		System.moveWgtX = 0;
 		
-		MainWindowInstance.guiInstanceTemplate.value = "Default.hx"; //MainWindowInstance.guiInstanceTemplate.options[0];
-		MainWindowInstance.guiInstanceTemplate.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-		
-		MainWindowInstance.presetsList.value = null; //MainWindowInstance.presetsList.options[0];
-		
-		MainWindowInstance.framesList.value = "default"; //MainWindowInstance.framesList.options[0];
-		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-		
-		MainWindowInstance.wgtGroupsLst.value = "default inputs"; //MainWindowInstance.wgtGroupsLst.options[0];
-		MainWindowInstance.wgtGroupsLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-		
 		System.selWgt = null;
 		
 		System.selWgtProp = null;
 		System.selPropName = "";
 		
-		MainWindowInstance.guiName.text = "";
-		MainWindowInstance.guiName.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		MainWindowInstance.xmlSource.text = "";
+		
+		System.guiSettings = {
+			guiUuid: "",
+			guiName: "",
+			wgtSrcAct: 0,
+			project: "",
+			srcDir: "",
+			makeInstance: false,
+			guiInstanceTemplate: "Default.hx",
+			guiInstancePath: "",
+			rootName: "",
+			preset: "",
+			frameTemplate: "default",
+			guiWidth: 0,
+			guiHeight: 0,
+			fixedWindowSize: false
+		}
+		
+		System.refreshGuiSettings();
+		
+		MainWindowInstance.wgtGroupsLst.value = MainWindowInstance.wgtGroupsLst.options[0];
+		MainWindowInstance.wgtGroupsLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 	}
 	
 	function onLoadXmlBtnClick (e:MouseEvent) : Void {
@@ -387,7 +378,7 @@ class MainWindow extends Sprite {
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
 		if (MainWindowInstance.guiName.text == "")
-			MainWindowInstance.guiName.text = MainWindowInstance.mainWnd.name;
+			MainWindowInstance.guiName.text = 'main_${MainWindowInstance.mainWnd.name}';
 		
 		System.guiSettings.guiName = MainWindowInstance.guiName.text;
 		
