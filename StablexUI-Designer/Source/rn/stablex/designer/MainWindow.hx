@@ -334,8 +334,24 @@ class MainWindow extends Sprite {
 			if (Path.extension(sFile).toLowerCase() != "xml")
 				sFile += ".xml";
 			
-			if (System.saveUiToFile(sFile))
+			var oldInstancePath:String = System.guiSettings.guiInstancePath;
+			
+			if (System.saveUiToFile(sFile)) {
+				if (System.guiSettings.makeInstance) {
+					SourceControl.clearWgtSources();
+					
+					if (SourceControl.makeInstance())
+						SourceControl.setInstanceInitHxFlag(oldInstancePath);
+					else
+						Dialogs.message("neko-systools", "Instance was not generated!", true);
+				}
+				
+				if (!MainWindowInstance.wgtSrcActNoth.selected)
+					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
+						Dialogs.message("neko-systools", "Some sources was not registered!", true);
+				
 				Dialogs.message("neko-systools", "UI was succefully saved to Xml!", false);
+			}
 			else
 				Dialogs.message("neko-systools", "UI was not saved to Xml!", true);
 		}
@@ -363,11 +379,9 @@ class MainWindow extends Sprite {
 			MainWindowInstance.projectPath.text = oFiles[0];
 			
 			if (MainWindowInstance.guiInstancePath.text == "") {
-				MainWindowInstance.guiInstancePath.text = Path.join([
-					Path.directory(MainWindowInstance.projectPath.text),
-					Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path"),
-					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
-				]);
+				var firstSrc:String = Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path");
+				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
+				MainWindowInstance.guiInstancePath.text = Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc, MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"]);
 			}
 		}
 	}
