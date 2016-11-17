@@ -1,8 +1,0 @@
-{
-	"title": "Widget",
-	"xml": "widget.xml",
-	"ico": "ico.png",
-	"src": "Source",
-	"className": "ru.stablex.ui.widgets.Widget",
-	"properties": [ ]
-}
