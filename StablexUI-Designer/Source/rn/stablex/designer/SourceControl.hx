@@ -16,6 +16,34 @@ using StringTools;
 using rn.typext.ext.XmlExtender;
 
 class SourceControl {
+	public static function setInstanceInitHxFlag (oldInstancePath:String) : Void {
+		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		var getInstance:String->String = function (instPath:String) : String
+			return
+				Path.withoutExtension(FileSystem.fullPath(instPath)
+					.replace(Path.addTrailingSlash(Path.join([
+						Path.directory(FileSystem.fullPath(System.guiSettings.project)),
+						projXml.getByXpath("//project/source").get("path")
+					])), ""))
+				.replace("/", ".")
+				.replace("\\", ".") + ".geInit()";
+		
+		if (oldInstancePath > "")
+			projXml.getByXpath('//project/haxeflag[@name="--macro" and @value="${getInstance(oldInstancePath)}"]').removeSelf();
+		
+		if (System.guiSettings.makeInstance)
+			if (System.guiSettings.guiInstancePath > "") {
+				var instXml:Xml = Xml.createElement("haxeflag");
+				instXml.set("name", "--macro");
+				instXml.set("value", getInstance(System.guiSettings.guiInstancePath));
+				
+				projXml.addChild(instXml);
+			}
+		
+		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+	}
+	
 	public static function makeInstance () : Void {
 		if (!(System.guiSettings.guiUuid > ""))
 			System.guiSettings.guiUuid = UUID.generateRandom(new Random()).toString();

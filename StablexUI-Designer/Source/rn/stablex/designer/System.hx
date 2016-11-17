@@ -407,6 +407,7 @@ class System {
 		if (MainWindowInstance.designerTabs.activeTab().name != "tabXml")
 			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
 		
+		var oldInstancePath:String = System.guiSettings.guiInstancePath;
 		System.saveUiSettingsToXml();
 		
 		if (System.loadUiFromXml(System.parseXml(MainWindowInstance.xmlSource.text).firstElement())) {
@@ -417,6 +418,8 @@ class System {
 			
 			if (System.guiSettings.makeInstance)
 				SourceControl.makeInstance();
+			
+			SourceControl.setInstanceInitHxFlag(oldInstancePath);
 			
 			return true;
 		}
