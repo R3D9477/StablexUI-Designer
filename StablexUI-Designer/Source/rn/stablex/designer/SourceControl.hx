@@ -6,14 +6,12 @@ import sys.FileSystem;
 
 import ru.stablex.ui.widgets.Widget;
 
-import com.hurlant.crypto.extra.UUID;
-import com.hurlant.crypto.prng.Random;
-
 import rn.typext.hlp.FileSystemHelper;
 
 using Lambda;
 using StringTools;
 using rn.typext.ext.XmlExtender;
+using rn.typext.ext.StringExtender;
 
 class SourceControl {
 	public static function setInstanceInitHxFlag (oldInstancePath:String) : Void {
@@ -45,9 +43,6 @@ class SourceControl {
 	}
 	
 	public static function makeInstance () : Bool {
-		if (!(System.guiSettings.guiUuid > ""))
-			System.guiSettings.guiUuid = UUID.generateRandom(new Random()).toString();
-		
 		if (!(System.guiSettings.project > "") || !(System.guiSettings.guiInstancePath > ""))
 			return false;
 		
@@ -143,7 +138,7 @@ class SourceControl {
 		
 		var wgtInd:Int = 1;
 		System.iterateWidgets(System.frameWgt, function (wgt:Dynamic) : Void {
-			if (System.wgtUiXmlMap.exists(wgt) ? System.wgtUiXmlMap.get(wgt).exists("name") : cast(wgt, Widget).name == System.guiSettings.guiName) {
+			if (System.wgtUiXmlMap.exists(wgt) ? System.wgtUiXmlMap.get(wgt).xml.exists("name") : cast(wgt, Widget).name == System.guiSettings.guiName) {
 				var wgtName:String = cast(wgt, Widget).name;
 				var wgtClassName:String = Type.getClassName(Type.getClass(wgt));
 				
@@ -176,21 +171,41 @@ class SourceControl {
 	public static function registerWgtSources (copy:Bool, destDir:String = null) : Bool {
 		var result:Bool = true;
 		
+		var srcLst:Array<String> = new Array<String>();
+		
+		for (xInfo in System.wgtUiXmlMap)
+			if (xInfo.xml.exists("src"))
+				if (srcLst.exists(function (src:String) : Bool return src == xInfo.xml.get("src")))
+					srcLst.push(Path.join([Path.directory(xInfo.xmlPath), "src"]));
+		
 		if (!copy) {
 			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 			
-			//...
-			//...
-			//...
+			for (src in srcLst) {
+				//var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
+				
+				//if (projXml.getByXpath('//project/source[@path="$srcPath"') == null) {
+				//	var srcXml:Xml = Xml.createElement("source");
+				//	srcXml.set("path", srcPath);
+				//	srcXml.set("guiUuid", System.guiSettings.guiUuid);
+				//	
+				//	projXml.addChild(srcXml);
+				//}
+			}
 			
 			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		}
-		else if (copy && destDir > "") {
-			destDir = FileSystem.fullPath(destDir);
+		else if (copy && FileSystem.exists(destDir.escNull())) {
+			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 			
-			//...
-			//...
-			//...
+			for (src in srcLst) {
+				//FileSystemHelper.copy(src, destDir, );
+				//...
+				//...
+				//...
+			}
+			
+			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		}
 		else
 			result = false;

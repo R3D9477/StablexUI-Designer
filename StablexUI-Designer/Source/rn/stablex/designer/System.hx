@@ -29,7 +29,7 @@ using rn.typext.ext.StringExtender;
 class System {
 	public static var guiSettings:GuiDataInfo;
 	
-	public static var wgtUiXmlMap:Map<{}, Xml>; // <widget>, <xml>
+	public static var wgtUiXmlMap:Map<{}, WgtXmlInfo>; // <widget>, <xml>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>
 	public static var wgtSkinsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
@@ -161,14 +161,13 @@ class System {
 		if (System.selWgtData != null)
 			if (FileSystem.exists(System.selWgtData.xml.escNull())) {
 				if (FileSystem.exists(System.selWgtData.bin.escNull())) {
-					
-					trace(Loader.local().loadModule(System.selWgtData.bin).exportsTable());
+					/*trace(Loader.local().loadModule(System.selWgtData.bin).exportsTable());
 					return;
 					
 					var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin).exportsTable().__classes, "GridWidget");
 					untyped wgtBinCls.__super__ = Widget;
 					
-					RTXml.regClass(wgtBinCls);
+					RTXml.regClass(wgtBinCls);*/
 				}
 				
 				var selXml:Xml = System.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
@@ -179,10 +178,10 @@ class System {
 				var targetWgt:Widget = cast(e.currentTarget, Widget);
 				targetWgt.addChild(selWgt);
 				
-				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
+				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt).xml;
 				targetXml.addChild(selXml);
 				
-				System.wgtUiXmlMap.set(selWgt, selXml);
+				System.wgtUiXmlMap.set(selWgt, { xmlPath: System.selWgtData.xml, xml: selXml });
 				System.setWgtEventHandlers(selWgt);
 			}
 		
@@ -303,7 +302,7 @@ class System {
 			},
 			function (dpWgt:Dynamic, dcWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dcWgt) == null)
-					System.wgtUiXmlMap.set(dcWgt, System.wgtUiXmlMap.get(dpWgt).getChildAt(cInd));
+					System.wgtUiXmlMap.set(dcWgt, { xmlPath: null, xml: System.wgtUiXmlMap.get(dpWgt).xml.getChildAt(cInd) });
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
@@ -340,7 +339,7 @@ class System {
 			MainWindowInstance.guiWgtsList.options = [ ["", null] ];
 			MainWindowInstance.wgtsPropsLst.freeChildren(true);
 			
-			System.wgtUiXmlMap = new Map<{}, Xml>();
+			System.wgtUiXmlMap = new Map<{}, WgtXmlInfo>();
 			
 			var wgtDyn:Dynamic = RTXml.buildFn(System.printXml(xml, "   "))();
 			
@@ -376,7 +375,7 @@ class System {
 			
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
 			
-			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
+			System.wgtUiXmlMap.set(System.guiElementsWgt, { xmlPath: null, xml: System.guiElementsXml });
 			System.setWgtEventHandlers(System.guiElementsWgt);
 			System.selectFirstWidget();
 			
@@ -441,7 +440,7 @@ class System {
 				System.deleteWidget(cast(wgt, Widget).getChildAt(i));
 		
 		if (System.wgtUiXmlMap.exists(wgt)) {
-			System.wgtUiXmlMap.get(wgt).removeSelf();
+			System.wgtUiXmlMap.get(wgt).xml.removeSelf();
 			System.wgtUiXmlMap.remove(wgt);
 		}
 		
@@ -483,14 +482,14 @@ class System {
 		MainWindowInstance.wgtsPropsLst.layout = new Row();
 		cast(MainWindowInstance.wgtsPropsLst.layout, Row).rows = new Array<Float>();
 		
-		var sx:Xml = System.wgtUiXmlMap.get(System.selWgt);
+		var sx:Xml = System.wgtUiXmlMap.get(System.selWgt).xml;
 		
 		for (att in sx.attributes())
 			System.addPropRow(att, sx.get(att));
 	}
 	
 	public static function setWgtProperty (wgt:Dynamic, property:String, propValue:String) : Void {
-		var wgtXml:Xml = System.wgtUiXmlMap.get(wgt);
+		var wgtXml:Xml = System.wgtUiXmlMap.get(wgt).xml;
 		
 		if (wgtXml.exists(property)) {
 			var ownerInfo:GuiObjPropOwnerInfo = System.setGuiObjProperties(wgt, [{ name: property, value: propValue }]).pop();

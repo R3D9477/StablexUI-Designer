@@ -16,6 +16,9 @@ import ru.stablex.ui.skins.*;
 import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.events.WidgetEvent;
 
+import com.hurlant.crypto.extra.UUID;
+import com.hurlant.crypto.prng.Random;
+
 import systools.Dialogs;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
@@ -280,7 +283,7 @@ class MainWindow extends Sprite {
 		System.frameData = null;
 		System.guiElementsXml = null;
 		
-		System.wgtUiXmlMap = new Map<{}, Xml>();
+		System.wgtUiXmlMap = new Map<{}, WgtXmlInfo>();
 		System.selWgtData = null;
 		
 		System.moveWgt = null;
@@ -295,7 +298,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.xmlSource.text = "";
 		
 		System.guiSettings = {
-			guiUuid: "",
+			guiUuid: UUID.generateRandom(new Random()).toString(),
 			guiName: "",
 			wgtSrcAct: 0,
 			project: "",
@@ -542,7 +545,7 @@ class MainWindow extends Sprite {
 			if (Std.is(prop, String))
 				value = "'" + value + "'";
 			
-			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropNamesLst.value, value);
+			System.wgtUiXmlMap.get(System.selWgt).xml.set(MainWindowInstance.wgtPropNamesLst.value, value);
 			System.addPropRow(MainWindowInstance.wgtPropNamesLst.value, value);
 			
 			var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
@@ -568,7 +571,7 @@ class MainWindow extends Sprite {
 			
 			MainWindowInstance.editPropName.text = System.propNameMap(System.selPropName);
 			MainWindowInstance.editPropType.text = Std.string(Type.typeof(Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName)));
-			MainWindowInstance.editPropValue.text = System.wgtUiXmlMap.get(System.selWgt).get(System.selPropName);
+			MainWindowInstance.editPropValue.text = System.wgtUiXmlMap.get(System.selWgt).xml.get(System.selPropName);
 			
 			MainWindowInstance.wgtEditPropWnd.show();
 		}
@@ -592,7 +595,7 @@ class MainWindow extends Sprite {
 		if (System.selWgt != null && MainWindowInstance.editPropValue.text > "") {
 			System.setWgtProperty(System.selWgt, System.selPropName, null);
 			System.selWgtProps.remove(System.selPropName);
-			System.wgtUiXmlMap.get(System.selWgt).remove(System.selPropName);
+			System.wgtUiXmlMap.get(System.selWgt).xml.remove(System.selPropName);
 			System.selWgtProp.parent.removeChild(System.selWgtProp);
 			
 			System.selWgtProp = null;
