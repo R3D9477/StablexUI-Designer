@@ -3,7 +3,7 @@
 	name="'tabXml'"
 	widthPt="100"
 	heightPt="100"
-	title-text="'XML'"
+	title-text="'Xml'"
 	title-padding="5"
 	title-highlightFormat-color="0xFF0000"
 	title-highlightFormat-bold="true"
@@ -24,9 +24,9 @@
 		<InputText
 			name="'xmlSource'"
 			autoSize="true"
-			skin:Paint-color="0xC0C0C0"
 			label-wordWrap="false"
 			label-multiline="true"
-			label-selectable="true"/>
+			label-selectable="true"
+			skin:Paint-color="0xC0C0C0"/>
 	</Scroll>
 </TabPage>
