@@ -1,6 +1,7 @@
 package rn.stablex.designer;
 
-typedef WgtDataInfo = {
+typedef WgtDescInfo = {
+	var wgtDir:String;
 	var title:String;
 	var xml:String;
 	var bin:String;

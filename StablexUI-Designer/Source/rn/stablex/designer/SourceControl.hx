@@ -162,35 +162,29 @@ class SourceControl {
 		return true;
 	}
 	
-	public static function clearWgtSources () : Void {
-		//...
-		//...
-		//...
-	}
-	
 	public static function registerWgtSources (copy:Bool, destDir:String = null) : Bool {
 		var result:Bool = true;
 		
 		var srcLst:Array<String> = new Array<String>();
 		
-		for (xInfo in System.wgtUiXmlMap)
-			if (xInfo.xml.exists("src"))
-				if (srcLst.exists(function (src:String) : Bool return src == xInfo.xml.get("src")))
-					srcLst.push(Path.join([Path.directory(xInfo.xmlPath), "src"]));
+		for (wgtInfo in System.wgtUiXmlMap) // fill sources list
+			if (wgtInfo.desc != null)
+				if (wgtInfo.xml.exists("src"))
+					if (srcLst.exists(function (src:String) : Bool return src == wgtInfo.xml.get("src")))
+						srcLst.push(Path.join([Path.directory(wgtInfo.desc.wgtDir), "src"]));
 		
 		if (!copy) {
 			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 			
 			for (src in srcLst) {
-				//var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
+				var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
 				
-				//if (projXml.getByXpath('//project/source[@path="$srcPath"') == null) {
-				//	var srcXml:Xml = Xml.createElement("source");
-				//	srcXml.set("path", srcPath);
-				//	srcXml.set("guiUuid", System.guiSettings.guiUuid);
-				//	
-				//	projXml.addChild(srcXml);
-				//}
+				if (projXml.getByXpath('//project/source[@path="$srcPath"') == null) {
+					var srcXml:Xml = Xml.createElement("source");
+					srcXml.set("path", srcPath);
+					
+					projXml.addChild(srcXml);
+				}
 			}
 			
 			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));

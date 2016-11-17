@@ -1,6 +1,6 @@
 package rn.stablex.designer;
 
-typedef WgtXmlInfo = {
-	var xmlPath:String;
+typedef WgtInfo = {
 	var xml:Xml;
+	var desc:WgtDescInfo;
 }

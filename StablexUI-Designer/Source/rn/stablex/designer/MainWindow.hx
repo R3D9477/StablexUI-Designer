@@ -283,7 +283,7 @@ class MainWindow extends Sprite {
 		System.frameData = null;
 		System.guiElementsXml = null;
 		
-		System.wgtUiXmlMap = new Map<{}, WgtXmlInfo>();
+		System.wgtUiXmlMap = new Map<{}, WgtInfo>();
 		System.selWgtData = null;
 		
 		System.moveWgt = null;
@@ -341,8 +341,6 @@ class MainWindow extends Sprite {
 			
 			if (System.saveUiToFile(sFile)) {
 				if (System.guiSettings.makeInstance) {
-					SourceControl.clearWgtSources();
-					
 					if (SourceControl.makeInstance())
 						SourceControl.setInstanceInitHxFlag(oldInstancePath);
 					else
@@ -453,7 +451,8 @@ class MainWindow extends Sprite {
 		for (wgtDir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
 			wgtDir = Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, wgtDir]);
 			
-			var wgtData:WgtDataInfo = TJSON.parse(File.getContent(FileSystem.fullPath(Path.join([wgtDir, "widget.json"]))));
+			var wgtData:WgtDescInfo = TJSON.parse(File.getContent(FileSystem.fullPath(Path.join([wgtDir, "widget.json"]))));
+			wgtData.wgtDir = wgtDir;
 			wgtData.ico = Path.join([wgtDir, wgtData.ico]);
 			
 			if (!Path.isAbsolute(wgtData.xml))

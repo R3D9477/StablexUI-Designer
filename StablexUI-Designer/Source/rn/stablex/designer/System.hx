@@ -29,7 +29,7 @@ using rn.typext.ext.StringExtender;
 class System {
 	public static var guiSettings:GuiDataInfo;
 	
-	public static var wgtUiXmlMap:Map<{}, WgtXmlInfo>; // <widget>, <xml>
+	public static var wgtUiXmlMap:Map<{}, WgtInfo>; // <widget>, <xml>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>
 	public static var wgtSkinsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
@@ -42,7 +42,7 @@ class System {
 	public static var guiElementsWgt:Widget;
 	
 	public static var selWgt:Dynamic;
-	public static var selWgtData:WgtDataInfo;
+	public static var selWgtData:WgtDescInfo;
 	
 	public static var selWgtProp:HBox;
 	public static var selWgtProps:Map<String, HBox>;
@@ -181,7 +181,7 @@ class System {
 				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt).xml;
 				targetXml.addChild(selXml);
 				
-				System.wgtUiXmlMap.set(selWgt, { xmlPath: System.selWgtData.xml, xml: selXml });
+				System.wgtUiXmlMap.set(selWgt, { xml: selXml, desc: System.selWgtData });
 				System.setWgtEventHandlers(selWgt);
 			}
 		
@@ -302,7 +302,7 @@ class System {
 			},
 			function (dpWgt:Dynamic, dcWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dcWgt) == null)
-					System.wgtUiXmlMap.set(dcWgt, { xmlPath: null, xml: System.wgtUiXmlMap.get(dpWgt).xml.getChildAt(cInd) });
+					System.wgtUiXmlMap.set(dcWgt, { xml: System.wgtUiXmlMap.get(dpWgt).xml.getChildAt(cInd), desc: null });
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
@@ -339,7 +339,7 @@ class System {
 			MainWindowInstance.guiWgtsList.options = [ ["", null] ];
 			MainWindowInstance.wgtsPropsLst.freeChildren(true);
 			
-			System.wgtUiXmlMap = new Map<{}, WgtXmlInfo>();
+			System.wgtUiXmlMap = new Map<{}, WgtInfo>();
 			
 			var wgtDyn:Dynamic = RTXml.buildFn(System.printXml(xml, "   "))();
 			
@@ -375,7 +375,7 @@ class System {
 			
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
 			
-			System.wgtUiXmlMap.set(System.guiElementsWgt, { xmlPath: null, xml: System.guiElementsXml });
+			System.wgtUiXmlMap.set(System.guiElementsWgt, { xml: System.guiElementsXml, desc: null });
 			System.setWgtEventHandlers(System.guiElementsWgt);
 			System.selectFirstWidget();
 			
