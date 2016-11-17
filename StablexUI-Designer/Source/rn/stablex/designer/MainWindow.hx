@@ -123,7 +123,6 @@ class MainWindow extends Sprite {
 		// on choose openfl project
 		
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
-		MainWindowInstance.chooseSrcDirPath.addEventListener(MouseEvent.CLICK, this.onChooseSrcDirPath);
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
@@ -283,7 +282,7 @@ class MainWindow extends Sprite {
 		System.frameData = null;
 		System.guiElementsXml = null;
 		
-		System.wgtUiXmlMap = new Map<{}, WgtInfo>();
+		System.wgtUiXmlMap = new Map<{}, Xml>();
 		System.selWgtData = null;
 		
 		System.moveWgt = null;
@@ -300,9 +299,7 @@ class MainWindow extends Sprite {
 		System.guiSettings = {
 			guiUuid: UUID.generateRandom(new Random()).toString(),
 			guiName: "",
-			wgtSrcAct: 0,
 			project: "",
-			srcDir: "",
 			makeInstance: false,
 			guiInstanceTemplate: "Default.hx",
 			guiInstancePath: "",
@@ -347,10 +344,6 @@ class MainWindow extends Sprite {
 						Dialogs.message("neko-systools", "Instance was not generated!", true);
 				}
 				
-				if (!MainWindowInstance.wgtSrcActNoth.selected)
-					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
-						Dialogs.message("neko-systools", "Some sources was not registered!", true);
-				
 				Dialogs.message("neko-systools", "UI was succefully saved to Xml!", false);
 			}
 			else
@@ -373,34 +366,6 @@ class MainWindow extends Sprite {
 	//-----------------------------------------------------------------------------------------------
 	// tab Project
 	
-	function onChooseOpenflProject (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
-		
-		if (oFiles != null) {
-			MainWindowInstance.projectPath.text = oFiles[0];
-			
-			if (MainWindowInstance.guiInstancePath.text == "") {
-				var firstSrc:String = Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path");
-				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
-				MainWindowInstance.guiInstancePath.text = Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc, MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"]);
-			}
-		}
-	}
-	
-	function onChooseSrcDirPath (e:MouseEvent) : Void {
-		var srcDir:String = Dialogs.folder("Select sources dir", "Select directory of current OpenFL/Lime project");
-		
-		if (srcDir > "")
-			MainWindowInstance.wgtSrcDirPath.text = srcDir;
-	}
-	
-	function onChooseInstancePath (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
-		
-		if (oFiles != null)
-			MainWindowInstance.guiInstancePath.text = oFiles[0];
-	}
-	
 	function onChangeGuiName (e:WidgetEvent) : Void {
 		if (MainWindowInstance.guiName.text == "")
 			MainWindowInstance.guiName.text = 'main_${MainWindowInstance.mainWnd.name}';
@@ -409,6 +374,28 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.mainWnd.name = System.guiSettings.guiName;
 		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+	}
+	
+	function onChooseOpenflProject (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
+		
+		if (oFiles != null) {
+			MainWindowInstance.projectPath.text = oFiles[0];
+			
+			if (MainWindowInstance.guiInstancePath.text == "")
+				MainWindowInstance.guiInstancePath.text = Path.join([
+					Path.directory(MainWindowInstance.projectPath.text),
+					Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path"),
+					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
+				]);
+		}
+	}
+	
+	function onChooseInstancePath (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
+		
+		if (oFiles != null)
+			MainWindowInstance.guiInstancePath.text = oFiles[0];
 	}
 	
 	function onChangeMainWindowSize (e:Event) : Void {
@@ -451,8 +438,7 @@ class MainWindow extends Sprite {
 		for (wgtDir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
 			wgtDir = Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, wgtDir]);
 			
-			var wgtData:WgtDescInfo = TJSON.parse(File.getContent(FileSystem.fullPath(Path.join([wgtDir, "widget.json"]))));
-			wgtData.wgtDir = wgtDir;
+			var wgtData:WgtInfo = TJSON.parse(File.getContent(FileSystem.fullPath(Path.join([wgtDir, "widget.json"]))));
 			wgtData.ico = Path.join([wgtDir, wgtData.ico]);
 			
 			if (!Path.isAbsolute(wgtData.xml))
@@ -544,7 +530,7 @@ class MainWindow extends Sprite {
 			if (Std.is(prop, String))
 				value = "'" + value + "'";
 			
-			System.wgtUiXmlMap.get(System.selWgt).xml.set(MainWindowInstance.wgtPropNamesLst.value, value);
+			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropNamesLst.value, value);
 			System.addPropRow(MainWindowInstance.wgtPropNamesLst.value, value);
 			
 			var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
@@ -570,7 +556,7 @@ class MainWindow extends Sprite {
 			
 			MainWindowInstance.editPropName.text = System.propNameMap(System.selPropName);
 			MainWindowInstance.editPropType.text = Std.string(Type.typeof(Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName)));
-			MainWindowInstance.editPropValue.text = System.wgtUiXmlMap.get(System.selWgt).xml.get(System.selPropName);
+			MainWindowInstance.editPropValue.text = System.wgtUiXmlMap.get(System.selWgt).get(System.selPropName);
 			
 			MainWindowInstance.wgtEditPropWnd.show();
 		}
@@ -594,7 +580,7 @@ class MainWindow extends Sprite {
 		if (System.selWgt != null && MainWindowInstance.editPropValue.text > "") {
 			System.setWgtProperty(System.selWgt, System.selPropName, null);
 			System.selWgtProps.remove(System.selPropName);
-			System.wgtUiXmlMap.get(System.selWgt).xml.remove(System.selPropName);
+			System.wgtUiXmlMap.get(System.selWgt).remove(System.selPropName);
 			System.selWgtProp.parent.removeChild(System.selWgtProp);
 			
 			System.selWgtProp = null;

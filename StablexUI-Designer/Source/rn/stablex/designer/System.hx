@@ -29,7 +29,7 @@ using rn.typext.ext.StringExtender;
 class System {
 	public static var guiSettings:GuiDataInfo;
 	
-	public static var wgtUiXmlMap:Map<{}, WgtInfo>; // <widget>, <xml>
+	public static var wgtUiXmlMap:Map<{}, Xml>; // <widget>, <xml>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>
 	public static var wgtSkinsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
@@ -42,7 +42,7 @@ class System {
 	public static var guiElementsWgt:Widget;
 	
 	public static var selWgt:Dynamic;
-	public static var selWgtData:WgtDescInfo;
+	public static var selWgtData:WgtInfo;
 	
 	public static var selWgtProp:HBox;
 	public static var selWgtProps:Map<String, HBox>;
@@ -77,15 +77,7 @@ class System {
 		
 		System.guiSettings.guiName = MainWindowInstance.guiName.text;
 		
-		if (MainWindowInstance.wgtSrcActLink.selected)
-			System.guiSettings.wgtSrcAct = 1;
-		else if (MainWindowInstance.wgtSrcActCopy.selected)
-			System.guiSettings.wgtSrcAct = 2;
-		else
-			System.guiSettings.wgtSrcAct = 0;
-		
 		System.guiSettings.project = MainWindowInstance.projectPath.text;
-		System.guiSettings.srcDir = MainWindowInstance.wgtSrcDirPath.text;
 		
 		System.guiSettings.makeInstance = MainWindowInstance.wgtMakeUiInst.selected;
 		System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value;
@@ -93,11 +85,11 @@ class System {
 		System.guiSettings.rootName = MainWindowInstance.rootName.text;
 		
 		System.guiSettings.preset = MainWindowInstance.presetsList.value;
+		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		
 		System.guiSettings.guiWidth = Std.parseInt(MainWindowInstance.guiWidth.text);
 		System.guiSettings.guiHeight = Std.parseInt(MainWindowInstance.guiHeight.text);
 		System.guiSettings.fixedWindowSize = MainWindowInstance.fixedWindowSize.selected;
-		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		
 		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
 	}
@@ -113,17 +105,7 @@ class System {
 	}
 	
 	public static function refreshGuiSettings () : Void {
-		switch(System.guiSettings.wgtSrcAct) {
-			case 1:
-				MainWindowInstance.wgtSrcActLink.selected = true;
-			case 2:
-				MainWindowInstance.wgtSrcActCopy.selected = true;
-			default:
-				MainWindowInstance.wgtSrcActNoth.selected = true;
-		}
-		
 		MainWindowInstance.projectPath.text = System.guiSettings.project.escNull();
-		MainWindowInstance.wgtSrcDirPath.text = System.guiSettings.srcDir.escNull();
 		
 		MainWindowInstance.wgtMakeUiInst.selected = System.guiSettings.makeInstance;
 		MainWindowInstance.guiInstanceTemplate.value = System.guiSettings.guiInstanceTemplate;
@@ -178,10 +160,10 @@ class System {
 				var targetWgt:Widget = cast(e.currentTarget, Widget);
 				targetWgt.addChild(selWgt);
 				
-				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt).xml;
+				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
 				targetXml.addChild(selXml);
 				
-				System.wgtUiXmlMap.set(selWgt, { xml: selXml, desc: System.selWgtData });
+				System.wgtUiXmlMap.set(selWgt, selXml);
 				System.setWgtEventHandlers(selWgt);
 			}
 		
@@ -302,7 +284,7 @@ class System {
 			},
 			function (dpWgt:Dynamic, dcWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dcWgt) == null)
-					System.wgtUiXmlMap.set(dcWgt, { xml: System.wgtUiXmlMap.get(dpWgt).xml.getChildAt(cInd), desc: null });
+					System.wgtUiXmlMap.set(dcWgt, System.wgtUiXmlMap.get(dpWgt).getChildAt(cInd));
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
@@ -339,7 +321,7 @@ class System {
 			MainWindowInstance.guiWgtsList.options = [ ["", null] ];
 			MainWindowInstance.wgtsPropsLst.freeChildren(true);
 			
-			System.wgtUiXmlMap = new Map<{}, WgtInfo>();
+			System.wgtUiXmlMap = new Map<{}, Xml>();
 			
 			var wgtDyn:Dynamic = RTXml.buildFn(System.printXml(xml, "   "))();
 			
@@ -375,7 +357,7 @@ class System {
 			
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
 			
-			System.wgtUiXmlMap.set(System.guiElementsWgt, { xml: System.guiElementsXml, desc: null });
+			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
 			System.setWgtEventHandlers(System.guiElementsWgt);
 			System.selectFirstWidget();
 			
@@ -440,7 +422,7 @@ class System {
 				System.deleteWidget(cast(wgt, Widget).getChildAt(i));
 		
 		if (System.wgtUiXmlMap.exists(wgt)) {
-			System.wgtUiXmlMap.get(wgt).xml.removeSelf();
+			System.wgtUiXmlMap.get(wgt).removeSelf();
 			System.wgtUiXmlMap.remove(wgt);
 		}
 		
@@ -482,14 +464,14 @@ class System {
 		MainWindowInstance.wgtsPropsLst.layout = new Row();
 		cast(MainWindowInstance.wgtsPropsLst.layout, Row).rows = new Array<Float>();
 		
-		var sx:Xml = System.wgtUiXmlMap.get(System.selWgt).xml;
+		var sx:Xml = System.wgtUiXmlMap.get(System.selWgt);
 		
 		for (att in sx.attributes())
 			System.addPropRow(att, sx.get(att));
 	}
 	
 	public static function setWgtProperty (wgt:Dynamic, property:String, propValue:String) : Void {
-		var wgtXml:Xml = System.wgtUiXmlMap.get(wgt).xml;
+		var wgtXml:Xml = System.wgtUiXmlMap.get(wgt);
 		
 		if (wgtXml.exists(property)) {
 			var ownerInfo:GuiObjPropOwnerInfo = System.setGuiObjProperties(wgt, [{ name: property, value: propValue }]).pop();

@@ -97,8 +97,6 @@ class SourceControl {
 					return hxLine;
 				});
 		
-		trace(gii, fli, bii, rli, ili);
-		
 		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Sys.getCwd());
 		
 		instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${haxe.io.Path.join([relPath, "GuiElements.xml"])}", "GuiElements");');
@@ -138,7 +136,7 @@ class SourceControl {
 		
 		var wgtInd:Int = 1;
 		System.iterateWidgets(System.frameWgt, function (wgt:Dynamic) : Void {
-			if (System.wgtUiXmlMap.exists(wgt) ? System.wgtUiXmlMap.get(wgt).xml.exists("name") : cast(wgt, Widget).name == System.guiSettings.guiName) {
+			if (System.wgtUiXmlMap.exists(wgt) ? System.wgtUiXmlMap.get(wgt).exists("name") : cast(wgt, Widget).name == System.guiSettings.guiName) {
 				var wgtName:String = cast(wgt, Widget).name;
 				var wgtClassName:String = Type.getClassName(Type.getClass(wgt));
 				
@@ -160,50 +158,5 @@ class SourceControl {
 		File.saveContent(System.guiSettings.guiInstancePath, instLines.join("\n"));
 		
 		return true;
-	}
-	
-	public static function registerWgtSources (copy:Bool, destDir:String = null) : Bool {
-		var result:Bool = true;
-		
-		var srcLst:Array<String> = new Array<String>();
-		
-		for (wgtInfo in System.wgtUiXmlMap) // fill sources list
-			if (wgtInfo.desc != null)
-				if (wgtInfo.xml.exists("src"))
-					if (srcLst.exists(function (src:String) : Bool return src == wgtInfo.xml.get("src")))
-						srcLst.push(Path.join([Path.directory(wgtInfo.desc.wgtDir), "src"]));
-		
-		if (!copy) {
-			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
-			
-			for (src in srcLst) {
-				var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
-				
-				if (projXml.getByXpath('//project/source[@path="$srcPath"') == null) {
-					var srcXml:Xml = Xml.createElement("source");
-					srcXml.set("path", srcPath);
-					
-					projXml.addChild(srcXml);
-				}
-			}
-			
-			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
-		}
-		else if (copy && FileSystem.exists(destDir.escNull())) {
-			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
-			
-			for (src in srcLst) {
-				//FileSystemHelper.copy(src, destDir, );
-				//...
-				//...
-				//...
-			}
-			
-			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
-		}
-		else
-			result = false;
-		
-		return result;
 	}
 }
