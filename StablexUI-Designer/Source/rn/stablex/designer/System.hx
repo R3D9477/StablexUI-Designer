@@ -542,6 +542,14 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
+	public static function getGuiObjDefaultPropValue (wgt:Dynamic, propName:String) : String {
+		//...
+		//...
+		//...
+		
+		return null;
+	}
+	
 	public static function setGuiObjProperties (obj:Dynamic, properies:Array<GuiObjPropInfo>) : Array<GuiObjPropOwnerInfo> {
 		var owners:Array<GuiObjPropOwnerInfo> = new Array<GuiObjPropOwnerInfo>();
 		
@@ -552,10 +560,17 @@ class System {
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
 			
+			if (Std.is(propInfo.value, String))
+				propInfo.value = StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"');
+			
 			for(cls in RTXml.imports.keys())
 				interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
 			
-			Reflect.setProperty(ownerInfo.propOwner, ownerInfo.propName, interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"')))));
+			Reflect.setProperty(
+				ownerInfo.propOwner,
+				ownerInfo.propName,
+				interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)))
+			);
 			
 			owners.push(ownerInfo);
 		}

@@ -601,7 +601,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wgtPropWnd.hide();
 		
 		if (System.selWgt != null && MainWindowInstance.editPropValue.text > "") {
-			System.setWgtProperty(System.selWgt, System.selPropName, null);
+			System.setWgtProperty(System.selWgt, System.selPropName, System.getGuiObjDefaultPropValue(System.selWgt, System.selPropName));
 			System.selWgtProps.remove(System.selPropName);
 			System.wgtUiXmlMap.get(System.selWgt).remove(System.selPropName);
 			System.selWgtProp.parent.removeChild(System.selWgtProp);
