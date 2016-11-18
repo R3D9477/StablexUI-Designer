@@ -14,6 +14,8 @@ using rn.typext.ext.XmlExtender;
 using rn.typext.ext.StringExtender;
 
 class SourceControl {
+	public static var wgtSources:Array<String> = new Array<String>();
+	
 	public static function setInstanceInitHxFlag (oldInstancePath:String) : Void {
 		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 		
@@ -97,6 +99,8 @@ class SourceControl {
 					return hxLine;
 				});
 		
+		trace(gii, fli, bii, rli, ili);
+		
 		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Sys.getCwd());
 		
 		instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${haxe.io.Path.join([relPath, "GuiElements.xml"])}", "GuiElements");');
@@ -158,5 +162,41 @@ class SourceControl {
 		File.saveContent(System.guiSettings.guiInstancePath, instLines.join("\n"));
 		
 		return true;
+	}
+	
+	public static function clearWgtSources () : Void {
+		//...
+		//...
+		//...
+	}
+	
+	public static function registerWgtSources (copy:Bool, destDir:String = null) : Bool {
+		var result:Bool = true;
+		
+		if (!copy) {
+			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+			
+			for (src in wgtSources) {
+				var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
+				
+				if (projXml.getByXpath('//project/source[@path="$srcPath"]') == null) {
+					var srcXml:Xml = Xml.createElement("source");
+					srcXml.set("path", srcPath);
+					//srcXml.set("guiUuid", System.guiSettings.guiUuid);
+					
+					projXml.addChild(srcXml);
+				}
+			}
+			
+			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		}
+		else if (copy && FileSystem.exists(destDir.escNull())) {
+			for (src in wgtSources)
+				FileSystemHelper.copy(Path.addTrailingSlash(src), Path.addTrailingSlash(destDir));
+		}
+		else
+			result = false;
+		
+		return result;
 	}
 }

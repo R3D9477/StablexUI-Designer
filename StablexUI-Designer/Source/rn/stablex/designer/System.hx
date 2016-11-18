@@ -77,7 +77,15 @@ class System {
 		
 		System.guiSettings.guiName = MainWindowInstance.guiName.text;
 		
+		if (MainWindowInstance.wgtSrcActLink.selected)
+			System.guiSettings.wgtSrcAct = 1;
+		else if (MainWindowInstance.wgtSrcActCopy.selected)
+			System.guiSettings.wgtSrcAct = 2;
+		else
+			System.guiSettings.wgtSrcAct = 0;
+		
 		System.guiSettings.project = MainWindowInstance.projectPath.text;
+		System.guiSettings.srcDir = MainWindowInstance.wgtSrcDirPath.text;
 		
 		System.guiSettings.makeInstance = MainWindowInstance.wgtMakeUiInst.selected;
 		System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value;
@@ -85,11 +93,11 @@ class System {
 		System.guiSettings.rootName = MainWindowInstance.rootName.text;
 		
 		System.guiSettings.preset = MainWindowInstance.presetsList.value;
-		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		
 		System.guiSettings.guiWidth = Std.parseInt(MainWindowInstance.guiWidth.text);
 		System.guiSettings.guiHeight = Std.parseInt(MainWindowInstance.guiHeight.text);
 		System.guiSettings.fixedWindowSize = MainWindowInstance.fixedWindowSize.selected;
+		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		
 		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
 	}
@@ -105,7 +113,17 @@ class System {
 	}
 	
 	public static function refreshGuiSettings () : Void {
+		switch(System.guiSettings.wgtSrcAct) {
+			case 1:
+				MainWindowInstance.wgtSrcActLink.selected = true;
+			case 2:
+				MainWindowInstance.wgtSrcActCopy.selected = true;
+			default:
+				MainWindowInstance.wgtSrcActNoth.selected = true;
+		}
+		
 		MainWindowInstance.projectPath.text = System.guiSettings.project.escNull();
+		MainWindowInstance.wgtSrcDirPath.text = System.guiSettings.srcDir.escNull();
 		
 		MainWindowInstance.wgtMakeUiInst.selected = System.guiSettings.makeInstance;
 		MainWindowInstance.guiInstanceTemplate.value = System.guiSettings.guiInstanceTemplate;
@@ -165,6 +183,13 @@ class System {
 				
 				System.wgtUiXmlMap.set(selWgt, selXml);
 				System.setWgtEventHandlers(selWgt);
+				
+				if (System.selWgtData.bin > "") {
+					var wgtSrc:String = Path.join([System.selWgtData.wgtDir, System.selWgtData.src]);
+					
+					if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
+						SourceControl.wgtSources.push(wgtSrc);
+				}
 			}
 		
 		MainWindowInstance.wlSelectBtn.selected = true;

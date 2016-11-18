@@ -123,6 +123,7 @@ class MainWindow extends Sprite {
 		// on choose openfl project
 		
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
+		MainWindowInstance.chooseSrcDirPath.addEventListener(MouseEvent.CLICK, this.onChooseSrcDirPath);
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
@@ -299,7 +300,9 @@ class MainWindow extends Sprite {
 		System.guiSettings = {
 			guiUuid: UUID.generateRandom(new Random()).toString(),
 			guiName: "",
+			wgtSrcAct: 0,
 			project: "",
+			srcDir: "",
 			makeInstance: false,
 			guiInstanceTemplate: "Default.hx",
 			guiInstancePath: "",
@@ -338,11 +341,19 @@ class MainWindow extends Sprite {
 			
 			if (System.saveUiToFile(sFile)) {
 				if (System.guiSettings.makeInstance) {
+					SourceControl.clearWgtSources();
+					
 					if (SourceControl.makeInstance())
 						SourceControl.setInstanceInitHxFlag(oldInstancePath);
 					else
 						Dialogs.message("neko-systools", "Instance was not generated!", true);
 				}
+				
+				SourceControl.clearWgtSources();
+				
+				if (!MainWindowInstance.wgtSrcActNoth.selected)
+					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
+						Dialogs.message("neko-systools", "Some sources was not registered!", true);
 				
 				Dialogs.message("neko-systools", "UI was succefully saved to Xml!", false);
 			}
@@ -366,6 +377,39 @@ class MainWindow extends Sprite {
 	//-----------------------------------------------------------------------------------------------
 	// tab Project
 	
+	function onChooseOpenflProject (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
+		
+		if (oFiles != null) {
+			MainWindowInstance.projectPath.text = oFiles[0];
+			
+			var firstSrc:String = Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path");
+			
+			if (!FileSystem.exists(firstSrc))
+				firstSrc = Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]);
+			
+			if (MainWindowInstance.wgtSrcDirPath.text == "")
+				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
+			
+			if (MainWindowInstance.guiInstancePath.text == "")
+				MainWindowInstance.guiInstancePath.text = Path.join([firstSrc, MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"]);
+		}
+	}
+	
+	function onChooseSrcDirPath (e:MouseEvent) : Void {
+		var srcDir:String = Dialogs.folder("Select sources dir", "Select directory of current OpenFL/Lime project");
+		
+		if (srcDir > "")
+			MainWindowInstance.wgtSrcDirPath.text = srcDir;
+	}
+	
+	function onChooseInstancePath (e:MouseEvent) : Void {
+		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
+		
+		if (oFiles != null)
+			MainWindowInstance.guiInstancePath.text = oFiles[0];
+	}
+	
 	function onChangeGuiName (e:WidgetEvent) : Void {
 		if (MainWindowInstance.guiName.text == "")
 			MainWindowInstance.guiName.text = 'main_${MainWindowInstance.mainWnd.name}';
@@ -374,28 +418,6 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.mainWnd.name = System.guiSettings.guiName;
 		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
-	}
-	
-	function onChooseOpenflProject (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
-		
-		if (oFiles != null) {
-			MainWindowInstance.projectPath.text = oFiles[0];
-			
-			if (MainWindowInstance.guiInstancePath.text == "")
-				MainWindowInstance.guiInstancePath.text = Path.join([
-					Path.directory(MainWindowInstance.projectPath.text),
-					Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path"),
-					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
-				]);
-		}
-	}
-	
-	function onChooseInstancePath (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
-		
-		if (oFiles != null)
-			MainWindowInstance.guiInstancePath.text = oFiles[0];
 	}
 	
 	function onChangeMainWindowSize (e:Event) : Void {
@@ -436,23 +458,24 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wgtsLst.freeChildren(true);
 		
 		for (wgtDir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
-			wgtDir = Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, wgtDir]);
+			wgtDir = FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, wgtDir]));
 			
-			var wgtData:WgtInfo = TJSON.parse(File.getContent(FileSystem.fullPath(Path.join([wgtDir, "widget.json"]))));
+			var wgtData:WgtInfo = TJSON.parse(File.getContent(Path.join([wgtDir, "widget.json"])));
+			wgtData.wgtDir = wgtDir;
 			wgtData.ico = Path.join([wgtDir, wgtData.ico]);
 			
 			if (!Path.isAbsolute(wgtData.xml))
-				wgtData.xml = FileSystem.fullPath(Path.join([wgtDir, wgtData.xml]));
+				wgtData.xml = Path.join([wgtDir, wgtData.xml]);
 			
 			if (wgtData.bin > "")
 				if (!Path.isAbsolute(wgtData.bin))
-					wgtData.bin = FileSystem.fullPath(Path.join([wgtDir, wgtData.bin]));
+					wgtData.bin = Path.join([wgtDir, wgtData.bin]);
 			
 			var tip:Tip = new Tip();
 			tip.text = wgtData.title;
 			
 			var ico:Bmp = new Bmp();
-			ico.src = wgtData.ico;
+			ico.src = wgtData.ico.replace(Path.addTrailingSlash(Sys.getCwd()), ""); // wgtData.ico; workaround
 			ico.refresh();
 			
 			var wgtSelector:Radio = UIBuilder.buildFn("XmlGui/WgtSelector.xml")();

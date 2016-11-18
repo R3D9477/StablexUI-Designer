@@ -38,21 +38,24 @@ class MainWindowInstance {
 	
 	public static var guiName:InputText;
 	
+	public static var wgtSrcActNoth:Radio;
+	public static var wgtSrcActLink:Radio;
 	public static var projectPath:InputText;
 	public static var chooseProject:Button;
+	public static var wgtSrcActCopy:Radio;
+	public static var wgtSrcDirPath:InputText;
+	public static var chooseSrcDirPath:Button;
 	
 	public static var wgtMakeUiInst:Checkbox;
 	public static var guiInstanceTemplate:Options;
 	public static var guiInstancePath:InputText;
 	public static var chooseInstancePath:Button;
 	public static var rootName:InputText;
-	
 	public static var presetsList:Options;
-	public static var framesList:Options;
-	
 	public static var guiWidth:InputText;
 	public static var guiHeight:InputText;
 	public static var fixedWindowSize:Checkbox;
+	public static var framesList:Options;
 	
 	public static var wgtGroupsLst:Options;
 	public static var wlSelectBtn:Radio;
@@ -108,20 +111,24 @@ class MainWindowInstance {
 		MainWindowInstance.tabDesigner = cast(MainWindowInstance.mainWnd.getChild("tabDesigner"), TabPage);
 		MainWindowInstance.tabXml = cast(MainWindowInstance.mainWnd.getChild("tabXml"), TabPage);
 		
+		MainWindowInstance.wgtSrcActNoth = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActNoth"), Radio);
+		MainWindowInstance.wgtSrcActLink = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActLink"), Radio);
 		MainWindowInstance.projectPath = cast(MainWindowInstance.mainWnd.getChild("projectPath"), InputText);
 		MainWindowInstance.chooseProject = cast(MainWindowInstance.mainWnd.getChild("chooseProject"), Button);
+		MainWindowInstance.wgtSrcActCopy = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActCopy"), Radio);
+		MainWindowInstance.wgtSrcDirPath = cast(MainWindowInstance.mainWnd.getChild("wgtSrcDirPath"), InputText);
+		MainWindowInstance.chooseSrcDirPath = cast(MainWindowInstance.mainWnd.getChild("chooseSrcDirPath"), Button);
 		
 		MainWindowInstance.wgtMakeUiInst = cast(MainWindowInstance.mainWnd.getChild("wgtMakeUiInst"), Checkbox);
 		MainWindowInstance.guiInstanceTemplate = cast(MainWindowInstance.mainWnd.getChild("guiInstanceTemplate"), Options);
 		MainWindowInstance.guiInstancePath = cast(MainWindowInstance.mainWnd.getChild("guiInstancePath"), InputText);
 		MainWindowInstance.chooseInstancePath = cast(MainWindowInstance.mainWnd.getChild("chooseInstancePath"), Button);
 		MainWindowInstance.rootName = cast(MainWindowInstance.mainWnd.getChild("rootName"), InputText);
-		
 		MainWindowInstance.presetsList = cast(MainWindowInstance.mainWnd.getChild("presetsList"), Options);
-		MainWindowInstance.framesList = cast(MainWindowInstance.mainWnd.getChild("framesList"), Options);
 		MainWindowInstance.guiWidth = cast(MainWindowInstance.mainWnd.getChild("guiWidth"), InputText);
 		MainWindowInstance.guiHeight = cast(MainWindowInstance.mainWnd.getChild("guiHeight"), InputText);
 		MainWindowInstance.fixedWindowSize = cast(MainWindowInstance.mainWnd.getChild("fixedWindowSize"), Checkbox);
+		MainWindowInstance.framesList = cast(MainWindowInstance.mainWnd.getChild("framesList"), Options);
 		
 		MainWindowInstance.wgtGroupsLst = cast(MainWindowInstance.mainWnd.getChild("wgtGroupsLst"), Options);
 		MainWindowInstance.wlSelectBtn = cast(MainWindowInstance.mainWnd.getChild("wlSelectBtn"), Radio);

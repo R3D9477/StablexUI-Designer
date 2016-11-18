@@ -47,12 +47,12 @@
 				</HBox>
 			</VBox>
 			<VBox
-				h="160"
+				h="250"
 				align="'top,left'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
 				skin:Paint-borderColor="0xFFFFFF"
-				layout:Row-rows="[0, 0, 0, 0, 0]"
+				layout:Row-rows="[0, 0, 0, 0, 0, 0, 0, 0]"
 				layout:Row-cellPadding="10"
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
@@ -69,6 +69,53 @@
 						skin:Paint-borderColor="0x000000" />
 					<Button
 						name="'chooseProject'"
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+				</HBox>
+				<Radio
+					name="'wgtSrcActNoth'"
+					text="'noting'"
+					tabEnabled="true"
+					group="'wgtSrcAct'"
+					label-visible="true"
+					align="'middle,left'"
+					states-up-ico-src="'graphics/tools/radio_up.png'"
+					states-down-ico-src="'graphics/tools/radio_down.png'"
+					selected="true" />
+				<HBox
+					layout:Column-cols="[0]"
+					layout:Column-cellPadding="10">
+					<Radio
+						name="'wgtSrcActLink'"
+						text="'add sources dir to openfl or lime project'"
+						tabEnabled="true"
+						group="'wgtSrcAct'"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/radio_up.png'"
+						states-down-ico-src="'graphics/tools/radio_down.png'" />
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1, 0]"
+					layout:Column-cellPadding="10">
+					<Radio
+						name="'wgtSrcActCopy'"
+						text="'copy sources to spec directory:'"
+						tabEnabled="true"
+						group="'wgtSrcAct'"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/radio_up.png'"
+						states-down-ico-src="'graphics/tools/radio_down.png'" />
+					<InputText
+						name="'wgtSrcDirPath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000" />
+					<Button
+						name="'chooseSrcDirPath'"
 						text="'Choose'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
