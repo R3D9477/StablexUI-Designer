@@ -3,5 +3,17 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Box",
-	"properties": [ ]
+	"properties": [
+		"src",
+		"smooth",
+		"stretch",
+		"keepAspect",
+		"autoSize",
+		"autoWidth",
+		"autoHeight",
+		"bitmapData",
+		"xOffset",
+		"yOffset",
+		"drawPortion"
+	]
 }

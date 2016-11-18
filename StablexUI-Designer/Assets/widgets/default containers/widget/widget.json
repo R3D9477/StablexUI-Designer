@@ -3,5 +3,27 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Widget",
-	"properties": [ "name", "left", "top", "w", "h" ]
+	"properties": [
+		"defaults",
+		"name",
+		"left",
+		"top",
+		"w",
+		"h",
+		"widthPt",
+		"minWidthByContent",
+		"minHeightByContent",
+		"left",
+		"leftPt",
+		"right",
+		"rightPt",
+		"topPt",
+		"bottom",
+		"bottomPt",
+		"skin",
+		"skinName",
+		"overflow",
+		"tip",
+		"layout"
+	]
 }

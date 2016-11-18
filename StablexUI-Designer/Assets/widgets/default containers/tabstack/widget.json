@@ -3,5 +3,9 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.TabStack",
-	"properties": [ ]
+	"properties": [
+		"tabBar",
+		"wrap",
+		"tabsPerLine"
+	]
 }

@@ -3,5 +3,12 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Slider",
-	"properties": [ ]
+	"properties": [
+		"min",
+		"max",
+		"value",
+		"step",
+		"slider",
+		"vertical"
+	]
 }

@@ -3,5 +3,10 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Clock",
-	"properties": [ ]
+	"properties": [
+		"forward",
+		"value",
+		"leadingZero",
+		"timeFormat"
+	]
 }

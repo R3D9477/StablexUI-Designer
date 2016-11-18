@@ -3,5 +3,18 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Button",
-	"properties": [ ]
+	"properties": [
+		"ico",
+		"icoHovered",
+		"icoPressed",
+		"icoDisabled",
+		"icoBeforeLabel",
+		"skinHoveredName",
+		"skinHovered",
+		"skinPressedName",
+		"skinPressed",
+		"skinDisabledName",
+		"skinDisabled",
+		"apart"
+	]
 }

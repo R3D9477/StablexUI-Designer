@@ -3,5 +3,9 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.ViewStack",
-	"properties": [ ]
+	"properties": [
+		"current",
+		"wrap",
+		"trans"
+	]
 }

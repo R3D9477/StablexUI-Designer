@@ -3,5 +3,15 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Progress",
-	"properties": [ ]
+	"properties": [
+		"max",
+		"value",
+		"bar",
+		"paddingLeft",
+		"paddingRight",
+		"interactive",
+		"smoothChange",
+		"useScrollRect",
+		"changeDuration"
+	]
 }

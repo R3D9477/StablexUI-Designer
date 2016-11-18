@@ -3,5 +3,7 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.TabPage",
-	"properties": [ ]
+	"properties": [
+		"title"
+	]
 }

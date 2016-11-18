@@ -3,5 +3,14 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Options",
-	"properties": [ ]
+	"properties": [
+		"options",
+		"list",
+		"box",
+		"value",
+		"optionDefaults",
+		"alignList",
+		"rebuildList",
+		"trans"
+	]
 }

@@ -3,5 +3,19 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Box",
-	"properties": [ ]
+	"properties": [
+		"vertical",
+		"padding",
+		"paddingLeft",
+		"paddingRight",
+		"paddingTop",
+		"paddingBottom",
+		"childPadding",
+		"align",
+		"autoSize",
+		"autoWidth",
+		"autoHeight",
+		"unifyChildren",
+		"intPositions"
+	]
 }
