@@ -321,7 +321,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function onLoadXmlBtnClick (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", { count: 1,  descriptions: ["StablexUI XML files"], extensions: ["*.xml"] }, false);
+		var oFiles:Array<String> = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", { count: 1,  descriptions: ["StablexUI XML files"], extensions: ["*.xml"] });
 		
 		if (oFiles != null)
 			if (System.loadUiFromFile(oFiles[0]))
@@ -378,7 +378,7 @@ class MainWindow extends Sprite {
 	// tab Project
 	
 	function onChooseOpenflProject (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] }, false);
+		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] });
 		
 		if (oFiles != null) {
 			MainWindowInstance.projectPath.text = oFiles[0];
@@ -404,7 +404,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function onChooseInstancePath (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] }, false);
+		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] });
 		
 		if (oFiles != null)
 			MainWindowInstance.guiInstancePath.text = oFiles[0];

@@ -542,10 +542,15 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
-	public static function getGuiObjDefaultPropValue (wgt:Dynamic, propName:String) : String {
-		//...
-		//...
-		//...
+	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String) : String {
+		var objCls:Class<Dynamic> = Type.getClass(obj);
+		
+		if (objCls != null) {
+			var defOwner:GuiObjPropOwnerInfo = System.getPropertyOwner(Type.createInstance(objCls, []), propName);
+			
+			if (defOwner.propOwner != null)
+				return Reflect.getProperty(defOwner.propOwner, defOwner.propName);
+		}
 		
 		return null;
 	}
@@ -560,17 +565,20 @@ class System {
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
 			
-			if (Std.is(propInfo.value, String))
+			var dynValue:Dynamic;
+			
+			if (Std.is(propInfo.value, String)) {
 				propInfo.value = StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"');
 			
-			for(cls in RTXml.imports.keys())
-				interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
+				for(cls in RTXml.imports.keys())
+					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
+				
+				dynValue = interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)));
+			}
+			else
+				dynValue = propInfo.value;
 			
-			Reflect.setProperty(
-				ownerInfo.propOwner,
-				ownerInfo.propName,
-				interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)))
-			);
+			Reflect.setProperty(ownerInfo.propOwner, ownerInfo.propName, dynValue);
 			
 			owners.push(ownerInfo);
 		}
