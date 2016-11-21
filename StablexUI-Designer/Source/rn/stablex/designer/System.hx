@@ -543,6 +543,12 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
+	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic {
+		return Std.is(propOwner, DynamicList) ?
+			Reflect.callMethod(propOwner, Reflect.field(propOwner, "get"), [propName]) :
+			Reflect.getProperty(propOwner, propName);
+	}
+	
 	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String, objCls:Class<Dynamic> = null) : Dynamic {
 		if (objCls == null)
 			objCls = Type.getClass(obj);
@@ -555,6 +561,29 @@ class System {
 		}
 		
 		return null;
+	}
+	
+	public static function getPropertyOwner (wgt:Dynamic, property:String) : GuiObjPropOwnerInfo {
+		var propLst:Array<String> = property.split("-");
+		
+		var propOwner:Dynamic = wgt;
+		var propName:String = property;
+		
+		for (i in 0...propLst.length) {
+			var ppInfo:Array<String> = propLst[i].split(":");
+			propName = ppInfo[0];
+			
+			if (i < (propLst.length - 1)) {
+				trace(propName, ":", System.getGuiObjProperty(propOwner, propName));
+				
+				if (System.getGuiObjProperty(propOwner, propName) == null)
+					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, ppInfo.length > 1 ? Type.resolveClass(ppInfo[1]) : null));
+				
+				propOwner = System.getGuiObjProperty(propOwner, propName);
+			}
+		}
+		
+		return { propOwner: propOwner, propName: propName };
 	}
 	
 	public static function setGuiObjProperties (obj:Dynamic, properies:Array<GuiObjPropInfo>) : Array<GuiObjPropOwnerInfo> {
@@ -586,32 +615,5 @@ class System {
 		}
 		
 		return owners;
-	}
-	
-	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic {
-		return Std.is(propOwner, DynamicList) ?
-			Reflect.callMethod(propOwner, Reflect.field(propOwner, "get"), [propName]) :
-			Reflect.getProperty(propOwner, propName);
-	}
-	
-	public static function getPropertyOwner (wgt:Dynamic, property:String) : GuiObjPropOwnerInfo {
-		var propLst:Array<String> = property.split("-");
-		
-		var propOwner:Dynamic = wgt;
-		var propName:String = property;
-		
-		for (i in 0...propLst.length) {
-			var ppInfo:Array<String> = propLst[i].split(":");
-			propName = ppInfo[0];
-			
-			if (i < (propLst.length - 1)) {
-				if (System.getGuiObjProperty(propOwner, propName) == null)
-					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, ppInfo.length > 1 ? Type.resolveClass(ppInfo[1]) : null));
-				
-				propOwner = Reflect.getProperty(propOwner, propName);
-			}
-		}
-		
-		return { propOwner: propOwner, propName: propName };
 	}
 }
