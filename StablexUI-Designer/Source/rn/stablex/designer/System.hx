@@ -12,6 +12,7 @@ import sys.FileSystem;
 import openfl.events.Event;
 import openfl.events.MouseEvent;
 
+import ru.stablex.*;
 import ru.stablex.ui.*;
 import ru.stablex.ui.skins.*;
 import ru.stablex.ui.widgets.*;
@@ -542,14 +543,15 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
-	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String) : String {
-		var objCls:Class<Dynamic> = Type.getClass(obj);
+	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String, objCls:Class<Dynamic> = null) : Dynamic {
+		if (objCls == null)
+			objCls = Type.getClass(obj);
 		
 		if (objCls != null) {
 			var defOwner:GuiObjPropOwnerInfo = System.getPropertyOwner(Type.createInstance(objCls, []), propName);
 			
 			if (defOwner.propOwner != null)
-				return Reflect.getProperty(defOwner.propOwner, defOwner.propName);
+				return System.getGuiObjProperty(defOwner.propOwner, defOwner.propName);
 		}
 		
 		return null;
@@ -586,6 +588,12 @@ class System {
 		return owners;
 	}
 	
+	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic {
+		return Std.is(propOwner, DynamicList) ?
+			Reflect.callMethod(propOwner, Reflect.field(propOwner, "get"), [propName]) :
+			Reflect.getProperty(propOwner, propName);
+	}
+	
 	public static function getPropertyOwner (wgt:Dynamic, property:String) : GuiObjPropOwnerInfo {
 		var propLst:Array<String> = property.split("-");
 		
@@ -596,21 +604,12 @@ class System {
 			var ppInfo:Array<String> = propLst[i].split(":");
 			propName = ppInfo[0];
 			
-			if (Reflect.getProperty(propOwner, propName) == null && i < (propLst.length - 1)) {
-				Reflect.setProperty(
-					propOwner,
-					propName,
-					Type.createInstance(
-						ppInfo.length > 1 ?
-						Type.resolveClass(ppInfo[1]) :
-						Type.getClass(Reflect.getProperty(propOwner, propName)),
-						[]
-					)
-				);
-			}
-			
-			if (i < (propLst.length - 1))
+			if (i < (propLst.length - 1)) {
+				if (System.getGuiObjProperty(propOwner, propName) == null)
+					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, ppInfo.length > 1 ? Type.resolveClass(ppInfo[1]) : null));
+				
 				propOwner = Reflect.getProperty(propOwner, propName);
+			}
 		}
 		
 		return { propOwner: propOwner, propName: propName };
