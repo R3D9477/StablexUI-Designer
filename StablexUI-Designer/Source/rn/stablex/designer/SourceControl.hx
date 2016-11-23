@@ -11,6 +11,7 @@ import rn.typext.hlp.FileSystemHelper;
 using Lambda;
 using StringTools;
 using rn.typext.ext.XmlExtender;
+using rn.typext.ext.IterExtender;
 using rn.typext.ext.StringExtender;
 
 class SourceControl {
@@ -45,7 +46,7 @@ class SourceControl {
 	}
 	
 	public static function makeInstance () : Bool {
-		if (!(System.guiSettings.project > "") || !(System.guiSettings.guiInstancePath > ""))
+		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiInstancePath > "") || !(System.guiSettings.guiUuid > ""))
 			return false;
 		
 		var cli:Int = 0;
@@ -108,7 +109,7 @@ class SourceControl {
 		rli++;
 		ili++;
 		
-		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}");');
+		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}"), "CWD", \'"$${Sys.getCwd()}\');');
 		
 		var preset:String = System.guiSettings.preset > "" ?
 			'"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([Sys.getCwd(), "presets", System.guiSettings.preset]))}"' :
@@ -172,21 +173,24 @@ class SourceControl {
 		var result:Bool = true;
 		
 		if (!copy) {
-			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
-			
-			for (src in wgtSources) {
-				var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
+			if (FileSystem.exists(System.guiSettings.project.escNull())) {
+				var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 				
-				if (projXml.getByXpath('//project/source[@path="$srcPath"]') == null) {
-					var srcXml:Xml = Xml.createElement("source");
-					srcXml.set("path", srcPath);
-					//srcXml.set("guiUuid", System.guiSettings.guiUuid);
+				for (src in wgtSources) {
+					var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
 					
-					projXml.addChild(srcXml);
+					if (projXml.getByXpath('//project/source[@path="$srcPath"]') == null) {
+						var srcXml:Xml = Xml.createElement("source");
+						srcXml.set("path", srcPath);
+						
+						projXml.addChild(srcXml);
+					}
 				}
+				
+				File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 			}
-			
-			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+			else
+				result = false;
 		}
 		else if (copy && FileSystem.exists(destDir.escNull())) {
 			for (src in wgtSources)
@@ -196,5 +200,29 @@ class SourceControl {
 			result = false;
 		
 		return result;
+	}
+	
+	public static function embedAssets () : Bool {
+		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiUuid > ""))
+			return false;
+		
+		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		for (xa in projXml.findByXpath('//project/assets[@guiUuid="${System.guiSettings.guiUuid}"]'))
+			xa.removeSelf();
+		
+		var assets:Array<String> = new Array<String>();
+		
+		for (suit in System.wgtSuitsMap.iterator().array().filter(function (s:SuitInfo) : Bool return s.assets > "")) {
+			var xa:Xml = Xml.createElement("assets");
+			xa.set("path", Path.join([suit.suitDir, suit.assets]));
+			xa.set("rename", Path.join([suit.suitDir, suit.assets]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
+			xa.set("guiUuid", System.guiSettings.guiUuid);
+			projXml.addChild(xa);
+		}
+		
+		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		
+		return true;
 	}
 }

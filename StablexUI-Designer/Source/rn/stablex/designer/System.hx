@@ -614,7 +614,7 @@ class System {
 			var dynValue:Dynamic;
 			
 			if (Std.is(propInfo.value, String)) {
-				propInfo.value = StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"');
+				propInfo.value = StringTools.replace(StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"'), "%CWD", '"${Sys.getCwd()}"');
 			
 				for(cls in RTXml.imports.keys())
 					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));

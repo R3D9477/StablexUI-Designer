@@ -141,6 +141,8 @@ class MainWindow extends Sprite {
 			var suitDir:String = Path.join([FileSystem.fullPath("suits"), suit]);
 			
 			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([suitDir, "suit.json"])));
+			suitData.suitDir = suitDir;
+			
 			var suitXml:Xml = System.parseXml(File.getContent(Path.join([suitDir, suitData.xml]))).firstElement();
 			
 			if (suitXml.nodeName == "Skins") {
@@ -348,6 +350,9 @@ class MainWindow extends Sprite {
 					else
 						Dialogs.message("neko-systools", "Instance was not generated!", true);
 				}
+				
+				if (!SourceControl.embedAssets())
+					Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
 				
 				SourceControl.clearWgtSources();
 				

@@ -51,6 +51,7 @@ class MainWindowInstance {
 	public static var guiInstancePath:InputText;
 	public static var chooseInstancePath:Button;
 	public static var rootName:InputText;
+	public static var embedAssets:Checkbox;
 	public static var presetsList:Options;
 	public static var guiWidth:InputText;
 	public static var guiHeight:InputText;
@@ -93,7 +94,7 @@ class MainWindowInstance {
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		UIBuilder.regClass("ClockTime");
 		
-		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(strValue, "SUIDCWD", Sys.getCwd());
+		//UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", '"${Sys.getCwd()}"'), "CWD", '"${Sys.getCwd()}"');
 		UIBuilder.init(null, true);
 		
 		StablexUIMod.setRtxmlMod();
@@ -123,6 +124,7 @@ class MainWindowInstance {
 		MainWindowInstance.guiInstanceTemplate = cast(MainWindowInstance.mainWnd.getChild("guiInstanceTemplate"), Options);
 		MainWindowInstance.guiInstancePath = cast(MainWindowInstance.mainWnd.getChild("guiInstancePath"), InputText);
 		MainWindowInstance.chooseInstancePath = cast(MainWindowInstance.mainWnd.getChild("chooseInstancePath"), Button);
+		MainWindowInstance.embedAssets = cast(MainWindowInstance.mainWnd.getChild("embedAssets"), Checkbox);
 		MainWindowInstance.rootName = cast(MainWindowInstance.mainWnd.getChild("rootName"), InputText);
 		MainWindowInstance.presetsList = cast(MainWindowInstance.mainWnd.getChild("presetsList"), Options);
 		MainWindowInstance.guiWidth = cast(MainWindowInstance.mainWnd.getChild("guiWidth"), InputText);
