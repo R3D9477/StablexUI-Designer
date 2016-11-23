@@ -377,8 +377,23 @@ class System {
 				System.guiElementsXml = System.frameXml.getByXpath("//GuiElements").replaceWith(System.guiElementsXml);
 			}
 			else {
-				System.guiElementsWgt = cast(System.frameWgt.getChild("guiElements"), Widget);
-				System.guiElementsXml = System.frameXml.getByXpath("//GuiElements");
+				var geDyn:Dynamic = System.frameWgt.getChild("guiElements");
+				
+				if (geDyn == null) {
+					geDyn = new GuiElements();
+					System.frameWgt.addChild(geDyn);
+				}
+				
+				System.guiElementsWgt = cast(geDyn, Widget);
+				
+				var geXml:Xml = System.frameXml.getByXpath("//GuiElements");
+				
+				if (geXml == null) {
+					geXml = Xml.createElement("GuiElements");
+					System.frameXml.addChild(geXml);
+				}
+				
+				System.guiElementsXml = geXml;
 			}
 			
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);

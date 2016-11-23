@@ -99,8 +99,6 @@ class SourceControl {
 					return hxLine;
 				});
 		
-		trace(gii, fli, bii, rli, ili);
-		
 		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Sys.getCwd());
 		
 		instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${haxe.io.Path.join([relPath, "GuiElements.xml"])}", "GuiElements");');
