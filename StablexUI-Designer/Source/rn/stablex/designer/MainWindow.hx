@@ -397,12 +397,15 @@ class MainWindow extends Sprite {
 			if (MainWindowInstance.wgtSrcDirPath.text == "")
 				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
 			
-			if (MainWindowInstance.guiInstancePath.text == "")
+			if (MainWindowInstance.guiInstancePath.text == "") {
 				MainWindowInstance.guiInstancePath.text = Path.join([
 					firstSrc,
 					Path.join(projXml.getByXpath("//project/meta").get("package").split(".")),
 					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
 				]);
+				
+				MainWindowInstance.wgtMakeUiInst.selected = true;
+			}
 		}
 	}
 	
