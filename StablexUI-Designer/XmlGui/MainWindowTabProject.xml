@@ -20,7 +20,7 @@
 		<VBox
 			widthPt="100"
 			align="'top,left'"
-			layout:Row-rows="[0, 0, 0, 0]"
+			layout:Row-rows="[0, 0, 0, 0, 0]"
 			layout:Row-paddingTop="10"
 			layout:Row-cellPadding="10"
 			layout:Row-paddingLeft="10"
@@ -184,6 +184,15 @@
 					list-skin:Paint-color="0x454545"
 					list-skin:Paint-alpha="1"/>
 			</HBox>
+			<Checkbox
+				name="'embedAssets'"
+				text="'embed assets of suits and skins'"
+				tabEnabled="true"
+				label-visible="true"
+				align="'middle,left'"
+				states-up-ico-src="'graphics/tools/check_up.png'"
+				states-down-ico-src="'graphics/tools/check_down.png'"
+				selected="true"/>
 			<VBox
 				h="90"
 				align="'top,left'"
