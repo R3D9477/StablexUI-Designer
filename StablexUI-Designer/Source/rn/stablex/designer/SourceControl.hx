@@ -109,7 +109,7 @@ class SourceControl {
 		rli++;
 		ili++;
 		
-		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}"), "CWD", \'"$${Sys.getCwd()}\');');
+		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}"), "CWD", Sys.getCwd());');
 		
 		var preset:String = System.guiSettings.preset > "" ?
 			'"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([Sys.getCwd(), "presets", System.guiSettings.preset]))}"' :
