@@ -383,7 +383,8 @@ class MainWindow extends Sprite {
 		if (oFiles != null) {
 			MainWindowInstance.projectPath.text = oFiles[0];
 			
-			var firstSrc:String = Xml.parse(File.getContent(MainWindowInstance.projectPath.text)).getByXpath("//project/source").get("path");
+			var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
+			var firstSrc:String = projXml.getByXpath("//project/source").get("path");
 			
 			if (!FileSystem.exists(firstSrc))
 				firstSrc = Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]);
@@ -392,7 +393,11 @@ class MainWindow extends Sprite {
 				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
 			
 			if (MainWindowInstance.guiInstancePath.text == "")
-				MainWindowInstance.guiInstancePath.text = Path.join([firstSrc, MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"]);
+				MainWindowInstance.guiInstancePath.text = Path.join([
+					firstSrc,
+					Path.join(projXml.getByXpath("//project/meta").get("package").split(".")),
+					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
+				]);
 		}
 	}
 	
