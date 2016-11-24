@@ -12,7 +12,7 @@ Graphical designer for library StablexUI.
 * auto-insert assets to current openfl/lime project
 * auto-insert sources path of custom widgets to current openfl/lime project
 * auto-generate file with declaration of objects for widgets with names (to easy access to widgets from source code)
-* manually editing xml of current gui
+* allow to edit raw xml of current gui manually
 
 ###Requirements:<br/>
 * [haxe](https://haxe.org) 3.2.1 or later
