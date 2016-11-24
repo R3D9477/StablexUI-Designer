@@ -7,4 +7,14 @@
 	wrap="true"
 	tabBar-paddingLeft="5"
 	tabBar-childPadding="5"
-	skinName="'defaultTabStack'"/>
+	skinName="'defaultTabStack'">
+	<TabPage
+		widthPt="100"
+		heightPt="100"
+		title-padding="5"
+		title-text="'Tab Page 1'"
+		title-highlightOnSelect="true"
+		title-highlightFormat-bold="true"
+		title-highlightFormat-color="0xFF0000"
+		skinName="'defaultTabPage'"/>
+</TabStack>

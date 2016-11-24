@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TabPage
-	w="50"
-	h="50"
-	top="0"
-	left="0"
+	widthPt="100"
+	heightPt="100"
 	title-padding="5"
 	title-text="'Tab Page'"
 	title-highlightOnSelect="true"
