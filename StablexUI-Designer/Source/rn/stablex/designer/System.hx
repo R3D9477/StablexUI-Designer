@@ -209,7 +209,7 @@ class System {
 	public static function onMoveWgtMouseDown (e:MouseEvent) : Void {
 		if (MainWindowInstance.wlDeleteBtn.selected)
 			System.deleteWidget(e.currentTarget);
-		else {
+		else if (System.wgtUiXmlMap.exists(e.currentTarget)) {
 			System.selWgt = e.currentTarget;
 			
 			System.moveWgt  = e.currentTarget;
@@ -308,9 +308,13 @@ class System {
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, System.onBoxClick);
 			},
-			function (dpWgt:Dynamic, dcWgt:Dynamic, cInd:Int) {
-				if (System.wgtUiXmlMap.get(dcWgt) == null)
-					System.wgtUiXmlMap.set(dcWgt, System.wgtUiXmlMap.get(dpWgt).getChildAt(cInd));
+			function (dParentWgt:Dynamic, dChildWgt:Dynamic, cInd:Int) {
+				if (System.wgtUiXmlMap.get(dChildWgt) == null) {
+					var chWgt:Dynamic = System.wgtUiXmlMap.get(dParentWgt).getChildAt(cInd);
+					
+					if (chWgt != null)
+						System.wgtUiXmlMap.set(dChildWgt, chWgt);
+				}
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
