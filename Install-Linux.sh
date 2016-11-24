@@ -56,9 +56,9 @@ git clone https://github.com/r3d9u11/StablexUI-Designer.git
 cd "./StablexUI-Designer/StablexUI-Designer"
 
 rm -rf "./Export"
-openfl build linux -64 -neko
+openfl build linux -neko
 
-cd "./Export/linux64/neko/release/bin"
+cd "./Export/linux/neko/release/bin"
 cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
 
 neko "StablexUI-Designer.n"
