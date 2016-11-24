@@ -26,12 +26,12 @@ Graphical designer for library StablexUI.
 
 ###Install:<br/>
 
-####Linux (32-bit):<br/>
+#####Linux (32-bit):<br/>
 ```bash
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
 ```
 
-####Linux (64-bit):<br/>
+#####Linux (64-bit):<br/>
 ```bash
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux64.sh | bash
 ```
