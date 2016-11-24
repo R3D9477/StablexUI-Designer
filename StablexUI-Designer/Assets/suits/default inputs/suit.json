@@ -1,5 +1,6 @@
 {
 	"title": "Default Containers",
 	"xml": "suit.xml",
-	"preview": "suit.png"
+	"preview": "suit.png",
+	"assets": "img"
 }
