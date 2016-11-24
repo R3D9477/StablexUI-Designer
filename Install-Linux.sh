@@ -10,8 +10,6 @@ sudo apt-get install git
 # INSTALL NEEDED HAXELIB PACKAGES #
 ###################################
 
-haxelib upgrade
-
 haxelib install format
 haxelib install hxcpp
 haxelib install hvm
