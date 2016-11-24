@@ -15,10 +15,12 @@ Graphical designer for library StablexUI.
 
 ###Requirements:<br/>
 * [haxe](https://haxe.org) 3.2.1 or later
+* [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 * [lime](https://github.com/openfl/lime)
 * [openfl](https://github.com/openfl/openfl)
 * [hscript](https://github.com/HaxeFoundation/hscript)
 * [stablexui](https://github.com/RealyUniqueName/StablexUI)
+* [systools](https://github.com/waneck/systools.git)
 * [haxe-crypto](https://github.com/soywiz/haxe-crypto)
 * [tjson](https://github.com/martamius/TJSON)
 * [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
