@@ -20,13 +20,13 @@ echo "y" | haxelib install actuate
 echo "y" | haxelib install lime
 echo "y" | haxelib install lime-tools
 echo "y" | haxelib install lime-samples
-echo "y" | haxelib run lime setup
+bash -c 'echo "y" | haxelib run lime setup'
 
 echo "y" | haxelib install openfl
 echo "y" | haxelib install openfl-tools
 echo "y" | haxelib install openfl-samples
 echo "y" | haxelib install openfl-native
-echo "y" | haxelib run openfl setup
+bash -c 'echo "y" | haxelib run openfl setup'
 
 echo "y" | haxelib install ihx
 echo "y" | haxelib install tjson
