@@ -27,7 +27,11 @@ Graphical designer for library StablexUI.
 ###Install:<br/>
 
 ####Linux (32-bit):<br/>
-curl -H 'Contol: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
+```bash
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
+```
 
 ####Linux (64-bit):<br/>
-curl -H 'Contol: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux64.sh | bash
+```bash
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux64.sh | bash
+```
