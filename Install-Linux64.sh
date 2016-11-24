@@ -22,9 +22,6 @@ haxelib install lime-tools
 haxelib install lime-samples
 haxelib run lime setup
 
-#lime rebuild linux -Dlegacy
-#lime rebuild tools
-
 haxelib install openfl
 haxelib install openfl-tools
 haxelib install openfl-samples
