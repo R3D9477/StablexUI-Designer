@@ -611,10 +611,13 @@ class System {
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
 			
+			if (Std.is(prop, Float))
+				propInfo.value = propInfo.value.replace(",", "."); // workaround: error with ',' when trying to parse Float
+			
 			var dynValue:Dynamic;
 			
 			if (Std.is(propInfo.value, String)) {
-				propInfo.value = StringTools.replace(StringTools.replace(propInfo.value, "%SUIDCWD", '"${Sys.getCwd()}"'), "%CWD", '"${Sys.getCwd()}"');
+				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Sys.getCwd()}"').replace("%CWD", '"${Sys.getCwd()}"');
 			
 				for(cls in RTXml.imports.keys())
 					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
