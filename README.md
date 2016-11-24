@@ -23,3 +23,11 @@ Graphical designer for library StablexUI.
 * [tjson](https://github.com/martamius/TJSON)
 * [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
 * [typext](https://github.com/r3d9u11/haxe-typext)
+
+###Install:<br/>
+
+####Linux (32-bit):<br/>
+curl -H 'Contol: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
+
+####Linux (64-bit):<br/>
+curl -H 'Contol: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux64.sh | bash
