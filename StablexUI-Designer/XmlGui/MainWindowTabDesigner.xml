@@ -64,7 +64,7 @@
 		<HBox
 			widthPt="100"
 			heightPt="100"
-			layout:Column-cols="[-1, 200]">
+			layout:Column-cols="[.70, -1]">
 			<DesignerArea/>
 			<WgtsPropsLst/>
 		</HBox>
