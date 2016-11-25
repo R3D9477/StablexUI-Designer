@@ -4,7 +4,7 @@
 # INSTALL NEEDED LINUX PACKAGES #
 #################################
 
-sudo apt-get install git
+sudo apt-get install git haxe neko-dev
 
 ###################################
 # INSTALL NEEDED HAXELIB PACKAGES #
