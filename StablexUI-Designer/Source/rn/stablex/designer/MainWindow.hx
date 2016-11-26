@@ -480,9 +480,13 @@ class MainWindow extends Sprite {
 			if (!Path.isAbsolute(wgtData.xml))
 				wgtData.xml = Path.join([wgtDir, wgtData.xml]);
 			
-			if (wgtData.bin > "")
-				if (!Path.isAbsolute(wgtData.bin))
-					wgtData.bin = Path.join([wgtDir, wgtData.bin]);
+			if (wgtData.bin != null) {
+				#if neko
+					if (FileSystem.exists(wgtData.bin.neko.escNull()))
+						if (!Path.isAbsolute(wgtData.bin.neko))
+							wgtData.bin.neko = Path.join([wgtDir, wgtData.bin.neko]);
+				#end
+			}
 			
 			var tip:Tip = new Tip();
 			tip.text = wgtData.title;

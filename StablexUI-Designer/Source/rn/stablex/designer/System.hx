@@ -1,7 +1,9 @@
 package rn.stablex.designer;
 
-import neko.vm.Loader;
-import neko.vm.Module;
+#if neko
+	import neko.vm.Loader;
+	import neko.vm.Module;
+#end
 
 import haxe.xml.Printer;
 
@@ -161,14 +163,18 @@ class System {
 		
 		if (System.selWgtData != null)
 			if (FileSystem.exists(System.selWgtData.xml.escNull())) {
-				if (FileSystem.exists(System.selWgtData.bin.escNull())) {
-					/*trace(Loader.local().loadModule(System.selWgtData.bin).exportsTable());
-					return;
-					
-					var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin).exportsTable().__classes, "GridWidget");
-					untyped wgtBinCls.__super__ = Widget;
-					
-					RTXml.regClass(wgtBinCls);*/
+				if (System.selWgtData.bin != null) {
+					#if neko
+						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
+							/*trace(Loader.local().loadModule(System.selWgtData.bin).exportsTable());
+							return;
+							
+							var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin).exportsTable().__classes, "GridWidget");
+							untyped wgtBinCls.__super__ = Widget;
+							
+							RTXml.regClass(wgtBinCls);*/
+						}
+					#end
 				}
 				
 				var selXml:Xml = System.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
@@ -185,11 +191,15 @@ class System {
 				System.wgtUiXmlMap.set(selWgt, selXml);
 				System.setWgtEventHandlers(selWgt);
 				
-				if (System.selWgtData.bin > "") {
-					var wgtSrc:String = Path.join([System.selWgtData.wgtDir, System.selWgtData.src]);
-					
-					if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
-						SourceControl.wgtSources.push(wgtSrc);
+				if (System.selWgtData.bin != null) {
+					#if neko
+						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
+							var wgtSrc:String = Path.join([System.selWgtData.wgtDir, System.selWgtData.src]);
+							
+							if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
+								SourceControl.wgtSources.push(wgtSrc);
+						}
+					#end
 				}
 			}
 		
