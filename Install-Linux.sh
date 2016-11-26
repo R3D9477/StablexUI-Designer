@@ -60,15 +60,18 @@ openfl build linux -neko
 cd "./Export/linux/neko/release/bin"
 cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
 
-neko "StablexUI-Designer.n"
+cd "../../../../.."
 
 ### compile for cpp
 
-cd "../../../../.."
-
 openfl build linux -cpp
 
+cd "../../../../.."
+
 ### run
+
+#cd "./Export/linux/neko/release/bin"
+#neko "StablexUI-Designer.n"
 
 cd "./Export/linux/cpp/release/bin"
 "./StablexUI-Designer"
