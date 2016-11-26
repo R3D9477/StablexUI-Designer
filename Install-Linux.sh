@@ -55,23 +55,15 @@ rm -rf "./Export"
 
 ### compile for neko
 
-openfl build linux -neko
+#openfl build linux -neko
 
-cd "./Export/linux/neko/release/bin"
-cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
-
-cd "../../../../.."
+#cd "./Export/linux/neko/release/bin"
+#cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
+#neko "StablexUI-Designer.n"
 
 ### compile for cpp
 
 openfl build linux -cpp
-
-cd "../../../../.."
-
-### run
-
-#cd "./Export/linux/neko/release/bin"
-#neko "StablexUI-Designer.n"
 
 cd "./Export/linux/cpp/release/bin"
 "./StablexUI-Designer"
