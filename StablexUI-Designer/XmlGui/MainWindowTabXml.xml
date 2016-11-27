@@ -11,22 +11,56 @@
 	skin:Paint-color="0xC0C0C0"
 	skin:Paint-border="1"
 	skin:Paint-borderColor="0x000000">
-	<Scroll
+	<VBox
 		widthPt="100"
 		heightPt="100"
-		hBar-visible="true"
-		vBar-visible="true"
-		skin:Paint-color="0xC0C0C0"
-		vBar-slider-skin:Paint-color="0x002200"
-		hBar-slider-skin:Paint-color="0x002200"
-		hBar-skin:Paint-color="0x777777"
-		vBar-skin:Paint-color="0x777777">
-		<InputText
-			name="'xmlSource'"
-			autoSize="true"
-			label-wordWrap="false"
-			label-multiline="true"
-			label-selectable="true"
-			skin:Paint-color="0xC0C0C0"/>
-	</Scroll>
+		layout:Row-rows="[25, -1]"
+		layout:Row-cellPadding="5"
+		skin:Paint-color="0xC0C0C0">
+		<HBox
+			widthPt="100"
+			heightPt="100"
+			layout:Column-cols="[0, 0, 0]"
+			layout:Column-cellPadding="5"
+			layout:Column-paddingLeft="5"
+			layout:Column-paddingRight="5"
+			layout:Column-paddingTop="3"
+			layout:Column-paddingBottom="3"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000">
+			<Checkbox
+				states-up-text="'[-] wrap text'"
+				states-down-text = "'[+] wrap text'"
+				skin:Paint-color="0xC0C0C0"/>
+			<Button
+				text="'Open in External propgramm'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x000000"/>
+			<Button
+				text="'Reload from File'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x000000"/>
+		</HBox>
+		<Scroll
+			widthPt="100"
+			heightPt="100"
+			hBar-visible="true"
+			vBar-visible="true"
+			skin:Paint-color="0xC0C0C0"
+			vBar-slider-skin:Paint-color="0x002200"
+			hBar-slider-skin:Paint-color="0x002200"
+			hBar-skin:Paint-color="0x777777"
+			vBar-skin:Paint-color="0x777777">
+			<InputText
+				name="'xmlSource'"
+				autoSize="true"
+				label-wordWrap="false"
+				label-multiline="true"
+				label-selectable="true"
+				skin:Paint-color="0xC0C0C0"/>
+		</Scroll>
+	</VBox>
 </TabPage>
