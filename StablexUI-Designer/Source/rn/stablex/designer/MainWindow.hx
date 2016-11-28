@@ -657,7 +657,7 @@ class MainWindow extends Sprite {
 	
 	function onXmlReloadFile (e:MouseEvent) : Void {
 		if (FileSystem.exists(System.uiXmlPath.escNull()))
-			MainWindowInstance.xmlSource.text = File.getContent(FileSystem.fullPath(System.uiXmlPath));
+			MainWindowInstance.xmlSource.text = System.escTabs(File.getContent(FileSystem.fullPath(System.uiXmlPath)));
 		else
 			Dialogs.message("neko-systools", "UI must be saved to file!", true);
 	}
