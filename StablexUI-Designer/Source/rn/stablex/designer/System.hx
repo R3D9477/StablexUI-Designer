@@ -61,9 +61,6 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// additional xml-functions & workarounds for TextField
 	
-	public static function escTabs (str:String) : String
-		return str.replace("	", "   ");
-	
 	public static function parseXml (xmlStr:String) : Xml
 		return Xml.parse((~/^ +</gm).replace((~/^	+</gm).replace(xmlStr, "<"), "<").replace("\n", ""));
 	
