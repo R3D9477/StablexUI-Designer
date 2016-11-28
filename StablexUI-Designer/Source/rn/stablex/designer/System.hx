@@ -603,8 +603,6 @@ class System {
 			propName = ppInfo[0];
 			
 			if (i < (propLst.length - 1)) {
-				trace(propName, ":", System.getGuiObjProperty(propOwner, propName));
-				
 				if (System.getGuiObjProperty(propOwner, propName) == null)
 					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, ppInfo.length > 1 ? Type.resolveClass(ppInfo[1]) : null));
 				
