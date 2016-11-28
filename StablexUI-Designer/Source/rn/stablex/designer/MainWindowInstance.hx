@@ -83,6 +83,9 @@ class MainWindowInstance {
 	public static var editPropValue:InputText;
 	public static var editPropValueSaveBtn:Button;
 	
+	public static var xmlWrap:Checkbox;
+	public static var xmlExtOpen:Button;
+	public static var xmlReloadFile:Button;
 	public static var xmlSource:InputText;
 	
 	//-----------------------------------------------------------------------------------------------
@@ -157,6 +160,9 @@ class MainWindowInstance {
 		MainWindowInstance.editPropValue = cast(MainWindowInstance.wgtEditPropWnd.getChild("editPropValue"), InputText);
 		MainWindowInstance.editPropValueSaveBtn = cast(MainWindowInstance.wgtEditPropWnd.getChild("editPropValueSaveBtn"), Button);
 		
+		MainWindowInstance.xmlWrap = cast(MainWindowInstance.mainWnd.getChild("xmlWrap"), Checkbox);
+		MainWindowInstance.xmlExtOpen = cast(MainWindowInstance.mainWnd.getChild("xmlExtOpen"), Button);
+		MainWindowInstance.xmlReloadFile = cast(MainWindowInstance.mainWnd.getChild("xmlReloadFile"), Button);
 		MainWindowInstance.xmlSource = cast(MainWindowInstance.mainWnd.getChild("xmlSource"), InputText);
 	}
 	#end

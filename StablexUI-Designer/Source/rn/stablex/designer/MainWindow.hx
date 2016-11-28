@@ -247,6 +247,10 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.xmlSource.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_UP));
 		
+		MainWindowInstance.xmlWrap.addEventListener(MouseEvent.CLICK, this.onXmlWrapChange);
+		MainWindowInstance.xmlExtOpen.addEventListener(MouseEvent.CLICK, this.onXmlExtOpen);
+		MainWindowInstance.xmlReloadFile.addEventListener(MouseEvent.MOUSE_UP, this.onXmlReloadFile);
+		
 		//-----------------------------------------------------------------------------------------------
 		// initialize new project
 		
@@ -640,4 +644,21 @@ class MainWindow extends Sprite {
 	
 	function onXmlSourceChange (e:KeyboardEvent) : Void
 		MainWindowInstance.xmlSource.parent.dispatchEvent(new WidgetEvent(WidgetEvent.RESIZE));
+	
+	function onXmlWrapChange (e:MouseEvent) : Void
+		MainWindowInstance.xmlSource.label.wordWrap = MainWindowInstance.xmlWrap.selected;
+	
+	function onXmlExtOpen (e:MouseEvent) : Void {
+		if (FileSystem.exists(System.uiXmlPath.escNull()))
+			FileSystemHelper.execUrl(FileSystem.fullPath(System.uiXmlPath));
+		else
+			Dialogs.message("neko-systools", "UI must be saved to file!", true);
+	}
+	
+	function onXmlReloadFile (e:MouseEvent) : Void {
+		if (FileSystem.exists(System.uiXmlPath.escNull()))
+			MainWindowInstance.xmlSource.text = File.getContent(FileSystem.fullPath(System.uiXmlPath));
+		else
+			Dialogs.message("neko-systools", "UI must be saved to file!", true);
+	}
 }

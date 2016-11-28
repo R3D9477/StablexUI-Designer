@@ -30,15 +30,18 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000">
 			<Checkbox
+				name="'xmlWrap'"
 				states-up-text="'[-] wrap text'"
 				states-down-text = "'[+] wrap text'"
 				skin:Paint-color="0xC0C0C0"/>
 			<Button
+				name="'xmlExtOpen'"
 				text="'Open in External propgramm'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
 				skin:Paint-borderColor="0x000000"/>
 			<Button
+				name="'xmlReloadFile'"
 				text="'Reload from File'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
