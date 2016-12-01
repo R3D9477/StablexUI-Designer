@@ -1,7 +1,7 @@
 StablexUI-Designer
 =========================
 
-Graphical designer for library StablexUI.
+Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/StablexUI).
 
 ###Current features:<br/>
 * design a new gui
