@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TabStack
-	w="100"
-	h="100"
-	top="0"
 	left="0"
-	wrap="true"
-	tabBar-paddingLeft="5"
-	tabBar-childPadding="5"
-	skinName="'defaultTabStack'">
+	top="0"
+	wrap="true">
 	<TabPage
-		widthPt="100"
-		heightPt="100"
-		title-padding="5"
-		title-text="'Tab Page 1'"
-		title-highlightOnSelect="true"
-		title-highlightFormat-bold="true"
-		title-highlightFormat-color="0xFF0000"
-		skinName="'defaultTabPage'"/>
+		title-text="'Tab Page 1'"/>
 </TabStack>

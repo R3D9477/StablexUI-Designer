@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Toggle
-	top="0"
 	left="0"
-	skinName="'defaultToggle'"
+	top="0"
 	states-up-text="'Released'"
-	states-up-skinName="'defaultToggleOff'"
-	states-up-ico-skinName="'defaultToggleOffIco'"
-	states-down-text="'Pressed'"
-	states-down-skinName="'defaultToggleOn'"
-	states-down-ico-skinName="'defaultToggleOnIco'"/>
+	states-down-text="'Pressed'"/>

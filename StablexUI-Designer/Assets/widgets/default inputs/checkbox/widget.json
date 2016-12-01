@@ -3,5 +3,10 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "ru.stablex.ui.widgets.Checkbox",
-	"properties": [ ]
+	"properties": [
+		"state-up-text",
+		"state-up-skin",
+		"state-down-text",
+		"state-down-skin"
+	]
 }

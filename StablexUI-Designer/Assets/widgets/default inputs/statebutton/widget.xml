@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StateButton
-	top="0"
 	left="0"
+	top="0"
 	order="['one', 'two', 'three']"
-	skinName="'defaultStateButton'"
 	states-one-text="'First state'"
-	states-one-skinName="'defaultStateButtonState1'"
-	states-one-ico-skinName="'defaultStateButtonState1Ico'"
 	states-two-text="'Second state'"
-	states-two-skinName="'defaultStateButtonState2'"
-	states-two-ico-skinName="'defaultStateButtonState2Ico'"
-	states-three-text="'Third state'"
-	states-three-skinName="'defaultStateButtonState3'"
-	states-three-ico-skinName="'defaultStateButtonState3Ico'"/>
+	states-three-text="'Third state'"/>

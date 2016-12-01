@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Defaults>
+	<Bmp>
+		<Default
+			w="50"
+			h="50"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Bmp>
+	<Box>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Box>
+	<Button>
+		<Default
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Button>
+	<Checkbox>
+		<Default
+			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
+			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
+	</Checkbox>
+	<Clock>
+		<Default
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Clock>
+	<Floating>
+		<Default
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Floating>
+	<HBox>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</HBox>
+	<InputText>
+		<Default
+			w="100"
+			h="20"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</InputText>
+	<Options>
+		<Default
+			w="150"
+			h="20"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			box-skin:Paint-alpha="0.9"
+			list-skin:Paint-color="0xC0C0C0"
+			list-skin:Paint-alpha="1"/>
+	</Options>
+	<Progress>
+		<Default
+			w="200"
+			h="20"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			bar-skin:Gradient-corners="[10]"
+			bar-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+	</Progress>
+	<Radio>
+		<Default
+			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unchecked.png']))"
+			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_checked.png']))"/>
+	</Radio>
+	<Scroll>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			vBar-visible="true"
+			vBar-skin:Paint-color="0xFFFFFF"
+			vBar-skin:Paint-border="1"
+			vBar-skin:Paint-borderColor="0x000000"
+			vBar-slider-skin:Paint-color="0xAAAAAA"
+			hBar-visible="true"
+			hBar-skin:Paint-color="0xFFFFFF"
+			hBar-skin:Paint-border="1"
+			hBar-skin:Paint-borderColor="0x000000"
+			hBar-slider-skin:Paint-color="0xAAAAAA"/>
+	</Scroll>
+	<Slider>
+		<Default
+			w="100"
+			h="20"
+			skin:Paint-corners="[10]"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			slider-w="50"
+			slider-heightPt="100"
+			slider-skin:Gradient-corners="[10]"
+			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+	</Slider>
+	<StateButton>
+		<Default
+			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state1.png']))"
+			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state2.png']))"
+			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state3.png']))"/>
+	</StateButton>
+	<Switch>
+		<Default
+			w="100"
+			h="20"
+			skin:Paint-corners="[10]"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			slider-w="50"
+			slider-heightPt="100"
+			slider:Gradient-corners="[10]"
+			slider:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+	</Switch>
+	<TabPage>
+		<Default
+			widthPt="100"
+			heightPt="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			title-padding="5"
+			title-highlightOnSelect="true"
+			title-highlightFormat-bold="true"
+			title-highlightFormat-color="0xFF0000"/>
+	</TabPage>
+	<TabStack>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"
+			tabBar-paddingLeft="5"
+			tabBar-childPadding="5"/>
+	</TabStack>
+	<Text>
+		
+	</Text>
+	<Tip>
+		
+	</Tip>
+	<Toggle>
+		<Default
+			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
+			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
+	</Toggle>
+	<VBox>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</VBox>
+	<ViewStack>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</ViewStack>
+	<Widget>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
+	</Widget>
+</Defaults>

@@ -176,8 +176,6 @@
 				<Options
 					name="'presetsList'"
 					box-skin:Paint-alpha="0.9"
-					options="[ ['none', null] ]"
-					value="'none'"
 					skin:Paint-color="0xC0C0C0"
 					skin:Paint-border="1"
 					skin:Paint-borderColor="0x909090"

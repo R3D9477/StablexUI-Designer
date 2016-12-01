@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <HBox
-	w="100"
-	h="100"
-	top="0"
 	left="0"
-	skinName="'defaultHBox'"/>
+	top="0"/>

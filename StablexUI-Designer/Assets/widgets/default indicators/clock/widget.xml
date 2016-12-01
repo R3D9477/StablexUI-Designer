@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Clock
-	top="0"
 	left="0"
+	top="0"
 	label-selectable="false"
 	value="$ClockTime.getCurrSeconds()"
-	on-display="$this.run();"
-	skinName="'defaultClock'"/>
+	on-display="$this.run();"/>

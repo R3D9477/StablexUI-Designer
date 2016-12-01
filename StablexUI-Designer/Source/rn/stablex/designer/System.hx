@@ -33,6 +33,7 @@ class System {
 	public static var guiSettings:GuiDataInfo;
 	
 	public static var wgtUiXmlMap:Map<{}, Xml>; // <widget>, <xml>
+	public static var wgtPresetsMap:Map<String, PresetInfo>; // <presets name>, <set of presets>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>
 	public static var wgtSkinsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
@@ -135,6 +136,7 @@ class System {
 		MainWindowInstance.rootName.text = System.guiSettings.rootName.escNull();
 		
 		MainWindowInstance.presetsList.value = System.guiSettings.preset;
+		MainWindowInstance.presetsList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
@@ -178,8 +180,8 @@ class System {
 				}
 				
 				var selXml:Xml = System.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
-				selWgt = RTXml.buildFn(selXml.toString())();
 				
+				selWgt = RTXml.buildFn(selXml.toString())();
 				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
 				
 				var targetWgt:Widget = cast(e.currentTarget, Widget);
@@ -211,6 +213,8 @@ class System {
 			
 			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
 			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+			
+			System.iterateWidgets(selWgt, function (w:Dynamic) StablexUIMod.setRtDefaults(w));
 		}
 		
 		e.stopPropagation();
@@ -572,11 +576,10 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
-	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic {
+	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic
 		return Std.is(propOwner, DynamicList) ?
 			Reflect.callMethod(propOwner, Reflect.field(propOwner, "get"), [propName]) :
 			Reflect.getProperty(propOwner, propName);
-	}
 	
 	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String, objCls:Class<Dynamic> = null) : Dynamic {
 		if (objCls == null)

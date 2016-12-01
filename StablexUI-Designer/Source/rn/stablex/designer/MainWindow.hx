@@ -129,29 +129,45 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// load presets
 		
-		MainWindowInstance.presetsList.addEventListener(Event.CHANGE, this.onSelectPreset);
-		MainWindowInstance.presetsList.options = MainWindowInstance.presetsList.options.concat([for (preset in FileSystem.readDirectory(FileSystem.fullPath("presets"))) [Path.withoutExtension(preset).toTitleCase(), preset]]);
+		System.wgtPresetsMap = new Map<String, PresetInfo>();
+		
+		MainWindowInstance.presetsList.addEventListener(WidgetEvent.CHANGE, this.onSelectPreset);
+		MainWindowInstance.presetsList.options = [
+			for (presetName in FileSystem.readDirectory(FileSystem.fullPath("presets"))) {
+				var presetDir:String = Path.join([FileSystem.fullPath("presets"), presetName]);
+				
+				var presetData:PresetInfo = TJSON.parse(File.getContent(Path.join([presetDir, "preset.json"])));
+				presetData.presetDir = presetDir;
+				
+				var presetXml:Xml = System.parseXml(File.getContent(Path.join([presetDir, presetData.xml]))).getByXpath("//Defaults");
+				
+				if (presetXml.nodeName != null)
+					System.wgtPresetsMap.set(presetName, presetData);
+				
+				[presetName.toTitleCase(), presetName];
+			}
+		];
 		
 		//-----------------------------------------------------------------------------------------------
 		// load suits
 		
 		System.wgtSuitsMap = new Map<String, SuitInfo>();
 		
-		for (suit in FileSystem.readDirectory(FileSystem.fullPath("suits"))) {
-			var suitDir:String = Path.join([FileSystem.fullPath("suits"), suit]);
+		for (suitName in FileSystem.readDirectory(FileSystem.fullPath("suits"))) {
+			var suitDir:String = Path.join([FileSystem.fullPath("suits"), suitName]);
 			
 			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([suitDir, "suit.json"])));
 			suitData.suitDir = suitDir;
 			
-			var suitXml:Xml = System.parseXml(File.getContent(Path.join([suitDir, suitData.xml]))).firstElement();
+			var suitXml:Xml = System.parseXml(File.getContent(Path.join([suitDir, suitData.xml]))).getByXpath("//Skins");
 			
-			if (suitXml.nodeName == "Skins") {
+			if (suitXml.nodeName != null) {
 				for (x in suitXml.elements()) {
 					var si:SkinInfo = SkinParser.parse(x);
 					UIBuilder.skins.set(si.name, function () : Skin return si.skin);
 				}
 				
-				System.wgtSuitsMap.set(suit, suitData);
+				System.wgtSuitsMap.set(suitName, suitData);
 			}
 		}
 		
@@ -170,7 +186,7 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// load frames
 		
-		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectMainWindow);
+		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
 		MainWindowInstance.framesList.options = [for (dir in FileSystem.readDirectory(FileSystem.fullPath("frames"))) [dir.toTitleCase(), dir]];
 		
 		//-----------------------------------------------------------------------------------------------
@@ -313,7 +329,7 @@ class MainWindow extends Sprite {
 			guiInstanceTemplate: "Default.hx",
 			guiInstancePath: "",
 			rootName: "",
-			preset: "default.xml",
+			preset: "default",
 			frameTemplate: "default",
 			guiWidth: 0,
 			guiHeight: 0,
@@ -450,12 +466,13 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSelectPreset (e:WidgetEvent) : Void {
-		//...
-		//...
-		//...
+		System.guiSettings.preset = MainWindowInstance.presetsList.value;
+		
+		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
+		StablexUIMod.rtDefaults = System.parseXml(File.getContent(Path.join([preset.presetDir, preset.xml])));
 	}
 	
-	function onSelectMainWindow (e:WidgetEvent) : Void {
+	function onSelectFrame (e:WidgetEvent) : Void {
 		System.frameData = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("frames"), MainWindowInstance.framesList.value, "window.json"])));
 		
 		MainWindowInstance.guiWidth.text = Std.string(System.frameData.width);

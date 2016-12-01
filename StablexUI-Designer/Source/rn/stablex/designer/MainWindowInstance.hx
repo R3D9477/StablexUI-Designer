@@ -97,7 +97,7 @@ class MainWindowInstance {
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		UIBuilder.regClass("ClockTime");
 		
-		//UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", '"${Sys.getCwd()}"'), "CWD", '"${Sys.getCwd()}"');
+		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Sys.getCwd()), "CWD", Sys.getCwd());
 		UIBuilder.init(null, true);
 		
 		StablexUIMod.setRtxmlMod();

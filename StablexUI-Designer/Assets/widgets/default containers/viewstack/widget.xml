@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ViewStack
-	w="100"
-	h="100"
-	top="0"
 	left="0"
+	top="0"
 	wrap="true"
 	overflow="false"
-	trans:Fade-duration="1"
-	skinName="'defaultViewStack'"/>
+	trans:Fade-duration="1"/>

@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scroll
-	w="100"
-	h="100"
-	top="0"
 	left="0"
-	skinName="'defaultScroll'"
-	vBar-visible="true"
-	vBar-skinName="'defaultVBar'"
-	vBar-slider-skinName="'defaultSliderVBar'"
-	hBar-visible="true"
-	hBar-skinName="'defaultHBar'"
-	hBar-slider-skinName="'defaultSliderHBar'">
+	top="0">
 	<Widget
-		w="150"
-		h="150"
+		left="0"
 		top="0"
-		left="0"/>
+		w="150"
+		h="150"/>
 </Scroll>
