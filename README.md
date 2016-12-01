@@ -2,6 +2,7 @@ StablexUI-Designer
 =========================
 
 Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/StablexUI).
+(current version is in progress and very unstable!)
 
 ###Current features:<br/>
 * design a new gui
@@ -9,6 +10,7 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 * save gui to xml-file
 * change frames of current window from templates collection
 * change size of current window
+* easy to change themes/presets
 * auto-insert assets to current openfl/lime project
 * auto-insert sources path of custom widgets to current openfl/lime project
 * auto-generate file with declaration of objects for widgets with names (to easy access to widgets from source code)
