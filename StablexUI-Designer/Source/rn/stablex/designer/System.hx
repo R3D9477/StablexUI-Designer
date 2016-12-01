@@ -529,11 +529,11 @@ class System {
 			System.addPropRow(att, sx.get(att));
 	}
 	
-	public static function setWgtProperty (wgt:Dynamic, property:String, propValue:String) : Void {
-		var wgtXml:Xml = System.wgtUiXmlMap.get(wgt);
+	public static function setWgtProperty (dWgt:Dynamic, property:String, propValue:String) : Void {
+		var wgtXml:Xml = System.wgtUiXmlMap.get(dWgt);
 		
 		if (wgtXml.exists(property)) {
-			var ownerInfo:GuiObjPropOwnerInfo = System.setGuiObjProperties(wgt, [{ name: property, value: propValue }]).pop();
+			var ownerInfo:GuiObjPropOwnerInfo = System.setGuiObjProperties(dWgt, [{ name: property, value: propValue }]).pop();
 			
 			if (propValue > "")
 				wgtXml.set(property, Std.is(Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName), Float) ? propValue.replace(",", ".") : propValue);
@@ -544,7 +544,7 @@ class System {
 				if (System.selWgtProps.exists(property))
 					cast(cast(System.selWgtProps.get(property), HBox).getChild("propValue"), Text).text = Std.string(wgtXml.get(property));
 			
-			cast(wgt, Widget).refresh();
+			cast(dWgt, Widget).refresh();
 		}
 	}
 	

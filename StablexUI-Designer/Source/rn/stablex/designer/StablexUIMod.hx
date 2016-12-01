@@ -28,19 +28,21 @@ class StablexUIMod {
 		});
 	}
 	
-	public static function setRtDefaults (wgt:Dynamic) : Void { // set defaults for widgets at runtime
-		var defsX:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(wgt)).split(".").pop()}/Default');
+	public static function setRtDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
+		var defsX:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/Default');
 		
 		if (defsX != null) {
-			var wgtX:Xml = System.wgtUiXmlMap.get(wgt);
+			var wgtX:Xml = System.wgtUiXmlMap.get(dWgt);
 			
 			System.setGuiObjProperties(
-				wgt,
+				dWgt,
 				defsX.attributes()
 					.array()
 					.filter(function (attr:String) : Bool return !wgtX.exists(attr))
 					.map(function (attr:String) : Dynamic return { name: attr, value: defsX.get(attr) })
 			);
+			
+			cast(dWgt, Widget).refresh();
 		}
 	}
 }
