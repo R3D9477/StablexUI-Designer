@@ -606,8 +606,16 @@ class System {
 			propName = ppInfo[0];
 			
 			if (i < (propLst.length - 1)) {
-				if (System.getGuiObjProperty(propOwner, propName) == null)
-					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, ppInfo.length > 1 ? Type.resolveClass(ppInfo[1]) : null));
+				if (System.getGuiObjProperty(propOwner, propName) == null) {
+					var propCls:Class<Dynamic> = null;
+					
+					if (ppInfo.length > 1)
+						for (p in ["", "ru.stablex.", "ru.stablex.events.", "ru.stablex.layouts.", "ru.stablex.misc.", "ru.stablex.ui.skins.", "ru.stablex.transitions.", "ru.stablex.ui.widgets."])
+							if ((propCls =  Type.resolveClass(p + ppInfo[1])) != null)
+								break;
+					
+					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, propCls));
+				}
 				
 				propOwner = System.getGuiObjProperty(propOwner, propName);
 			}
@@ -623,6 +631,8 @@ class System {
 		var interp = new hscript.Interp();
 		
 		for (propInfo in properies) {
+			trace('-- ${propInfo.name}');
+			
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
 			
