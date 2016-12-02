@@ -6,9 +6,9 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 
 ###Current features:<br/>
 * generic
-	* design a new gui
-	* load existing gui from xml-file
-	* save gui to xml-file
+		* design a new gui
+		* load existing gui from xml-file
+		* save gui to xml-file
 * change frames of current window from templates collection
 * change size of current window
 * easy to change presets (defaults)
