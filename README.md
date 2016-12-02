@@ -5,15 +5,18 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 (current version is in progress and very unstable!)
 
 ###Current features:<br/>
-* design a new gui
-* load existing gui from xml-file
-* save gui to xml-file
+* generic
+	* design a new gui
+	* load existing gui from xml-file
+	* save gui to xml-file
 * change frames of current window from templates collection
 * change size of current window
 * easy to change presets (defaults)
-* allow to use custom widgets
-* allow to use custom skins
-* allow to use custom defaults
+* customizing
+	* allow to use custom templates of frame (root widget)
+	* allow to use custom widgets
+	* allow to use custom skins
+	* allow to use custom defaults
 * easy integration with openfl/lime project:
 	* auto-register selected presets (defaults) in current openfl/lime project
 	* auto-insert assets to current openfl/lime project
