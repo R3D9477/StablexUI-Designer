@@ -79,8 +79,8 @@
 	</Progress>
 	<Radio>
 		<Default
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unchecked.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_checked.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unselected.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_selected.png']))"/>
 	</Radio>
 	<Scroll>
 		<Default
