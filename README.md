@@ -23,7 +23,7 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 	* allow to use custom widgets
 	* allow to use custom skins
 	* allow to use custom defaults
-* easy integration with openfl/lime project:
+* easy integration with openfl/lime project
 	* auto-register selected presets (defaults) in current openfl/lime project
 	* auto-insert assets to current openfl/lime project
 	* auto-insert sources path of custom widgets to current openfl/lime project
