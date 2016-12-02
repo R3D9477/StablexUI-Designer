@@ -213,8 +213,6 @@ class System {
 			
 			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
 			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
-			
-			System.iterateWidgets(selWgt, function (w:Dynamic) StablexUIMod.setRtDefaults(w));
 		}
 		
 		e.stopPropagation();
@@ -305,6 +303,8 @@ class System {
 	public static function setWgtEventHandlers (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
+				StablexUIMod.setRtDefaults(dWgt);
+				
 				var wgt:Widget = cast(dWgt, Widget);
 				
 				wgt.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) MainWindowInstance.mainWnd.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN)));

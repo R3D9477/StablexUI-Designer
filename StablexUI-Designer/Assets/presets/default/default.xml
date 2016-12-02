@@ -25,8 +25,8 @@
 	</Button>
 	<Checkbox>
 		<Default
-			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
-			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
 	</Checkbox>
 	<Clock>
 		<Default
@@ -79,8 +79,8 @@
 	</Progress>
 	<Radio>
 		<Default
-			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unchecked.png']))"
-			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_checked.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unchecked.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_checked.png']))"/>
 	</Radio>
 	<Scroll>
 		<Default
@@ -162,8 +162,8 @@
 	</Tip>
 	<Toggle>
 		<Default
-			states-up-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
-			states-down-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
 	</Toggle>
 	<VBox>
 		<Default
