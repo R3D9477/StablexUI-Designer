@@ -576,10 +576,11 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui objects's propety
 	
-	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic
+	public static function getGuiObjProperty (propOwner:Dynamic, propName:String) : Dynamic {
 		return Std.is(propOwner, DynamicList) ?
 			Reflect.callMethod(propOwner, Reflect.field(propOwner, "get"), [propName]) :
 			Reflect.getProperty(propOwner, propName);
+	}
 	
 	public static function getGuiObjDefaultPropValue (obj:Dynamic, propName:String, objCls:Class<Dynamic> = null) : Dynamic {
 		if (objCls == null)
@@ -614,7 +615,7 @@ class System {
 							if ((propCls =  Type.resolveClass(p + ppInfo[1])) != null)
 								break;
 					
-					Reflect.setProperty(propOwner, propName, System.getGuiObjDefaultPropValue(propOwner, propName, propCls));
+					Reflect.setProperty(propOwner, propName, Type.createInstance(propCls, []));
 				}
 				
 				propOwner = System.getGuiObjProperty(propOwner, propName);
@@ -631,8 +632,6 @@ class System {
 		var interp = new hscript.Interp();
 		
 		for (propInfo in properies) {
-			trace('-- ${propInfo.name}');
-			
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
 			
