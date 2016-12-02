@@ -9,9 +9,15 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 	* design a new gui
 	* load existing gui from xml-file
 	* save gui to xml-file
-* change frames of current window from templates collection
-* change size of current window
-* easy to change presets (defaults)
+* themes
+	* change defaults from presets collection
+* windows settings
+	* change frames of current window from templates collection
+	* change size of current window
+* designing
+	* use all standard widgets from ["ru.stablex.ui.widgets.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets)
+	* use all standard skins from ["ru.stablex.ui.skins.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/skins)
+	* allow to evaluate haxe-expression and use result as value for property of widget
 * customizing
 	* allow to use custom templates of frame (root widget)
 	* allow to use custom widgets
