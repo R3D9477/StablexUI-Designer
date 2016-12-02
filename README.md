@@ -10,10 +10,12 @@ Graphical designer for library [StablexUI](https://github.com/RealyUniqueName/St
 * save gui to xml-file
 * change frames of current window from templates collection
 * change size of current window
-* easy to change themes/presets
-* auto-insert assets to current openfl/lime project
-* auto-insert sources path of custom widgets to current openfl/lime project
-* auto-generate file with declaration of objects for widgets with names (to easy access to widgets from source code)
+* easy to change presets (defaults)
+* easy integration with openfl/lime project:
+	* auto-register selected presets (defaults) in current openfl/lime project
+	* auto-insert assets to current openfl/lime project
+	* auto-insert sources path of custom widgets to current openfl/lime project
+	* auto-generate file with declaration of objects for widgets with names (to easy access to widgets from source code)
 * allow to edit raw xml of current gui manually
 
 ###Requirements:<br/>
