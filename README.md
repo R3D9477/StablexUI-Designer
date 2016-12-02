@@ -6,7 +6,7 @@ Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_u
 
 ###Current features:<br/>
 * generic
-	* design a new gui
+	* build a new gui
 	* load existing gui from xml-file
 	* save gui to xml-file
 * themes
