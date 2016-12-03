@@ -643,8 +643,11 @@ class System {
 				
 				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Sys.getCwd()}"').replace("%CWD", '"${Sys.getCwd()}"');
 			
-				for(cls in RTXml.imports.keys())
+				for (cls in RTXml.imports.keys())
 					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
+				
+				for (flt in ["BitmapFilter", "BitmapFilterQuality", "BitmapFilterType", "BlurFilter", "ColorMatrixFilter", "DropShadowFilter", "GlowFilter"])
+					interp.variables.set(flt, 'openfl.filters.$flt');
 				
 				dynValue = interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)));
 			}
