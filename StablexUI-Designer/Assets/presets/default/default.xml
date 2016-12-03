@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Defaults>
+	<GuiElements>
+		<Default
+			skin:Paint-color="0xFFFFFF"/>
+	</GuiElements>
 	<Bmp>
 		<Default
 			w="50"
@@ -19,17 +23,23 @@
 	</Box>
 	<Button>
 		<Default
+			format-size="12"
+			format-color="0x000000"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
 	</Button>
 	<Checkbox>
 		<Default
+			format-size="12"
+			format-color="0x000000"
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
 	</Checkbox>
 	<Clock>
 		<Default
+			format-size="12"
+			format-color="0x000000"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
@@ -52,6 +62,8 @@
 		<Default
 			w="100"
 			h="20"
+			format-size="12"
+			format-color="0x000000"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
@@ -60,6 +72,8 @@
 		<Default
 			w="150"
 			h="20"
+			format-size="12"
+			format-color="0x000000"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
@@ -79,6 +93,8 @@
 	</Progress>
 	<Radio>
 		<Default
+			format-size="12"
+			format-color="0x000000"
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unselected.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_selected.png']))"/>
 	</Radio>
@@ -115,6 +131,8 @@
 	</Slider>
 	<StateButton>
 		<Default
+			format-size="12"
+			format-color="0x000000"
 			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state1.png']))"
 			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state2.png']))"
 			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state3.png']))"/>
@@ -140,9 +158,12 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			title-padding="5"
+			title-format-size="12"
+			title-format-color="0x000000"
 			title-highlightOnSelect="true"
+			title-highlightFormat-size="12"
 			title-highlightFormat-bold="true"
-			title-highlightFormat-color="0xFF0000"/>
+			title-highlightFormat-color="0x000000"/>
 	</TabPage>
 	<TabStack>
 		<Default
@@ -155,10 +176,12 @@
 			tabBar-childPadding="5"/>
 	</TabStack>
 	<Text>
-		
+		<Default
+			format-size="12"
+			format-color="0x000000"/>
 	</Text>
 	<Tip>
-		
+		<Default/>
 	</Tip>
 	<Toggle>
 		<Default

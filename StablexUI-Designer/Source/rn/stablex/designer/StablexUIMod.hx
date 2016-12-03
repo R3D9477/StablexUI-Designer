@@ -3,7 +3,7 @@ package rn.stablex.designer;
 import hscript.Interp;
 import ru.stablex.ui.RTXml;
 import ru.stablex.ui.UIBuilder;
-import ru.stablex.ui.widgets.Widget;
+import ru.stablex.ui.widgets.*;
 
 using Lambda;
 using rn.typext.ext.XmlExtender;
@@ -34,15 +34,20 @@ class StablexUIMod {
 		if (defsX != null) {
 			var wgtX:Xml = System.wgtUiXmlMap.get(dWgt);
 			
-			System.setGuiObjProperties(
-				dWgt,
-				defsX.attributes()
-					.array()
-					.filter(function (attr:String) : Bool return !wgtX.exists(attr))
-					.map(function (attr:String) : Dynamic return { name: attr, value: defsX.get(attr) })
-			);
-			
-			cast(dWgt, Widget).refresh();
+			if (wgtX != null) {
+				System.setGuiObjProperties(
+					dWgt,
+					defsX.attributes()
+						.array()
+						.filter(function (attr:String) : Bool return !wgtX.exists(attr))
+						.map(function (attr:String) : Dynamic return { name: attr, value: defsX.get(attr) })
+				);
+				
+				cast(dWgt, Widget).refresh();
+				
+				if (Std.is(dWgt, StateButton))
+					cast(dWgt, StateButton).updateState();
+			}
 		}
 	}
 }
