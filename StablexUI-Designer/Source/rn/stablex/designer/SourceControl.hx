@@ -81,7 +81,7 @@ class SourceControl {
 				.map (function (hxLine:String) : String
 					return hxLine
 						.replace("%InstanceName%", instanceName)
-						.replace("%InstancePackage%", Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//meta").get("package"))
+						.replace("%InstancePackage%", Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join("."))
 				)
 				.map (function (hxLine:String) : String {
 					if (hxLine.indexOf("// create source of GuiElements class") >= 0)
@@ -111,11 +111,10 @@ class SourceControl {
 		
 		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}"), "CWD", Sys.getCwd());');
 		
-		var preset:String = System.guiSettings.preset > "" ?
-			'"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([Sys.getCwd(), "presets", System.guiSettings.preset]))}"' :
-			null;
+		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
+		var presetPath:String = '"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([preset.dir, preset.xml]))}"';
 		
-		instLines.insert(bii + 1, '		ru.stablex.ui.UIBuilder.init($preset, ${instLines[bii - 1].indexOf("RTXml") >= 0});');
+		instLines.insert(bii + 1, '		ru.stablex.ui.UIBuilder.init($presetPath, ${instLines[bii - 1].indexOf("RTXml") >= 0});');
 		
 		rli += 2;
 		ili += 2;
@@ -213,13 +212,14 @@ class SourceControl {
 		
 		var assets:Array<String> = new Array<String>();
 		
-		for (suit in System.wgtSuitsMap.iterator().array().filter(function (s:SuitInfo) : Bool return s.assets > "")) {
-			var xa:Xml = Xml.createElement("assets");
-			xa.set("path", Path.join([suit.suitDir, suit.assets]));
-			xa.set("rename", Path.join([suit.suitDir, suit.assets]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
-			xa.set("guiUuid", System.guiSettings.guiUuid);
-			projXml.addChild(xa);
-		}
+		for (i in [System.wgtSuitsMap.iterator(), System.wgtPresetsMap.iterator()])
+			for (a in i.array().filter(function (e:Dynamic) : Bool return e.assets > "")) {
+				var xa:Xml = Xml.createElement("assets");
+				xa.set("path", Path.join([a.dir, a.assets]));
+				xa.set("rename", Path.join([a.dir, a.assets]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
+				xa.set("guiUuid", System.guiSettings.guiUuid);
+				projXml.addChild(xa);
+			}
 		
 		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		

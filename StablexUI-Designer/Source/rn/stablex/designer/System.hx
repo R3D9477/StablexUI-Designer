@@ -196,7 +196,7 @@ class System {
 				if (System.selWgtData.bin != null) {
 					#if neko
 						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
-							var wgtSrc:String = Path.join([System.selWgtData.wgtDir, System.selWgtData.src]);
+							var wgtSrc:String = Path.join([System.selWgtData.dir, System.selWgtData.src]);
 							
 							if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
 								SourceControl.wgtSources.push(wgtSrc);

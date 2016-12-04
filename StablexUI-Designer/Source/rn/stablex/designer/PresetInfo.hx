@@ -1,7 +1,7 @@
 package rn.stablex.designer;
 
 typedef PresetInfo = {
-	var presetDir:String;
+	var dir:String;
 	var title:String;
 	var xml:String;
 	var preview:String;

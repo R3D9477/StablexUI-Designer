@@ -134,12 +134,12 @@ class MainWindow extends Sprite {
 		MainWindowInstance.presetsList.addEventListener(WidgetEvent.CHANGE, this.onSelectPreset);
 		MainWindowInstance.presetsList.options = [
 			for (presetName in FileSystem.readDirectory(FileSystem.fullPath("presets"))) {
-				var presetDir:String = Path.join([FileSystem.fullPath("presets"), presetName]);
+				var dir:String = Path.join([FileSystem.fullPath("presets"), presetName]);
 				
-				var presetData:PresetInfo = TJSON.parse(File.getContent(Path.join([presetDir, "preset.json"])));
-				presetData.presetDir = presetDir;
+				var presetData:PresetInfo = TJSON.parse(File.getContent(Path.join([dir, "preset.json"])));
+				presetData.dir = dir;
 				
-				var presetXml:Xml = System.parseXml(File.getContent(Path.join([presetDir, presetData.xml]))).getByXpath("//Defaults");
+				var presetXml:Xml = System.parseXml(File.getContent(Path.join([dir, presetData.xml]))).getByXpath("//Defaults");
 				
 				if (presetXml.nodeName != null)
 					System.wgtPresetsMap.set(presetName, presetData);
@@ -154,12 +154,12 @@ class MainWindow extends Sprite {
 		System.wgtSuitsMap = new Map<String, SuitInfo>();
 		
 		for (suitName in FileSystem.readDirectory(FileSystem.fullPath("suits"))) {
-			var suitDir:String = Path.join([FileSystem.fullPath("suits"), suitName]);
+			var dir:String = Path.join([FileSystem.fullPath("suits"), suitName]);
 			
-			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([suitDir, "suit.json"])));
-			suitData.suitDir = suitDir;
+			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([dir, "suit.json"])));
+			suitData.dir = dir;
 			
-			var suitXml:Xml = System.parseXml(File.getContent(Path.join([suitDir, suitData.xml]))).getByXpath("//Skins");
+			var suitXml:Xml = System.parseXml(File.getContent(Path.join([dir, suitData.xml]))).getByXpath("//Skins");
 			
 			if (suitXml.nodeName != null) {
 				for (x in suitXml.elements()) {
@@ -208,8 +208,8 @@ class MainWindow extends Sprite {
 		System.wgtPropsMap = new Map<String, WgtPropInfo>();
 		
 		for (wgtGrpDir in FileSystem.readDirectory(FileSystem.fullPath("widgets")))
-			for (wgtDir in FileSystem.readDirectory(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir]))) {
-				var wgtData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir, wgtDir, "widget.json"])));
+			for (dir in FileSystem.readDirectory(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir]))) {
+				var wgtData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir, dir, "widget.json"])));
 				
 				if (wgtData.properties != null)
 					if (wgtData.properties.length > 0)
@@ -420,7 +420,7 @@ class MainWindow extends Sprite {
 			if (MainWindowInstance.guiInstancePath.text == "") {
 				MainWindowInstance.guiInstancePath.text = Path.join([
 					firstSrc,
-					Path.join(projXml.getByXpath("//project/meta").get("package").split(".")),
+					Path.join(projXml.getByXpath("//project/app").get("main").split(".").slice(0, -1)),
 					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
 				]);
 				
@@ -469,7 +469,7 @@ class MainWindow extends Sprite {
 		System.guiSettings.preset = MainWindowInstance.presetsList.value;
 		
 		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
-		StablexUIMod.rtDefaults = System.parseXml(File.getContent(Path.join([preset.presetDir, preset.xml])));
+		StablexUIMod.rtDefaults = System.parseXml(File.getContent(Path.join([preset.dir, preset.xml])));
 	}
 	
 	function onSelectFrame (e:WidgetEvent) : Void {
@@ -491,21 +491,21 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wlSelectBtn.selected = true;
 		MainWindowInstance.wgtsLst.freeChildren(true);
 		
-		for (wgtDir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
-			wgtDir = FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, wgtDir]));
+		for (dir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
+			dir = FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, dir]));
 			
-			var wgtData:WgtInfo = TJSON.parse(File.getContent(Path.join([wgtDir, "widget.json"])));
-			wgtData.wgtDir = wgtDir;
-			wgtData.ico = Path.join([wgtDir, wgtData.ico]);
+			var wgtData:WgtInfo = TJSON.parse(File.getContent(Path.join([dir, "widget.json"])));
+			wgtData.dir = dir;
+			wgtData.ico = Path.join([dir, wgtData.ico]);
 			
 			if (!Path.isAbsolute(wgtData.xml))
-				wgtData.xml = Path.join([wgtDir, wgtData.xml]);
+				wgtData.xml = Path.join([dir, wgtData.xml]);
 			
 			if (wgtData.bin != null) {
 				#if neko
 					if (FileSystem.exists(wgtData.bin.neko.escNull()))
 						if (!Path.isAbsolute(wgtData.bin.neko))
-							wgtData.bin.neko = Path.join([wgtDir, wgtData.bin.neko]);
+							wgtData.bin.neko = Path.join([dir, wgtData.bin.neko]);
 				#end
 			}
 			

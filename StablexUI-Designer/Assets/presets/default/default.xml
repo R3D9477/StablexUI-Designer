@@ -147,8 +147,8 @@
 			skin:Paint-borderColor="0x000000"
 			slider-w="50"
 			slider-heightPt="100"
-			slider:Gradient-corners="[10]"
-			slider:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			slider-skin:Gradient-corners="[10]"
+			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
 	</Switch>
 	<TabPage>
 		<Default
