@@ -147,8 +147,7 @@ class SourceControl {
 				if (wgtName == System.guiSettings.guiName) {
 					if (wgtName == rootWgtName) {
 						instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
-						ili++;
-						instLines.insert(ili, Std.is(wgt, Floating) ? '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)' : '		openfl.Lib.current.stage.addChild($instanceName.$wgtName); // $gUuidStr ($gXmlName)');
+						instLines.insert(++ili, Std.is(wgt, Floating) ? '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)' : '		openfl.Lib.current.stage.addChild($instanceName.$wgtName); // $gUuidStr ($gXmlName)');
 					}
 					else
 						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
