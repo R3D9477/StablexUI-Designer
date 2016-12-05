@@ -4,7 +4,7 @@ import sys.io.File;
 import haxe.io.Path;
 import sys.FileSystem;
 
-import ru.stablex.ui.widgets.Widget;
+import ru.stablex.ui.widgets.*;
 
 import rn.typext.hlp.FileSystemHelper;
 
@@ -145,8 +145,11 @@ class SourceControl {
 				instLines.insert(fli, '	public static var $wgtName:$wgtClassName; // $gUuidStr ($gXmlName)');
 				
 				if (wgtName == System.guiSettings.guiName) {
-					if (wgtName == rootWgtName)
+					if (wgtName == rootWgtName) {
 						instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
+						ili++;
+						instLines.insert(ili, Std.is(wgt, Floating) ? '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)' : '		openfl.Lib.current.stage.addChild($instanceName.$wgtName); // $gUuidStr ($gXmlName)');
+					}
 					else
 						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
 				}
