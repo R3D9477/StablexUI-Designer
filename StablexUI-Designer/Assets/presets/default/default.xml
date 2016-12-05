@@ -3,6 +3,8 @@
 <Defaults>
 	<GuiElements>
 		<Default
+			widthPt="100"
+			heightPt="100"
 			skin:Paint-color="0xFFFFFF"/>
 	</GuiElements>
 	<Bmp>
@@ -46,6 +48,8 @@
 	</Clock>
 	<Floating>
 		<Default
+			widthPt="100"
+			heightPt="100"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>

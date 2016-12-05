@@ -48,6 +48,8 @@
 	</Clock>
 	<Floating>
 		<Default
+			widthPt="100"
+			heightPt="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x3079EC"/>
