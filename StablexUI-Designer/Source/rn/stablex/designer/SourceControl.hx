@@ -215,7 +215,7 @@ class SourceControl {
 		for (i in [System.wgtSuitsMap.iterator(), System.wgtPresetsMap.iterator()])
 			for (a in i.array().filter(function (e:Dynamic) : Bool return e.assets > "")) {
 				var xa:Xml = Xml.createElement("assets");
-				xa.set("path", Path.join([a.dir, a.assets]));
+				xa.set("path", FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([a.dir, a.assets])));
 				xa.set("rename", Path.join([a.dir, a.assets]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
 				xa.set("guiUuid", System.guiSettings.guiUuid);
 				projXml.addChild(xa);

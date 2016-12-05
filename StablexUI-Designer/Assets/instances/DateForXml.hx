@@ -30,6 +30,8 @@ class %InstanceName% {
 		// skins registration
 		
 		// initialization of instances
+		
+		// display gui
 	}
 	#end
 }

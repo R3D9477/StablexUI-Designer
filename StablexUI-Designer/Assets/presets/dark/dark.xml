@@ -3,6 +3,8 @@
 <Defaults>
 	<GuiElements>
 		<Default
+			widthPt="100"
+			heightPt="100"
 			skin:Paint-color="0x272727"/>
 	</GuiElements>
 	<Bmp>
