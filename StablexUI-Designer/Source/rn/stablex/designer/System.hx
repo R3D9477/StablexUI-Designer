@@ -336,16 +336,6 @@ class System {
 		);
 	}
 	
-	public static function selectFirstWidget () : Void {
-		if (MainWindowInstance.guiWgtsList.options.length > 1)
-			if (!(MainWindowInstance.guiWgtsList.options[0][1] > ""))
-				MainWindowInstance.guiWgtsList.options.remove(MainWindowInstance.guiWgtsList.options[0]);
-		
-		MainWindowInstance.guiWgtsList.value = MainWindowInstance.guiWgtsList.options[0][1];
-		MainWindowInstance.guiWgtsList.text = MainWindowInstance.guiWgtsList.options[0][0];
-		MainWindowInstance.guiWgtsList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-	}
-	
 	public static function loadUiFromXml (xml:Xml) : Bool {
 		//try {
 			if (xml.nodeName == "GuiElements") {
@@ -418,7 +408,7 @@ class System {
 			
 			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
 			System.setWgtEventHandlers(System.guiElementsWgt);
-			System.selectFirstWidget();
+			System.selectWgtFromList(0); // select first widget from list
 			
 			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
 		//}
@@ -498,13 +488,26 @@ class System {
 				MainWindowInstance.guiWgtsList.options = [ ["", null] ];
 		});
 		
-		System.selectFirstWidget();
+		System.selectWgtFromList(0); // select first widget from list
 		
 		cast(wgt, Widget).parent.removeChild(wgt);
 	}
 	
 	//-----------------------------------------------------------------------------------------------
 	// widget's propety
+	
+	public static function selectWgtFromList (cond:Dynamic) : Void {
+		Reflect.setField(MainWindowInstance.guiWgtsList, "_selectedIdx", -1); // workaround for Options (if value was changed, but not selected index)
+		
+		if (Std.is(cond, Int))
+			MainWindowInstance.guiWgtsList.value = MainWindowInstance.guiWgtsList.options[cond][1];
+		else
+			MainWindowInstance.guiWgtsList.value = Std.string(cond);
+		
+		if (MainWindowInstance.guiWgtsList.options.length > 1)
+			if (!(MainWindowInstance.guiWgtsList.options[0][1] > ""))
+				MainWindowInstance.guiWgtsList.options.remove(MainWindowInstance.guiWgtsList.options[0]);
+	}
 	
 	public static function propNameMap (propName:String) : String {
 		return switch (propName.toLowerCase()) {
@@ -517,7 +520,7 @@ class System {
 	public static function showWgtPropList () : Void {
 		System.selWgtProps = new Map<String, HBox>();
 		
-		MainWindowInstance.guiWgtsList.value = cast(System.selWgt, Widget).name;
+		System.selectWgtFromList(cast(System.selWgt, Widget).name);
 		
 		MainWindowInstance.wgtsPropsLst.freeChildren(true);
 		MainWindowInstance.wgtsPropsLst.layout = new Row();

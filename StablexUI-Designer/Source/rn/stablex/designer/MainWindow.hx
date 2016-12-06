@@ -393,7 +393,7 @@ class MainWindow extends Sprite {
 	function onSelectTab (e:WidgetEvent) : Void {
 		if (MainWindowInstance.designerTabs.activeTab().name == "tabDesigner") {
 			System.loadUiFromXml(System.parseXml(MainWindowInstance.xmlSource.text).firstElement());
-			System.selectFirstWidget();
+			System.selectWgtFromList(0); // select first widget from list
 		}
 		
 		MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
@@ -536,8 +536,6 @@ class MainWindow extends Sprite {
 				wgt.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
 			}
 		}
-		
-		e.stopPropagation();
 	}
 	
 	function showWgtPropsBtnClick (e:MouseEvent) : Void {
