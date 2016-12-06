@@ -32,11 +32,12 @@ using rn.typext.ext.StringExtender;
 class System {
 	public static var guiSettings:GuiDataInfo;
 	
-	public static var wgtUiXmlMap:Map<{}, Xml>; // <widget>, <xml>
 	public static var wgtPresetsMap:Map<String, PresetInfo>; // <presets name>, <set of presets>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>
 	public static var wgtSkinsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
+	
+	public static var wgtUiXmlMap:Map<{}, Xml>; // <widget>, <xml>
 	
 	public static var frameXml:Xml;
 	public static var frameWgt:Widget;
@@ -313,7 +314,8 @@ class System {
 				wgt.addEventListener(MouseEvent.RIGHT_CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
 				
 				if (Type.getClass(dWgt) != GuiElements) {
-					MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
+					if (System.wgtUiXmlMap.exists(wgt))
+						MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
 					
 					wgt.addEventListener(MouseEvent.MOUSE_DOWN, System.onMoveWgtMouseDown);
 					wgt.addEventListener(MouseEvent.MOUSE_MOVE, System.onMoveWgtMouseMove);
