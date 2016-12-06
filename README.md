@@ -24,7 +24,7 @@ Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_u
 	* allow to use custom skins
 	* allow to use custom defaults
 * easy integration with openfl/lime project
-	* auto-insertion of instruction '<haxelib name="stablexui">' (if not exist) to current openfl/lime project
+	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist) to current openfl/lime project
 	* auto-registration of selected presets (defaults) in current openfl/lime project
 	* auto-insertion of assets to current openfl/lime project
 	* auto-insertion of sources path of custom widgets to current openfl/lime project
