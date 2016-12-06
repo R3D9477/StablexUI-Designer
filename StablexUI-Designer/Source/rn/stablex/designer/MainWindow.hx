@@ -362,6 +362,9 @@ class MainWindow extends Sprite {
 			var oldInstancePath:String = System.guiSettings.guiInstancePath;
 			
 			if (System.saveUiToFile(sFile)) {
+				if (!SourceControl.checkStablexUILib())
+					Dialogs.message("neko-systools", "StablexUI library was not defined in project!", true);
+				
 				if (System.guiSettings.makeInstance) {
 					SourceControl.clearWgtSources();
 					

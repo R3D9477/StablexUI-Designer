@@ -45,6 +45,23 @@ class SourceControl {
 		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 	}
 	
+	public static function checkStablexUILib () : Bool {
+		if (!FileSystem.exists(System.guiSettings.project.escNull()))
+			return false;
+		
+		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		if (projXml.getByXpath("//project/haxelib[@name='stablexui']") == null) {
+			var hxnode:Xml = Xml.createElement("haxelib");
+			hxnode.set("name", "stablexui");
+			projXml.addChild(hxnode);
+			
+			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		}
+		
+		return true;
+	}
+	
 	public static function makeInstance () : Bool {
 		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiInstancePath > "") || !(System.guiSettings.guiUuid > ""))
 			return false;
