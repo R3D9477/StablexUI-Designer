@@ -39,7 +39,14 @@ class StablexUIMod {
 					dWgt,
 					defsX.attributes()
 						.array()
-						.filter(function (attr:String) : Bool return !wgtX.exists(attr))
+						.filter(function (attr:String) : Bool {
+							if (attr == "w" || attr.indexOf("width") > -1)
+								return !(wgtX.exists("w") || wgtX.exists("width") || wgtX.exists("widthPt"));
+							else if (attr == "h" || attr.indexOf("height") > -1)
+								return !(wgtX.exists("h") || wgtX.exists("height") || wgtX.exists("heightPt"));
+							
+							return !wgtX.exists(attr);
+						})
 						.map(function (attr:String) : Dynamic return { name: attr, value: defsX.get(attr) })
 				);
 				
