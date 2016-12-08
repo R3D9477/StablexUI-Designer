@@ -278,34 +278,35 @@ class System {
 			wgtClass == ru.stablex.ui.widgets.Floating;
 	}
 	
-	public static function iterateWidgets (wgt:Dynamic, onBefore:Dynamic = null, onBox:Dynamic = null, onChild:Dynamic = null, onWgt:Dynamic = null) : Void {
+	public static function iterateWidgets (dWgt:Dynamic, onBefore:Dynamic = null, onBox:Dynamic = null, onChild:Dynamic = null, onWgt:Dynamic = null, onAfter:Dynamic = null) : Void {
 		if (onBefore != null)
-			onBefore(wgt);
+			onBefore(dWgt);
 		
-		if (System.isBox(Type.getClass(wgt))) {
+		if (System.isBox(Type.getClass(dWgt))) {
 			if (onBox != null)
-				onBox(wgt);
+				onBox(dWgt);
 			
-			for (i in 0...cast(wgt, Widget).numChildren) {
-				var chWgt:Dynamic = cast(wgt, Widget).getChildAt(i);
+			for (i in 0...cast(dWgt, Widget).numChildren) {
+				var chWgt:Dynamic = cast(dWgt, Widget).getChildAt(i);
 				
 				if (Std.is(chWgt, Widget)) {
 					if (onChild != null)
-						onChild(wgt, chWgt, i);
+						onChild(dWgt, chWgt, i);
 					
-					System.iterateWidgets(chWgt, onBefore, onBox, onChild, onWgt);
+					System.iterateWidgets(chWgt, onBefore, onBox, onChild, onWgt, onAfter);
 				}
 			}
 		}
 		else if (onWgt != null)
-			onWgt(wgt);
+			onWgt(dWgt);
+		
+		if (onAfter != null)
+			onAfter(dWgt);
 	}
 	
 	public static function setWgtEventHandlers (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
-				StablexUIMod.setRtDefaults(dWgt);
-				
 				var wgt:Widget = cast(dWgt, Widget);
 				
 				wgt.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) MainWindowInstance.mainWnd.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN)));
@@ -314,8 +315,6 @@ class System {
 				wgt.addEventListener(MouseEvent.RIGHT_CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
 				
 				if (Type.getClass(dWgt) != GuiElements && System.wgtUiXmlMap.exists(dWgt)) {
-					trace(Type.getClassName(Type.getClass(dWgt)));
-					
 					wgt.addEventListener(MouseEvent.MOUSE_DOWN, System.onMoveWgtMouseDown);
 					wgt.addEventListener(MouseEvent.MOUSE_MOVE, System.onMoveWgtMouseMove);
 					
@@ -323,7 +322,8 @@ class System {
 				}
 			},
 			function (dWgt:Dynamic) {
-				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, System.onBoxClick);
+				if (System.wgtUiXmlMap.exists(dWgt))
+					cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, System.onBoxClick);
 			},
 			function (dParentWgt:Dynamic, dChildWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dChildWgt) == null) {
@@ -336,6 +336,10 @@ class System {
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
+			},
+			function (dWgt:Dynamic) {
+				if (System.wgtUiXmlMap.exists(dWgt))
+					StablexUIMod.setRtDefaults(dWgt);
 			}
 		);
 	}

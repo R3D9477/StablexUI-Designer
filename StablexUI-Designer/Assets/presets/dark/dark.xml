@@ -50,9 +50,7 @@
 		<Default
 			widthPt="100"
 			heightPt="100"
-			skin:Paint-color="0x272727"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-color="0x272727"/>
 	</Floating>
 	<HBox>
 		<Default
@@ -157,21 +155,11 @@
 	<TabPage>
 		<Default
 			widthPt="100"
-			heightPt="100"
-			skin:Paint-color="0x272727"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
-			title-padding="5"
-			title-format-size="12"
-			title-format-color="0x0AD49E"
-			title-highlightOnSelect="true"
-			title-highlightFormat-size="12"
-			title-highlightFormat-bold="true"
-			title-highlightFormat-color="0x0AD49E"/>
+			heightPt="100"/>
 	</TabPage>
 	<TabStack>
 		<Default
-			w="100"
+			w="400"
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
