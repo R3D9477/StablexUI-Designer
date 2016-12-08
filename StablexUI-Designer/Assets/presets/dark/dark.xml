@@ -94,7 +94,7 @@
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x3079EC"
-			skin:Gradient-corners="[10]"
+			skin:Paint-corners="[10]"
 			bar-skin:Gradient-corners="[10]"
 			bar-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
 	</Progress>
