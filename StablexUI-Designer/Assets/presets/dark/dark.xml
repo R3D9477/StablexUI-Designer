@@ -94,8 +94,9 @@
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x3079EC"
+			skin:Gradient-corners="[10]"
 			bar-skin:Gradient-corners="[10]"
-			bar-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			bar-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
 	</Progress>
 	<Radio>
 		<Default
@@ -133,7 +134,7 @@
 			slider-w="50"
 			slider-heightPt="100"
 			slider-skin:Gradient-corners="[10]"
-			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			slider-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
 	</Slider>
 	<StateButton>
 		<Default
@@ -154,7 +155,7 @@
 			slider-w="50"
 			slider-heightPt="100"
 			slider-skin:Gradient-corners="[10]"
-			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			slider-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
 	</Switch>
 	<TabPage>
 		<Default
