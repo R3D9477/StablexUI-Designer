@@ -313,12 +313,13 @@ class System {
 				wgt.addEventListener(MouseEvent.MOUSE_UP, System.onMoveWgtMouseUp);
 				wgt.addEventListener(MouseEvent.RIGHT_CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
 				
-				if (Type.getClass(dWgt) != GuiElements) {
-					if (System.wgtUiXmlMap.exists(wgt))
-						MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
+				if (Type.getClass(dWgt) != GuiElements && System.wgtUiXmlMap.exists(dWgt)) {
+					trace(Type.getClassName(Type.getClass(dWgt)));
 					
 					wgt.addEventListener(MouseEvent.MOUSE_DOWN, System.onMoveWgtMouseDown);
 					wgt.addEventListener(MouseEvent.MOUSE_MOVE, System.onMoveWgtMouseMove);
+					
+					MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
 				}
 			},
 			function (dWgt:Dynamic) {
@@ -326,10 +327,11 @@ class System {
 			},
 			function (dParentWgt:Dynamic, dChildWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dChildWgt) == null) {
-					var chWgt:Dynamic = System.wgtUiXmlMap.get(dParentWgt).getChildAt(cInd);
+					var chXml:Xml = System.wgtUiXmlMap.get(dParentWgt).getChildAt(cInd);
 					
-					if (chWgt != null)
-						System.wgtUiXmlMap.set(dChildWgt, chWgt);
+					if (chXml != null)
+						if (StablexUIMod.resolveClass(chXml.nodeName) == Type.getClass(dChildWgt))
+							System.wgtUiXmlMap.set(dChildWgt, chXml);
 				}
 			},
 			function (dWgt:Dynamic) {
@@ -616,9 +618,7 @@ class System {
 					var propCls:Class<Dynamic> = null;
 					
 					if (ppInfo.length > 1)
-						for (p in ["", "ru.stablex.", "ru.stablex.events.", "ru.stablex.layouts.", "ru.stablex.misc.", "ru.stablex.ui.skins.", "ru.stablex.transitions.", "ru.stablex.ui.widgets."])
-							if ((propCls =  Type.resolveClass(p + ppInfo[1])) != null)
-								break;
+						propCls = StablexUIMod.resolveClass(ppInfo[1]);
 					
 					Reflect.setProperty(propOwner, propName, Type.createInstance(propCls, []));
 				}

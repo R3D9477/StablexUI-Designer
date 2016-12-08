@@ -28,6 +28,16 @@ class StablexUIMod {
 		});
 	}
 	
+	public static function resolveClass (className:String) : Class<Dynamic> {
+		var resCls:Class<Dynamic> = null;
+		
+		for (p in ["", "ru.stablex.", "ru.stablex.events.", "ru.stablex.layouts.", "ru.stablex.misc.", "ru.stablex.ui.skins.", "ru.stablex.transitions.", "ru.stablex.ui.widgets."])
+			if ((resCls =  Type.resolveClass(p + className)) != null)
+				break;
+		
+		return resCls;
+	}
+	
 	public static function setRtDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
 		var defsX:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/Default');
 		
