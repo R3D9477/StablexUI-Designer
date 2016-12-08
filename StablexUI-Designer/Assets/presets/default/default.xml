@@ -161,23 +161,18 @@
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
-			title-padding="5"
 			title-format-size="12"
 			title-format-color="0x000000"
-			title-highlightOnSelect="true"
-			title-highlightFormat-size="12"
-			title-highlightFormat-bold="true"
-			title-highlightFormat-color="0x000000"/>
+			title-states-up-ico="null"
+			title-states-down-ico="null"/>
 	</TabPage>
 	<TabStack>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
-			tabBar-paddingLeft="5"
-			tabBar-childPadding="5"/>
+			tabBar-skin:Paint-color="0xC0C0C0"
+			tabBar-skin:Paint-border="0"/>
 	</TabStack>
 	<Text>
 		<Default

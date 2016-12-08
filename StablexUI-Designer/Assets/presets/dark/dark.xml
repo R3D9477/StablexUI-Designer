@@ -155,17 +155,19 @@
 	<TabPage>
 		<Default
 			widthPt="100"
-			heightPt="100"/>
+			heightPt="100"
+			title-format-size="12"
+			title-format-color="0x0AD49E"
+			title-states-up-ico="null"
+			title-states-down-ico="null"/>
 	</TabPage>
 	<TabStack>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x3079EC"
-			tabBar-paddingLeft="5"
-			tabBar-childPadding="5"/>
+			tabBar-skin:Paint-color="0x272727"
+			tabBar-skin:Paint-border="0"/>
 	</TabStack>
 	<Text>
 		<Default
