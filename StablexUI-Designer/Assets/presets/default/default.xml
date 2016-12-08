@@ -5,7 +5,9 @@
 		<Default
 			widthPt="100"
 			heightPt="100"
-			skin:Paint-color="0xFFFFFF"/>
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
 	</GuiElements>
 	<Bmp>
 		<Default
@@ -172,7 +174,6 @@
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
-			tabBar-autoSize="true"
 			tabBar-paddingBottom="5"
 			tabBar-skin:Paint-color="0xC0C0C0"
 			tabBar-skin:Paint-border="0"/>
