@@ -159,7 +159,7 @@
 	</TabPage>
 	<TabStack>
 		<Default
-			w="400"
+			w="100"
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
