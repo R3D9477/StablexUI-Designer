@@ -259,6 +259,8 @@ class System {
 		System.moveWgt = null;
 		System.moveWgtX = 0;
 		System.moveWgtY = 0;
+		
+		e.stopPropagation();
 	}
 	
 	//-----------------------------------------------------------------------------------------------

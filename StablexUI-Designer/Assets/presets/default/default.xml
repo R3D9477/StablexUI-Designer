@@ -159,8 +159,7 @@
 			widthPt="100"
 			heightPt="100"
 			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"
+			skin:Paint-border="0"
 			title-format-size="12"
 			title-format-color="0x000000"
 			title-states-up-ico="null"
@@ -168,9 +167,13 @@
 	</TabPage>
 	<TabStack>
 		<Default
+			padding="5"
+			autoSize="true"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
+			tabBar-autoSize="true"
+			tabBar-paddingBottom="5"
 			tabBar-skin:Paint-color="0xC0C0C0"
 			tabBar-skin:Paint-border="0"/>
 	</TabStack>
