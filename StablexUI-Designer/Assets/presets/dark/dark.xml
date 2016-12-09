@@ -31,7 +31,8 @@
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-corners="[5]"/>
 	</Button>
 	<Checkbox>
 		<Default
@@ -92,7 +93,7 @@
 			w="200"
 			h="20"
 			skin:Paint-color="0x272727"
-			skin:Paint-border="1"
+			skin:Paint-border="2"
 			skin:Paint-borderColor="0x3079EC"
 			skin:Paint-corners="[10]"
 			bar-skin:Gradient-corners="[10]"
@@ -150,12 +151,16 @@
 			h="20"
 			skin:Paint-corners="[10]"
 			skin:Paint-color="0x272727"
-			skin:Paint-border="1"
+			skin:Paint-border="2"
 			skin:Paint-borderColor="0x3079EC"
 			slider-w="50"
 			slider-heightPt="100"
 			slider-skin:Gradient-corners="[10]"
-			slider-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
+			slider-skin:Gradient-colors="[0x486A61, 0x218E71]"
+			labelOn-format-size="12"
+			labelOn-format-color="0x0AD49E"
+			labelOff-format-size="12"
+			labelOff-format-color="0x0AD49E"/>
 	</Switch>
 	<TabPage>
 		<Default

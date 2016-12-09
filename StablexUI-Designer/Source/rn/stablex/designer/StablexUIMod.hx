@@ -1,8 +1,13 @@
 package rn.stablex.designer;
 
 import hscript.Interp;
-import ru.stablex.ui.RTXml;
-import ru.stablex.ui.UIBuilder;
+
+import ru.stablex.ui.*;
+import ru.stablex.ui.events.*;
+import ru.stablex.ui.layouts.*;
+import ru.stablex.ui.misc.*;
+import ru.stablex.ui.skins.*;
+import ru.stablex.ui.transitions.*;
 import ru.stablex.ui.widgets.*;
 
 using Lambda;
@@ -31,8 +36,8 @@ class StablexUIMod {
 	public static function resolveClass (className:String) : Class<Dynamic> {
 		var resCls:Class<Dynamic> = null;
 		
-		for (p in ["", "ru.stablex.", "ru.stablex.events.", "ru.stablex.layouts.", "ru.stablex.misc.", "ru.stablex.ui.skins.", "ru.stablex.transitions.", "ru.stablex.ui.widgets."])
-			if ((resCls =  Type.resolveClass(p + className)) != null)
+		for (p in ["", "ru.stablex.", "ru.stablex.ui.events.", "ru.stablex.ui.layouts.", "ru.stablex.ui.misc.", "ru.stablex.ui.skins.", "ru.stablex.ui.transitions.", "ru.stablex.ui.widgets."])
+			if ((resCls = Type.resolveClass(p + className)) != null)
 				break;
 		
 		return resCls;
