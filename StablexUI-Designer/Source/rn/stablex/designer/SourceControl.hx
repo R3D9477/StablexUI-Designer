@@ -85,6 +85,8 @@ class SourceControl {
 			System.guiSettings.guiInstancePath :
 			FileSystem.fullPath(Path.join(["instances", System.guiSettings.guiInstanceTemplate]));
 		
+		var pack:String = Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".");
+		
 		var instLines:Array<String> = File.getContent(instPath)
 			.split("\n")
 				.filter(function (hxLine:String) : Bool
@@ -98,7 +100,8 @@ class SourceControl {
 				.map (function (hxLine:String) : String
 					return hxLine
 						.replace("%InstanceName%", instanceName)
-						.replace("%InstancePackage%", Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join("."))
+						.replace("%InstancePackage%", pack)
+						.replace("%InstancePackageDot%", pack > "" ? '$pack.' : "")
 				)
 				.map (function (hxLine:String) : String {
 					if (hxLine.indexOf("// create source of GuiElements class") >= 0)
