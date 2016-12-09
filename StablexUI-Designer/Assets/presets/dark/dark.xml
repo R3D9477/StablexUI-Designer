@@ -171,7 +171,10 @@
 			title-format-size="12"
 			title-format-color="0x0AD49E"
 			title-states-up-ico="null"
-			title-states-down-ico="null"/>
+			title-states-down-ico="null"
+			title-highlightFormat-color="0xEDD400"
+			title-highlightFormat-bold="true"
+			title-highlightOnSelect="true"/>
 	</TabPage>
 	<TabStack>
 		<Default
