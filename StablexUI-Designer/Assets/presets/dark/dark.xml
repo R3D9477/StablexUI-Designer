@@ -51,7 +51,8 @@
 			paddingBottom="2"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x04D9EB"/>
+			skin:Paint-borderColor="0x04D9EB"
+			skin:Paint-corners="[10]"/>
 	</Clock>
 	<Floating>
 		<Default
