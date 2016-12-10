@@ -7,7 +7,7 @@
 			heightPt="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</GuiElements>
 	<Bmp>
 		<Default
@@ -15,7 +15,7 @@
 			h="50"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</Bmp>
 	<Box>
 		<Default
@@ -23,7 +23,7 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</Box>
 	<Button>
 		<Default
@@ -31,7 +31,7 @@
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			skin:Paint-corners="[5]"/>
 	</Button>
 	<Checkbox>
@@ -47,7 +47,7 @@
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</Clock>
 	<Floating>
 		<Default
@@ -55,7 +55,7 @@
 			heightPt="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</Floating>
 	<HBox>
 		<Default
@@ -63,7 +63,7 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</HBox>
 	<InputText>
 		<Default
@@ -73,7 +73,7 @@
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</InputText>
 	<Options>
 		<Default
@@ -83,7 +83,7 @@
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			box-skin:Paint-alpha="0.9"
 			list-skin:Paint-color="0x272727"
 			list-skin:Paint-alpha="1"/>
@@ -94,7 +94,7 @@
 			h="20"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="2"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			skin:Paint-corners="[10]"
 			bar-skin:Gradient-corners="[10]"
 			bar-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
@@ -112,16 +112,16 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			vBar-visible="true"
 			vBar-skin:Paint-color="0xFFFFFF"
 			vBar-skin:Paint-border="1"
-			vBar-skin:Paint-borderColor="0x3079EC"
+			vBar-skin:Paint-borderColor="0x04D9EB"
 			vBar-slider-skin:Paint-color="0xAAAAAA"
 			hBar-visible="true"
 			hBar-skin:Paint-color="0xFFFFFF"
 			hBar-skin:Paint-border="1"
-			hBar-skin:Paint-borderColor="0x3079EC"
+			hBar-skin:Paint-borderColor="0x04D9EB"
 			hBar-slider-skin:Paint-color="0xAAAAAA"/>
 	</Scroll>
 	<Slider>
@@ -131,7 +131,7 @@
 			skin:Paint-corners="[10]"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			slider-w="50"
 			slider-heightPt="100"
 			slider-skin:Gradient-corners="[10]"
@@ -152,7 +152,7 @@
 			skin:Paint-corners="[10]"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="2"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			slider-w="50"
 			slider-heightPt="100"
 			slider-skin:Gradient-corners="[10]"
@@ -182,7 +182,7 @@
 			autoSize="true"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"
+			skin:Paint-borderColor="0x04D9EB"
 			tabBar-paddingBottom="5"
 			tabBar-skin:Paint-color="0x272727"
 			tabBar-skin:Paint-border="0"/>
@@ -208,7 +208,7 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</VBox>
 	<ViewStack>
 		<Default
@@ -216,7 +216,7 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</ViewStack>
 	<Widget>
 		<Default
@@ -224,6 +224,6 @@
 			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x3079EC"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</Widget>
 </Defaults>
