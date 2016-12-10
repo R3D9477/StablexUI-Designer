@@ -44,6 +44,10 @@
 		<Default
 			format-size="12"
 			format-color="0x000000"
+			paddingLeft="5"
+			paddingRight="5"
+			paddingTop="2"
+			paddingBottom="2"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
@@ -92,9 +96,11 @@
 			w="200"
 			h="20"
 			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="2"
+			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			skin:Paint-corners="[10]"
+			bar-skin:Gradient-border="1"
+			bar-skin:Gradient-borderColor="0x000000"
 			bar-skin:Gradient-corners="[10]"
 			bar-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
 	</Progress>
@@ -113,28 +119,36 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			vBar-visible="true"
-			vBar-skin:Paint-color="0xFFFFFF"
-			vBar-skin:Paint-border="1"
-			vBar-skin:Paint-borderColor="0x000000"
-			vBar-slider-skin:Paint-color="0xAAAAAA"
+			vBar-w="15"
+			vBar-skin:Paint-color="0xC0C0C0"
+			vBar-slider-widthPt="100"
+			vBar-slider-skin:Paint-color="0x909090"
+			vBar-slider-skin:Paint-border="1"
+			vBar-slider-skin:Paint-borderColor="0x000000"
+			vBar-slider-skin:Paint-corners="[10]"
 			hBar-visible="true"
-			hBar-skin:Paint-color="0xFFFFFF"
-			hBar-skin:Paint-border="1"
-			hBar-skin:Paint-borderColor="0x000000"
-			hBar-slider-skin:Paint-color="0xAAAAAA"/>
+			hBar-h="15"
+			hBar-skin:Paint-color="0xC0C0C0"
+			hBar-slider-heightPt="100"
+			hBar-slider-skin:Paint-color="0x909090"
+			hBar-slider-skin:Paint-border="1"
+			hBar-slider-skin:Paint-borderColor="0x000000"
+			hBar-slider-skin:Paint-corners="[10]"/>
 	</Scroll>
 	<Slider>
 		<Default
 			w="100"
-			h="20"
-			skin:Paint-corners="[10]"
+			h="15"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
-			slider-w="50"
+			skin:Paint-corners="[10]"
+			slider-widthPt="50"
 			slider-heightPt="100"
-			slider-skin:Gradient-corners="[10]"
-			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			slider-skin:Paint-color="0x909090"
+			slider-skin:Paint-border="1"
+			slider-skin:Paint-borderColor="0x000000"
+			slider-skin:Paint-corners="[10]"/>
 	</Slider>
 	<StateButton>
 		<Default
@@ -154,6 +168,8 @@
 			skin:Paint-borderColor="0x000000"
 			slider-w="50"
 			slider-heightPt="100"
+			slider-skin:Gradient-border="1"
+			slider-skin:Gradient-borderColor="0x000000"
 			slider-skin:Gradient-corners="[10]"
 			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"
 			labelOn-format-size="12"
