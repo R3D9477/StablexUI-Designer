@@ -33,6 +33,10 @@ Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_u
 	* allow to run saved xml file in external editor "on the fly"
 	* allow to force reload xml from saved file
 
+###Available targets:<br/>
+[neko](http://haxe.org/doc/start/neko)
+[cpp](http://haxe.org/doc/start/cpp)
+
 ###Requirements:<br/>
 * [haxe](https://haxe.org) 3.2.1 or later
 * [hxcpp](https://github.com/HaxeFoundation/hxcpp)
