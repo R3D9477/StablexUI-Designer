@@ -18,7 +18,6 @@
 	<haxelib name="haxe-crypto"/>
 	<haxelib name="hscript"/>
 	
-	<assets rename="font" include="*.ttf" path="Assets/font"/>
 	<assets rename="graphics" path="Assets/graphics"/>
 	
 	<assets rename="presets" path="Assets/presets"/>
