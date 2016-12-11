@@ -338,8 +338,7 @@ class System {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
 			},
 			function (dWgt:Dynamic) {
-				if (System.wgtUiXmlMap.exists(dWgt))
-					StablexUIMod.setRtDefaults(dWgt);
+				StablexUIMod.setRtDefaults(dWgt);
 			}
 		);
 	}
@@ -651,7 +650,9 @@ class System {
 					propInfo.value = propInfo.value.replace(",", "."); // workaround: error with ',' when trying to parse Float
 				
 				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Sys.getCwd()}"').replace("%CWD", '"${Sys.getCwd()}"');
-			
+				
+				interp.variables.set("__ui__this", obj);
+				
 				for (cls in RTXml.imports.keys())
 					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
 				

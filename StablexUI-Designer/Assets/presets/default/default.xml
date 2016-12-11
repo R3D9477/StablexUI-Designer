@@ -19,8 +19,6 @@
 	</Bmp>
 	<Box>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
@@ -80,16 +78,19 @@
 	</InputText>
 	<Options>
 		<Default
-			w="150"
+			w="100"
 			h="20"
+			alignList="true"
 			format-size="12"
 			format-color="0x000000"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			box-skin:Paint-alpha="0.9"
-			list-skin:Paint-color="0xC0C0C0"
-			list-skin:Paint-alpha="1"/>
+			list-w="$this.box.w"
+			list-h="$this.box.h"
+			list-skin="null"
+			optionDefaults="'Option'"/>
 	</Options>
 	<Progress>
 		<Default
@@ -181,8 +182,6 @@
 		<Default
 			widthPt="100"
 			heightPt="100"
-			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="0"
 			title-format-size="12"
 			title-format-color="0x000000"
 			title-states-up-ico="null"
@@ -199,8 +198,7 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			tabBar-paddingBottom="5"
-			tabBar-skin:Paint-color="0xC0C0C0"
-			tabBar-skin:Paint-border="0"/>
+			tabBar-skin="null"/>
 	</TabStack>
 	<Text>
 		<Default
@@ -214,6 +212,9 @@
 		<Default
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
+		<Option
+			format-size="12"
+			format-color="0x0AD49E"/>
 	</Toggle>
 	<VBox>
 		<Default

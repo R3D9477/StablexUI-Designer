@@ -44,23 +44,27 @@ class StablexUIMod {
 	}
 	
 	public static function setRtDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
-		var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/Default');
-		
-		if (defsXml != null) {
-			var wgtXml:Xml = System.wgtUiXmlMap.get(dWgt);
+		for (defName in cast(dWgt, Widget).defaults.split(",")) {
+			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/$defName');
 			
-			if (wgtXml != null) {
+			if (defsXml != null) {
+				var wgtXml:Xml = System.wgtUiXmlMap.get(dWgt);
+				
 				System.setGuiObjProperties(
 					dWgt,
 					defsXml.attributes()
 						.array()
 						.filter(function (attr:String) : Bool {
-							if (attr == "w" || attr.indexOf("width") > -1)
-								return !(wgtXml.exists("w") || wgtXml.exists("width") || wgtXml.exists("widthPt"));
-							else if (attr == "h" || attr.indexOf("height") > -1)
-								return !(wgtXml.exists("h") || wgtXml.exists("height") || wgtXml.exists("heightPt"));
+							if (wgtXml != null) {
+								if (attr == "w" || attr.indexOf("width") > -1)
+									return !(wgtXml.exists("w") || wgtXml.exists("width") || wgtXml.exists("widthPt"));
+								else if (attr == "h" || attr.indexOf("height") > -1)
+									return !(wgtXml.exists("h") || wgtXml.exists("height") || wgtXml.exists("heightPt"));
+								
+								return !wgtXml.exists(attr);
+							}
 							
-							return !wgtXml.exists(attr);
+							return true;
 						})
 						.map(function (attr:String) : Dynamic return { name: attr, value: defsXml.get(attr) })
 				);
