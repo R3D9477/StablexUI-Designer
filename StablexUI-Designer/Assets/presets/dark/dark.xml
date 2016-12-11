@@ -11,8 +11,6 @@
 	</GuiElements>
 	<Bmp>
 		<Default
-			w="50"
-			h="50"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
@@ -62,16 +60,12 @@
 	</Floating>
 	<HBox>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
 	</HBox>
 	<InputText>
 		<Default
-			w="100"
-			h="20"
 			format-size="12"
 			format-color="0x0AD49E"
 			skin:Paint-color="0x272727"
@@ -80,8 +74,6 @@
 	</InputText>
 	<Options>
 		<Default
-			w="100"
-			h="20"
 			alignList="true"
 			format-size="12"
 			format-color="0x0AD49E"
@@ -96,8 +88,6 @@
 	</Options>
 	<Progress>
 		<Default
-			w="200"
-			h="20"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
@@ -116,8 +106,6 @@
 	</Radio>
 	<Scroll>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
@@ -140,8 +128,6 @@
 	</Scroll>
 	<Slider>
 		<Default
-			w="100"
-			h="15"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
@@ -163,8 +149,6 @@
 	</StateButton>
 	<Switch>
 		<Default
-			w="100"
-			h="20"
 			skin:Paint-corners="[10]"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
@@ -222,24 +206,18 @@
 	</Toggle>
 	<VBox>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
 	</VBox>
 	<ViewStack>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
 	</ViewStack>
 	<Widget>
 		<Default
-			w="100"
-			h="100"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
