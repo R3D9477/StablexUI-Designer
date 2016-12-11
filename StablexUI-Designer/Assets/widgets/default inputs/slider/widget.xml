@@ -2,6 +2,8 @@
 <Slider
 	left="0"
 	top="0"
+	w="100"
+	h="15"
 	min="-100"
 	max="100"
 	value="0"

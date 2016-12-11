@@ -2,5 +2,7 @@
 <Progress
 	left="0"
 	top="0"
+	w="200"
+	h="20"
 	max="100"
 	value="65"/>

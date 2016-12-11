@@ -2,6 +2,8 @@
 <ViewStack
 	left="0"
 	top="0"
+	w="100"
+	h="100"
 	wrap="true"
 	overflow="false"
 	trans:Fade-duration="1"/>

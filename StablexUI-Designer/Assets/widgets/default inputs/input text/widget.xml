@@ -2,4 +2,6 @@
 <InputText
 	left="0"
 	top="0"
+	w="100"
+	h="20"
 	label-selectable="true"/>

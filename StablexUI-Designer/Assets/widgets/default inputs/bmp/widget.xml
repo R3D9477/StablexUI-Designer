@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bmp
 	left="0"
-	top="0"/>
+	top="0"
+	w="50"
+	h="50"/>
