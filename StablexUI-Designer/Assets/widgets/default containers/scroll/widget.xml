@@ -8,5 +8,6 @@
 		left="0"
 		top="0"
 		w="150"
-		h="150"/>
+		h="150"
+		defaults="'ScrollWidget'"/>
 </Scroll>
