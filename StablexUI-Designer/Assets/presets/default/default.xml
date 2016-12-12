@@ -101,22 +101,23 @@
 	<Scroll>
 		<Default
 			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"
+			skin:Paint-border="0"
 			vBar-visible="true"
 			vBar-w="10"
 			vBar-skin:Paint-border="0"
+			vBar-skin:Paint-corners="null"
 			vBar-slider-widthPt="100"
 			vBar-slider-skin:Paint-color="0x909090"
 			vBar-slider-skin:Paint-border="0"
-			vBar-slider-skin:Paint-corners="[0]"
+			vBar-slider-skin:Paint-corners="null"
 			hBar-visible="true"
 			hBar-h="10"
 			hBar-skin:Paint-border="0"
+			hBar-skin:Paint-corners="null"
 			hBar-slider-heightPt="100"
 			hBar-slider-skin:Paint-color="0x909090"
 			hBar-slider-skin:Paint-border="0"
-			hBar-slider-skin:Paint-corners="[0]"/>
+			hBar-slider-skin:Paint-corners="null"/>
 	</Scroll>
 	<Slider>
 		<Default
@@ -205,5 +206,7 @@
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
+		<ScrollWidget
+			skin:Paint-color="0xFFFFFF"/>
 	</Widget>
 </Defaults>
