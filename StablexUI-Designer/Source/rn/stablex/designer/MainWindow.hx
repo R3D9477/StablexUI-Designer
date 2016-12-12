@@ -627,7 +627,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function editPropValueSaveClick (e:MouseEvent) : Void {
-		if (System.selPropName > "" && System.selWgt != null && MainWindowInstance.editPropValue.text > "") {
+		if (System.selWgt != null && System.selPropName > "" && MainWindowInstance.editPropValue.text > "") {
 			System.setWgtProperty(System.selWgt, System.selPropName, MainWindowInstance.editPropValue.text);
 			MainWindowInstance.wgtEditPropWnd.hide();
 		}
@@ -639,7 +639,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wgtEditPropWnd.hide();
 		MainWindowInstance.wgtPropWnd.hide();
 		
-		if (System.selWgt != null && MainWindowInstance.editPropValue.text > "") {
+		if (System.selWgt != null && System.selWgtProp != null && MainWindowInstance.editPropValue.text > "") {
 			System.setWgtProperty(System.selWgt, System.selPropName, System.getGuiObjDefaultPropValue(System.selWgt, System.selPropName));
 			System.selWgtProps.remove(System.selPropName);
 			System.wgtUiXmlMap.get(System.selWgt).remove(System.selPropName);

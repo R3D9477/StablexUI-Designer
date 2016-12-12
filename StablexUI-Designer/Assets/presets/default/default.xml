@@ -104,21 +104,17 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			vBar-visible="true"
-			vBar-w="15"
-			vBar-skin:Paint-color="0xC0C0C0"
+			vBar-w="10"
+			vBar-skin:Paint-border="0"
 			vBar-slider-widthPt="100"
 			vBar-slider-skin:Paint-color="0x909090"
-			vBar-slider-skin:Paint-border="1"
-			vBar-slider-skin:Paint-borderColor="0x000000"
-			vBar-slider-skin:Paint-corners="[10]"
+			vBar-slider-skin:Paint-border="0"
 			hBar-visible="true"
-			hBar-h="15"
-			hBar-skin:Paint-color="0xC0C0C0"
+			hBar-h="10"
+			hBar-skin:Paint-border="0"
 			hBar-slider-heightPt="100"
 			hBar-slider-skin:Paint-color="0x909090"
-			hBar-slider-skin:Paint-border="1"
-			hBar-slider-skin:Paint-borderColor="0x000000"
-			hBar-slider-skin:Paint-corners="[10]"/>
+			hBar-slider-skin:Paint-border="0"/>
 	</Scroll>
 	<Slider>
 		<Default
@@ -126,11 +122,8 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			skin:Paint-corners="[10]"
-			slider-widthPt="50"
-			slider-heightPt="100"
 			slider-skin:Paint-color="0x909090"
 			slider-skin:Paint-border="1"
-			slider-skin:Paint-borderColor="0x000000"
 			slider-skin:Paint-corners="[10]"/>
 	</Slider>
 	<StateButton>

@@ -108,21 +108,17 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
 			vBar-visible="true"
-			vBar-w="15"
-			vBar-skin:Paint-color="0x272727"
+			vBar-w="10"
+			vBar-skin:Paint-border="0"
 			vBar-slider-widthPt="100"
 			vBar-slider-skin:Paint-color="0x008491"
-			vBar-slider-skin:Paint-border="1"
-			vBar-slider-skin:Paint-borderColor="0x04D9EB"
-			vBar-slider-skin:Paint-corners="[10]"
+			vBar-slider-skin:Paint-border="0"
 			hBar-visible="true"
-			hBar-h="15"
-			hBar-skin:Paint-color="0x272727"
+			hBar-h="10"
+			hBar-skin:Paint-border="0"
 			hBar-slider-heightPt="100"
 			hBar-slider-skin:Paint-color="0x008491"
-			hBar-slider-skin:Paint-border="1"
-			hBar-slider-skin:Paint-borderColor="0x04D9EB"
-			hBar-slider-skin:Paint-corners="[10]"/>
+			hBar-slider-skin:Paint-border="0"/>
 	</Scroll>
 	<Slider>
 		<Default
@@ -130,8 +126,6 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
 			skin:Paint-corners="[10]"
-			slider-widthPt="50"
-			slider-heightPt="100"
 			slider-skin:Paint-color="0x008491"
 			slider-skin:Paint-border="1"
 			slider-skin:Paint-borderColor="0x04D9EB"

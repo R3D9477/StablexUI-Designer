@@ -204,17 +204,19 @@ class System {
 						}
 					#end
 				}
+				
+				if (!Std.is(e.currentTarget, Box)) {
+					System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
+					System.setWgtProperty(selWgt, "left", Std.string(Std.int(e.localX)));
+					
+					cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+					cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+				}
+				
+				targetWgt.refresh();
 			}
 		
 		MainWindowInstance.wlSelectBtn.selected = true;
-		
-		if (selWgt != null) {
-			System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
-			System.setWgtProperty(selWgt, "left", Std.string(Std.int(e.localX)));
-			
-			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
-			cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
-		}
 		
 		e.stopPropagation();
 	}
@@ -338,6 +340,9 @@ class System {
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
+			},
+			function (dWgt:Dynamic) {
+				StablexUIMod.applyDefaults(dWgt);
 			}
 		);
 	}
