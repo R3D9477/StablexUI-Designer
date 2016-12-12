@@ -109,12 +109,14 @@
 			vBar-slider-widthPt="100"
 			vBar-slider-skin:Paint-color="0x909090"
 			vBar-slider-skin:Paint-border="0"
+			vBar-slider-skin:Paint-corners="[0]"
 			hBar-visible="true"
 			hBar-h="10"
 			hBar-skin:Paint-border="0"
 			hBar-slider-heightPt="100"
 			hBar-slider-skin:Paint-color="0x909090"
-			hBar-slider-skin:Paint-border="0"/>
+			hBar-slider-skin:Paint-border="0"
+			hBar-slider-skin:Paint-corners="[0]"/>
 	</Scroll>
 	<Slider>
 		<Default
