@@ -7,4 +7,6 @@
 	min="-100"
 	max="100"
 	value="0"
-	vertical="false"/>
+	vertical="false"
+	slider-w="50"
+	slider-heightPt="100"/>
