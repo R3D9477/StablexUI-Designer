@@ -192,7 +192,7 @@ class System {
 				targetXml.addChild(selXml);
 				
 				System.wgtUiXmlMap.set(selWgt, selXml);
-				System.setWgtEventHandlers(selWgt);
+				System.setupEachWidget(selWgt);
 				
 				if (System.selWgtData.bin != null) {
 					#if neko
@@ -304,9 +304,11 @@ class System {
 			onAfter(dWgt);
 	}
 	
-	public static function setWgtEventHandlers (rWgt:Dynamic) : Void {
+	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
+				StablexUIMod.applyDefaults(dWgt);
+				
 				var wgt:Widget = cast(dWgt, Widget);
 				
 				wgt.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) MainWindowInstance.mainWnd.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN)));
@@ -336,9 +338,6 @@ class System {
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
-			},
-			function (dWgt:Dynamic) {
-				StablexUIMod.setRtDefaults(dWgt);
 			}
 		);
 	}
@@ -414,7 +413,7 @@ class System {
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
 			
 			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
-			System.setWgtEventHandlers(System.guiElementsWgt);
+			System.setupEachWidget(System.guiElementsWgt);
 			System.selectWgtFromList(0); // select first widget from list
 			
 			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");

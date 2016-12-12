@@ -168,11 +168,10 @@
 			heightPt="100"
 			title-format-size="12"
 			title-format-color="0x000000"
-			title-states-up-ico="null"
-			title-states-down-ico="null"
+			title-highlightOnSelect="true"
 			title-highlightFormat-color="0xFF0000"
-			title-highlightFormat-bold="true"
-			title-highlightOnSelect="true"/>
+			title-states-up-ico-skin="null"
+			title-states-down-ico-skin="null"/>
 	</TabPage>
 	<TabStack>
 		<Default
@@ -180,9 +179,7 @@
 			autoSize="true"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"
-			tabBar-paddingBottom="5"
-			tabBar-skin="null"/>
+			skin:Paint-borderColor="0x000000"/>
 	</TabStack>
 	<Text>
 		<Default

@@ -83,6 +83,8 @@
 			box-skin:Paint-alpha="0.9"
 			list-w="$this.box.w"
 			list-h="$this.box.h"
+			list-top="$this.top + $this.h"
+			list-left="$this.left"
 			list-skin="null"
 			optionDefaults="'Option'"/>
 	</Options>
@@ -92,10 +94,10 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
 			skin:Paint-corners="[10]"
+			bar-skin:Gradient-colors="[0x486A61, 0x218E71]"
 			bar-skin:Gradient-border="1"
 			bar-skin:Gradient-borderColor="0x04D9EB"
-			bar-skin:Gradient-corners="[10]"
-			bar-skin:Gradient-colors="[0x486A61, 0x218E71]"/>
+			bar-skin:Gradient-corners="[10]"/>
 	</Progress>
 	<Radio>
 		<Default
@@ -182,9 +184,7 @@
 			autoSize="true"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x04D9EB"
-			tabBar-paddingBottom="5"
-			tabBar-skin="null"/>
+			skin:Paint-borderColor="0x04D9EB"/>
 	</TabStack>
 	<Text>
 		<Default

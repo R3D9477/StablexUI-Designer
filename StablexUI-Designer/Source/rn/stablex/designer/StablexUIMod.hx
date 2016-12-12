@@ -17,22 +17,6 @@ using rn.typext.ext.IterExtender;
 class StablexUIMod {
 	public static var rtDefaults:Xml;
 	
-	public static function setRtxmlMod () : Void { // workaround to ignore elements with unregistered class
-		var origProcessXml:Xml->Interp->RTXml = Reflect.field(RTXml, "processXml");
-		
-		Reflect.setField(RTXml, "processXml", function (node:Xml, interp:Interp = null) : RTXml {
-			try {
-				return origProcessXml(node, interp);
-			}
-			catch (ex:Dynamic) {
-				var cache:RTXml = new RTXml(interp);
-				cache.cls = RTXml.getImportedClass("Widget");
-				
-				return cache;
-			}
-		});
-	}
-	
 	public static function resolveClass (className:String) : Class<Dynamic> {
 		var resCls:Class<Dynamic> = null;
 		
@@ -43,7 +27,7 @@ class StablexUIMod {
 		return resCls;
 	}
 	
-	public static function setRtDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
+	public static function applyDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
 		for (defName in cast(dWgt, Widget).defaults.split(",")) {
 			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/$defName');
 			
@@ -69,11 +53,37 @@ class StablexUIMod {
 						.map(function (attr:String) : Dynamic return { name: attr, value: defsXml.get(attr) })
 				);
 				
-				cast(dWgt, Widget).refresh();
-				
-				if (Std.is(dWgt, StateButton))
+				if (Std.is(dWgt, Options)) {
+					Reflect.callMethod(dWgt, Reflect.field(dWgt, "_buildList"), []);
+					Reflect.setField(dWgt, "rebuildList", false);
+					
+					System.iterateWidgets(cast(dWgt, Options).box, function (w:Dynamic) if (Std.is(w, Toggle)) StablexUIMod.applyDefaults(w));
+				}
+				else if (Std.is(dWgt, StateButton))
 					cast(dWgt, StateButton).updateState();
+				else if (Std.is(dWgt, TabStack))
+					System.iterateWidgets(dWgt, function (w:Dynamic) if (!Std.is(w, TabStack)) StablexUIMod.applyDefaults(w));
+				else if (Std.is(dWgt, Progress))
+					cast(dWgt, Progress).value = cast(dWgt, Progress).value;
+				
+				cast(dWgt, Widget).refresh();
 			}
 		}
+	}
+	
+	public static function setRtxmlMod () : Void { // workaround to ignore elements with unregistered class
+		var origProcessXml:Xml->Interp->RTXml = Reflect.field(RTXml, "processXml");
+		
+		Reflect.setField(RTXml, "processXml", function (node:Xml, interp:Interp = null) : RTXml {
+			try {
+				return origProcessXml(node, interp);
+			}
+			catch (ex:Dynamic) {
+				var cache:RTXml = new RTXml(interp);
+				cache.cls = RTXml.getImportedClass("Widget");
+				
+				return cache;
+			}
+		});
 	}
 }
