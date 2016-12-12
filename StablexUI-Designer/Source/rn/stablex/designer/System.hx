@@ -553,7 +553,8 @@ class System {
 				if (System.selWgtProps.exists(property))
 					cast(cast(System.selWgtProps.get(property), HBox).getChild("propValue"), Text).text = Std.string(wgtXml.get(property));
 			
-			cast(dWgt, Widget).refresh();
+			if (property != "left" && property != "top")
+				StablexUIMod.applyDefaults(dWgt);
 		}
 	}
 	
@@ -598,8 +599,10 @@ class System {
 		if (objCls != null) {
 			var defOwner:GuiObjPropOwnerInfo = System.getPropertyOwner(Type.createInstance(objCls, []), propName);
 			
-			if (defOwner.propOwner != null)
-				return System.getGuiObjProperty(defOwner.propOwner, defOwner.propName);
+			if (defOwner.propOwner != null) {
+				var prop:Dynamic = System.getGuiObjProperty(defOwner.propOwner, defOwner.propName);
+				return Std.is(prop, String) ? "'" + prop + "'" : prop;
+			}
 		}
 		
 		return null;

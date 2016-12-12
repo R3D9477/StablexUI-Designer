@@ -28,7 +28,12 @@ class StablexUIMod {
 	}
 	
 	public static function applyDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
-		for (defName in cast(dWgt, Widget).defaults.split(",")) {
+		var wgt:Widget = cast(dWgt, Widget);
+		
+		if (!(wgt.defaults > ""))
+			wgt.defaults = "Default";
+		
+		for (defName in wgt.defaults.split(",")) {
 			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/$defName');
 			
 			if (defsXml != null) {
@@ -66,7 +71,7 @@ class StablexUIMod {
 				else if (Std.is(dWgt, Progress))
 					cast(dWgt, Progress).value = cast(dWgt, Progress).value;
 				
-				cast(dWgt, Widget).refresh();
+				wgt.refresh();
 			}
 		}
 	}
