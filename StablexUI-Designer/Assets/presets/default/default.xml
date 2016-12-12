@@ -5,9 +5,7 @@
 		<Default
 			widthPt="100"
 			heightPt="100"
-			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"/>
+			skin:Paint-color="0xC0C0C0"/>
 	</GuiElements>
 	<Bmp>
 		<Default
@@ -52,9 +50,7 @@
 		<Default
 			widthPt="100"
 			heightPt="100"
-			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"/>
+			skin:Paint-color="0xC0C0C0"/>
 	</Floating>
 	<HBox>
 		<Default

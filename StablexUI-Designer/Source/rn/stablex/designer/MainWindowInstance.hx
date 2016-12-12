@@ -63,7 +63,7 @@ class MainWindowInstance {
 	public static var wlDeleteBtn:Radio;
 	public static var wgtsLst:HBox;
 	
-	public static var wgtMainWndContainer:VBox;
+	public static var wgtMainWndContainer:Box;
 	
 	public static var guiWgtsList:Options;
 	
@@ -140,7 +140,7 @@ class MainWindowInstance {
 		MainWindowInstance.wlDeleteBtn = cast(MainWindowInstance.mainWnd.getChild("wlDeleteBtn"), Radio);
 		MainWindowInstance.wgtsLst = cast(MainWindowInstance.mainWnd.getChild("wgtsLst"), HBox);
 		
-		MainWindowInstance.wgtMainWndContainer = cast(MainWindowInstance.mainWnd.getChild("wgtMainWndContainer"), VBox);
+		MainWindowInstance.wgtMainWndContainer = cast(MainWindowInstance.mainWnd.getChild("wgtMainWndContainer"), Box);
 		
 		MainWindowInstance.guiWgtsList = cast(MainWindowInstance.mainWnd.getChild("guiWgtsList"), Options);
 		

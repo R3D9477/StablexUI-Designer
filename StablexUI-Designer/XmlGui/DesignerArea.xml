@@ -9,13 +9,16 @@
 	vBar-skin:Paint-color="0x777777"
 	vBar-visible="true"
 	hBar-visible="true">
-	<VBox
+	<Box
 		name="'wgtMainWndContainer'"
 		align="'top,left'"
 		layout:Row-rows="[-1]"
-		layout:Row-paddingLeft="10"
-		layout:Row-paddingTop="10"
-		layout:Row-paddingRight="20"
-		layout:Row-paddingBottom="20">
-	</VBox>
+		layout:Row-paddingLeft="15"
+		layout:Row-paddingTop="15"
+		layout:Row-paddingRight="15"
+		layout:Row-paddingBottom="15"
+		skin:Paint-color="0xFFFFFF"
+		skin:Paint-border="1"
+		skin:Paint-borderColor="0x000000">
+	</Box>
 </Scroll>
