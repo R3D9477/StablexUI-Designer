@@ -21,6 +21,7 @@ import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.layouts.Row;
 import ru.stablex.ui.events.WidgetEvent;
 
+import systools.Dialogs;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
 
@@ -185,7 +186,19 @@ class System {
 				selWgt = RTXml.buildFn(selXml.toString())();
 				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
 				
-				var targetWgt:Widget = cast(e.currentTarget, Widget);
+				var dTargetWgt:Dynamic = e.currentTarget;
+				
+				if (Std.is(selWgt, TabPage)) {
+					while (!Std.is(dTargetWgt, TabStack) && !Std.is(dTargetWgt, GuiElements))
+						dTargetWgt = dTargetWgt.parent;
+					
+					if (!Std.is(dTargetWgt, TabStack)) {
+						Dialogs.message("neko-systools", "Parent TabStack was not found!", true);
+						return;
+					}
+				}
+				
+				var targetWgt:Widget = cast(dTargetWgt, Widget);
 				targetWgt.addChild(selWgt);
 				
 				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
@@ -205,7 +218,7 @@ class System {
 					#end
 				}
 				
-				if (!Std.is(e.currentTarget, Box)) {
+				if (!Std.is(e.currentTarget, Box) && !Std.is(e.currentTarget, TabStack)) {
 					System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
 					System.setWgtProperty(selWgt, "left", Std.string(Std.int(e.localX)));
 					
