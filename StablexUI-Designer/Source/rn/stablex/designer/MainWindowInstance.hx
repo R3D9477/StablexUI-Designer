@@ -92,6 +92,7 @@ class MainWindowInstance {
 	// gui initialization
 	
 	public static function setupInstance () : Void {
+		UIBuilder.regClass("Reflect");
 		UIBuilder.regClass("haxe.io.Path");
 		UIBuilder.regClass("openfl.display.BitmapData");
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
