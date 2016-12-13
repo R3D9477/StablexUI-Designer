@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TabStack
 	left="0"
-	top="0"
-	wrap="true">
+	top="0">
 	<TabPage
 		title-text="'Tab Page 1'"/>
 </TabStack>
