@@ -10,8 +10,8 @@
 			on-click="
 				var trans = new $Fade();
 				trans.duration = 0.25;
-				$this.parent.parent.trans = trans;
-				$this.parent.parent.show($this.parent.parent.getChildAt(1).name);"/>
+				cast($this.parent.parent, $ViewStack).trans = trans;
+				cast($this.parent.parent, $ViewStack).show(cast($this.parent.parent, $ViewStack).getChildAt(1).name);"/>
 	</VBox>
 	<VBox padding="5">
 		<Button
@@ -19,7 +19,7 @@
 			on-click="
 				var trans = new $Fade();
 				trans.duration = 0.25;
-				$this.parent.parent.trans = trans;
-				$this.parent.parent.show($this.parent.parent.getChildAt(0).name);"/>
+				cast($this.parent.parent, $ViewStack).trans = trans;
+				cast($this.parent.parent, $ViewStack).show(cast($this.parent.parent, $ViewStack).getChildAt(0).name);"/>
 	</VBox>
 </ViewStack>

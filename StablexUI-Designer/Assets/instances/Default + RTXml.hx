@@ -20,6 +20,7 @@ class %InstanceName% {
 	// fields of instances
 	
 	public static function load () {
+		ru.stablex.ui.UIBuilder.regClass("Reflect");
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
