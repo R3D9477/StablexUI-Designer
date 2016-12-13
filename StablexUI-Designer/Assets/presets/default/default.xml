@@ -197,7 +197,9 @@
 	</VBox>
 	<ViewStack>
 		<Default
-			skin:Paint-color="0xFFFFFF"/>
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
 	</ViewStack>
 	<Widget>
 		<Default
