@@ -4,12 +4,12 @@
 	widthPt="100"
 	heightPt="100"
 	title-text="'Project'"
-	title-padding="5"
-	title-highlightFormat-color="0xFF0000"
-	title-highlightFormat-bold="true"
+	title-format-size="12"
+	title-format-color="0x000000"
 	title-highlightOnSelect="true"
-	skin:Paint-color="0xC0C0C0">
+	title-highlightFormat-color="0xFF0000">
 	<Scroll
+		name="'projScroll'"
 		widthPt="100"
 		heightPt="100"
 		skin:Paint-color="0xC0C0C0"
@@ -22,16 +22,17 @@
 			align="'top,left'"
 			layout:Row-rows="[0, 0, 0, 0, 0, 0]"
 			layout:Row-paddingTop="10"
-			layout:Row-cellPadding="10"
+			layout:Row-paddingBottom="10"
 			layout:Row-paddingLeft="10"
 			layout:Row-paddingRight="20">
 			<VBox
-				h="30"
+				h="65"
 				align="'top,left'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
 				skin:Paint-borderColor="0xFFFFFF"
-				layout:Row-rows="[0]"
+				layout:Row-rows="[0, 0]"
+				layout:Row-cellPadding="10"
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
 				layout:Row-paddingTop="5">
@@ -45,19 +46,6 @@
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
 				</HBox>
-			</VBox>
-			<VBox
-				h="250"
-				align="'top,left'"
-				skin:Paint-color="0xC0C0C0"
-				skin:Paint-border="1"
-				skin:Paint-borderColor="0xFFFFFF"
-				layout:Row-rows="[0, 0, 0, 0, 0, 0, 0, 0]"
-				layout:Row-cellPadding="10"
-				layout:Row-paddingLeft="10"
-				layout:Row-paddingRight="10"
-				layout:Row-paddingTop="5">
-				<Text text="'Widget\'s sources action:'"/>
 				<HBox
 					layout:Column-cols="[0, -1, 0]"
 					layout:Column-cellPadding="10">
@@ -74,6 +62,19 @@
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
 				</HBox>
+			</VBox>
+			<VBox
+				h="220"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0, 0, 0, 0, 0, 0, 0]"
+				layout:Row-cellPadding="10"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<Text text="'Widget\'s sources action:'"/>
 				<Radio
 					name="'wgtSrcActNoth'"
 					text="'noting'"
@@ -169,30 +170,42 @@
 						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 			</VBox>
-			<HBox
-				layout:Column-cols="[0, -1]"
-				layout:Column-cellPadding="10">
-				<Text text="'Presets:'"/>
-				<Options
-					name="'presetsList'"
-					box-skin:Paint-alpha="0.9"
-					skin:Paint-color="0xC0C0C0"
-					skin:Paint-border="1"
-					skin:Paint-borderColor="0x909090"
-					list-skin:Paint-color="0x454545"
-					list-skin:Paint-alpha="1"/>
-			</HBox>
-			<Checkbox
-				name="'embedAssets'"
-				text="'Embed assets of presets, suits and skins'"
-				tabEnabled="true"
-				label-visible="true"
-				align="'middle,left'"
-				states-up-ico-src="'graphics/tools/check_up.png'"
-				states-down-ico-src="'graphics/tools/check_down.png'"
-				selected="true"/>
 			<VBox
-				h="90"
+				h="65"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0, 0]"
+				layout:Row-cellPadding="10"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<HBox
+					layout:Column-cols="[0, -1]"
+					layout:Column-cellPadding="10">
+					<Text text="'Presets:'"/>
+					<Options
+						name="'presetsList'"
+						box-skin:Paint-alpha="0.9"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x909090"
+						list-skin:Paint-color="0x454545"
+						list-skin:Paint-alpha="1"/>
+				</HBox>
+				<Checkbox
+					name="'embedAssets'"
+					text="'Embed assets of presets, suits and skins'"
+					tabEnabled="true"
+					label-visible="true"
+					align="'middle,left'"
+					states-up-ico-src="'graphics/tools/check_up.png'"
+					states-down-ico-src="'graphics/tools/check_down.png'"
+					selected="true"/>
+			</VBox>
+			<VBox
+				h="95"
 				align="'top,left'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
@@ -309,6 +322,7 @@
 						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 			</VBox>
+			<Widget h="20"/>
 		</VBox>
 	</Scroll>
 </TabPage>

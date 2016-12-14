@@ -11,9 +11,7 @@
 			name="'designerTabs'"
 			widthPt="100"
 			heightPt="100"
-			wrap="true"
-			tabBar-paddingLeft="5"
-			tabBar-childPadding="5">
+			tabBar-padding="5">
 			<MainWindowTabProject/>
 			<MainWindowTabDesigner/>
 			<MainWindowTabXml/>

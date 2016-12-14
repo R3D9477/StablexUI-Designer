@@ -4,13 +4,10 @@
 	widthPt="100"
 	heightPt="100"
 	title-text="'Designer'"
-	title-padding="5"
-	title-highlightFormat-color="0xFF0000"
-	title-highlightFormat-bold="true"
+	title-format-size="12"
+	title-format-color="0x000000"
 	title-highlightOnSelect="true"
-	skin:Paint-color="0xC0C0C0"
-	skin:Paint-border="1"
-	skin:Paint-borderColor="0x000000">
+	title-highlightFormat-color="0xFF0000">
 	<VBox
 		widthPt="100"
 		heightPt="100"

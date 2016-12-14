@@ -19,4 +19,10 @@ typedef GuiDataInfo = {
 	var guiWidth:Float;
 	var guiHeight:Float;
 	var fixedWindowSize:Bool;
+	
+	var useGrid:Bool;
+	var gridSize:Int;
+	var gridBorderSize:Int;
+	var drawGrid:Bool;
+	var gridColor:Int;
 }

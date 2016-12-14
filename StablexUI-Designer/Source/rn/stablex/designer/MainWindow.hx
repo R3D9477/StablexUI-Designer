@@ -292,6 +292,7 @@ class MainWindow extends Sprite {
 		// show designer's window
 		
 		MainWindowInstance.mainWnd.show();
+		MainWindowInstance.projScroll.refresh();
 	}
 	
 	//-----------------------------------------------------------------------------------------------
@@ -333,7 +334,12 @@ class MainWindow extends Sprite {
 			frameTemplate: "default",
 			guiWidth: 0,
 			guiHeight: 0,
-			fixedWindowSize: false
+			fixedWindowSize: false,
+			useGrid: false,
+			gridSize: 10,
+			gridBorderSize: 2,
+			drawGrid: false,
+			gridColor: 0xFFFFFF
 		}
 		
 		System.refreshGuiSettings();
@@ -362,8 +368,9 @@ class MainWindow extends Sprite {
 			var oldInstancePath:String = System.guiSettings.guiInstancePath;
 			
 			if (System.saveUiToFile(sFile)) {
-				if (!SourceControl.checkStablexUILib())
-					Dialogs.message("neko-systools", "StablexUI library was not defined in project!", true);
+				if (System.guiSettings.project > "")
+					if (!SourceControl.checkStablexUILib())
+						Dialogs.message("neko-systools", "StablexUI library was not defined in project!", true);
 				
 				if (System.guiSettings.makeInstance) {
 					SourceControl.clearWgtSources();
@@ -374,10 +381,9 @@ class MainWindow extends Sprite {
 						Dialogs.message("neko-systools", "Instance was not generated!", true);
 				}
 				
-				if (!SourceControl.embedAssets())
-					Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
-				
-				SourceControl.clearWgtSources();
+				if (System.guiSettings.project > "")
+					if (!SourceControl.embedAssets())
+						Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
 				
 				if (!MainWindowInstance.wgtSrcActNoth.selected)
 					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))

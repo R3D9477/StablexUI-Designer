@@ -38,6 +38,8 @@ class MainWindowInstance {
 	
 	public static var guiName:InputText;
 	
+	public static var projScroll:Scroll;
+	
 	public static var wgtSrcActNoth:Radio;
 	public static var wgtSrcActLink:Radio;
 	public static var projectPath:InputText;
@@ -98,7 +100,6 @@ class MainWindowInstance {
 	// gui initialization
 	
 	public static function setupInstance () : Void {
-		UIBuilder.regClass("Reflect");
 		UIBuilder.regClass("haxe.io.Path");
 		UIBuilder.regClass("openfl.display.BitmapData");
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
@@ -121,6 +122,8 @@ class MainWindowInstance {
 		MainWindowInstance.tabProject = cast(MainWindowInstance.mainWnd.getChild("tabProject"), TabPage);
 		MainWindowInstance.tabDesigner = cast(MainWindowInstance.mainWnd.getChild("tabDesigner"), TabPage);
 		MainWindowInstance.tabXml = cast(MainWindowInstance.mainWnd.getChild("tabXml"), TabPage);
+		
+		MainWindowInstance.projScroll = cast(MainWindowInstance.mainWnd.getChild("projScroll"), Scroll);
 		
 		MainWindowInstance.wgtSrcActNoth = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActNoth"), Radio);
 		MainWindowInstance.wgtSrcActLink = cast(MainWindowInstance.mainWnd.getChild("wgtSrcActLink"), Radio);

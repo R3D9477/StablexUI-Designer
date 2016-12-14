@@ -167,8 +167,7 @@
 	</TabPage>
 	<TabStack>
 		<Default
-			padding="5"
-			autoSize="true"
+			tabBar-padding="5"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>

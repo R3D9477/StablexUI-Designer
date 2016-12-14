@@ -105,6 +105,12 @@ class System {
 		System.guiSettings.fixedWindowSize = MainWindowInstance.fixedWindowSize.selected;
 		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		
+		System.guiSettings.useGrid = MainWindowInstance.useGrid.selected;
+		System.guiSettings.gridSize = Std.parseInt(MainWindowInstance.gridSize.text);
+		System.guiSettings.gridBorderSize = Std.parseInt(MainWindowInstance.gridBorderSize.text);
+		System.guiSettings.drawGrid = MainWindowInstance.drawGrid.selected;
+		System.guiSettings.gridColor = Std.parseInt(MainWindowInstance.gridColor.text);
+		
 		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
 	}
 	
@@ -155,12 +161,20 @@ class System {
 		
 		MainWindowInstance.fixedWindowSize.selected = System.guiSettings.fixedWindowSize;
 		
+		MainWindowInstance.useGrid.selected = System.guiSettings.useGrid;
+		MainWindowInstance.gridSize.text = Std.string(System.guiSettings.gridSize);
+		MainWindowInstance.gridBorderSize.text = Std.string(System.guiSettings.gridBorderSize);
+		MainWindowInstance.drawGrid.selected = System.guiSettings.drawGrid;
+		MainWindowInstance.gridColor.text = '0x${System.guiSettings.gridColor.hex()}';
+		
 		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
 		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
 	}
 	
 	//-----------------------------------------------------------------------------------------------
 	// tab Designer: widget's movement
+	
+	
 	
 	public static function onBoxClick (e:MouseEvent) : Void {
 		var selWgt:Dynamic = null;
@@ -250,18 +264,31 @@ class System {
 		e.stopPropagation();
 	}
 	
+	public static function mouseGridMove (currentPos:Float, newPos:Float) : Bool {
+		if (!MainWindowInstance.useGrid.selected)
+			return true;
+		
+		//...
+		//...
+		//...
+		
+		return false;
+	}
+	
 	public static function onMoveWgtMouseMove (e:MouseEvent) : Void {
 		if (System.moveWgt != null) {
-			var nTop:Float = cast(System.moveWgt, Widget).top + e.stageY - System.moveWgtY;
+			var mWgt:Widget = cast(System.moveWgt, Widget);
 			
-			if (nTop > 0 && (nTop + cast(System.moveWgt, Widget).h) < cast(System.moveWgt.parent, Widget).h) {
+			var nTop:Float = mWgt.top + e.stageY - System.moveWgtY;
+			
+			if (mouseGridMove(mWgt.top, nTop) && nTop > 0 && (nTop + mWgt.h) < cast(mWgt.parent, Widget).h) {
 				System.setWgtProperty(System.moveWgt, "top", Std.string(nTop));
 				System.moveWgtY = e.stageY;
 			}
 			
-			var nLeft:Float = cast(System.moveWgt, Widget).left + e.stageX - System.moveWgtX;
+			var nLeft:Float = mWgt.left + e.stageX - System.moveWgtX;
 			
-			if (nLeft > 0 && (nLeft + cast(System.moveWgt, Widget).w) < cast(System.moveWgt.parent, Widget).w) {
+			if (mouseGridMove(mWgt.left, nLeft) && nLeft > 0 && (nLeft + mWgt.w) < cast(mWgt.parent, Widget).w) {
 				System.setWgtProperty(System.moveWgt, "left", Std.string(nLeft));
 				System.moveWgtX = e.stageX;
 			}
