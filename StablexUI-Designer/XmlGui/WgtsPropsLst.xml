@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VBox layout:Row-rows="[30, 20, -1]">
 	<Scroll
+		widthPt="100"
 		vBar-visible="false"
 		hBar-visible="true"
 		hBar-skin:Paint-color="0x777777"
 		vBar-skin:Paint-color="0x777777"
 		vBar-slider-skin:Paint-color="0x002200"
-		hBar-slider-skin:Paint-color="0x002200">
+		hBar-slider-skin:Paint-color="0x002200"
+		skin:Paint-color="0xC0C0C0">
 		<Options
 			name="'guiWgtsList'"
 			box-skin:Paint-alpha="0.9"
-			skin:Paint-color="0xC0C0C0"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x909090"
 			list-skin:Paint-color="0x454545"
 			list-skin:Paint-alpha="1"/>
 	</Scroll>
