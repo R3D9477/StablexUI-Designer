@@ -281,7 +281,7 @@
 					states-down-ico-src="'graphics/tools/check_down.png'"
 					selected="false"/>
 				<HBox
-					layout:Column-cols="[0, 100, 0, 100]"
+					layout:Column-cols="[0, 100]"
 					layout:Column-cellPadding="10">
 					<Text text="'Grid size:'"/>
 					<InputText
@@ -291,17 +291,9 @@
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
-					<Text text="'with border size'"/>
-					<InputText
-						name="'gridBorderSize'"
-						text="'2'"
-						align="'middle,center'"
-						skin:Paint-color="0xC0C0C0"
-						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 				<HBox
-					layout:Column-cols="[0, 0, 100]"
+					layout:Column-cols="[0, 0, 100, 0, 100]"
 					layout:Column-cellPadding="10">
 					<Checkbox
 						name="'drawGrid'"
@@ -316,6 +308,14 @@
 					<InputText
 						name="'gridColor'"
 						text="'0xFFFFFF'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Text text="'and border size'"/>
+					<InputText
+						name="'gridBorderSize'"
+						text="'2'"
 						align="'middle,center'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"

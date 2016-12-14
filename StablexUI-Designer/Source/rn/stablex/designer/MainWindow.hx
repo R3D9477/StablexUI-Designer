@@ -335,11 +335,11 @@ class MainWindow extends Sprite {
 			guiWidth: 0,
 			guiHeight: 0,
 			fixedWindowSize: false,
-			useGrid: false,
+			useGrid: true,
 			gridSize: 10,
-			gridBorderSize: 2,
-			drawGrid: false,
-			gridColor: 0xFFFFFF
+			gridBorderSize: 1,
+			drawGrid: true,
+			gridColor: 0x000000
 		}
 		
 		System.refreshGuiSettings();

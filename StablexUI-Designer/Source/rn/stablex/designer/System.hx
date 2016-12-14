@@ -174,8 +174,6 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// tab Designer: widget's movement
 	
-	
-	
 	public static function onBoxClick (e:MouseEvent) : Void {
 		var selWgt:Dynamic = null;
 		
@@ -264,31 +262,27 @@ class System {
 		e.stopPropagation();
 	}
 	
-	public static function mouseGridMove (currentPos:Float, newPos:Float) : Bool {
-		if (!MainWindowInstance.useGrid.selected)
-			return true;
-		
-		//...
-		//...
-		//...
-		
-		return false;
-	}
-	
 	public static function onMoveWgtMouseMove (e:MouseEvent) : Void {
 		if (System.moveWgt != null) {
 			var mWgt:Widget = cast(System.moveWgt, Widget);
 			
+			var gridMove:Float->Bool = function (newPos:Float) : Bool {
+				if (MainWindowInstance.useGrid.selected)
+					return (newPos % Std.parseFloat(MainWindowInstance.gridSize.text)) == 0;
+				
+				return true;
+			}
+			
 			var nTop:Float = mWgt.top + e.stageY - System.moveWgtY;
 			
-			if (mouseGridMove(mWgt.top, nTop) && nTop > 0 && (nTop + mWgt.h) < cast(mWgt.parent, Widget).h) {
+			if (gridMove(nTop) && nTop >= 0 && (nTop + mWgt.h) <= cast(mWgt.parent, Widget).h) {
 				System.setWgtProperty(System.moveWgt, "top", Std.string(nTop));
 				System.moveWgtY = e.stageY;
 			}
 			
 			var nLeft:Float = mWgt.left + e.stageX - System.moveWgtX;
 			
-			if (mouseGridMove(mWgt.left, nLeft) && nLeft > 0 && (nLeft + mWgt.w) < cast(mWgt.parent, Widget).w) {
+			if (gridMove(nLeft) && nLeft >= 0 && (nLeft + mWgt.w) <= cast(mWgt.parent, Widget).w) {
 				System.setWgtProperty(System.moveWgt, "left", Std.string(nLeft));
 				System.moveWgtX = e.stageX;
 			}
@@ -306,7 +300,7 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui builder
 	
-	public static function isBox (wgtClass:Dynamic) : Bool {
+	public static function isBox (wgtClass:Class<Dynamic>) : Bool {
 		return
 			wgtClass == GuiElements ||
 			wgtClass == ru.stablex.ui.widgets.Box ||
@@ -366,8 +360,33 @@ class System {
 				}
 			},
 			function (dWgt:Dynamic) {
-				if (System.wgtUiXmlMap.exists(dWgt))
+				if (System.wgtUiXmlMap.exists(dWgt)) {
 					cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, System.onBoxClick);
+					
+					if (MainWindowInstance.useGrid.selected && MainWindowInstance.drawGrid.selected) { // draw grid
+						var origApplySkin:Void->Void = Reflect.field(dWgt, "applySkin");
+						
+						Reflect.setField(dWgt, "applySkin", function () : Void {
+							origApplySkin();
+							
+							var x:Float = 0;
+							
+							while (x < cast(dWgt, Widget).w) {
+								var y:Float = 0;
+								
+								while (y < cast(dWgt, Widget).h) {
+									cast(dWgt, Widget).graphics.beginFill(Std.parseInt(MainWindowInstance.gridColor.text));
+									cast(dWgt, Widget).graphics.drawRect(x, y, Std.parseFloat(MainWindowInstance.gridBorderSize.text), Std.parseFloat(MainWindowInstance.gridBorderSize.text));
+									cast(dWgt, Widget).graphics.endFill();
+									
+									y += Std.parseFloat(MainWindowInstance.gridSize.text);
+								}
+								
+								x += Std.parseFloat(MainWindowInstance.gridSize.text);
+							}
+						});
+					}
+				}
 			},
 			function (dParentWgt:Dynamic, dChildWgt:Dynamic, cInd:Int) {
 				if (System.wgtUiXmlMap.get(dChildWgt) == null) {
