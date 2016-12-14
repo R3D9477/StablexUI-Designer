@@ -10,7 +10,7 @@ package %InstancePackage%;
 
 @:noCompletion class ClockTime { // workaround for https://github.com/RealyUniqueName/StablexUI/issues/235
 	public static function getCurrSeconds () : Int
-		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds(); 
+		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds();
 }
 
 class %InstanceName% {
