@@ -4,7 +4,7 @@
 	<app file="StablexUI-Designer" path="Export" main="rn.stablex.designer.MainWindow"/>
 	
 	<window background="0xFFFFFF" fps="60"/>
-	<window height="540" unless="mobile" width="640"/>
+	<window width="640" height="480" unless="mobile"/>
 	<window if="html5 || flash" height="0" width="0"/>
 	
 	<source path="Source"/>

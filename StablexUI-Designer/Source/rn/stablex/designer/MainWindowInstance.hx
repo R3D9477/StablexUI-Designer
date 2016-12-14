@@ -58,6 +58,12 @@ class MainWindowInstance {
 	public static var fixedWindowSize:Checkbox;
 	public static var framesList:Options;
 	
+	public static var useGrid:Checkbox;
+	public static var gridSize:InputText;
+	public static var gridBorderSize:InputText;
+	public static var drawGrid:Checkbox;
+	public static var gridColor:InputText;
+	
 	public static var wgtGroupsLst:Options;
 	public static var wlSelectBtn:Radio;
 	public static var wlDeleteBtn:Radio;
@@ -135,6 +141,12 @@ class MainWindowInstance {
 		MainWindowInstance.guiHeight = cast(MainWindowInstance.mainWnd.getChild("guiHeight"), InputText);
 		MainWindowInstance.fixedWindowSize = cast(MainWindowInstance.mainWnd.getChild("fixedWindowSize"), Checkbox);
 		MainWindowInstance.framesList = cast(MainWindowInstance.mainWnd.getChild("framesList"), Options);
+		
+		MainWindowInstance.useGrid = cast(MainWindowInstance.mainWnd.getChild("useGrid"), Checkbox);
+		MainWindowInstance.gridSize = cast(MainWindowInstance.mainWnd.getChild("gridSize"), InputText);
+		MainWindowInstance.gridBorderSize = cast(MainWindowInstance.mainWnd.getChild("gridBorderSize"), InputText);
+		MainWindowInstance.drawGrid = cast(MainWindowInstance.mainWnd.getChild("drawGrid"), Checkbox);
+		MainWindowInstance.gridColor = cast(MainWindowInstance.mainWnd.getChild("gridColor"), InputText);
 		
 		MainWindowInstance.wgtGroupsLst = cast(MainWindowInstance.mainWnd.getChild("wgtGroupsLst"), Options);
 		MainWindowInstance.wlSelectBtn = cast(MainWindowInstance.mainWnd.getChild("wlSelectBtn"), Radio);

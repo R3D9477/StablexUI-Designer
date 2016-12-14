@@ -20,7 +20,7 @@
 		<VBox
 			widthPt="100"
 			align="'top,left'"
-			layout:Row-rows="[0, 0, 0, 0, 0]"
+			layout:Row-rows="[0, 0, 0, 0, 0, 0]"
 			layout:Row-paddingTop="10"
 			layout:Row-cellPadding="10"
 			layout:Row-paddingLeft="10"
@@ -38,12 +38,12 @@
 				<HBox
 					layout:Column-cols="[0, -1]"
 					layout:Column-cellPadding="10">
-					<Text text="'Current GUI Name:'" />
+					<Text text="'Current GUI Name:'"/>
 					<InputText
 						name="'guiName'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 			</VBox>
 			<VBox
@@ -57,7 +57,7 @@
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
 				layout:Row-paddingTop="5">
-				<Text text="'Widget\'s sources action:'" />
+				<Text text="'Widget\'s sources action:'"/>
 				<HBox
 					layout:Column-cols="[0, -1, 0]"
 					layout:Column-cellPadding="10">
@@ -66,13 +66,13 @@
 						name="'projectPath'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 					<Button
 						name="'chooseProject'"
 						text="'Choose'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 				<Radio
 					name="'wgtSrcActNoth'"
@@ -83,7 +83,7 @@
 					align="'middle,left'"
 					states-up-ico-src="'graphics/tools/radio_up.png'"
 					states-down-ico-src="'graphics/tools/radio_down.png'"
-					selected="true" />
+					selected="true"/>
 				<HBox
 					layout:Column-cols="[0]"
 					layout:Column-cellPadding="10">
@@ -95,7 +95,7 @@
 						label-visible="true"
 						align="'middle,left'"
 						states-up-ico-src="'graphics/tools/radio_up.png'"
-						states-down-ico-src="'graphics/tools/radio_down.png'" />
+						states-down-ico-src="'graphics/tools/radio_down.png'"/>
 				</HBox>
 				<HBox
 					layout:Column-cols="[0, -1, 0]"
@@ -108,18 +108,18 @@
 						label-visible="true"
 						align="'middle,left'"
 						states-up-ico-src="'graphics/tools/radio_up.png'"
-						states-down-ico-src="'graphics/tools/radio_down.png'" />
+						states-down-ico-src="'graphics/tools/radio_down.png'"/>
 					<InputText
 						name="'wgtSrcDirPath'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 					<Button
 						name="'chooseSrcDirPath'"
 						text="'Choose'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 				<HBox
 					layout:Column-cols="[0, -1]"
@@ -172,7 +172,7 @@
 			<HBox
 				layout:Column-cols="[0, -1]"
 				layout:Column-cellPadding="10">
-				<Text text="'Presets:'" />
+				<Text text="'Presets:'"/>
 				<Options
 					name="'presetsList'"
 					box-skin:Paint-alpha="0.9"
@@ -184,7 +184,7 @@
 			</HBox>
 			<Checkbox
 				name="'embedAssets'"
-				text="'embed assets of suits and skins'"
+				text="'Embed assets of presets, suits and skins'"
 				tabEnabled="true"
 				label-visible="true"
 				align="'middle,left'"
@@ -202,11 +202,11 @@
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
 				layout:Row-paddingTop="5">
-				<Text text="'Window\'s settings:'" />
+				<Text text="'Window\'s settings:'"/>
 				<HBox
 					layout:Column-cols="[0, -1]"
 					layout:Column-cellPadding="10">
-					<Text text="'Frame:'" />
+					<Text text="'Frame:'"/>
 					<Options
 						name="'framesList'"
 						box-skin:Paint-alpha="0.9"
@@ -219,22 +219,22 @@
 				<HBox
 					layout:Column-cols="[0, 100, 0, 100, -1]"
 					layout:Column-cellPadding="10">
-					<Text text="'Window size:'" />
+					<Text text="'Window size:'"/>
 					<InputText
 						name="'guiWidth'"
 						text="'640'"
 						align="'middle,center'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
-					<Text text="'x'" />
+						skin:Paint-borderColor="0x000000"/>
+					<Text text="'x'"/>
 					<InputText
 						name="'guiHeight'"
 						text="'480'"
 						align="'middle,center'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000" />
+						skin:Paint-borderColor="0x000000"/>
 					<Checkbox
 						name="'fixedWindowSize'"
 						text="'use fixed window size'"
@@ -243,7 +243,70 @@
 						align="'middle,left'"
 						states-up-ico-src="'graphics/tools/check_up.png'"
 						states-down-ico-src="'graphics/tools/check_down.png'"
-						selected="false" />
+						selected="false"/>
+				</HBox>
+			</VBox>
+			<VBox
+				h="125"
+				align="'top,left'"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF"
+				layout:Row-rows="[0, 0, 0, 0]"
+				layout:Row-cellPadding="10"
+				layout:Row-paddingLeft="10"
+				layout:Row-paddingRight="10"
+				layout:Row-paddingTop="5">
+				<Text text="'Grid:'"/>
+				<Checkbox
+					name="'useGrid'"
+					text="'Use the grid for positioning'"
+					tabEnabled="true"
+					label-visible="true"
+					align="'middle,left'"
+					states-up-ico-src="'graphics/tools/check_up.png'"
+					states-down-ico-src="'graphics/tools/check_down.png'"
+					selected="false"/>
+				<HBox
+					layout:Column-cols="[0, 100, 0, 100]"
+					layout:Column-cellPadding="10">
+					<Text text="'Grid size:'"/>
+					<InputText
+						name="'gridSize'"
+						text="'10'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Text text="'with border size'"/>
+					<InputText
+						name="'gridBorderSize'"
+						text="'2'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, 0, 100]"
+					layout:Column-cellPadding="10">
+					<Checkbox
+						name="'drawGrid'"
+						text="'Draw grid:'"
+						tabEnabled="true"
+						label-visible="true"
+						align="'middle,left'"
+						states-up-ico-src="'graphics/tools/check_up.png'"
+						states-down-ico-src="'graphics/tools/check_down.png'"
+						selected="false"/>
+					<Text text="'with color'"/>
+					<InputText
+						name="'gridColor'"
+						text="'0xFFFFFF'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 			</VBox>
 		</VBox>
