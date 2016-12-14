@@ -20,6 +20,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* use all standard widgets from ["ru.stablex.ui.widgets.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets)
 	* use all standard skins from ["ru.stablex.ui.skins.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/skins)
 	* allow to evaluate [haXe](https://haxe.org/)-expression and use result as value for property of widget
+	* allow to use an alignment widgets to grid
 * customizing
 	* allow to use custom templates of frame (root widget)
 	* allow to use custom widgets
