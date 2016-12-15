@@ -400,10 +400,10 @@ class System {
 							var gridBorderSize:Float = Std.parseFloat(MainWindowInstance.gridBorderSize.text);
 							
 							if (MainWindowInstance.gridType.value == 1) {
-								var x:Float = 0;
+								var x:Float = gridSize;
 								
 								while (x < wgt.w) {
-									var y:Float = 0;
+									var y:Float = gridSize;
 									
 									while (y < cast(dWgt, Widget).h) {
 										wgt.graphics.beginFill(color);
@@ -417,7 +417,7 @@ class System {
 								}
 							}
 							else if (MainWindowInstance.gridType.value == 2) {
-								var i:Float = 0;
+								var i:Float = gridSize;
 								
 								while (i < Math.max(wgt.w, wgt.h)) {
 									if (i < wgt.w) { // draw vertical line

@@ -426,6 +426,8 @@ class MainWindow extends Sprite {
 			System.loadUiFromXml(System.parseXml(MainWindowInstance.xmlSource.text).firstElement());
 			System.selectWgtFromList(0); // select first widget from list
 		}
+		if (MainWindowInstance.designerTabs.activeTab().name == "tabProject")
+			MainWindowInstance.projScroll.refresh();
 		
 		MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
 	}
