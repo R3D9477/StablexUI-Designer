@@ -22,7 +22,7 @@ typedef GuiDataInfo = {
 	
 	var useGrid:Bool;
 	var gridSize:Int;
-	var gridBorderSize:Int;
-	var drawGrid:Bool;
+	var gridType:Int;
 	var gridColor:Int;
+	var gridBorderSize:Int;
 }

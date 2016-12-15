@@ -107,9 +107,9 @@ class System {
 		
 		System.guiSettings.useGrid = MainWindowInstance.useGrid.selected;
 		System.guiSettings.gridSize = Std.parseInt(MainWindowInstance.gridSize.text);
-		System.guiSettings.gridBorderSize = Std.parseInt(MainWindowInstance.gridBorderSize.text);
-		System.guiSettings.drawGrid = MainWindowInstance.drawGrid.selected;
+		System.guiSettings.gridType = MainWindowInstance.gridType.value;
 		System.guiSettings.gridColor = Std.parseInt(MainWindowInstance.gridColor.text);
+		System.guiSettings.gridBorderSize = Std.parseInt(MainWindowInstance.gridBorderSize.text);
 		
 		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
 	}
@@ -163,9 +163,9 @@ class System {
 		
 		MainWindowInstance.useGrid.selected = System.guiSettings.useGrid;
 		MainWindowInstance.gridSize.text = Std.string(System.guiSettings.gridSize);
-		MainWindowInstance.gridBorderSize.text = Std.string(System.guiSettings.gridBorderSize);
-		MainWindowInstance.drawGrid.selected = System.guiSettings.drawGrid;
+		MainWindowInstance.gridType.value = System.guiSettings.gridType;
 		MainWindowInstance.gridColor.text = '0x${System.guiSettings.gridColor.hex()}';
+		MainWindowInstance.gridBorderSize.text = Std.string(System.guiSettings.gridBorderSize);
 		
 		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
 		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
@@ -361,28 +361,54 @@ class System {
 			},
 			function (dWgt:Dynamic) {
 				if (System.wgtUiXmlMap.exists(dWgt)) {
-					cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, System.onBoxClick);
+					var wgt:Widget = cast(dWgt, Widget);
+					wgt.addEventListener(MouseEvent.CLICK, System.onBoxClick);
 					
-					if (MainWindowInstance.useGrid.selected && MainWindowInstance.drawGrid.selected) { // draw grid
+					if (MainWindowInstance.useGrid.selected && MainWindowInstance.gridType.value > 0) { // draw grid
 						var origApplySkin:Void->Void = Reflect.field(dWgt, "applySkin");
 						
 						Reflect.setField(dWgt, "applySkin", function () : Void {
 							origApplySkin();
 							
-							var x:Float = 0;
+							var color:Int = Std.parseInt(MainWindowInstance.gridColor.text);
+							var gridSize:Float = Std.parseFloat(MainWindowInstance.gridSize.text);
+							var gridBorderSize:Float = Std.parseFloat(MainWindowInstance.gridBorderSize.text);
 							
-							while (x < cast(dWgt, Widget).w) {
-								var y:Float = 0;
+							if (MainWindowInstance.gridType.value == 1) {
+								var x:Float = 0;
 								
-								while (y < cast(dWgt, Widget).h) {
-									cast(dWgt, Widget).graphics.beginFill(Std.parseInt(MainWindowInstance.gridColor.text));
-									cast(dWgt, Widget).graphics.drawRect(x, y, Std.parseFloat(MainWindowInstance.gridBorderSize.text), Std.parseFloat(MainWindowInstance.gridBorderSize.text));
-									cast(dWgt, Widget).graphics.endFill();
+								while (x < wgt.w) {
+									var y:Float = 0;
 									
-									y += Std.parseFloat(MainWindowInstance.gridSize.text);
+									while (y < cast(dWgt, Widget).h) {
+										wgt.graphics.beginFill(color);
+										wgt.graphics.drawRect(x, y, gridBorderSize, gridBorderSize);
+										wgt.graphics.endFill();
+										
+										y += gridSize;
+									}
+									
+									x += gridSize;
 								}
+							}
+							else if (MainWindowInstance.gridType.value == 2) {
+								var i:Float = 0;
 								
-								x += Std.parseFloat(MainWindowInstance.gridSize.text);
+								while (i < Math.max(wgt.w, wgt.h)) {
+									if (i < wgt.w) { // draw vertical line
+										wgt.graphics.lineStyle(1, color, 1);
+										wgt.graphics.moveTo(i, 0);
+										wgt.graphics.lineTo(i, wgt.h);
+									}
+									
+									if (i < wgt.h) { // draw vertical line
+										wgt.graphics.lineStyle(1, color, 1);
+										wgt.graphics.moveTo(0, i);
+										wgt.graphics.lineTo(wgt.w, i);
+									}
+									
+									i += gridSize;
+								}
 							}
 						});
 					}

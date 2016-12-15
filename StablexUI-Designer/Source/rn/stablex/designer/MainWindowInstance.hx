@@ -62,9 +62,9 @@ class MainWindowInstance {
 	
 	public static var useGrid:Checkbox;
 	public static var gridSize:InputText;
-	public static var gridBorderSize:InputText;
-	public static var drawGrid:Checkbox;
+	public static var gridType:Options;
 	public static var gridColor:InputText;
+	public static var gridBorderSize:InputText;
 	
 	public static var wgtGroupsLst:Options;
 	public static var wlSelectBtn:Radio;
@@ -147,9 +147,9 @@ class MainWindowInstance {
 		
 		MainWindowInstance.useGrid = cast(MainWindowInstance.mainWnd.getChild("useGrid"), Checkbox);
 		MainWindowInstance.gridSize = cast(MainWindowInstance.mainWnd.getChild("gridSize"), InputText);
-		MainWindowInstance.gridBorderSize = cast(MainWindowInstance.mainWnd.getChild("gridBorderSize"), InputText);
-		MainWindowInstance.drawGrid = cast(MainWindowInstance.mainWnd.getChild("drawGrid"), Checkbox);
+		MainWindowInstance.gridType = cast(MainWindowInstance.mainWnd.getChild("gridType"), Options);
 		MainWindowInstance.gridColor = cast(MainWindowInstance.mainWnd.getChild("gridColor"), InputText);
+		MainWindowInstance.gridBorderSize = cast(MainWindowInstance.mainWnd.getChild("gridBorderSize"), InputText);
 		
 		MainWindowInstance.wgtGroupsLst = cast(MainWindowInstance.mainWnd.getChild("wgtGroupsLst"), Options);
 		MainWindowInstance.wlSelectBtn = cast(MainWindowInstance.mainWnd.getChild("wlSelectBtn"), Radio);

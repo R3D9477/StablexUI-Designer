@@ -337,9 +337,9 @@ class MainWindow extends Sprite {
 			fixedWindowSize: false,
 			useGrid: true,
 			gridSize: 10,
-			gridBorderSize: 1,
-			drawGrid: true,
-			gridColor: 0x000000
+			gridType: 1,
+			gridColor: 0xFFFFFF,
+			gridBorderSize: 1
 		}
 		
 		System.refreshGuiSettings();
