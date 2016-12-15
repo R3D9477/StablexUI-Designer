@@ -248,7 +248,7 @@ class SourceControl {
 		return true;
 	}
 	
-	public static function setWindowSize () : Bool {
+	public static function setWindow () : Bool {
 		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiUuid > ""))
 			return false;
 		
@@ -257,6 +257,25 @@ class SourceControl {
 				return false;
 		
 		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		var setWndInfo:Xml->Void = function (x:Xml) : Void {
+			x.set("width", Std.string(System.guiSettings.guiWidth));
+			x.set("height", Std.string(System.guiSettings.guiHeight));
+			
+			x.set("background", '#${System.guiSettings.wndBackground.hex()}');
+			x.set("fps", Std.string(System.guiSettings.wndFps));
+			x.set("vsync", Std.string(System.guiSettings.wndVsync));
+			x.set("borderless", Std.string(System.guiSettings.wndBorderless));
+			x.set("resizable", Std.string(System.guiSettings.wndResizable));
+			x.set("fullscreen", Std.string(System.guiSettings.wndFullscreen));
+			x.set("hardware", Std.string(System.guiSettings.wndHardware));
+			x.set("allow-shaders", Std.string(System.guiSettings.wndAllowShaders));
+			x.set("require-shaders", Std.string(System.guiSettings.wndRequireShaders));
+			x.set("depth-buffer", Std.string(System.guiSettings.wndDepthBuffer));
+			x.set("stencil-buffer", Std.string(System.guiSettings.wndStencilBuffer));
+			
+			x.set("orientation", System.guiSettings.wndOrientation);
+		}
 		
 		var exists:Bool = false;
 		
@@ -267,10 +286,21 @@ class SourceControl {
 				if (x.exists("if"))
 					valid = x.get("if").indexOf("flash") < 0 && x.get("if").indexOf("html5") < 0;
 				
+				x.remove("background");
+				x.remove("fps");
+				x.remove("vsync");
+				x.remove("borderless");
+				x.remove("resizable");
+				x.remove("fullscreen");
+				x.remove("hardware");
+				x.remove("allow-shaders");
+				x.remove("require-shaders");
+				x.remove("depth-buffer");
+				x.remove("stencil-buffer");
+				x.remove("orientation");
+				
 				if (valid && (x.exists("width") || x.exists("height"))) {
-					x.set("width", Std.string(System.guiSettings.guiWidth));
-					x.set("height", Std.string(System.guiSettings.guiHeight));
-					
+					setWndInfo(x);
 					exists = true;
 				}
 			}
@@ -279,8 +309,7 @@ class SourceControl {
 			var sx:Xml = Xml.createElement("window");
 			
 			sx.set("unless", "mobile");
-			sx.set("width", Std.string(System.guiSettings.guiWidth));
-			sx.set("height", Std.string(System.guiSettings.guiHeight));
+			setWndInfo(sx);
 			
 			projXml.addChild(sx);
 		}

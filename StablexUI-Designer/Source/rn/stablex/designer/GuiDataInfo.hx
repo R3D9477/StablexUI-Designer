@@ -14,11 +14,23 @@ typedef GuiDataInfo = {
 	var rootName:String;
 	
 	var preset:String;
+	var embedAssets:Bool;
 	
 	var frameTemplate:String;
 	var guiWidth:Float;
 	var guiHeight:Float;
-	var fixedWindowSize:Bool;
+	var wndBackground:Int;
+	var wndFps:Int;
+	var wndVsync:Bool;
+	var wndBorderless:Bool;
+	var wndResizable:Bool;
+	var wndFullscreen:Bool;
+	var wndHardware:Bool;
+	var wndAllowShaders:Bool;
+	var wndRequireShaders:Bool;
+	var wndDepthBuffer:Bool;
+	var wndStencilBuffer:Bool;
+	var wndOrientation:String;
 	
 	var useGrid:Bool;
 	var gridSize:Int;

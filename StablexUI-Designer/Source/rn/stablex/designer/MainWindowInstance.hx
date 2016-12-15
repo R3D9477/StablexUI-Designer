@@ -53,12 +53,25 @@ class MainWindowInstance {
 	public static var guiInstancePath:InputText;
 	public static var chooseInstancePath:Button;
 	public static var rootName:InputText;
-	public static var embedAssets:Checkbox;
+	
 	public static var presetsList:Options;
+	public static var embedAssets:Checkbox;
+	
+	public static var framesList:Options;
 	public static var guiWidth:InputText;
 	public static var guiHeight:InputText;
-	public static var fixedWindowSize:Checkbox;
-	public static var framesList:Options;
+	public static var wndBackground:InputText;
+	public static var wndFps:InputText;
+	public static var wndVsync:Checkbox;
+	public static var wndBorderless:Checkbox;
+	public static var wndResizable:Checkbox;
+	public static var wndFullscreen:Checkbox;
+	public static var wndHardware:Checkbox;
+	public static var wndAllowShaders:Checkbox;
+	public static var wndRequireShaders:Checkbox;
+	public static var wndDepthBuffer:Checkbox;
+	public static var wndStencilBuffer:Checkbox;
+	public static var wndOrientation:Options;
 	
 	public static var useGrid:Checkbox;
 	public static var gridSize:InputText;
@@ -137,13 +150,26 @@ class MainWindowInstance {
 		MainWindowInstance.guiInstanceTemplate = cast(MainWindowInstance.mainWnd.getChild("guiInstanceTemplate"), Options);
 		MainWindowInstance.guiInstancePath = cast(MainWindowInstance.mainWnd.getChild("guiInstancePath"), InputText);
 		MainWindowInstance.chooseInstancePath = cast(MainWindowInstance.mainWnd.getChild("chooseInstancePath"), Button);
-		MainWindowInstance.embedAssets = cast(MainWindowInstance.mainWnd.getChild("embedAssets"), Checkbox);
 		MainWindowInstance.rootName = cast(MainWindowInstance.mainWnd.getChild("rootName"), InputText);
+		
 		MainWindowInstance.presetsList = cast(MainWindowInstance.mainWnd.getChild("presetsList"), Options);
+		MainWindowInstance.embedAssets = cast(MainWindowInstance.mainWnd.getChild("embedAssets"), Checkbox);
+		
+		MainWindowInstance.framesList = cast(MainWindowInstance.mainWnd.getChild("framesList"), Options);
 		MainWindowInstance.guiWidth = cast(MainWindowInstance.mainWnd.getChild("guiWidth"), InputText);
 		MainWindowInstance.guiHeight = cast(MainWindowInstance.mainWnd.getChild("guiHeight"), InputText);
-		MainWindowInstance.fixedWindowSize = cast(MainWindowInstance.mainWnd.getChild("fixedWindowSize"), Checkbox);
-		MainWindowInstance.framesList = cast(MainWindowInstance.mainWnd.getChild("framesList"), Options);
+		MainWindowInstance.wndBackground = cast(MainWindowInstance.mainWnd.getChild("wndBackground"), InputText);
+		MainWindowInstance.wndFps = cast(MainWindowInstance.mainWnd.getChild("wndFps"), InputText);
+		MainWindowInstance.wndVsync = cast(MainWindowInstance.mainWnd.getChild("wndVsync"), Checkbox);
+		MainWindowInstance.wndBorderless = cast(MainWindowInstance.mainWnd.getChild("wndBorderless"), Checkbox);
+		MainWindowInstance.wndResizable = cast(MainWindowInstance.mainWnd.getChild("wndResizable"), Checkbox);
+		MainWindowInstance.wndFullscreen = cast(MainWindowInstance.mainWnd.getChild("wndFullscreen"), Checkbox);
+		MainWindowInstance.wndHardware = cast(MainWindowInstance.mainWnd.getChild("wndHardware"), Checkbox);
+		MainWindowInstance.wndAllowShaders = cast(MainWindowInstance.mainWnd.getChild("wndAllowShaders"), Checkbox);
+		MainWindowInstance.wndRequireShaders = cast(MainWindowInstance.mainWnd.getChild("wndRequireShaders"), Checkbox);
+		MainWindowInstance.wndDepthBuffer = cast(MainWindowInstance.mainWnd.getChild("wndDepthBuffer"), Checkbox);
+		MainWindowInstance.wndStencilBuffer = cast(MainWindowInstance.mainWnd.getChild("wndStencilBuffer"), Checkbox);
+		MainWindowInstance.wndOrientation = cast(MainWindowInstance.mainWnd.getChild("wndOrientation"), Options);
 		
 		MainWindowInstance.useGrid = cast(MainWindowInstance.mainWnd.getChild("useGrid"), Checkbox);
 		MainWindowInstance.gridSize = cast(MainWindowInstance.mainWnd.getChild("gridSize"), InputText);

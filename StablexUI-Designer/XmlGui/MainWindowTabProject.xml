@@ -205,16 +205,16 @@
 					selected="true"/>
 			</VBox>
 			<VBox
-				h="95"
+				h="250"
 				align="'top,left'"
-				skin:Paint-color="0xC0C0C0"
-				skin:Paint-border="1"
-				skin:Paint-borderColor="0xFFFFFF"
-				layout:Row-rows="[0, 0, 0]"
+				layout:Row-rows="[0, 0, 0, 0, 0]"
 				layout:Row-cellPadding="10"
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
-				layout:Row-paddingTop="5">
+				layout:Row-paddingTop="5"
+				skin:Paint-color="0xC0C0C0"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0xFFFFFF">
 				<Text text="'Window\'s settings:'"/>
 				<HBox
 					layout:Column-cols="[0, -1]"
@@ -230,7 +230,7 @@
 						list-skin:Paint-alpha="1"/>
 				</HBox>
 				<HBox
-					layout:Column-cols="[0, 100, 0, 100, -1]"
+					layout:Column-cols="[0, 100, 0, 100]"
 					layout:Column-cellPadding="10">
 					<Text text="'Window size:'"/>
 					<InputText
@@ -248,16 +248,132 @@
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
-					<Checkbox
-						name="'fixedWindowSize'"
-						text="'use fixed window size'"
-						tabEnabled="true"
-						label-visible="true"
-						align="'middle,left'"
-						states-up-ico-src="'graphics/tools/check_up.png'"
-						states-down-ico-src="'graphics/tools/check_down.png'"
-						selected="false"/>
 				</HBox>
+				<HBox
+					layout:Column-cols="[0, 100, 0, 100]"
+					layout:Column-cellPadding="10">
+					<Text text="'Background:'"/>
+					<InputText
+						name="'wndBackground'"
+						text="'0xFFFFFF'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Text text="'Fps'"/>
+					<InputText
+						name="'wndFps'"
+						text="'30'"
+						align="'middle,center'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+				</HBox>
+				<VBox
+					align="'top,left'"
+					layout:Row-rows="[0, 0, 0, 0]"
+					layout:Row-cellPadding="10"
+					layout:Row-paddingLeft="20"
+					layout:Row-paddingRight="20">
+					<HBox
+						align="'top,left'"
+						layout:Column-cols="[150, 150, 150]">
+						<Checkbox
+							name="'wndVsync'"
+							text="'vsync'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndBorderless'"
+							text="'borderless'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndResizable'"
+							text="'resizable'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="true"/>
+					</HBox>
+					<HBox
+						align="'top,left'"
+						layout:Column-cols="[150, 150, 150]">
+						<Checkbox
+							name="'wndFullscreen'"
+							text="'fullscreen'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndHardware'"
+							text="'hardware'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndAllowShaders'"
+							text="'allow-shaders'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+					</HBox>
+					<HBox
+						align="'top,left'"
+						layout:Column-cols="[150, 150, 150]">
+						<Checkbox
+							name="'wndRequireShaders'"
+							text="'require-shaders'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndDepthBuffer'"
+							text="'depth-buffer'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+						<Checkbox
+							name="'wndStencilBuffer'"
+							text="'stencil-buffer'"
+							label-visible="true"
+							align="'middle,left'"
+							states-up-ico-src="'graphics/tools/check_up.png'"
+							states-down-ico-src="'graphics/tools/check_down.png'"
+							selected="false"/>
+					</HBox>
+					<HBox
+						layout:Column-cols="[0, 0]"
+						layout:Column-cellPadding="10">
+						<Text text="'Orientation:'"/>
+						<Options
+							name="'wndOrientation'"
+							box-skin:Paint-alpha="0.9"
+							options="[ ['Auto', 'auto'], ['Portrait', 'portrait'], ['Landscape', 'landscape'] ]"
+							skin:Paint-color="0xC0C0C0"
+							skin:Paint-border="1"
+							skin:Paint-borderColor="0x909090"
+							list-skin:Paint-color="0x454545"
+							list-skin:Paint-alpha="1"/>
+					</HBox>
+				</VBox>
 			</VBox>
 			<VBox
 				h="180"

@@ -323,6 +323,7 @@ class MainWindow extends Sprite {
 		System.guiSettings = {
 			guiUuid: UUID.generateRandom(new Random()).toString(),
 			guiName: "",
+			
 			wgtSrcAct: 0,
 			project: "",
 			srcDir: "",
@@ -330,11 +331,27 @@ class MainWindow extends Sprite {
 			guiInstanceTemplate: "Default.hx",
 			guiInstancePath: "",
 			rootName: "",
+			
 			preset: "default",
+			embedAssets: true,
+			
 			frameTemplate: "default",
 			guiWidth: 0,
 			guiHeight: 0,
-			fixedWindowSize: false,
+			
+			wndBackground: 0xFFFFFF,
+			wndFps: 30,
+			wndVsync: false,
+			wndBorderless: false,
+			wndResizable: true,
+			wndFullscreen: false,
+			wndHardware: false,
+			wndAllowShaders: false,
+			wndRequireShaders: false,
+			wndDepthBuffer: false,
+			wndStencilBuffer: false,
+			wndOrientation: 'auto',
+			
 			useGrid: true,
 			gridSize: 10,
 			gridType: 1,
@@ -382,11 +399,12 @@ class MainWindow extends Sprite {
 				}
 				
 				if (System.guiSettings.project > "") {
-					if (!SourceControl.setWindowSize())
-						Dialogs.message("neko-systools", "Window size has not been set!", true);
+					if (!SourceControl.setWindow())
+						Dialogs.message("neko-systools", "Some properties of window has not been set!", true);
 					
-					if (!SourceControl.embedAssets())
-						Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
+					if (MainWindowInstance.embedAssets.selected)
+						if (!SourceControl.embedAssets())
+							Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
 				}
 				
 				if (!MainWindowInstance.wgtSrcActNoth.selected)
@@ -492,7 +510,18 @@ class MainWindow extends Sprite {
 		MainWindowInstance.guiHeight.text = Std.string(System.frameData.height);
 		MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
 		
-		MainWindowInstance.fixedWindowSize.selected = System.frameData.fixedSize;
+		MainWindowInstance.wndBackground.text = Std.string(System.frameData.background);
+		MainWindowInstance.wndFps.text = Std.string(System.frameData.fps);
+		MainWindowInstance.wndVsync.selected = System.frameData.vsync;
+		MainWindowInstance.wndBorderless.selected = System.frameData.borderless;
+		MainWindowInstance.wndResizable.selected = System.frameData.resizable;
+		MainWindowInstance.wndFullscreen.selected = System.frameData.fullscreen;
+		MainWindowInstance.wndHardware.selected = System.frameData.hardware;
+		MainWindowInstance.wndAllowShaders.selected = System.frameData.allowShaders;
+		MainWindowInstance.wndRequireShaders.selected = System.frameData.requireShaders;
+		MainWindowInstance.wndDepthBuffer.selected = System.frameData.depthBuffer;
+		MainWindowInstance.wndStencilBuffer.selected = System.frameData.stencilBuffer;
+		MainWindowInstance.wndOrientation.value = System.frameData.orientation;
 		
 		System.loadUiFromXml(System.parseXml(File.getContent(Path.join([FileSystem.fullPath("frames"), MainWindowInstance.framesList.value, System.frameData.xml]))).firstElement());
 	}

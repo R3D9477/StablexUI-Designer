@@ -99,11 +99,24 @@ class System {
 		System.guiSettings.rootName = MainWindowInstance.rootName.text;
 		
 		System.guiSettings.preset = MainWindowInstance.presetsList.value;
+		System.guiSettings.embedAssets = MainWindowInstance.embedAssets.selected;
 		
+		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
 		System.guiSettings.guiWidth = Std.parseInt(MainWindowInstance.guiWidth.text);
 		System.guiSettings.guiHeight = Std.parseInt(MainWindowInstance.guiHeight.text);
-		System.guiSettings.fixedWindowSize = MainWindowInstance.fixedWindowSize.selected;
-		System.guiSettings.frameTemplate = MainWindowInstance.framesList.value;
+		
+		System.guiSettings.wndBackground = Std.parseInt(MainWindowInstance.wndBackground.text);
+		System.guiSettings.wndFps = Std.parseInt(MainWindowInstance.wndFps.text);
+		System.guiSettings.wndVsync = MainWindowInstance.wndVsync.selected;
+		System.guiSettings.wndBorderless = MainWindowInstance.wndBorderless.selected;
+		System.guiSettings.wndResizable = MainWindowInstance.wndResizable.selected;
+		System.guiSettings.wndFullscreen = MainWindowInstance.wndFullscreen.selected;
+		System.guiSettings.wndHardware = MainWindowInstance.wndHardware.selected;
+		System.guiSettings.wndAllowShaders = MainWindowInstance.wndAllowShaders.selected;
+		System.guiSettings.wndRequireShaders = MainWindowInstance.wndRequireShaders.selected;
+		System.guiSettings.wndDepthBuffer = MainWindowInstance.wndDepthBuffer.selected;
+		System.guiSettings.wndStencilBuffer = MainWindowInstance.wndStencilBuffer.selected;
+		System.guiSettings.wndOrientation = MainWindowInstance.wndOrientation.value;
 		
 		System.guiSettings.useGrid = MainWindowInstance.useGrid.selected;
 		System.guiSettings.gridSize = Std.parseInt(MainWindowInstance.gridSize.text);
@@ -145,6 +158,7 @@ class System {
 		
 		MainWindowInstance.presetsList.value = System.guiSettings.preset;
 		MainWindowInstance.presetsList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		MainWindowInstance.embedAssets.selected = System.guiSettings.embedAssets;
 		
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
@@ -159,7 +173,18 @@ class System {
 			MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
 		}
 		
-		MainWindowInstance.fixedWindowSize.selected = System.guiSettings.fixedWindowSize;
+		MainWindowInstance.wndBackground.text = '0x${System.guiSettings.wndBackground.hex()}';
+		MainWindowInstance.wndFps.text = Std.string(System.guiSettings.wndFps);
+		MainWindowInstance.wndVsync.selected = System.guiSettings.wndVsync;
+		MainWindowInstance.wndBorderless.selected = System.guiSettings.wndBorderless;
+		MainWindowInstance.wndResizable.selected = System.guiSettings.wndResizable;
+		MainWindowInstance.wndFullscreen.selected = System.guiSettings.wndFullscreen;
+		MainWindowInstance.wndHardware.selected = System.guiSettings.wndHardware;
+		MainWindowInstance.wndAllowShaders.selected = System.guiSettings.wndAllowShaders;
+		MainWindowInstance.wndRequireShaders.selected = System.guiSettings.wndRequireShaders;
+		MainWindowInstance.wndDepthBuffer.selected = System.guiSettings.wndDepthBuffer;
+		MainWindowInstance.wndStencilBuffer.selected = System.guiSettings.wndStencilBuffer;
+		MainWindowInstance.wndOrientation.value = System.guiSettings.wndOrientation;
 		
 		MainWindowInstance.useGrid.selected = System.guiSettings.useGrid;
 		MainWindowInstance.gridSize.text = Std.string(System.guiSettings.gridSize);
