@@ -247,4 +247,46 @@ class SourceControl {
 		
 		return true;
 	}
+	
+	public static function setWindowSize () : Bool {
+		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiUuid > ""))
+			return false;
+		
+		if (System.guiSettings.rootName > "")
+			if (System.guiSettings.guiName != System.guiSettings.rootName)
+				return false;
+		
+		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		var exists:Bool = false;
+		
+		for (x in projXml.iterator())
+			if (x.nodeName == "window") {
+				var valid:Bool = true;
+				
+				if (x.exists("if"))
+					valid = x.get("if").indexOf("flash") < 0 && x.get("if").indexOf("html5") < 0;
+				
+				if (valid && (x.exists("width") || x.exists("height"))) {
+					x.set("width", Std.string(System.guiSettings.guiWidth));
+					x.set("height", Std.string(System.guiSettings.guiHeight));
+					
+					exists = true;
+				}
+			}
+		
+		if (!exists) {
+			var sx:Xml = Xml.createElement("window");
+			
+			sx.set("unless", "mobile");
+			sx.set("width", Std.string(System.guiSettings.guiWidth));
+			sx.set("height", Std.string(System.guiSettings.guiHeight));
+			
+			projXml.addChild(sx);
+		}
+		
+		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		
+		return true;
+	}
 }

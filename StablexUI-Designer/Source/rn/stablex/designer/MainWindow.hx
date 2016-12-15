@@ -381,9 +381,13 @@ class MainWindow extends Sprite {
 						Dialogs.message("neko-systools", "Instance was not generated!", true);
 				}
 				
-				if (System.guiSettings.project > "")
+				if (System.guiSettings.project > "") {
+					if (!SourceControl.setWindowSize())
+						Dialogs.message("neko-systools", "Window size has not been set!", true);
+					
 					if (!SourceControl.embedAssets())
 						Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
+				}
 				
 				if (!MainWindowInstance.wgtSrcActNoth.selected)
 					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
