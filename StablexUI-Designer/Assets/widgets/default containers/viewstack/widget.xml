@@ -3,23 +3,16 @@
 	left="0"
 	top="0"
 	w="100"
-	h="100">
+	h="100"
+	trans="(function () { var trans = new $Fade(); trans.duration = 0.25; return trans; })()">
 	<VBox padding="5">
 		<Button
 			text="'Next'"
-			on-click="
-				var trans = new $Fade();
-				trans.duration = 0.25;
-				cast($this.parent.parent, $ViewStack).trans = trans;
-				cast($this.parent.parent, $ViewStack).show(cast($this.parent.parent, $ViewStack).getChildAt(1).name);"/>
+			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(1).name);"/>
 	</VBox>
 	<VBox padding="5">
 		<Button
 			text="'Back'"
-			on-click="
-				var trans = new $Fade();
-				trans.duration = 0.25;
-				cast($this.parent.parent, $ViewStack).trans = trans;
-				cast($this.parent.parent, $ViewStack).show(cast($this.parent.parent, $ViewStack).getChildAt(0).name);"/>
+			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(0).name);"/>
 	</VBox>
 </ViewStack>

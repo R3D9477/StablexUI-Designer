@@ -8,6 +8,11 @@ import ru.stablex.ui.widgets.*;
 		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds(); 
 }
 
+@:noCompletion class TypeCast { // needed for ViewStack
+	public static function castType <T> (v:Dynamic, c:Class<T>) : T
+		return Std.is(v, c) ? cast v : null;
+}
+
 class MainWindowInstance {
 	macro static public function geInit () : Void {
 		UIBuilder.buildClass("XmlGui/MainWindowMenu.xml", "MainWindowMenu");
@@ -117,9 +122,14 @@ class MainWindowInstance {
 		UIBuilder.regClass("openfl.display.BitmapData");
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		UIBuilder.regClass("ClockTime");
+		UIBuilder.regClass("TypeCast");
 		
 		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Sys.getCwd()), "CWD", Sys.getCwd());
 		UIBuilder.init(null, true);
+		
+		RTXml.parser = new hscript.Parser();
+		RTXml.parser.allowJSON = true;
+		RTXml.parser.allowTypes = true;
 		
 		StablexUIMod.setRtxmlMod();
 		

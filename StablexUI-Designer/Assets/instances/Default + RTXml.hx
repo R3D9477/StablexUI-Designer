@@ -13,6 +13,11 @@ package %InstancePackage%;
 		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds();
 }
 
+@:noCompletion class TypeCast { // needed for ViewStack
+	public static function castType <T> (v:Dynamic, c:Class<T>) : T
+		return Std.is(v, c) ? cast v : null;
+}
+
 class %InstanceName% {
 	@:noCompletion macro public static function geInit () : Void // create source of GuiElements class
 	
@@ -24,6 +29,7 @@ class %InstanceName% {
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%ClockTime");
+		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%TypeCast");
 		
 		// UIBuilder initialization + RTXml
 		
