@@ -18,7 +18,7 @@
 		</Widget>
 		<Button
 			text="'Next'"
-			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(1).name);"/>
+			on-click="$Suid.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(1).name);"/>
 	</VBox>
 	<VBox
 		widthPt="95"
@@ -33,6 +33,6 @@
 		</Widget>
 		<Button
 			text="'Back'"
-			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(0).name);"/>
+			on-click="$Suid.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(0).name);"/>
 	</VBox>
 </ViewStack>

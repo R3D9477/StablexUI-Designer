@@ -3,13 +3,11 @@ package rn.stablex.designer;
 import ru.stablex.ui.*;
 import ru.stablex.ui.widgets.*;
 
-@:noCompletion class ClockTime { // workaround for https://github.com/RealyUniqueName/StablexUI/issues/235
-	public static function getCurrSeconds () : Int
-		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds(); 
-}
-
-@:noCompletion class TypeCast { // needed for ViewStack
-	public static function castType <T> (v:Dynamic, c:Class<T>) : T
+@:noCompletion class Suid {
+	public static function getCurrSeconds () : Int // workaround for https://github.com/RealyUniqueName/StablexUI/issues/235
+		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds();
+	
+	public static function castType <T> (v:Dynamic, c:Class<T>) : T // needed for ViewStack
 		return Std.is(v, c) ? cast v : null;
 }
 
@@ -118,11 +116,10 @@ class MainWindowInstance {
 	// gui initialization
 	
 	public static function setupInstance () : Void {
+		UIBuilder.regClass("Suid");
 		UIBuilder.regClass("haxe.io.Path");
-		UIBuilder.regClass("openfl.display.BitmapData");
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
-		UIBuilder.regClass("ClockTime");
-		UIBuilder.regClass("TypeCast");
+		UIBuilder.regClass("openfl.display.BitmapData");
 		
 		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Sys.getCwd()), "CWD", Sys.getCwd());
 		UIBuilder.init(null, true);

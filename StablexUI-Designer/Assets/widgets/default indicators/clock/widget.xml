@@ -3,5 +3,5 @@
 	left="0"
 	top="0"
 	label-selectable="false"
-	value="$ClockTime.getCurrSeconds()"
+	value="$Suid.getCurrSeconds()"
 	on-display="$this.run();"/>
