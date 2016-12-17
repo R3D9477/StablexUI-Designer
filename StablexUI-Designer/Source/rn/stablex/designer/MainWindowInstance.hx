@@ -127,10 +127,6 @@ class MainWindowInstance {
 		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Sys.getCwd()), "CWD", Sys.getCwd());
 		UIBuilder.init(null, true);
 		
-		RTXml.parser = new hscript.Parser();
-		RTXml.parser.allowJSON = true;
-		RTXml.parser.allowTypes = true;
-		
 		StablexUIMod.setRtxmlMod();
 		
 		MainWindowInstance.mainWnd = UIBuilder.buildFn("XmlGui/MainWindow.xml")();

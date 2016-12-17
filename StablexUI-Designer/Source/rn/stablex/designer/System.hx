@@ -234,6 +234,8 @@ class System {
 						return;
 					}
 				}
+				else if (Std.is(selWgt, Floating))
+					System.setupFloating(cast(selWgt, Floating), cast(dTargetWgt, Widget));
 				
 				var targetWgt:Widget = cast(dTargetWgt, Widget);
 				targetWgt.addChild(selWgt);
@@ -365,6 +367,13 @@ class System {
 			onAfter(dWgt);
 	}
 	
+	public static function setupFloating (fWgt:Floating, parentWgt:Widget) : Void {
+		if (fWgt.shown) {
+			cast(parentWgt, Widget).addChild(fWgt);
+			fWgt.visible = true;
+		}
+	}
+	
 	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
@@ -447,6 +456,9 @@ class System {
 						if (StablexUIMod.resolveClass(chXml.nodeName) == Type.getClass(dChildWgt))
 							System.wgtUiXmlMap.set(dChildWgt, chXml);
 				}
+				
+				if (System.wgtUiXmlMap.exists(dChildWgt) && Std.is(dChildWgt, Floating))
+					System.setupFloating(cast(dChildWgt, Floating), cast(dParentWgt, Widget));
 			},
 			function (dWgt:Dynamic) {
 				cast(dWgt, Widget).addEventListener(MouseEvent.CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
