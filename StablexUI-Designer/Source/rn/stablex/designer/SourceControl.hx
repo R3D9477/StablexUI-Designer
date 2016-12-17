@@ -172,9 +172,9 @@ class SourceControl {
 					else {
 						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
 						
-						if (Std.is(wgt, Floating))
-							if (cast(wgt, Floating).shown)
-								instLines.insert(++ili, '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)');
+						//if (Std.is(wgt, Floating))
+						//	if (cast(wgt, Floating).shown)
+						//		instLines.insert(++ili, '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)');
 					}
 				}
 				else
