@@ -5,12 +5,32 @@
 	w="100"
 	h="100"
 	trans="(function () { var trans = new $Fade(); trans.duration = 0.25; return trans; })()">
-	<VBox padding="5">
+	<VBox
+		widthPt="95"
+		heightPt="95"
+		layout:Row-rows="[-1, 0]"
+		layout:Row-cellPadding="5">
+		<Widget>
+			<Text
+				left="0"
+				top="0"
+				text="'Page 1'"/>
+		</Widget>
 		<Button
 			text="'Next'"
 			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(1).name);"/>
 	</VBox>
-	<VBox padding="5">
+	<VBox
+		widthPt="95"
+		heightPt="95"
+		layout:Row-rows="[-1, 0]"
+		layout:Row-cellPadding="5">
+		<Widget>
+			<Text
+				left="0"
+				top="0"
+				text="'Page 2'"/>
+		</Widget>
 		<Button
 			text="'Back'"
 			on-click="$TypeCast.castType($this.parent.parent, $ViewStack).show($this.parent.parent.getChildAt(0).name);"/>

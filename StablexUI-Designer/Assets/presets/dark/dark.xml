@@ -204,7 +204,7 @@
 	</VBox>
 	<ViewStack>
 		<Default
-			skin:Paint-color="0x272727"
+			skin:Paint-color="0xFFFFFF"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
 	</ViewStack>
