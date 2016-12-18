@@ -184,7 +184,9 @@
 			format-color="0x0AD49E"/>
 	</Text>
 	<Tip>
-		<Default/>
+		<Default
+			label-format-size="12"
+			label-format-color="0x0AD49E"/>
 	</Tip>
 	<Toggle>
 		<Default

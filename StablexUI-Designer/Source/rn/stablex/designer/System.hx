@@ -199,7 +199,7 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// tab Designer: widget's movement
 	
-	public static function onBoxClick (e:MouseEvent) : Void {
+	public static function onWgtClick (e:MouseEvent) : Void {
 		var selWgt:Dynamic = null;
 		
 		if (System.selWgtData != null)
@@ -221,43 +221,57 @@ class System {
 				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
 				
 				var dTargetWgt:Dynamic = e.currentTarget;
+				var targetWgt:Widget = cast(dTargetWgt, Widget);
 				
-				if (Std.is(selWgt, TabPage)) {
-					while (!Std.is(dTargetWgt, TabStack) && !Std.is(dTargetWgt, GuiElements))
-						dTargetWgt = dTargetWgt.parent;
-					
-					if (!Std.is(dTargetWgt, TabStack)) {
-						Dialogs.message("neko-systools", "Parent TabStack was not found!", true);
-						return;
+				if (Std.is(selWgt, Tip)) {
+					if (Type.getClass(dTargetWgt) != GuiElements) {
+						for (tipAttr in selXml.attributes()) {
+							System.wgtUiXmlMap.get(System.selWgt).set('tip:Tip-${tipAttr}', selXml.get(tipAttr));
+							System.addPropRow('tip:Tip-${tipAttr}', selXml.get(tipAttr));
+							
+							System.setWgtProperty(dTargetWgt, 'tip:Tip-${tipAttr}', selXml.get(tipAttr));
+						}
+						
+						StablexUIMod.applyDefaults(targetWgt.tip);
 					}
 				}
-				
-				var targetWgt:Widget = cast(dTargetWgt, Widget);
-				targetWgt.addChild(selWgt);
-				
-				var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
-				targetXml.addChild(selXml);
-				
-				System.wgtUiXmlMap.set(selWgt, selXml);
-				System.setupEachWidget(selWgt);
-				
-				if (System.selWgtData.bin != null) {
-					#if neko
-						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
-							var wgtSrc:String = Path.join([System.selWgtData.dir, System.selWgtData.src]);
-							
-							if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
-								SourceControl.wgtSources.push(wgtSrc);
+				else if (System.isBox(Type.getClass(dTargetWgt))) {
+					if (Std.is(selWgt, TabPage)) {
+						while (!Std.is(dTargetWgt, TabStack) && !Std.is(dTargetWgt, GuiElements))
+							dTargetWgt = dTargetWgt.parent;
+						
+						if (!Std.is(dTargetWgt, TabStack)) {
+							Dialogs.message("neko-systools", "Parent TabStack was not found!", true);
+							return;
 						}
-					#end
-				}
-				
-				if (!Std.is(e.currentTarget, Box) && !Std.is(e.currentTarget, TabStack)) {
-					System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
-					System.setWgtProperty(selWgt, "left", Std.string(Std.int(e.localX)));
+					}
 					
-					cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
-					cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+					targetWgt.addChild(selWgt);
+					
+					var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
+					targetXml.addChild(selXml);
+					
+					System.wgtUiXmlMap.set(selWgt, selXml);
+					System.setupEachWidget(selWgt);
+					
+					if (System.selWgtData.bin != null) {
+						#if neko
+							if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
+								var wgtSrc:String = Path.join([System.selWgtData.dir, System.selWgtData.src]);
+								
+								if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
+									SourceControl.wgtSources.push(wgtSrc);
+							}
+						#end
+					}
+					
+					if (!Std.is(e.currentTarget, Box) && !Std.is(e.currentTarget, TabStack)) {
+						System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
+						System.setWgtProperty(selWgt, "left", Std.string(Std.int(e.localX)));
+						
+						cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN));
+						cast(selWgt, Widget).dispatchEvent(new MouseEvent(MouseEvent.MOUSE_UP));
+					}
 				}
 				
 				targetWgt.refresh();
@@ -374,19 +388,21 @@ class System {
 				wgt.addEventListener(MouseEvent.MOUSE_UP, System.onMoveWgtMouseUp);
 				wgt.addEventListener(MouseEvent.RIGHT_CLICK, function (e:MouseEvent) MainWindowInstance.wlSelectBtn.selected = true);
 				
-				if (Type.getClass(dWgt) != GuiElements && System.wgtUiXmlMap.exists(dWgt)) {
-					wgt.addEventListener(MouseEvent.MOUSE_DOWN, System.onMoveWgtMouseDown);
-					wgt.addEventListener(MouseEvent.MOUSE_MOVE, System.onMoveWgtMouseMove);
+				if (System.wgtUiXmlMap.exists(dWgt)) {
+					wgt.addEventListener(MouseEvent.CLICK, System.onWgtClick);
 					
-					MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
+					if (Type.getClass(dWgt) != GuiElements) {
+						wgt.addEventListener(MouseEvent.MOUSE_DOWN, System.onMoveWgtMouseDown);
+						wgt.addEventListener(MouseEvent.MOUSE_MOVE, System.onMoveWgtMouseMove);
+						
+						MainWindowInstance.guiWgtsList.options.push(['${wgt.name}:${Type.getClassName(Type.getClass(dWgt))}', wgt.name]);
+					}
 				}
 			},
 			function (dWgt:Dynamic) {
 				if (System.wgtUiXmlMap.exists(dWgt)) {
-					var wgt:Widget = cast(dWgt, Widget);
-					wgt.addEventListener(MouseEvent.CLICK, System.onBoxClick);
-					
 					if (MainWindowInstance.useGrid.selected && MainWindowInstance.gridType.value > 0) { // draw grid
+						var wgt:Widget = cast(dWgt, Widget);
 						var origApplySkin:Void->Void = Reflect.field(dWgt, "applySkin");
 						
 						Reflect.setField(dWgt, "applySkin", function () : Void {

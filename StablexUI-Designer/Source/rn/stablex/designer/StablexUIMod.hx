@@ -71,6 +71,9 @@ class StablexUIMod {
 				else if (Std.is(dWgt, Progress))
 					cast(dWgt, Progress).value = cast(dWgt, Progress).value;
 				
+				if (wgt.tip != null)
+					StablexUIMod.applyDefaults(wgt.tip);
+				
 				wgt.refresh();
 			}
 		}
