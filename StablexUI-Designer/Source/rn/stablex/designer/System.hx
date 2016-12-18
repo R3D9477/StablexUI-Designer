@@ -322,9 +322,9 @@ class System {
 				System.setWgtProperty(System.moveWgt, "left", Std.string(nLeft));
 				System.moveWgtX = e.stageX;
 			}
+			
+			e.stopPropagation();
 		}
-		
-		e.stopPropagation();
 	}
 	
 	public static function onMoveWgtMouseUp (e:MouseEvent) : Void {
