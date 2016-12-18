@@ -235,7 +235,7 @@ class System {
 						StablexUIMod.applyDefaults(targetWgt.tip);
 					}
 				}
-				else if (System.isBox(Type.getClass(dTargetWgt))) {
+				else if (System.isContainer(Type.getClass(dTargetWgt))) {
 					if (Std.is(selWgt, TabPage)) {
 						while (!Std.is(dTargetWgt, TabStack) && !Std.is(dTargetWgt, GuiElements))
 							dTargetWgt = dTargetWgt.parent;
@@ -336,7 +336,7 @@ class System {
 	//-----------------------------------------------------------------------------------------------
 	// gui builder
 	
-	public static function isBox (wgtClass:Class<Dynamic>) : Bool {
+	public static function isContainer (wgtClass:Class<Dynamic>) : Bool {
 		return
 			wgtClass == GuiElements ||
 			wgtClass == ru.stablex.ui.widgets.Box ||
@@ -354,7 +354,7 @@ class System {
 		if (onBefore != null)
 			onBefore(dWgt);
 		
-		if (System.isBox(Type.getClass(dWgt))) {
+		if (System.isContainer(Type.getClass(dWgt))) {
 			if (onBox != null)
 				onBox(dWgt);
 			
@@ -600,7 +600,7 @@ class System {
 			MainWindowInstance.wgtsPropsLst.freeChildren(true);
 		}
 		
-		if (System.isBox(Type.getClass(wgt)))
+		if (System.isContainer(Type.getClass(wgt)))
 			for (i in 0...cast(wgt, Widget).numChildren)
 				System.deleteWidget(cast(wgt, Widget).getChildAt(i));
 		
