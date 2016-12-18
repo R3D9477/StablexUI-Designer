@@ -169,13 +169,8 @@ class SourceControl {
 						instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
 						instLines.insert(++ili, Std.is(wgt, Floating) ? '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)' : '		openfl.Lib.current.stage.addChild($instanceName.$wgtName); // $gUuidStr ($gXmlName)');
 					}
-					else {
+					else
 						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
-						
-						//if (Std.is(wgt, Floating))
-						//	if (cast(wgt, Floating).shown)
-						//		instLines.insert(++ili, '		$instanceName.$wgtName.show(); // $gUuidStr ($gXmlName)');
-					}
 				}
 				else
 					instLines.insert(ili + wgtInd, '		$instanceName.$wgtName = cast($instanceName.${System.guiSettings.guiName}.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');

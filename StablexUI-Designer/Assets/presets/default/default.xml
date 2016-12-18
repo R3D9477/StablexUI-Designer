@@ -178,7 +178,13 @@
 			format-color="0x000000"/>
 	</Text>
 	<Tip>
-		<Default/>
+		<Default
+			label-skin:Paint-color="0x000000"
+			label-skin:Paint-alpha="0.7"
+			label-skin:Paint-corners="[10]"
+			label-format-color="0xFFFFFF"
+			label-format-size="14"
+			label-padding="5"/>
 	</Tip>
 	<Toggle>
 		<Default

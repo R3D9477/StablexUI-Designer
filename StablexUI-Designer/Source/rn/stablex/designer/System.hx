@@ -207,13 +207,10 @@ class System {
 				if (System.selWgtData.bin != null) {
 					#if neko
 						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
-							/*trace(Loader.local().loadModule(System.selWgtData.bin).exportsTable());
-							return;
-							
-							var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin).exportsTable().__classes, "GridWidget");
+							var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin.neko).exportsTable().__classes, selWgtData.className);
 							untyped wgtBinCls.__super__ = Widget;
 							
-							RTXml.regClass(wgtBinCls);*/
+							RTXml.regClass(wgtBinCls);
 						}
 					#end
 				}
