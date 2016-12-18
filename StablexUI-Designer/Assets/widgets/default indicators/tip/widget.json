@@ -1,0 +1,11 @@
+{
+	"title": "Tip",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "ru.stablex.ui.widgets.Tip",
+	"properties": [
+		"target",
+		"text",
+		"label"
+	]
+}
