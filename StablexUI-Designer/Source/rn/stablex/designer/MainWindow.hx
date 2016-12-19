@@ -626,23 +626,38 @@ class MainWindow extends Sprite {
 	}
 	
 	function wgtAddPropBtnClick (e:MouseEvent) : Void {
-		if (System.selWgt != null && MainWindowInstance.wgtPropNamesLst.value != null) {
-			var prop:Dynamic = Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropNamesLst.value);
+		var propName:String = switch (MainWindowInstance.wgtPropTabs.activeTab().name) {
+			case "wgtPropTabsList":
+				MainWindowInstance.wgtPropNamesLst.value;
+			case "wgtPropTabsManual":
+				MainWindowInstance.wgtPropCustom.text;
+			default:
+				null;
+		}
+		
+		if (System.selWgt != null && propName > "") {
+			var prop:Dynamic = Reflect.getProperty(System.selWgt, propName);
 			var value:String = Std.string(prop).replace(",", ".");
 			
 			if (Std.is(prop, String))
 				value = "'" + value + "'";
 			
-			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropNamesLst.value, value);
-			System.addPropRow(MainWindowInstance.wgtPropNamesLst.value, value);
+			System.wgtUiXmlMap.get(System.selWgt).set(propName, value);
+			System.addPropRow(propName, value);
 			
-			var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
-			proplst.remove(MainWindowInstance.wgtPropNamesLst.value);
-			
-			MainWindowInstance.wgtPropNamesLst.options = proplst.length > 0 ? proplst : [ [ "", null ] ];
-			
-			MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
-			MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+			switch (MainWindowInstance.wgtPropTabs.activeTab().name) {
+				case "wgtPropTabsList":
+					var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
+					proplst.remove(MainWindowInstance.wgtPropNamesLst.value);
+					
+					MainWindowInstance.wgtPropNamesLst.options = proplst.length > 0 ? proplst : [ [ "", null ] ];
+					
+					MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
+					MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+				case "wgtPropTabsManual":
+					MainWindowInstance.wgtPropCustom.text = "";
+				default:
+			}
 		}
 		
 		e.stopPropagation();

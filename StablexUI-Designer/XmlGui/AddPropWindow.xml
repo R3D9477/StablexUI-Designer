@@ -1,45 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Floating
 	w="300"
-	h="100"
+	h="150"
 	skin:Paint-color="0xC0C0C0"
 	skin:Paint-border="1"
 	skin:Paint-borderColor="0xFFFFFF">
 	<VBox
 		widthPt="100"
 		heightPt="100"
-		skin:Paint-color="0xC0C0C0"
-		layout:Row-rows="[0, 0, 0]"
+		layout:Row-rows="[0, 0]"
 		layout:Row-paddingTop="10"
 		layout:Row-cellPadding="10"
 		layout:Row-paddingLeft="10"
 		layout:Row-paddingRight="10">
-		<HBox
-			layout:Column-cols="[0, -1]"
-			layout:Column-cellPadding="10">
-			<Text text="'Type:'"/>
-			<Options
-				name="'wgtPropTypesLst'"
-				box-skin:Paint-alpha="0.9"
-				skin:Paint-color="0xC0C0C0"
-				skin:Paint-border="1"
-				skin:Paint-borderColor="0x909090"
-				list-skin:Paint-color="0x454545"
-				list-skin:Paint-alpha="1"/>
-		</HBox>
-		<HBox
-			layout:Column-cols="[0, -1]"
-			layout:Column-cellPadding="10">
-			<Text text="'Property:'"/>
-			<Options
-				name="'wgtPropNamesLst'"
-				box-skin:Paint-alpha="0.9"
-				skin:Paint-color="0xC0C0C0"
-				skin:Paint-border="1"
-				skin:Paint-borderColor="0x909090"
-				list-skin:Paint-color="0x454545"
-				list-skin:Paint-alpha="1"/>
-		</HBox>
+		<TabStack
+			name="'wgtPropTabs'"
+			left="0"
+			top="0">
+			<TabPage
+				name="'wgtPropTabsList'"
+				title-text="'Select from list'"
+				title-format-size="12"
+				title-format-color="0x000000"
+				title-highlightOnSelect="true"
+				title-highlightFormat-color="0xFF0000">
+				<VBox
+					widthPt="100"
+					heightPt="100"
+					layout:Row-rows="[0, 0]"
+					layout:Row-paddingTop="10"
+					layout:Row-cellPadding="10">
+					<HBox
+						layout:Column-cols="[0, -1]"
+						layout:Column-cellPadding="10">
+						<Text text="'Type:'"/>
+						<Options
+							name="'wgtPropTypesLst'"
+							box-skin:Paint-alpha="0.9"
+							skin:Paint-color="0xC0C0C0"
+							skin:Paint-border="1"
+							skin:Paint-borderColor="0x909090"
+							list-skin:Paint-color="0x454545"
+							list-skin:Paint-alpha="1"/>
+					</HBox>
+					<HBox
+						layout:Column-cols="[0, -1]"
+						layout:Column-cellPadding="10">
+						<Text text="'Property:'"/>
+						<Options
+							name="'wgtPropNamesLst'"
+							box-skin:Paint-alpha="0.9"
+							skin:Paint-color="0xC0C0C0"
+							skin:Paint-border="1"
+							skin:Paint-borderColor="0x909090"
+							list-skin:Paint-color="0x454545"
+							list-skin:Paint-alpha="1"/>
+					</HBox>
+				</VBox>
+			</TabPage>
+			<TabPage
+				name="'wgtPropTabsManual'"
+				title-text="'Enter manually'"
+				title-format-size="12"
+				title-format-color="0x000000"
+				title-highlightOnSelect="true"
+				title-highlightFormat-color="0xFF0000">
+				<VBox
+					widthPt="100"
+					heightPt="100"
+					layout:Row-rows="[0, -1]"
+					layout:Row-paddingTop="10"
+					layout:Row-cellPadding="10">
+					<Text text="'Property full name:'"/>
+					<InputText
+						name="'wgtPropCustom'"
+						label-wordWrap="true"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x909090"/>
+				</VBox>
+			</TabPage>
+		</TabStack>
 		<Button
 			name="'wgtAddPropBtn'"
 			text="'Add'"

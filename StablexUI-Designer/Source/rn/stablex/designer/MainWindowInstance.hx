@@ -97,8 +97,10 @@ class MainWindowInstance {
 	public static var deleteWgtPropBtn:Button;
 	
 	public static var wgtPropWnd:Floating;
+	public static var wgtPropTabs:TabStack;
 	public static var wgtPropTypesLst:Options;
 	public static var wgtPropNamesLst:Options;
+	public static var wgtPropCustom:InputText;
 	public static var wgtAddPropBtn:Button;
 	
 	public static var wgtEditPropWnd:Floating;
@@ -195,8 +197,10 @@ class MainWindowInstance {
 		MainWindowInstance.deleteWgtPropBtn = cast(MainWindowInstance.mainWnd.getChild("deleteWgtPropBtn"), Button);
 		
 		MainWindowInstance.wgtPropWnd = UIBuilder.buildFn("XmlGui/AddPropWindow.xml")();
+		MainWindowInstance.wgtPropTabs = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropTabs"), TabStack);
 		MainWindowInstance.wgtPropTypesLst = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropTypesLst"), Options);
 		MainWindowInstance.wgtPropNamesLst = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropNamesLst"), Options);
+		MainWindowInstance.wgtPropCustom = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropCustom"), InputText);
 		MainWindowInstance.wgtAddPropBtn = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropBtn"), Button);
 		
 		MainWindowInstance.wgtEditPropWnd = UIBuilder.buildFn("XmlGui/EditPropWindow.xml")();
