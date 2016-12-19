@@ -55,20 +55,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 
 ###Install:<br/>
 
-#####Linux:<br/>
-* Neko 32-bit
+#####Linux (one-command installation):<br/>
 ```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash -32 -neko
-```
-* Neko 64-bit
-```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash -64 -neko
-```
-* Cpp 32-bit
-```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash -32 -cpp
-```
-* Cpp 64-bit
-```bash
-curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash -64 -cpp
+curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
 ```
