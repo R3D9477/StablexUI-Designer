@@ -50,20 +50,49 @@ git clone https://github.com/r3d9u11/StablexUI-Designer.git
 # COMPILE AND RUN STABLEXUI-DESIGNER #
 ######################################
 
+PLATFORM=32
+TARGET="neko"
+OUTDIR="linux"
+
+if [ $(uname -m) = "x86_64" ]; then
+	PLATFORM=64
+fi
+
+for i in "$@"
+	do
+	if [ $i = "-32" ]; then
+		PLATFORM=32
+	elif [ $i = "-64" ]; then
+		PLATFORM=64
+	elif [ $i = "-neko" ]; then
+		TARGET="neko"
+	elif [ $i = "-cpp" ]; then
+		TARGET="cpp"
+	fi
+done
+
+OUTDIR="linux"
+
+if [ $PLATFORM -eq 64 ]; then
+	OUTDIR=$OUTDIR'64'
+fi
+
+OUTDIR=$OUTDIR'/'$TARGET
+
+echo "PLATFORM = ${PLATFORM}"
+echo "TARGET = ${TARGET}"
+echo "OUTDIR = ${OUTDIR}"
+
 cd "./StablexUI-Designer/StablexUI-Designer"
 rm -rf "./Export"
 
-### compile for neko
+openfl build linux -$PLATFORM -$TARGET
 
-#openfl build linux -neko
+cd "./Export/"$OUTDIR"/release/bin"
 
-#cd "./Export/linux/neko/release/bin"
-#cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
-#neko "StablexUI-Designer.n"
-
-### compile for cpp
-
-openfl build linux -cpp
-
-cd "./Export/linux/cpp/release/bin"
-"./StablexUI-Designer"
+if [ $TARGET = "neko" ]; then
+	cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
+	neko "StablexUI-Designer.n"
+else
+	"./StablexUI-Designer"
+fi
