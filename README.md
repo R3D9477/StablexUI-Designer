@@ -38,7 +38,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 
 ###Available targets:<br/>
 * [neko](http://haxe.org/doc/start/neko)
-* [cpp](http://haxe.org/doc/start/cpp)
+* [cpp](http://haxe.org/doc/start/cpp) (restricted)
 
 ###Requirements:<br/>
 * [haxe](https://haxe.org) 3.2.1 or later
