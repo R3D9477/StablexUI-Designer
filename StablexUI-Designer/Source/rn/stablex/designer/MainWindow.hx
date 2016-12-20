@@ -33,6 +33,10 @@ using rn.typext.ext.StringExtender;
 class MainWindow extends Sprite {
 	private var origCwd:String;
 	
+	private var tmpPpBuf:String;
+	private var tmpPpBufRmType:Bool;
+	private var tmpPpBufRmName:Bool;
+	
 	//-----------------------------------------------------------------------------------------------
 	// setup main window
 	
@@ -243,9 +247,15 @@ class MainWindow extends Sprite {
 		// widget's properties menu
 		
 		MainWindowInstance.showWgtPropsBtn.addEventListener(MouseEvent.CLICK, this.showWgtPropsBtnClick);
+		MainWindowInstance.wgtPropTypesLst.addEventListener(WidgetEvent.CHANGE, this.wgtAddPropTypeChanged);
+		MainWindowInstance.wgtPropNamesLst.addEventListener(WidgetEvent.CHANGE, this.wgtAddPropNameChanged);
+		MainWindowInstance.wgtAddPropRefresh.addEventListener(MouseEvent.CLICK, this.wgtAddPropRefresh);
+		MainWindowInstance.wgtAddPropBack.addEventListener(MouseEvent.CLICK, this.wgtAddPropBack);
 		MainWindowInstance.wgtAddPropBtn.addEventListener(MouseEvent.CLICK, this.wgtAddPropBtnClick);
+		
 		MainWindowInstance.showEditWgtPropBtn.addEventListener(MouseEvent.CLICK, this.showEditWgtPropBtnClick);
 		MainWindowInstance.editPropValueSaveBtn.addEventListener(MouseEvent.CLICK, this.editPropValueSaveClick);
+		
 		MainWindowInstance.deleteWgtPropBtn.addEventListener(MouseEvent.CLICK, this.deleteWgtPropBtnClick);
 		
 		//-----------------------------------------------------------------------------------------------
@@ -582,6 +592,21 @@ class MainWindow extends Sprite {
 		}
 	}
 	
+	function showWgtPropTypes (obj:Dynamic) : Void {
+		var opts = [ [ "Not Selected", null ] ];
+		
+		for (arr in [System.wgtPropsMap.keys().array(), System.wgtSkinsMap.keys().array()])
+			opts = opts
+				.concat(System.wgtPropsMap.keys().array()
+					.filter(function (wgtPropClass:String) : Bool return Std.is(obj, Type.resolveClass(wgtPropClass)))
+					.map(function (wgtPropClass) : Array<String> return [ System.wgtPropsMap.get(wgtPropClass).name, wgtPropClass ])
+				);
+		
+		MainWindowInstance.wgtPropTypesLst.options = opts;
+		MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
+		MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+	}
+	
 	function showWgtPropsBtnClick (e:MouseEvent) : Void {
 		MainWindowInstance.wgtEditPropWnd.hide();
 		
@@ -589,35 +614,11 @@ class MainWindow extends Sprite {
 			MainWindowInstance.wgtPropWnd.top = e.stageY + 5;
 			MainWindowInstance.wgtPropWnd.left = e.stageX - MainWindowInstance.wgtPropWnd.w - 5;
 			
-			MainWindowInstance.wgtPropTypesLst.clearEvent(WidgetEvent.CHANGE);
-			MainWindowInstance.wgtPropTypesLst.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) {
-				var nullToEmptyArr = function (data:Dynamic) : Dynamic return data == null ? { properties: new Array<String>() } : data;
-				
-				var proplst:Array<Array<String>> = nullToEmptyArr(System.wgtPropsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
-					.filter(function (wgtProperty:String) : Bool return !System.selWgtProps.exists(wgtProperty))
-					.map(function (wgtProperty:String) : Array<String> return [ System.propNameMap(wgtProperty), wgtProperty ])
-					.concat(nullToEmptyArr(System.wgtSkinsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
-						.map(function (skinProperty:String) : String return "skin:" + MainWindowInstance.wgtPropTypesLst.value.split(".").pop() + "-" + skinProperty)
-						.filter(function (skinProperty:String) : Bool return !System.selWgtProps.exists(skinProperty))
-						.map(function (skinProperty:String) : Array<String> return [skinProperty , skinProperty])
-					);
-				
-				MainWindowInstance.wgtPropNamesLst.options = proplst.length > 0 ? proplst : [ [ "", null ] ];
-				
-				MainWindowInstance.wgtPropNamesLst.value = MainWindowInstance.wgtPropNamesLst.options[0];
-				MainWindowInstance.wgtPropNamesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-			});
+			this.tmpPpBuf = "";
+			this.tmpPpBufRmType = false;
+			this.tmpPpBufRmName = false;
 			
-			MainWindowInstance.wgtPropTypesLst.options = System.wgtPropsMap.keys().array()
-				.filter(function (wgtPropClass:String) : Bool return Std.is(System.selWgt, Type.resolveClass(wgtPropClass)))
-				.map(function (wgtPropClass) : Array<String> return [ System.wgtPropsMap.get(wgtPropClass).name, wgtPropClass ])
-				.concat(System.wgtSkinsMap.keys().array()
-					.filter(function (skinPropClass:String) : Bool return Reflect.getProperty(System.selWgt, "skin") == null || Std.is(Reflect.getProperty(System.selWgt, "skin"), Type.resolveClass(skinPropClass)))
-					.map(function (skinPropClass) : Array<String> return [ "skin:" + skinPropClass.split(".").pop(), skinPropClass ])
-				);
-			
-			MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
-			MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+			this.showWgtPropTypes(System.selWgt);
 			
 			MainWindowInstance.wgtPropWnd.show();
 		}
@@ -625,39 +626,113 @@ class MainWindow extends Sprite {
 		e.stopPropagation();
 	}
 	
-	function wgtAddPropBtnClick (e:MouseEvent) : Void {
-		var propName:String = switch (MainWindowInstance.wgtPropTabs.activeTab().name) {
-			case "wgtPropTabsList":
-				MainWindowInstance.wgtPropNamesLst.value;
-			case "wgtPropTabsManual":
-				MainWindowInstance.wgtPropCustom.text;
-			default:
-				null;
+	function wgtAddPropTypeChanged (e:Event) : Void {
+		if (this.tmpPpBufRmType)
+			if (this.tmpPpBuf.indexOf(":") >= 0)
+				this.tmpPpBuf = this.tmpPpBuf.split(":").slice(0, -1).join(":");
+		
+		this.tmpPpBufRmType = true;
+		this.tmpPpBufRmName = false;
+		
+		var props:Array<Array<String>> = [ [ "Not Selected", null ] ];
+		
+		if (MainWindowInstance.wgtPropTypesLst.value > "") {
+			if (this.tmpPpBuf > "")
+				this.tmpPpBuf += ":" + MainWindowInstance.wgtPropTypesLst.value.split(".").pop();
+			
+			var nullToEmptyArr = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
+			
+			props = props
+				.concat(nullToEmptyArr(System.wgtPropsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
+					.filter(function (wgtProperty:String) : Bool return !System.selWgtProps.exists(wgtProperty))
+					.map(function (wgtProperty:String) : Array<String> return [ System.propNameMap(wgtProperty), wgtProperty ])
+				);
 		}
 		
-		if (System.selWgt != null && propName > "") {
-			var prop:Dynamic = Reflect.getProperty(System.selWgt, propName);
+		var prop:Dynamic = this.tmpPpBuf > "" ? System.getGuiObjProperty(System.selWgt, this.tmpPpBuf) : System.selWgt;
+		
+		if (Std.is(prop, Widget))
+			props = props
+				.concat(System.wgtSkinsMap.keys().array()
+					.filter(function (skinPropClass:String) : Bool return Reflect.getProperty(prop, "skin") == null || Std.is(Reflect.getProperty(prop, "skin"), Type.resolveClass(skinPropClass)))
+					.map(function (skinPropClass) : Array<String> return {
+						var skinName:String = skinPropClass.split(".").pop();
+						return [ "skin:" + skinName, "skin:" + skinName ];
+					})
+				);
+		
+		MainWindowInstance.wgtPropNamesLst.options = props;
+		
+		MainWindowInstance.wgtPropNamesLst.value = MainWindowInstance.wgtPropNamesLst.options[0];
+		MainWindowInstance.wgtPropNamesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		
+		e.stopPropagation();
+	}
+	
+	function wgtAddPropNameChanged (e:Event) : Void {
+		if (this.tmpPpBufRmName)
+			if (this.tmpPpBuf.indexOf("-") >= 0)
+				this.tmpPpBuf = this.tmpPpBuf.split("-").slice(0, -1).join("-");
+		
+		this.tmpPpBufRmName = true;
+		
+		if (MainWindowInstance.wgtPropNamesLst.value > "") {
+			if (this.tmpPpBuf > "")
+				this.tmpPpBuf += "-";
+			
+			this.tmpPpBuf += MainWindowInstance.wgtPropNamesLst.value;
+			
+			if (this.tmpPpBuf > "") {
+				var prop:Dynamic = System.getGuiObjProperty(System.selWgt, this.tmpPpBuf);
+				
+				if (Std.is(prop, Widget) || Std.is(prop, Skin)) {
+					this.tmpPpBufRmType = false;
+					this.showWgtPropTypes(prop);
+				}
+			}
+		}
+		
+		MainWindowInstance.wgtPropCustom.text = this.tmpPpBuf;
+		
+		e.stopPropagation();
+	}
+	
+	function wgtAddPropRefresh (e:MouseEvent) : Void {
+		this.tmpPpBuf = MainWindowInstance.wgtPropCustom.text;
+		
+		this.tmpPpBufRmType = false;
+		this.tmpPpBufRmName = false;
+		
+		this.showWgtPropTypes(System.getGuiObjProperty(System.selWgt, this.tmpPpBuf));
+		
+		e.stopPropagation();
+	}
+	
+	function wgtAddPropBack (e:MouseEvent) : Void {
+		if (this.tmpPpBuf.indexOf("-") >= 0)
+			this.tmpPpBuf = this.tmpPpBuf.split("-").slice(0, -1).join("-");
+		
+		this.tmpPpBufRmType = false;
+		this.tmpPpBufRmName = false;
+		
+		var prop:Dynamic = System.getGuiObjProperty(System.selWgt, this.tmpPpBuf);
+		
+		if (Std.is(prop, Widget) || Std.is(prop, Skin))
+			this.showWgtPropTypes(prop);
+		
+		e.stopPropagation();
+	}
+	
+	function wgtAddPropBtnClick (e:MouseEvent) : Void {
+		if (System.selWgt != null && MainWindowInstance.wgtPropCustom.text > "") {
+			var prop:Dynamic = Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropCustom.text);
 			var value:String = Std.string(prop).replace(",", ".");
 			
 			if (Std.is(prop, String))
 				value = "'" + value + "'";
 			
-			System.wgtUiXmlMap.get(System.selWgt).set(propName, value);
-			System.addPropRow(propName, value);
-			
-			switch (MainWindowInstance.wgtPropTabs.activeTab().name) {
-				case "wgtPropTabsList":
-					var proplst:Array<Array<Dynamic>> = MainWindowInstance.wgtPropNamesLst.options;
-					proplst.remove(MainWindowInstance.wgtPropNamesLst.value);
-					
-					MainWindowInstance.wgtPropNamesLst.options = proplst.length > 0 ? proplst : [ [ "", null ] ];
-					
-					MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
-					MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-				case "wgtPropTabsManual":
-					MainWindowInstance.wgtPropCustom.text = "";
-				default:
-			}
+			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropCustom.text, value);
+			System.addPropRow(MainWindowInstance.wgtPropCustom.text, value);
 		}
 		
 		e.stopPropagation();

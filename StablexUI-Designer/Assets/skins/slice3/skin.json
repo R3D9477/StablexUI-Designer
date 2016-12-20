@@ -1,0 +1,17 @@
+{
+	"className": "ru.stablex.ui.skins.Slice3",
+	"properties": [
+		"src",
+		"bitmapData",
+		"smooth",
+		"stretch",
+		"paddingTop",
+		"paddingRight",
+		"paddingBottom",
+		"paddingLeft",
+		"padding",
+		"srcRect",
+		"slice",
+		"vertical"
+	]
+}

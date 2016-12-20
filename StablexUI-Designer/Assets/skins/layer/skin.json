@@ -1,0 +1,7 @@
+{
+	"className": "ru.stablex.ui.skins.Layer",
+	"properties": [
+		"current",
+		"behind"
+	]
+}

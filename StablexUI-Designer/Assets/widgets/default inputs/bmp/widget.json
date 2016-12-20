@@ -2,7 +2,7 @@
 	"title": "Image",
 	"xml": "widget.xml",
 	"ico": "ico.png",
-	"className": "ru.stablex.ui.widgets.Box",
+	"className": "ru.stablex.ui.widgets.Bmp",
 	"properties": [
 		"src",
 		"smooth",

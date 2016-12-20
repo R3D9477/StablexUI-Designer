@@ -1,5 +1,5 @@
 {
-	"className": "ru.stablex.ui.skins.Paint",
+	"className": "ru.stablex.ui.skins.Img",
 	"properties": [
 		"src",
 		"smooth",

@@ -1,0 +1,8 @@
+{
+	"className": "ru.stablex.ui.skins.Tile",
+	"properties": [
+		"src",
+		"bitmapData",
+		"smooth"
+	]
+}

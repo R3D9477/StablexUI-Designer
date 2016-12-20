@@ -97,9 +97,10 @@ class MainWindowInstance {
 	public static var deleteWgtPropBtn:Button;
 	
 	public static var wgtPropWnd:Floating;
-	public static var wgtPropTabs:TabStack;
 	public static var wgtPropTypesLst:Options;
 	public static var wgtPropNamesLst:Options;
+	public static var wgtAddPropRefresh:Button;
+	public static var wgtAddPropBack:Button;
 	public static var wgtPropCustom:InputText;
 	public static var wgtAddPropBtn:Button;
 	
@@ -197,9 +198,10 @@ class MainWindowInstance {
 		MainWindowInstance.deleteWgtPropBtn = cast(MainWindowInstance.mainWnd.getChild("deleteWgtPropBtn"), Button);
 		
 		MainWindowInstance.wgtPropWnd = UIBuilder.buildFn("XmlGui/AddPropWindow.xml")();
-		MainWindowInstance.wgtPropTabs = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropTabs"), TabStack);
 		MainWindowInstance.wgtPropTypesLst = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropTypesLst"), Options);
 		MainWindowInstance.wgtPropNamesLst = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropNamesLst"), Options);
+		MainWindowInstance.wgtAddPropRefresh = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropRefresh"), Button);
+		MainWindowInstance.wgtAddPropBack = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropBack"), Button);
 		MainWindowInstance.wgtPropCustom = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropCustom"), InputText);
 		MainWindowInstance.wgtAddPropBtn = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropBtn"), Button);
 		
