@@ -617,12 +617,17 @@ class MainWindow extends Sprite {
 	function showWgtPropTypes (objCls:Class<Dynamic>) : Void {
 		var opts:Array<Array<String>> = [ [ "Not Selected", null ] ];
 		
-		for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap])
-			opts = opts
-				.concat(propsMap.keys().array()
-					.filter(function (propClass:String) : Bool return objCls.is(StablexUIMod.resolveClass(propClass)))
-					.map(function (propClass) : Array<String> return [ propsMap.get(propClass).name, propClass ])
-				);
+		opts = opts
+			.concat(System.wgtPropsMap.keys().array()
+				.filter(function (propClass:String) : Bool return objCls.is(StablexUIMod.resolveClass(propClass)))
+				.map(function (propClass) : Array<String> return [ System.wgtPropsMap.get(propClass).name, propClass ])
+			);
+		
+		opts = opts
+			.concat(System.wgtSkinsMap.keys().array()
+				.filter(function (propClass:String) : Bool return StablexUIMod.resolveClass(propClass).is(objCls))
+				.map(function (propClass) : Array<String> return [ System.wgtSkinsMap.get(propClass).name, propClass ])
+			);
 		
 		MainWindowInstance.wgtPropTypesLst.options = opts;
 		MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
@@ -652,18 +657,6 @@ class MainWindow extends Sprite {
 						.map(function (propClass:String) : Array<String> return [ System.propNameMap(propClass), propClass ])
 					);
 		}
-		
-		var prop:Dynamic = this.tmpPpBuf > "" ? System.getGuiObjProperty(System.selWgt, this.tmpPpBuf) : System.selWgt;  // can't be used RTTI, becuse property can have different types with different property sets
-		
-		if (Std.is(prop, Widget))
-			props = props
-				.concat(System.wgtSkinsMap.keys().array()
-					.filter(function (skinPropClass:String) : Bool return Reflect.getProperty(prop, "skin") == null || Std.is(Reflect.getProperty(prop, "skin"), Type.resolveClass(skinPropClass)))
-					.map(function (skinPropClass) : Array<String> return {
-						var skinName:String = skinPropClass.split(".").pop();
-						return [ "skin:" + skinName, "skin:" + skinName ];
-					})
-				);
 		
 		MainWindowInstance.wgtPropNamesLst.options = props;
 		
