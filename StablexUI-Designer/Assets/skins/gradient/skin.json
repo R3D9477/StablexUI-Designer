@@ -1,4 +1,5 @@
 {
+	"title": "Gradient",
 	"className": "ru.stablex.ui.skins.Gradient",
 	"properties": [
 		"type",

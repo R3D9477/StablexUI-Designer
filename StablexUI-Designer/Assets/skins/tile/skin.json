@@ -1,4 +1,5 @@
 {
+	"title": "Tile",
 	"className": "ru.stablex.ui.skins.Tile",
 	"properties": [
 		"src",

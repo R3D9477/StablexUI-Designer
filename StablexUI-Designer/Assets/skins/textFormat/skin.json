@@ -1,4 +1,5 @@
 {
+	"title": "Text Format",
 	"className": "ru.stablex.ui.skins.TextFormat",
 	"properties": [
 		"format"

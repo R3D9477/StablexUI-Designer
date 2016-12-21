@@ -752,6 +752,8 @@ class System {
 					
 					if (ppInfo.length > 1)
 						propCls = StablexUIMod.resolveClass(ppInfo[1]);
+					else
+						propCls = System.rttiGetPropertyType(propOwner, propName);
 					
 					Reflect.setProperty(propOwner, propName, Type.createInstance(propCls, []));
 				}
@@ -800,5 +802,39 @@ class System {
 		}
 		
 		return owners;
+	}
+	
+	//-----------------------------------------------------------------------------------------------
+	// rtti functions
+	
+	public static function rttiGetFieldType (objCls:Class<Dynamic>, fieldName:String) : Class<Dynamic> {
+		var propCls:Class<Dynamic> = null;
+		
+		if (haxe.rtti.Rtti.hasRtti(objCls)) {
+			var rtti = haxe.rtti.Rtti.getRtti(objCls);
+			
+			for (sf in rtti.fields)
+				if (sf.name == fieldName) {
+					propCls = StablexUIMod.resolveClass(haxe.rtti.CType.CTypeTools.toString(sf.type));
+					break;
+				}
+			
+			if (propCls == null)
+				if (rtti.superClass != null)
+					propCls = System.rttiGetFieldType(StablexUIMod.resolveClass(rtti.superClass.path), fieldName);
+		}
+		
+		return propCls;
+	}
+	
+	public static function rttiGetPropertyType (objCls:Class<Dynamic>, properyName:String) : Class<Dynamic> {
+		var fldCls:Class<Dynamic> = objCls;
+		
+		for (fld in properyName.split("-")) {
+			var fldData:Array<String> = fld.split(":");
+			fldCls = fldData.length == 1 ? System.rttiGetFieldType(fldCls, fldData[0]) : StablexUIMod.resolveClass(fldData[1]);
+		}
+		
+		return fldCls;
 	}
 }

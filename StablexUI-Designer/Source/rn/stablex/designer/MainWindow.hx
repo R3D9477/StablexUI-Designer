@@ -28,6 +28,7 @@ using Lambda;
 using StringTools;
 using rn.typext.ext.XmlExtender;
 using rn.typext.ext.IterExtender;
+using rn.typext.ext.ClassExtender;
 using rn.typext.ext.StringExtender;
 
 class MainWindow extends Sprite {
@@ -592,21 +593,6 @@ class MainWindow extends Sprite {
 		}
 	}
 	
-	function showWgtPropTypes (obj:Dynamic) : Void {
-		var opts = [ [ "Not Selected", null ] ];
-		
-		for (arr in [System.wgtPropsMap.keys().array(), System.wgtSkinsMap.keys().array()])
-			opts = opts
-				.concat(System.wgtPropsMap.keys().array()
-					.filter(function (wgtPropClass:String) : Bool return Std.is(obj, Type.resolveClass(wgtPropClass)))
-					.map(function (wgtPropClass) : Array<String> return [ System.wgtPropsMap.get(wgtPropClass).name, wgtPropClass ])
-				);
-		
-		MainWindowInstance.wgtPropTypesLst.options = opts;
-		MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
-		MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-	}
-	
 	function showWgtPropsBtnClick (e:MouseEvent) : Void {
 		MainWindowInstance.wgtEditPropWnd.hide();
 		
@@ -618,12 +604,29 @@ class MainWindow extends Sprite {
 			this.tmpPpBufRmType = false;
 			this.tmpPpBufRmName = false;
 			
-			this.showWgtPropTypes(System.selWgt);
+			this.showWgtPropTypes(Type.getClass(System.selWgt));
 			
 			MainWindowInstance.wgtPropWnd.show();
 		}
 		
 		e.stopPropagation();
+	}
+	
+	/// wgt.prop. prototype builder
+	
+	function showWgtPropTypes (objCls:Class<Dynamic>) : Void {
+		var opts:Array<Array<String>> = [ [ "Not Selected", null ] ];
+		
+		for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap])
+			opts = opts
+				.concat(propsMap.keys().array()
+					.filter(function (propClass:String) : Bool return objCls.is(StablexUIMod.resolveClass(propClass)))
+					.map(function (propClass) : Array<String> return [ propsMap.get(propClass).name, propClass ])
+				);
+		
+		MainWindowInstance.wgtPropTypesLst.options = opts;
+		MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
+		MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 	}
 	
 	function wgtAddPropTypeChanged (e:Event) : Void {
@@ -642,14 +645,15 @@ class MainWindow extends Sprite {
 			
 			var nullToEmptyArr = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
 			
-			props = props
-				.concat(nullToEmptyArr(System.wgtPropsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
-					.filter(function (wgtProperty:String) : Bool return !System.selWgtProps.exists(wgtProperty))
-					.map(function (wgtProperty:String) : Array<String> return [ System.propNameMap(wgtProperty), wgtProperty ])
-				);
+			for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap])
+				props = props
+					.concat(nullToEmptyArr(propsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
+						.filter(function (propClass:String) : Bool return !System.selWgtProps.exists(propClass))
+						.map(function (propClass:String) : Array<String> return [ System.propNameMap(propClass), propClass ])
+					);
 		}
 		
-		var prop:Dynamic = this.tmpPpBuf > "" ? System.getGuiObjProperty(System.selWgt, this.tmpPpBuf) : System.selWgt;
+		var prop:Dynamic = this.tmpPpBuf > "" ? System.getGuiObjProperty(System.selWgt, this.tmpPpBuf) : System.selWgt;  // can't be used RTTI, becuse property can have different types with different property sets
 		
 		if (Std.is(prop, Widget))
 			props = props
@@ -683,11 +687,11 @@ class MainWindow extends Sprite {
 			this.tmpPpBuf += MainWindowInstance.wgtPropNamesLst.value;
 			
 			if (this.tmpPpBuf > "") {
-				var prop:Dynamic = System.getGuiObjProperty(System.selWgt, this.tmpPpBuf);
+				var propCls:Class<Dynamic> = System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 				
-				if (Std.is(prop, Widget) || Std.is(prop, Skin)) {
+				if (propCls.is(Widget) || propCls.is(Skin)) {
 					this.tmpPpBufRmType = false;
-					this.showWgtPropTypes(prop);
+					this.showWgtPropTypes(propCls);
 				}
 			}
 		}
@@ -703,7 +707,8 @@ class MainWindow extends Sprite {
 		this.tmpPpBufRmType = false;
 		this.tmpPpBufRmName = false;
 		
-		this.showWgtPropTypes(System.getGuiObjProperty(System.selWgt, this.tmpPpBuf));
+		// must be used RTTI, becuse property can be null (without Class)
+		this.showWgtPropTypes(this.tmpPpBuf > "" ? System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf) : Type.getClass(System.selWgt));
 		
 		e.stopPropagation();
 	}
@@ -715,13 +720,15 @@ class MainWindow extends Sprite {
 		this.tmpPpBufRmType = false;
 		this.tmpPpBufRmName = false;
 		
-		var prop:Dynamic = System.getGuiObjProperty(System.selWgt, this.tmpPpBuf);
+		var propCls:Class<Dynamic> = System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 		
-		if (Std.is(prop, Widget) || Std.is(prop, Skin))
-			this.showWgtPropTypes(prop);
+		if (propCls.is(Widget) || propCls.is(Skin))
+			this.showWgtPropTypes(propCls);
 		
 		e.stopPropagation();
 	}
+	
+	///
 	
 	function wgtAddPropBtnClick (e:MouseEvent) : Void {
 		if (System.selWgt != null && MainWindowInstance.wgtPropCustom.text > "") {

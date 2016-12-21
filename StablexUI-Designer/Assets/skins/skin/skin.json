@@ -1,4 +1,5 @@
 {
+	"title": "Skin",
 	"className": "ru.stablex.ui.skins.Skin",
 	"properties": [
 		"clear"

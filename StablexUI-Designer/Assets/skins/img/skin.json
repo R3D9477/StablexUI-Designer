@@ -1,4 +1,5 @@
 {
+	"title": "Img",
 	"className": "ru.stablex.ui.skins.Img",
 	"properties": [
 		"src",

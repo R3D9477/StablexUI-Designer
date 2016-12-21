@@ -31,4 +31,42 @@
 	<assets rename="GuiElements.xml" path="XmlGui/GuiElements.xml"/>
 	
 	<haxeflag name="--macro" value="rn.stablex.designer.MainWindowInstance.geInit()"/>
+	
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Bmp')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Box')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Button')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Checkbox')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Clock')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Floating')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.HBox')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.InputText')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Options')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Progress')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Radio')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Scroll')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Slider')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.StateButton')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Switch')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.TabPage')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.TabStack')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Text')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Tip')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Toggle')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.VBox')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.ViewStack')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.widgets.Widget')"/>
+	
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Aswing')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Gradient')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Img')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Layer')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Paint')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Rect')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Skin')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Slice3')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Slice9')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.TextFormat')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.Tile')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.TiledSlice3')"/>
+	<haxeflag name="--macro" value="addMetadata('@:rtti', 'ru.stablex.ui.skins.TiledSlice9')"/>
 </project>

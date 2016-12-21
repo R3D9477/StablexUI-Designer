@@ -1,4 +1,5 @@
 {
+	"title": "Rect",
 	"className": "ru.stablex.ui.skins.Rect",
 	"properties": [
 		"border",

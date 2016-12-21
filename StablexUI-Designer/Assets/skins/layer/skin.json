@@ -1,4 +1,5 @@
 {
+	"title": "Layer",
 	"className": "ru.stablex.ui.skins.Layer",
 	"properties": [
 		"current",
