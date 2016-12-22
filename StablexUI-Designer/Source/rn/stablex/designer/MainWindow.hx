@@ -34,10 +34,6 @@ using rn.typext.ext.StringExtender;
 class MainWindow extends Sprite {
 	private var origCwd:String;
 	
-	private var tmpPpBuf:String;
-	private var tmpPpBufRmType:Bool;
-	private var tmpPpBufRmName:Bool;
-	
 	//-----------------------------------------------------------------------------------------------
 	// setup main window
 	
@@ -600,11 +596,10 @@ class MainWindow extends Sprite {
 			MainWindowInstance.wgtPropWnd.top = e.stageY + 5;
 			MainWindowInstance.wgtPropWnd.left = e.stageX - MainWindowInstance.wgtPropWnd.w - 5;
 			
-			this.tmpPpBuf = "";
-			this.tmpPpBufRmType = false;
-			this.tmpPpBufRmName = false;
+			PropertyBuilder.init(Type.getClass(System.selWgt));
 			
-			this.showWgtPropTypes(Type.getClass(System.selWgt));
+			PropertyBuilder.rebuildPropTypesList();
+			MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
 			
 			MainWindowInstance.wgtPropWnd.show();
 		}
@@ -612,116 +607,40 @@ class MainWindow extends Sprite {
 		e.stopPropagation();
 	}
 	
-	/// wgt.prop. prototype builder
-	
-	function showWgtPropTypes (objCls:Class<Dynamic>) : Void {
-		var opts:Array<Array<String>> = [ [ "Not Selected", null ] ];
-		
-		opts = opts
-			.concat(System.wgtPropsMap.keys().array()
-				.filter(function (propClass:String) : Bool return objCls.is(StablexUIMod.resolveClass(propClass)))
-				.map(function (propClass) : Array<String> return [ System.wgtPropsMap.get(propClass).name, propClass ])
-			);
-		
-		opts = opts
-			.concat(System.wgtSkinsMap.keys().array()
-				.filter(function (propClass:String) : Bool return StablexUIMod.resolveClass(propClass).is(objCls))
-				.map(function (propClass) : Array<String> return [ System.wgtSkinsMap.get(propClass).name, propClass ])
-			);
-		
-		MainWindowInstance.wgtPropTypesLst.options = opts;
-		MainWindowInstance.wgtPropTypesLst.value = MainWindowInstance.wgtPropTypesLst.options[0];
-		MainWindowInstance.wgtPropTypesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-	}
-	
 	function wgtAddPropTypeChanged (e:Event) : Void {
-		if (this.tmpPpBufRmType)
-			if (this.tmpPpBuf.indexOf(":") >= 0)
-				this.tmpPpBuf = this.tmpPpBuf.split(":").slice(0, -1).join(":");
+		MainWindowInstance.wgtPropNamesLst.options = PropertyBuilder.rebuildPropNamesList(MainWindowInstance.wgtPropTypesLst.value);
 		
-		this.tmpPpBufRmType = true;
-		this.tmpPpBufRmName = false;
-		
-		var props:Array<Array<String>> = [ [ "Not Selected", null ] ];
-		
-		if (MainWindowInstance.wgtPropTypesLst.value > "") {
-			if (this.tmpPpBuf > "")
-				this.tmpPpBuf += ":" + MainWindowInstance.wgtPropTypesLst.value.split(".").pop();
-			
-			var nullToEmptyArr = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
-			
-			for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap])
-				props = props
-					.concat(nullToEmptyArr(propsMap.get(MainWindowInstance.wgtPropTypesLst.value)).properties
-						.filter(function (propClass:String) : Bool return !System.selWgtProps.exists(propClass))
-						.map(function (propClass:String) : Array<String> return [ System.propNameMap(propClass), propClass ])
-					);
-		}
-		
-		MainWindowInstance.wgtPropNamesLst.options = props;
-		
-		MainWindowInstance.wgtPropNamesLst.value = MainWindowInstance.wgtPropNamesLst.options[0];
-		MainWindowInstance.wgtPropNamesLst.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
 	}
 	
 	function wgtAddPropNameChanged (e:Event) : Void {
-		if (this.tmpPpBufRmName)
-			if (this.tmpPpBuf.indexOf("-") >= 0)
-				this.tmpPpBuf = this.tmpPpBuf.split("-").slice(0, -1).join("-");
+		if (PropertyBuilder.rebuildPrototype(MainWindowInstance.wgtPropNamesLst.value))
+			MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
 		
-		this.tmpPpBufRmName = true;
-		
-		if (MainWindowInstance.wgtPropNamesLst.value > "") {
-			if (this.tmpPpBuf > "")
-				this.tmpPpBuf += "-";
-			
-			this.tmpPpBuf += MainWindowInstance.wgtPropNamesLst.value;
-			
-			if (this.tmpPpBuf > "") {
-				var propCls:Class<Dynamic> = System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
-				
-				if (propCls.is(Widget) || propCls.is(Skin)) {
-					this.tmpPpBufRmType = false;
-					this.showWgtPropTypes(propCls);
-				}
-			}
-		}
-		
-		MainWindowInstance.wgtPropCustom.text = this.tmpPpBuf;
+		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
 	}
 	
 	function wgtAddPropRefresh (e:MouseEvent) : Void {
-		this.tmpPpBuf = MainWindowInstance.wgtPropCustom.text;
+		PropertyBuilder.refreshPrototype(MainWindowInstance.wgtPropCustom.text);
+		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
 		
-		this.tmpPpBufRmType = false;
-		this.tmpPpBufRmName = false;
-		
-		// must be used RTTI, becuse property can be null (without Class)
-		this.showWgtPropTypes(this.tmpPpBuf > "" ? System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf) : Type.getClass(System.selWgt));
+		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
 	}
 	
 	function wgtAddPropBack (e:MouseEvent) : Void {
-		if (this.tmpPpBuf.indexOf("-") >= 0)
-			this.tmpPpBuf = this.tmpPpBuf.split("-").slice(0, -1).join("-");
+		PropertyBuilder.backPrototype();
+		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
 		
-		this.tmpPpBufRmType = false;
-		this.tmpPpBufRmName = false;
-		
-		var propCls:Class<Dynamic> = System.rttiGetPropertyType(Type.getClass(System.selWgt), this.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
-		
-		if (propCls.is(Widget) || propCls.is(Skin))
-			this.showWgtPropTypes(propCls);
+		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
 	}
-	
-	///
 	
 	function wgtAddPropBtnClick (e:MouseEvent) : Void {
 		if (System.selWgt != null && MainWindowInstance.wgtPropCustom.text > "") {
