@@ -42,9 +42,4 @@ git clone https://github.com/r3d9u11/StablexUI-Designer.git
 
 cd ".\StablexUI-Designer\StablexUI-Designer"
 
-openfl build windows -neko
-
-cd ".\Export\windows\neko\release\bin"
-
-copy "..\obj\ApplicationMain.n" ".\StablexUI-Designer.n"
-neko ".\StablexUI-Designer.n"
+openfl test windows -neko

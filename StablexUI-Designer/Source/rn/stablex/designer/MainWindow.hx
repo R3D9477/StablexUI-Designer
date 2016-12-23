@@ -44,29 +44,26 @@ class MainWindow extends Sprite {
 		this.stage.scaleMode = StageScaleMode.NO_SCALE;
 		
 		//-----------------------------------------------------------------------------------------------
-		// set current workdir
+		// workaround for haxe 3.2.1
+		
+		var programPath:String = switch (Sys.systemName().toLowerCase()) {
+				case "linux":
+					#if neko
+						Path.join([Sys.getCwd(), "StablexUI-Designer.n"]);
+					#elseif cpp
+						Sys.executablePath();
+					#end
+				default:
+					Sys.executablePath();
+			};
 		
 		this.origCwd = Sys.getCwd();
-		
-		Sys.setCwd(Path.directory(FileSystem.fullPath(
-			#if neko
-				neko.vm.Module.local().name
-			#elseif cpp
-				Sys.executablePath()
-			#end
-		)));
+		Sys.setCwd(Path.directory(programPath));
 		
 		//-----------------------------------------------------------------------------------------------
 		// load designer's window size and position
 		
-		var configPath:String =
-			Path.withExtension(FileSystem.fullPath(
-				#if neko
-					neko.vm.Module.local().name
-				#elseif cpp
-					Sys.executablePath()
-				#end
-			), "json");
+		var configPath:String = Path.withExtension(programPath, "json");
 		
 		var configData:Dynamic = FileSystem.exists(configPath) ? haxe.Json.parse(File.getContent(configPath)) : {
 			x: Lib.application.window.x,

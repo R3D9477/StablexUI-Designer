@@ -84,13 +84,4 @@ echo "OUTDIR = ${OUTDIR}"
 cd "./StablexUI-Designer/StablexUI-Designer"
 rm -rf "./Export"
 
-openfl build linux -$PLATFORM -$TARGET
-
-cd "./Export/"$OUTDIR"/release/bin"
-
-if [ $TARGET = "neko" ]; then
-	cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
-	neko "./StablexUI-Designer.n"
-else
-	"./StablexUI-Designer"
-fi
+openfl test linux -$PLATFORM -$TARGET
