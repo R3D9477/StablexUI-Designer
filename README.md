@@ -41,7 +41,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 * [cpp](http://haxe.org/doc/start/cpp) (restricted)
 
 ###Requirements:<br/>
-* [git](https://git-scm.com/downloads)
+* [git-tools](https://git-scm.com/downloads)
 * [haxe](https://haxe.org) (3.2.1 or later) with [haxelib](https://lib.haxe.org/)-packages:
 	* [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 	* [lime](https://github.com/openfl/lime)
