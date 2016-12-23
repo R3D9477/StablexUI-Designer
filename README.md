@@ -15,7 +15,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* change [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [presets collection](StablexUI-Designer/Assets/presets)
 * windows settings
 	* change frames of current window from templates collection
-	* change size and other settings of current window (see tag "window" from [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
+	* change size and other settings of current window (see description of tag `<window />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 * designing
 	* use all standard widgets from ["ru.stablex.ui.widgets.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets)
 	* use all standard skins from ["ru.stablex.ui.skins.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/skins)
