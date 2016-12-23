@@ -12,10 +12,10 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* load existing gui from xml-file
 	* save gui to xml-file
 * themes
-	* change defaults from presets collection
+	* change (defaults)[http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html] from presets collection
 * windows settings
 	* change frames of current window from templates collection
-	* change size of current window
+	* change size and other settings of current window (see tag "<window/>" from [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 * designing
 	* use all standard widgets from ["ru.stablex.ui.widgets.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets)
 	* use all standard skins from ["ru.stablex.ui.skins.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/skins)
@@ -26,11 +26,11 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* allow to use custom widgets
 	* allow to use custom skins
 	* allow to use custom defaults
-* easy integration with openfl/lime project
-	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist) to current openfl/lime project
-	* auto-registration of selected presets (defaults) in current openfl/lime project
-	* auto-insertion of assets to current openfl/lime project
-	* auto-insertion of sources path of custom widgets to current openfl/lime project
+* easy integration with (openfl/lime project)[http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/]
+	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist)
+	* auto-registration of selected presets (defaults)
+	* auto-insertion of assets
+	* auto-insertion of sources path of custom widgets
 	* auto-generation of file with declaration of objects for widgets with names (to easy access to widgets from source code)
 * allow to edit raw xml of current gui manually
 	* allow to run saved xml file in external editor "on the fly"
