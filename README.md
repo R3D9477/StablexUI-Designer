@@ -41,17 +41,18 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 * [cpp](http://haxe.org/doc/start/cpp) (restricted)
 
 ###Requirements:<br/>
-* [haxe](https://haxe.org) 3.2.1 or later
-* [hxcpp](https://github.com/HaxeFoundation/hxcpp)
-* [lime](https://github.com/openfl/lime)
-* [openfl](https://github.com/openfl/openfl)
-* [hscript](https://github.com/HaxeFoundation/hscript)
-* [stablexui](https://github.com/RealyUniqueName/StablexUI)
-* [systools](https://github.com/waneck/systools.git)
-* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
-* [tjson](https://github.com/martamius/TJSON)
-* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
-* [typext](https://github.com/r3d9u11/haxe-typext)
+* [git](https://git-scm.com/downloads)
+* [haxe](https://haxe.org) 3.2.1 or later with [haxelib](https://lib.haxe.org/)-packages:
+	* [hxcpp](https://github.com/HaxeFoundation/hxcpp)
+	* [lime](https://github.com/openfl/lime)
+	* [openfl](https://github.com/openfl/openfl)
+	* [hscript](https://github.com/HaxeFoundation/hscript)
+	* [stablexui](https://github.com/RealyUniqueName/StablexUI)
+	* [systools](https://github.com/waneck/systools.git)
+	* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
+	* [tjson](https://github.com/martamius/TJSON)
+	* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
+	* [typext](https://github.com/r3d9u11/haxe-typext)
 
 ###Install:<br/>
 
