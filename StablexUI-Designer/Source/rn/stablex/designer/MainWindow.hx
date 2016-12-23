@@ -564,7 +564,7 @@ class MainWindow extends Sprite {
 			tip.text = wgtData.title;
 			
 			var ico:Bmp = new Bmp();
-			ico.src = wgtData.ico.replace(Path.addTrailingSlash(Sys.getCwd()), ""); // wgtData.ico; workaround
+			ico.bitmapData = BitmapData.fromFile(wgtData.ico.replace(Path.addTrailingSlash(Sys.getCwd()), ""));
 			ico.refresh();
 			
 			var wgtSelector:Radio = UIBuilder.buildFn("XmlGui/WgtSelector.xml")();
