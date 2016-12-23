@@ -28,7 +28,6 @@ echo "y" | haxelib install openfl-samples
 echo "y" | haxelib install openfl-native
 bash -c 'echo "y" | haxelib run openfl setup'
 
-echo "y" | haxelib install ihx
 echo "y" | haxelib install tjson
 echo "y" | haxelib install haxe-crypto
 echo "y" | haxelib git systools https://github.com/waneck/systools.git
@@ -36,7 +35,6 @@ echo "y" | haxelib git systools https://github.com/waneck/systools.git
 echo "y" | haxelib git stablexui https://github.com/RealyUniqueName/StablexUI.git
 
 echo "y" | haxelib git typext https://github.com/r3d9u11/haxe-typext.git
-echo "y" | haxelib git libmodbus https://github.com/r3d9u11/haxe-libmodbus.git
 echo "y" | haxelib git tjsonStyleCl https://github.com/r3d9u11/haxe-tjsonStyleCl.git
 echo "y" | haxelib git dataTree https://github.com/r3d9u11/haxe-dataTree.git
 
@@ -92,7 +90,7 @@ cd "./Export/"$OUTDIR"/release/bin"
 
 if [ $TARGET = "neko" ]; then
 	cp "../obj/ApplicationMain.n" "./StablexUI-Designer.n"
-	neko "StablexUI-Designer.n"
+	neko "./StablexUI-Designer.n"
 else
 	"./StablexUI-Designer"
 fi
