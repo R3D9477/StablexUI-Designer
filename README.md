@@ -42,7 +42,9 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 
 ###Requirements:<br/>
 * [git-tools](https://git-scm.com/downloads)
-* [haxe](https://haxe.org) (3.2.1 or later) with [haxelib](https://lib.haxe.org/)-packages:
+* [haxe](https://haxe.org) 3.2.1 or later
+* [neko-vm](http://nekovm.org) 2.1.0 or later
+* [haxelib](https://lib.haxe.org/)-packages:
 	* [hxcpp](https://github.com/HaxeFoundation/hxcpp)
 	* [lime](https://github.com/openfl/lime)
 	* [openfl](https://github.com/openfl/openfl)
