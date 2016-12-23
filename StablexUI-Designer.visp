@@ -1,12 +1,6 @@
  ⦑ StablexUI-Designer ⦒
 	⦑ Assets ⦒
-		⦑ font ⦒
-			 04B_03__.eot
-			 04B_03__.ttf
 		⦑ frames ⦒
-			⦑ 3 test buttons ⦒
-				 window.json
-				 window.xml
 			⦑ default ⦒
 				 window.json
 				 window.xml
@@ -22,31 +16,10 @@
 				 save.png
 				 select.png
 		⦑ instances ⦒
-			 DateForXml + RTXml.hx
-			 DateForXml.hx
 			 Default + RTXml.hx
 			 Default.hx
 		⦑ presets ⦒
-			 default.xml
-		⦑ skins ⦒
-			⦑ aswing ⦒
-				 skin.json
-			⦑ gradient ⦒
-				 skin.json
-			⦑ img ⦒
-				 skin.json
-			⦑ paint ⦒
-				 skin.json
-			⦑ rect ⦒
-				 skin.json
-		⦑ suits ⦒
-			⦑ default containers ⦒
-				 suit.json
-				 suit.xml
-			⦑ default indicators ⦒
-				 suit.json
-				 suit.xml
-			⦑ default inputs ⦒
+			⦑ dark ⦒
 				⦑ img ⦒
 					 checkbox_checked.png
 					 checkbox_unchecked.png
@@ -57,11 +30,65 @@
 					 statebutton_state3.png
 					 toggle_off.png
 					 toggle_on.png
+				 dark.xml
+				 preset.json
+			⦑ default ⦒
+				⦑ img ⦒
+					 checkbox_checked.png
+					 checkbox_unchecked.png
+					 radio_selected.png
+					 radio_unselected.png
+					 statebutton_state1.png
+					 statebutton_state2.png
+					 statebutton_state3.png
+					 toggle_off.png
+					 toggle_on.png
+				 default.xml
+				 preset.json
+		⦑ skins ⦒
+			⦑ aswing ⦒
+				 skin.json
+			⦑ gradient ⦒
+				 skin.json
+			⦑ img ⦒
+				 skin.json
+			⦑ layer ⦒
+				 skin.json
+			⦑ paint ⦒
+				 skin.json
+			⦑ rect ⦒
+				 skin.json
+			⦑ skin ⦒
+				 skin.json
+			⦑ slice3 ⦒
+				 skin.json
+			⦑ slice9 ⦒
+				 skin.json
+			⦑ textFormat ⦒
+				 skin.json
+			⦑ tile ⦒
+				 skin.json
+			⦑ tiledSlice3 ⦒
+				 skin.json
+			⦑ tiledSlice9 ⦒
+				 skin.json
+		⦑ suits ⦒
+			⦑ default containers ⦒
+				 suit.json
+				 suit.xml
+			⦑ default indicators ⦒
+				 suit.json
+				 suit.xml
+			⦑ default inputs ⦒
 				 suit.json
 				 suit.xml
 		⦑ widgets ⦒
 			⦑ default containers ⦒
 				⦑ box ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ floating ⦒
 					 ico.png
 					 widget.json
 					 widget.xml
@@ -103,6 +130,10 @@
 					 widget.json
 					 widget.xml
 				⦑ text ⦒
+					 ico.png
+					 widget.json
+					 widget.xml
+				⦑ tip ⦒
 					 ico.png
 					 widget.json
 					 widget.xml
@@ -152,12 +183,7 @@
 			⦑ neko ⦒
 				⦑ release ⦒
 					⦑ bin ⦒
-						⦑ font ⦒
-							 04B_03__.ttf
 						⦑ frames ⦒
-							⦑ 3 test buttons ⦒
-								 window.json
-								 window.xml
 							⦑ default ⦒
 								 window.json
 								 window.xml
@@ -173,31 +199,10 @@
 								 save.png
 								 select.png
 						⦑ instances ⦒
-							 DateForXml + RTXml.hx
-							 DateForXml.hx
 							 Default + RTXml.hx
 							 Default.hx
 						⦑ presets ⦒
-							 default.xml
-						⦑ skins ⦒
-							⦑ aswing ⦒
-								 skin.json
-							⦑ gradient ⦒
-								 skin.json
-							⦑ img ⦒
-								 skin.json
-							⦑ paint ⦒
-								 skin.json
-							⦑ rect ⦒
-								 skin.json
-						⦑ suits ⦒
-							⦑ default containers ⦒
-								 suit.json
-								 suit.xml
-							⦑ default indicators ⦒
-								 suit.json
-								 suit.xml
-							⦑ default inputs ⦒
+							⦑ dark ⦒
 								⦑ img ⦒
 									 checkbox_checked.png
 									 checkbox_unchecked.png
@@ -208,11 +213,65 @@
 									 statebutton_state3.png
 									 toggle_off.png
 									 toggle_on.png
+								 dark.xml
+								 preset.json
+							⦑ default ⦒
+								⦑ img ⦒
+									 checkbox_checked.png
+									 checkbox_unchecked.png
+									 radio_selected.png
+									 radio_unselected.png
+									 statebutton_state1.png
+									 statebutton_state2.png
+									 statebutton_state3.png
+									 toggle_off.png
+									 toggle_on.png
+								 default.xml
+								 preset.json
+						⦑ skins ⦒
+							⦑ aswing ⦒
+								 skin.json
+							⦑ gradient ⦒
+								 skin.json
+							⦑ img ⦒
+								 skin.json
+							⦑ layer ⦒
+								 skin.json
+							⦑ paint ⦒
+								 skin.json
+							⦑ rect ⦒
+								 skin.json
+							⦑ skin ⦒
+								 skin.json
+							⦑ slice3 ⦒
+								 skin.json
+							⦑ slice9 ⦒
+								 skin.json
+							⦑ textFormat ⦒
+								 skin.json
+							⦑ tile ⦒
+								 skin.json
+							⦑ tiledSlice3 ⦒
+								 skin.json
+							⦑ tiledSlice9 ⦒
+								 skin.json
+						⦑ suits ⦒
+							⦑ default containers ⦒
+								 suit.json
+								 suit.xml
+							⦑ default indicators ⦒
+								 suit.json
+								 suit.xml
+							⦑ default inputs ⦒
 								 suit.json
 								 suit.xml
 						⦑ widgets ⦒
 							⦑ default containers ⦒
 								⦑ box ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ floating ⦒
 									 ico.png
 									 widget.json
 									 widget.xml
@@ -254,6 +313,10 @@
 									 widget.json
 									 widget.xml
 								⦑ text ⦒
+									 ico.png
+									 widget.json
+									 widget.xml
+								⦑ tip ⦒
 									 ico.png
 									 widget.json
 									 widget.xml
@@ -300,6 +363,7 @@
 									 widget.xml
 						 GuiElements.xml
 						 StablexUI-Designer
+						 StablexUI-Designer.json
 						 StablexUI-Designer.n
 						 lime.ndll
 						 manifest
@@ -323,12 +387,15 @@
 					 GuiObjPropOwnerInfo.hx
 					 MainWindow.hx
 					 MainWindowInstance.hx
+					 PresetInfo.hx
+					 PropertyBuilder.hx
 					 SkinInfo.hx
 					 SkinParser.hx
 					 SourceControl.hx
+					 StablexUIMod.hx
 					 SuitInfo.hx
 					 System.hx
-					 WgtDataInfo.hx
+					 WgtInfo.hx
 					 WgtPropInfo.hx
 	⦑ XmlGui ⦒
 		 AddPropWindow.xml
