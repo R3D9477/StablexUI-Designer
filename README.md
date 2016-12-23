@@ -12,7 +12,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* load existing gui from xml-file
 	* save gui to xml-file
 * themes
-	* change (defaults)[http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html] from presets collection
+	* change (defaults)["http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html"] from presets collection
 * windows settings
 	* change frames of current window from templates collection
 	* change size and other settings of current window (see tag "<window/>" from [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
