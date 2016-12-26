@@ -5,5 +5,5 @@ typedef PresetInfo = {
 	var title:String;
 	var xml:String;
 	var preview:String;
-	var assets:String;
+	var assets:Array<String>;
 }

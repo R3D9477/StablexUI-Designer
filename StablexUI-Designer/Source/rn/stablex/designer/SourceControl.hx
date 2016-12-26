@@ -232,16 +232,15 @@ class SourceControl {
 		for (xa in projXml.findByXpath('//project/assets[@guiUuid="${System.guiSettings.guiUuid}"]'))
 			xa.removeSelf();
 		
-		var assets:Array<String> = new Array<String>();
-		
-		for (i in [System.wgtSuitsMap.iterator(), System.wgtPresetsMap.iterator()])
-			for (a in i.array().filter(function (e:Dynamic) : Bool return e.assets > "")) {
-				var xa:Xml = Xml.createElement("assets");
-				xa.set("path", FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([a.dir, a.assets])));
-				xa.set("rename", Path.join([a.dir, a.assets]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
-				xa.set("guiUuid", System.guiSettings.guiUuid);
-				projXml.addChild(xa);
-			}
+		for (map in [System.wgtSuitsMap.iterator(), System.wgtPresetsMap.iterator()])
+			for (inf in map.array().filter(function (e:Dynamic) : Bool return e.assets != null))
+				for (asset in inf.assets) {
+					var xa:Xml = Xml.createElement("assets");
+					xa.set("path", FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([inf.dir, asset])));
+					xa.set("rename", Path.join([inf.dir, asset]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
+					xa.set("guiUuid", System.guiSettings.guiUuid);
+					projXml.addChild(xa);
+				}
 		
 		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		
