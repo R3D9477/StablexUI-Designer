@@ -26,7 +26,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* allow to use custom widgets
 	* allow to use custom skins
 	* allow to use custom defaults
-* easy integration with (openfl/lime project)[http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/]
+* easy integration with [openfl/lime project](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/)
 	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist)
 	* auto-registration of selected presets (defaults)
 	* auto-insertion of assets
