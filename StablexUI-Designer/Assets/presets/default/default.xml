@@ -21,23 +21,26 @@
 	</Box>
 	<Button>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
 	</Button>
 	<Checkbox>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
 	</Checkbox>
 	<Clock>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			paddingLeft="5"
 			paddingRight="5"
 			paddingTop="2"
@@ -60,21 +63,23 @@
 	</HBox>
 	<InputText>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
 	</InputText>
 	<Options>
 		<Default
-			alignList="true"
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			box-skin:Paint-alpha="0.9"
+			alignList="true"
 			list-w="$this.box.w"
 			list-h="$this.box.h"
 			list-skin="null"
@@ -93,8 +98,9 @@
 	</Progress>
 	<Radio>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unselected.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_selected.png']))"/>
 	</Radio>
@@ -131,8 +137,9 @@
 	</Slider>
 	<StateButton>
 		<Default
-			format-size="12"
+			format-size="13"
 			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state1.png']))"
 			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state2.png']))"
 			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state3.png']))"/>
@@ -149,16 +156,18 @@
 			slider-skin:Gradient-borderColor="0x000000"
 			slider-skin:Gradient-corners="[10]"
 			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"
-			labelOn-format-size="12"
+			labelOn-format-size="13"
 			labelOn-format-color="0x000000"
-			labelOff-format-size="12"
-			labelOff-format-color="0x000000"/>
+			labelOn-format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
+			labelOff-format-size="13"
+			labelOff-format-color="0x000000"
+			labelOff-format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"/>
 	</Switch>
 	<TabPage>
 		<Default
 			widthPt="100"
 			heightPt="100"
-			title-format-size="12"
+			title-format-size="13"
 			title-format-color="0x000000"
 			title-highlightOnSelect="true"
 			title-highlightFormat-color="0xFF0000"
@@ -174,21 +183,24 @@
 	</TabStack>
 	<Text>
 		<Default
-			format-size="12"
-			format-color="0x000000"/>
+			format-size="13"
+			format-color="0x000000"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"/>
 	</Text>
 	<Tip>
 		<Default
-			label-format-size="12"
-			label-format-color="0x000000"/>
+			label-format-size="13"
+			label-format-color="0x000000"
+			label-format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"/>
 	</Tip>
 	<Toggle>
 		<Default
 			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
 		<Option
-			format-size="12"
-			format-color="0x0AD49E"/>
+			format-size="13"
+			format-color="0x0AD49E"
+			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"/>
 	</Toggle>
 	<VBox>
 		<Default
