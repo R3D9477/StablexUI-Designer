@@ -78,11 +78,10 @@
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
-			box-skin:Paint-alpha="0.9"
-			alignList="true"
-			list-w="$this.box.w"
-			list-h="$this.box.h"
-			list-skin="null"
+			box-skin:Paint-alpha="0.5"
+			box-skin:Paint-color="0x000000"
+			box-skin:Paint-border="1"
+			box-skin:Paint-borderColor="0x000000"
 			optionDefaults="'Option'"/>
 	</Options>
 	<Progress>
@@ -91,10 +90,10 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
 			skin:Paint-corners="[10]"
+			bar-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"
 			bar-skin:Gradient-border="1"
 			bar-skin:Gradient-borderColor="0x000000"
-			bar-skin:Gradient-corners="[10]"
-			bar-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"/>
+			bar-skin:Gradient-corners="[10]"/>
 	</Progress>
 	<Radio>
 		<Default
@@ -199,7 +198,7 @@
 			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
 		<Option
 			format-size="13"
-			format-color="0x0AD49E"
+			format-color="0x000000"
 			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"/>
 	</Toggle>
 	<VBox>

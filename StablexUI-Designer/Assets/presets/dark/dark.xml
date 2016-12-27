@@ -53,8 +53,6 @@
 	</Clock>
 	<Floating>
 		<Default
-			widthPt="100"
-			heightPt="100"
 			skin:Paint-color="0x272727"/>
 	</Floating>
 	<HBox>
@@ -80,13 +78,10 @@
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
-			box-skin:Paint-alpha="0.9"
-			alignList="true"
-			list-w="$this.box.w"
-			list-h="$this.box.h"
-			list-top="$this.top + $this.h"
-			list-left="$this.left"
-			list-skin="null"
+			box-skin:Paint-alpha="0.5"
+			box-skin:Paint-color="0x000000"
+			box-skin:Paint-border="1"
+			box-skin:Paint-borderColor="0x04D9EB"
 			optionDefaults="'Option'"/>
 	</Options>
 	<Progress>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Floating>
+<Floating
+	widthPt="100"
+	heightPt="100">
 	<GuiElements/>
 </Floating>
