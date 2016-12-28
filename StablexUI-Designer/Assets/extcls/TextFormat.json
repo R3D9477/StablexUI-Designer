@@ -1,0 +1,23 @@
+{
+	"className": "openfl.text.TextFormat",
+	"properties": [
+		"align",
+		"blockIndent",
+		"bold",
+		"bullet",
+		"color",
+		"font",
+		"indent",
+		"italic",
+		"kerning",
+		"leading",
+		"leftMargin",
+		"letterSpacing",
+		"rightMargin",
+		"size",
+		"tabStops",
+		"target",
+		"underline",
+		"url"
+	]
+}

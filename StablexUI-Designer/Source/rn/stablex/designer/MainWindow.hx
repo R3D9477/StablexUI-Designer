@@ -47,15 +47,15 @@ class MainWindow extends Sprite {
 		// workaround for haxe 3.2.1
 		
 		var programPath:String = switch (Sys.systemName().toLowerCase()) {
-				case "linux":
-					#if neko
-						Path.join([Sys.getCwd(), "StablexUI-Designer.n"]);
-					#elseif cpp
-						Sys.executablePath();
-					#end
-				default:
+			case "linux":
+				#if neko
+					Path.join([Sys.getCwd(), "StablexUI-Designer.n"]);
+				#elseif cpp
 					Sys.executablePath();
-			};
+				#end
+			default:
+				Sys.executablePath();
+		};
 		
 		this.origCwd = Sys.getCwd();
 		Sys.setCwd(Path.directory(programPath));
@@ -123,6 +123,14 @@ class MainWindow extends Sprite {
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
 		MainWindowInstance.chooseSrcDirPath.addEventListener(MouseEvent.CLICK, this.onChooseSrcDirPath);
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
+		
+		//-----------------------------------------------------------------------------------------------
+		// load ext. classes
+		
+		System.extClsMap = new Map<String, WgtPropInfo>();
+		
+		for (clsName in FileSystem.readDirectory(FileSystem.fullPath("extcls")))
+			System.extClsMap.set(clsName, TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("extcls"), clsName]))));
 		
 		//-----------------------------------------------------------------------------------------------
 		// load presets

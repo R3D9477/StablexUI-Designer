@@ -33,6 +33,8 @@ using rn.typext.ext.StringExtender;
 class System {
 	public static var guiSettings:GuiDataInfo;
 	
+	public static var extClsMap:Map<String, WgtPropInfo>; // <class name>, <set of external classes>
+	
 	public static var wgtPresetsMap:Map<String, PresetInfo>; // <presets name>, <set of presets>
 	public static var wgtPropsMap:Map<String, WgtPropInfo>; // <class name>, <set of properties>
 	public static var wgtSuitsMap:Map<String, SuitInfo>; // <class name>, <set of suits>

@@ -28,19 +28,16 @@ class PropertyBuilder {
 	}
 	
 	public static function rebuildPropTypesList () : Void {
-		PropertyBuilder.propTypesList = [ [ "Not Selected", null ] ];
+		var props:Array<Array<String>> = [ [ "Not Selected", null ] ];
 		
-		PropertyBuilder.propTypesList = PropertyBuilder.propTypesList
-			.concat(System.wgtPropsMap.keys().array()
-				.filter(function (propClass:String) : Bool return PropertyBuilder.tmpPpCurrCls.is(StablexUIMod.resolveClass(propClass)))
-				.map(function (propClass) : Array<String> return [ System.wgtPropsMap.get(propClass).name, propClass ])
-			);
+		for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap, System.extClsMap])
+			props = props
+				.concat(propsMap.keys().array()
+					.filter(function (propClass:String) : Bool return PropertyBuilder.tmpPpCurrCls.is(StablexUIMod.resolveClass(propClass)))
+					.map(function (propClass) : Array<String> return [ propsMap.get(propClass).name, propClass ])
+				);
 		
-		PropertyBuilder.propTypesList = PropertyBuilder.propTypesList
-			.concat(System.wgtSkinsMap.keys().array()
-				.filter(function (propClass:String) : Bool return StablexUIMod.resolveClass(propClass).is(PropertyBuilder.tmpPpCurrCls))
-				.map(function (propClass) : Array<String> return [ System.wgtSkinsMap.get(propClass).name, propClass ])
-			);
+		PropertyBuilder.propTypesList = props;
 	}
 	
 	public static function removeLastType (prototype:String) : String {
@@ -75,7 +72,7 @@ class PropertyBuilder {
 			
 			var nullToEmptyArr = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
 			
-			for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap])
+			for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap, System.extClsMap])
 				props = props
 					.concat(nullToEmptyArr(propsMap.get(typeName)).properties
 						.filter(function (propClass:String) : Bool return !System.selWgtProps.exists(propClass))
