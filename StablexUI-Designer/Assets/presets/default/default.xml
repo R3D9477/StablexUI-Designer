@@ -26,7 +26,15 @@
 			format-font="$Path.join([%CWD, 'presets/default/fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000"/>
+			skin:Paint-borderColor="0x000000"
+			skinHovered:Paint-color="0xC0C0C0"
+			skinHovered:Paint-border="1"
+			skinHovered:Paint-borderColor="0xFF0000"
+			skinHovered:Paint-corners="[5]"
+			skinPressed:Paint-color="0x9C9C9C"
+			skinPressed:Paint-border="1"
+			skinPressed:Paint-borderColor="0xFF0000"
+			skinPressed:Paint-corners="[5]"/>
 	</Button>
 	<Checkbox>
 		<Default

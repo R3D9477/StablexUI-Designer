@@ -27,7 +27,15 @@
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"
-			skin:Paint-corners="[5]"/>
+			skin:Paint-corners="[5]"
+			skinHovered:Paint-color="0x272727"
+			skinHovered:Paint-border="1"
+			skinHovered:Paint-borderColor="0xEDD400"
+			skinHovered:Paint-corners="[5]"
+			skinPressed:Paint-color="0x3A3A3A"
+			skinPressed:Paint-border="1"
+			skinPressed:Paint-borderColor="0xEDD400"
+			skinPressed:Paint-corners="[5]"/>
 	</Button>
 	<Checkbox>
 		<Default
