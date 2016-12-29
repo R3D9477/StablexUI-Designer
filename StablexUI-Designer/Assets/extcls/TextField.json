@@ -1,4 +1,5 @@
 {
+	"title": "Text Field",
 	"className": "openfl.text.TextField",
 	"properties": [
 		"antiAliasType",

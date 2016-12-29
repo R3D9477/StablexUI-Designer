@@ -3,25 +3,45 @@ package rn.stablex.designer;
 import hscript.Interp;
 
 import ru.stablex.ui.*;
-import ru.stablex.ui.events.*;
-import ru.stablex.ui.layouts.*;
-import ru.stablex.ui.misc.*;
-import ru.stablex.ui.skins.*;
-import ru.stablex.ui.transitions.*;
 import ru.stablex.ui.widgets.*;
 
 using Lambda;
+using StringTools;
 using rn.typext.ext.XmlExtender;
 using rn.typext.ext.IterExtender;
 
 class StablexUIMod {
+	public static var namespaces:Array<String> = [
+		"",
+		"ru.stablex.",
+		"ru.stablex.ui.events.",
+		"ru.stablex.ui.layouts.",
+		"ru.stablex.ui.misc.",
+		"ru.stablex.ui.skins.",
+		"ru.stablex.ui.transitions.",
+		"ru.stablex.ui.widgets.",
+		"openfl.display.",
+		"openfl.display3D.",
+		"openfl.display3D.textures.",
+		"openfl.events.",
+		"openfl.filters.",
+		"openfl.geom.",
+		"openfl.text.",
+		"openfl.ui."
+	];
+	
 	public static var rtDefaults:Xml;
 	
+	public static function remapNamespace (className:String) : String
+		return className.replace("flash.", "openfl.");
+	
 	public static function resolveClass (className:String) : Class<Dynamic> {
+		className = StablexUIMod.remapNamespace(className);
+		
 		var resCls:Class<Dynamic> = null;
 		
-		for (p in ["", "ru.stablex.", "ru.stablex.ui.events.", "ru.stablex.ui.layouts.", "ru.stablex.ui.misc.", "ru.stablex.ui.skins.", "ru.stablex.ui.transitions.", "ru.stablex.ui.widgets."])
-			if ((resCls = Type.resolveClass(p + className)) != null)
+		for (nmspc in StablexUIMod.namespaces)
+			if ((resCls = Type.resolveClass(nmspc + className)) != null)
 				break;
 		
 		return resCls;

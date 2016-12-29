@@ -129,8 +129,10 @@ class MainWindow extends Sprite {
 		
 		System.extClsMap = new Map<String, WgtPropInfo>();
 		
-		for (clsName in FileSystem.readDirectory(FileSystem.fullPath("extcls")))
-			System.extClsMap.set(clsName, TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("extcls"), clsName]))));
+		for (clsFile in FileSystem.readDirectory(FileSystem.fullPath("extcls"))) {
+			var extClsData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("extcls"), clsFile])));
+			System.extClsMap.set(extClsData.className, { name: extClsData.title, properties: extClsData.properties });
+		}
 		
 		//-----------------------------------------------------------------------------------------------
 		// load presets
@@ -614,7 +616,6 @@ class MainWindow extends Sprite {
 	
 	function wgtAddPropTypeChanged (e:Event) : Void {
 		MainWindowInstance.wgtPropNamesLst.options = PropertyBuilder.rebuildPropNamesList(MainWindowInstance.wgtPropTypesLst.value);
-		
 		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
@@ -623,7 +624,6 @@ class MainWindow extends Sprite {
 	function wgtAddPropNameChanged (e:Event) : Void {
 		if (PropertyBuilder.rebuildPrototype(MainWindowInstance.wgtPropNamesLst.value))
 			MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
-		
 		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
@@ -632,7 +632,6 @@ class MainWindow extends Sprite {
 	function wgtAddPropRefresh (e:MouseEvent) : Void {
 		PropertyBuilder.refreshPrototype(MainWindowInstance.wgtPropCustom.text);
 		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
-		
 		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();
@@ -641,7 +640,6 @@ class MainWindow extends Sprite {
 	function wgtAddPropBack (e:MouseEvent) : Void {
 		PropertyBuilder.backPrototype();
 		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
-		
 		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
 		
 		e.stopPropagation();

@@ -1,4 +1,5 @@
 {
+	"title": "Text Format",
 	"className": "openfl.text.TextFormat",
 	"properties": [
 		"align",

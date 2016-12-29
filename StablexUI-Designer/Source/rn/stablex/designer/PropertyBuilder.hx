@@ -70,7 +70,7 @@ class PropertyBuilder {
 			if (PropertyBuilder.tmpPpBuf > "")
 				PropertyBuilder.tmpPpBuf += ":" + typeName.split(".").pop();
 			
-			var nullToEmptyArr = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
+			var nullToEmptyArr:WgtPropInfo->Dynamic = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
 			
 			for (propsMap in [System.wgtPropsMap, System.wgtSkinsMap, System.extClsMap])
 				props = props
@@ -98,7 +98,7 @@ class PropertyBuilder {
 			if (PropertyBuilder.tmpPpBuf > "") {
 				var propCls:Class<Dynamic> = System.rttiGetPropertyType(PropertyBuilder.tmpPpCurrCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 				
-				if (propCls.is(Widget) || propCls.is(Skin)) {
+				if (propCls != null && propCls != String) {
 					PropertyBuilder.tmpPpCurrCls = propCls;
 					PropertyBuilder.rebuildPropTypesList();
 					
