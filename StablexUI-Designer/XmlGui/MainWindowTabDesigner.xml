@@ -28,13 +28,13 @@
 				widthPt="100"
 				heightPt="100"
 				tip:Tip-text="'Selection mode'"
-				ico-src="'graphics/tools/select.png'" />
+				ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/select.png']))"/>
 			<WgtSelector
 				name="'wlDeleteBtn'"
 				widthPt="100"
 				heightPt="100"
 				tip:Tip-text="'Delete widget'"
-				ico-src="'graphics/tools/delete.png'" />
+				ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/delete.png']))"/>
 			<Options
 				name="'wgtGroupsLst'"
 				heightPt="100"

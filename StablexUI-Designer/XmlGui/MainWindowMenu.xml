@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <HBox
+	widthPt="100"
+	h="32"
 	skin:Paint-border="1"
 	skin:Paint-borderColor="0x000000"
 	skin:Paint-color="0xC0C0C0"
-	layout:Column-cols="[0, 0, 0, -1]"
+	layout:Column-cols="[32, 32, 32, -1]"
 	layout:Column-paddingLeft="5"
 	layout:Column-paddingTop="2"
 	layout:Column-paddingBottom="2">
@@ -11,21 +13,27 @@
 		name="'newGuiBtn'"
 		tabEnabled="false"
 		label-visible="false"
-		ico-src="'graphics/tools/new.png'"
+		widthPt="100"
+		heightPt="100"
+		ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/new.png']))"
 		tip:Tip-text="'Create New Gui'"
 		skin:Paint-color="0xC0C0C0" />
 	<Button
 		name="'loadGuiBtn'"
 		tabEnabled="false"
 		label-visible="false"
-		ico-src="'graphics/tools/load.png'"
+		widthPt="100"
+		heightPt="100"
+		ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/load.png']))"
 		tip:Tip-text="'Load Gui from File'"
 		skin:Paint-color="0xC0C0C0" />
 	<Button
 		name="'saveGuiBtn'"
 		tabEnabled="false"
 		label-visible="false"
-		ico-src="'graphics/tools/save.png'"
+		widthPt="100"
+		heightPt="100"
+		ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/save.png']))"
 		tip:Tip-text="'Save Gui to File'"
 		skin:Paint-color="0xC0C0C0" />
 	<Widget />
