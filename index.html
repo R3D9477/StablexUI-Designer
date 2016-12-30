@@ -1,0 +1,105 @@
+<html>
+<body>
+
+<p>
+	Graphical designer (builder) for <a href="https://en.wikipedia.org/wiki/Graphical_user_interface">GUI</a> library <a href="https://github.com/RealyUniqueName/StablexUI">StablexUI</a>.<br>
+	Demo-video available <a href="https://youtu.be/8SPn3NZE8T4">here</a>.<br>
+</p>
+
+<p>(wiki and the list of the plans will be soon...)<br></p>
+
+<h3></a>Current features:<br></h3>
+
+<ul>
+	<li>generic
+		<ul>
+			<li>build a new gui</li>
+			<li>load existing gui from xml-file</li>
+			<li>save gui to xml-file</li>
+		</ul>
+	</li>
+	<li>themes
+		<ul>
+			<li>change <a href="http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html">defaults</a> from <a href="/r3d9u11/StablexUI-Designer/blob/master/StablexUI-Designer/Assets/presets">collection of presets</a></li>
+		</ul>
+	</li>
+	<li>windows settings
+		<ul>
+			<li>change frames of current window from templates collection</li>
+			<li>change size and other settings of current window (see description of tag <code>&lt;window /&gt;</code> in <a href="http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/">XML Format</a>)</li>
+		</ul>
+	</li>
+	<li>designing
+		<ul>
+			<li>use all standard widgets from <a href="https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets">"ru.stablex.ui.widgets.*"</a></li>
+			<li>use all standard skins from <a href="https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/skins">"ru.stablex.ui.skins.*"</a></li>
+			<li>allow to evaluate <a href="https://haxe.org/">haXe</a>-expression and use result as value for property of widget</li>
+			<li>allow to use an alignment of widgets to grid</li>
+		</ul>
+	</li>
+	<li>customizing
+		<ul>
+			<li>allow to use custom templates of frame (root widget)</li>
+			<li>allow to use custom widgets</li>
+			<li>allow to use custom skins</li>
+			<li>allow to use custom defaults</li>
+		</ul>
+	</li>
+	<li>easy integration with <a href="http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/">openfl/lime project</a>
+		<ul>
+			<li>auto-insertion of instruction <code>&lt;haxelib name="stablexui"&gt;</code> (if not exist)</li>
+			<li>auto-registration of selected presets (defaults)</li>
+			<li>auto-insertion of assets</li>
+			<li>auto-insertion of sources path of custom widgets</li>
+			<li>auto-generation of file with declaration of objects for widgets with names (to easy access to widgets from source code)</li>
+		</ul>
+	</li>
+	<li>allow to edit raw xml of current gui manually
+		<ul>
+			<li>allow to run saved xml file in external editor "on the fly"</li>
+			<li>allow to force reload xml from saved file</li>
+		</ul>
+	</li>
+</ul>
+
+<h3></a>Available targets:<br></h3>
+
+<ul>
+	<li><a href="http://haxe.org/doc/start/neko">neko</a></li>
+	<li><a href="http://haxe.org/doc/start/cpp">cpp</a> (restricted)</li>
+</ul>
+
+<h3></a>Requirements:<br></h3>
+
+<ul>
+	<li><a href="https://git-scm.com/downloads">git-tools</a></li>
+	<li><a href="https://haxe.org">haxe</a> 3.2.1 or later</li>
+	<li><a href="http://nekovm.org">neko-vm</a> 2.1.0 or later</li>
+	<li><a href="https://lib.haxe.org/">haxelib</a>-packages:
+	<ul>
+		<li><a href="https://github.com/HaxeFoundation/hxcpp">hxcpp</a></li>
+		<li><a href="https://github.com/openfl/lime">lime</a></li>
+		<li><a href="https://github.com/openfl/openfl">openfl</a></li>
+		<li><a href="https://github.com/HaxeFoundation/hscript">hscript</a></li>
+		<li><a href="https://github.com/RealyUniqueName/StablexUI">stablexui</a></li>
+		<li><a href="https://github.com/waneck/systools.git">systools</a></li>
+		<li><a href="https://github.com/soywiz/haxe-crypto">haxe-crypto</a></li>
+		<li><a href="https://github.com/martamius/TJSON">tjson</a></li>
+		<li><a href="https://github.com/r3d9u11/haxe-tjsonStyleCl">tjsonStyleCl</a></li>
+		<li><a href="https://github.com/r3d9u11/haxe-typext">typext</a></li>
+	</ul>
+	</li>
+</ul>
+
+<h3></a>Install:<br></h3>
+
+<h5></a>Linux (one-command installation):<br></h5>
+
+<ul>
+	<li>download and install <a href="https://git-scm.com/download/win">git-tools</a></li>
+	<li>download and install <a href="https://haxe.org/download/">haxe</a></li>
+	<li>download and run <a href="https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Windows.bat">installation script</a></li>
+</ul>
+
+</html>
+</body>
