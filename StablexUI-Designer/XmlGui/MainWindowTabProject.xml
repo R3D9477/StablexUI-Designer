@@ -82,9 +82,9 @@
 					group="'wgtSrcAct'"
 					label-visible="true"
 					align="'middle,left'"
-					states-up-ico-src="'graphics/tools/radio_up.png'"
-					states-down-ico-src="'graphics/tools/radio_down.png'"
-					selected="true"/>
+					selected="true"
+					states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_up.png']))"
+					states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_down.png']))"/>
 				<HBox
 					layout:Column-cols="[0]"
 					layout:Column-cellPadding="10">
@@ -95,8 +95,8 @@
 						group="'wgtSrcAct'"
 						label-visible="true"
 						align="'middle,left'"
-						states-up-ico-src="'graphics/tools/radio_up.png'"
-						states-down-ico-src="'graphics/tools/radio_down.png'"/>
+						states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_up.png']))"
+						states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_down.png']))"/>
 				</HBox>
 				<HBox
 					layout:Column-cols="[0, -1, 0]"
@@ -108,8 +108,8 @@
 						group="'wgtSrcAct'"
 						label-visible="true"
 						align="'middle,left'"
-						states-up-ico-src="'graphics/tools/radio_up.png'"
-						states-down-ico-src="'graphics/tools/radio_down.png'"/>
+						states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_up.png']))"
+						states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/radio_down.png']))"/>
 					<InputText
 						name="'wgtSrcDirPath'"
 						skin:Paint-color="0xC0C0C0"
@@ -131,9 +131,9 @@
 						tabEnabled="true"
 						label-visible="true"
 						align="'middle,left'"
-						states-up-ico-src="'graphics/tools/check_up.png'"
-						states-down-ico-src="'graphics/tools/check_down.png'"
-						selected="true"/>
+						selected="true"
+						states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+						states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 					<Options
 						name="'guiInstanceTemplate'"
 						box-skin:Paint-alpha="0.9"
@@ -200,9 +200,9 @@
 					tabEnabled="true"
 					label-visible="true"
 					align="'middle,left'"
-					states-up-ico-src="'graphics/tools/check_up.png'"
-					states-down-ico-src="'graphics/tools/check_down.png'"
-					selected="true"/>
+					selected="true"
+					states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+					states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 			</VBox>
 			<VBox
 				h="250"
@@ -283,25 +283,25 @@
 							text="'vsync'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndBorderless'"
 							text="'borderless'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndResizable'"
 							text="'resizable'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="true"/>
+							selected="true"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 					</HBox>
 					<HBox
 						align="'top,left'"
@@ -311,25 +311,25 @@
 							text="'fullscreen'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndHardware'"
 							text="'hardware'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndAllowShaders'"
 							text="'allow-shaders'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 					</HBox>
 					<HBox
 						align="'top,left'"
@@ -339,25 +339,25 @@
 							text="'require-shaders'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndDepthBuffer'"
 							text="'depth-buffer'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 						<Checkbox
 							name="'wndStencilBuffer'"
 							text="'stencil-buffer'"
 							label-visible="true"
 							align="'middle,left'"
-							states-up-ico-src="'graphics/tools/check_up.png'"
-							states-down-ico-src="'graphics/tools/check_down.png'"
-							selected="false"/>
+							selected="false"
+							states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+							states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 					</HBox>
 					<HBox
 						layout:Column-cols="[0, 0]"
@@ -393,9 +393,9 @@
 					tabEnabled="true"
 					label-visible="true"
 					align="'middle,left'"
-					states-up-ico-src="'graphics/tools/check_up.png'"
-					states-down-ico-src="'graphics/tools/check_down.png'"
-					selected="false"/>
+					selected="false"
+					states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+					states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 				<HBox
 					layout:Column-cols="[0, 100]"
 					layout:Column-cellPadding="10">
