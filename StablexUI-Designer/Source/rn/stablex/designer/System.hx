@@ -783,7 +783,7 @@ class System {
 				if (Std.is(prop, Float))
 					propInfo.value = propInfo.value.replace(",", "."); // workaround: error with ',' when trying to parse Float
 				
-				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Sys.getCwd()}"').replace("%CWD", '"${Sys.getCwd()}"');
+				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Suid.getCwd()}"').replace("%CWD", '"${Suid.getCwd()}"');
 				
 				interp.variables.set("__ui__this", obj);
 				

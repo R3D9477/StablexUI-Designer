@@ -14,6 +14,15 @@ package %InstancePackage%;
 	
 	public static function castType <T> (v:Dynamic, c:Class<T>) : T // needed for ViewStack
 		return Std.is(v, c) ? cast v : null;
+	
+	public static function getCwd () : String
+		return Suid.escPath(Sys.getCwd());
+	
+	public static function fullPath (path:String) : String
+		return Suid.escPath(sys.FileSystem.fullPath(path));
+	
+	public static function escPath (path:String) : String // workaround for Windows
+		return StringTools.replace(path, "\\", "/");
 }
 
 class %InstanceName% {

@@ -49,7 +49,7 @@ class MainWindow extends Sprite {
 		var programPath:String = switch (Sys.systemName().toLowerCase()) {
 			case "linux":
 				#if neko
-					Path.join([Sys.getCwd(), "StablexUI-Designer.n"]);
+					Path.join([Suid.getCwd(), "StablexUI-Designer.n"]);
 				#elseif cpp
 					Sys.executablePath();
 				#end
@@ -57,7 +57,7 @@ class MainWindow extends Sprite {
 				Sys.executablePath();
 		};
 		
-		this.origCwd = Sys.getCwd();
+		this.origCwd = Suid.getCwd();
 		Sys.setCwd(Path.directory(programPath));
 		
 		//-----------------------------------------------------------------------------------------------
@@ -129,8 +129,8 @@ class MainWindow extends Sprite {
 		
 		System.extClsMap = new Map<String, WgtPropInfo>();
 		
-		for (clsFile in FileSystem.readDirectory(FileSystem.fullPath("extcls"))) {
-			var extClsData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("extcls"), clsFile])));
+		for (clsFile in FileSystem.readDirectory(Suid.fullPath("extcls"))) {
+			var extClsData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("extcls"), clsFile])));
 			System.extClsMap.set(extClsData.className, { name: extClsData.title, properties: extClsData.properties });
 		}
 		
@@ -141,8 +141,8 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.presetsList.addEventListener(WidgetEvent.CHANGE, this.onSelectPreset);
 		MainWindowInstance.presetsList.options = [
-			for (presetName in FileSystem.readDirectory(FileSystem.fullPath("presets"))) {
-				var dir:String = Path.join([FileSystem.fullPath("presets"), presetName]);
+			for (presetName in FileSystem.readDirectory(Suid.fullPath("presets"))) {
+				var dir:String = Path.join([Suid.fullPath("presets"), presetName]);
 				
 				var presetData:PresetInfo = TJSON.parse(File.getContent(Path.join([dir, "preset.json"])));
 				presetData.dir = dir;
@@ -161,8 +161,8 @@ class MainWindow extends Sprite {
 		
 		System.wgtSuitsMap = new Map<String, SuitInfo>();
 		
-		for (suitName in FileSystem.readDirectory(FileSystem.fullPath("suits"))) {
-			var dir:String = Path.join([FileSystem.fullPath("suits"), suitName]);
+		for (suitName in FileSystem.readDirectory(Suid.fullPath("suits"))) {
+			var dir:String = Path.join([Suid.fullPath("suits"), suitName]);
 			
 			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([dir, "suit.json"])));
 			suitData.dir = dir;
@@ -189,13 +189,13 @@ class MainWindow extends Sprite {
 		// load wgt-instance templates
 		
 		MainWindowInstance.guiInstanceTemplate.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) : Void System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value);
-		MainWindowInstance.guiInstanceTemplate.options = [for (instTemplateFile in FileSystem.readDirectory(FileSystem.fullPath("instances"))) [Path.withoutExtension(instTemplateFile), instTemplateFile]];
+		MainWindowInstance.guiInstanceTemplate.options = [for (instTemplateFile in FileSystem.readDirectory(Suid.fullPath("instances"))) [Path.withoutExtension(instTemplateFile), instTemplateFile]];
 		
 		//-----------------------------------------------------------------------------------------------
 		// load frames
 		
 		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
-		MainWindowInstance.framesList.options = [for (dir in FileSystem.readDirectory(FileSystem.fullPath("frames"))) [dir.toTitleCase(), dir]];
+		MainWindowInstance.framesList.options = [for (dir in FileSystem.readDirectory(Suid.fullPath("frames"))) [dir.toTitleCase(), dir]];
 		
 		//-----------------------------------------------------------------------------------------------
 		// load widget groups
@@ -203,7 +203,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wlSelectBtn.addEventListener(WidgetEvent.CHANGE, function (e:MouseEvent) if (MainWindowInstance.wlSelectBtn.selected) System.selWgtData = null);
 		
 		MainWindowInstance.wgtGroupsLst.addEventListener(WidgetEvent.CHANGE, this.onSelectWgtsGroup);
-		MainWindowInstance.wgtGroupsLst.options = [for (dir in FileSystem.readDirectory(FileSystem.fullPath("widgets"))) [dir.toTitleCase(), dir]];
+		MainWindowInstance.wgtGroupsLst.options = [for (dir in FileSystem.readDirectory(Suid.fullPath("widgets"))) [dir.toTitleCase(), dir]];
 		
 		//-----------------------------------------------------------------------------------------------
 		// on select widget from widget's list on properties panel
@@ -215,9 +215,9 @@ class MainWindow extends Sprite {
 		
 		System.wgtPropsMap = new Map<String, WgtPropInfo>();
 		
-		for (wgtGrpDir in FileSystem.readDirectory(FileSystem.fullPath("widgets")))
-			for (dir in FileSystem.readDirectory(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir]))) {
-				var wgtData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("widgets"), wgtGrpDir, dir, "widget.json"])));
+		for (wgtGrpDir in FileSystem.readDirectory(Suid.fullPath("widgets")))
+			for (dir in FileSystem.readDirectory(Path.join([Suid.fullPath("widgets"), wgtGrpDir]))) {
+				var wgtData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("widgets"), wgtGrpDir, dir, "widget.json"])));
 				
 				if (wgtData.properties != null)
 					if (wgtData.properties.length > 0)
@@ -229,8 +229,8 @@ class MainWindow extends Sprite {
 		
 		System.wgtSkinsMap = new Map<String, WgtPropInfo>();
 		
-		for (skinDir in FileSystem.readDirectory(FileSystem.fullPath("skins"))) {
-			var skinData:Dynamic = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("skins"), skinDir, "skin.json"])));
+		for (skinDir in FileSystem.readDirectory(Suid.fullPath("skins"))) {
+			var skinData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("skins"), skinDir, "skin.json"])));
 			
 			if (skinData.properties != null)
 				if (skinData.properties.length > 0)
@@ -292,7 +292,7 @@ class MainWindow extends Sprite {
 		for (arg in Sys.args())
 			if (FileSystem.exists(arg))
 				if (Path.extension(arg).toLowerCase() == "xml") {
-					if (System.loadUiFromFile(FileSystem.fullPath(arg)))
+					if (System.loadUiFromFile(Suid.fullPath(arg)))
 						MainWindowInstance.tabDesigner.title.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 					break;
 				}
@@ -520,7 +520,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSelectFrame (e:WidgetEvent) : Void {
-		System.frameData = TJSON.parse(File.getContent(Path.join([FileSystem.fullPath("frames"), MainWindowInstance.framesList.value, "window.json"])));
+		System.frameData = TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, "window.json"])));
 		
 		MainWindowInstance.guiWidth.text = Std.string(System.frameData.width);
 		MainWindowInstance.guiHeight.text = Std.string(System.frameData.height);
@@ -539,7 +539,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wndStencilBuffer.selected = System.frameData.stencilBuffer;
 		MainWindowInstance.wndOrientation.value = System.frameData.orientation;
 		
-		System.loadUiFromXml(System.parseXml(File.getContent(Path.join([FileSystem.fullPath("frames"), MainWindowInstance.framesList.value, System.frameData.xml]))).firstElement());
+		System.loadUiFromXml(System.parseXml(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, System.frameData.xml]))).firstElement());
 	}
 	
 	//-----------------------------------------------------------------------------------------------
@@ -549,8 +549,8 @@ class MainWindow extends Sprite {
 		MainWindowInstance.wlSelectBtn.selected = true;
 		MainWindowInstance.wgtsLst.freeChildren(true);
 		
-		for (dir in FileSystem.readDirectory(FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
-			dir = FileSystem.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, dir]));
+		for (dir in FileSystem.readDirectory(Suid.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
+			dir = Suid.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, dir]));
 			
 			var wgtData:WgtInfo = TJSON.parse(File.getContent(Path.join([dir, "widget.json"])));
 			wgtData.dir = dir;
@@ -571,7 +571,7 @@ class MainWindow extends Sprite {
 			tip.text = wgtData.title;
 			
 			var ico:Bmp = new Bmp();
-			ico.bitmapData = BitmapData.fromFile(wgtData.ico.replace(Path.addTrailingSlash(Sys.getCwd()), ""));
+			ico.bitmapData = BitmapData.fromFile(wgtData.ico.replace(Path.addTrailingSlash(Suid.getCwd()), ""));
 			ico.refresh();
 			
 			var wgtSelector:Radio = UIBuilder.buildFn("XmlGui/WgtSelector.xml")();
@@ -721,14 +721,14 @@ class MainWindow extends Sprite {
 	
 	function onXmlExtOpen (e:MouseEvent) : Void {
 		if (FileSystem.exists(System.uiXmlPath.escNull()))
-			FileSystemHelper.execUrl(FileSystem.fullPath(System.uiXmlPath));
+			FileSystemHelper.execUrl(Suid.fullPath(System.uiXmlPath));
 		else
 			Dialogs.message("neko-systools", "UI must be saved to file!", true);
 	}
 	
 	function onXmlReloadFile (e:MouseEvent) : Void {
 		if (FileSystem.exists(System.uiXmlPath.escNull())) {
-			var xml:Xml = System.parseXml(File.getContent(FileSystem.fullPath(System.uiXmlPath)));
+			var xml:Xml = System.parseXml(File.getContent(Suid.fullPath(System.uiXmlPath)));
 			MainWindowInstance.xmlSource.text = System.printXml(xml.getByXpath("//GuiElements"), "   ");
 		}
 		else

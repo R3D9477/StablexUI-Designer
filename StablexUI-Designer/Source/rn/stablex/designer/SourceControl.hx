@@ -22,9 +22,9 @@ class SourceControl {
 		
 		var getInstance:String->String = function (instPath:String) : String
 			return
-				Path.withoutExtension(FileSystem.fullPath(instPath)
+				Path.withoutExtension(Suid.fullPath(instPath)
 					.replace(Path.addTrailingSlash(Path.join([
-						Path.directory(FileSystem.fullPath(System.guiSettings.project)),
+						Path.directory(Suid.fullPath(System.guiSettings.project)),
 						projXml.getByXpath("//project/source").get("path")
 					])), ""))
 				.replace("/", ".")
@@ -42,7 +42,7 @@ class SourceControl {
 				projXml.addChild(instXml);
 			}
 		
-		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 	}
 	
 	public static function checkStablexUILib () : Bool {
@@ -56,7 +56,7 @@ class SourceControl {
 			hxnode.set("name", "stablexui");
 			projXml.addChild(hxnode);
 			
-			File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+			File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		}
 		
 		return true;
@@ -83,7 +83,7 @@ class SourceControl {
 		var instPath:String =
 			FileSystem.exists(System.guiSettings.guiInstancePath) ?
 			System.guiSettings.guiInstancePath :
-			FileSystem.fullPath(Path.join(["instances", System.guiSettings.guiInstanceTemplate]));
+			Suid.fullPath(Path.join(["instances", System.guiSettings.guiInstanceTemplate]));
 		
 		var pack:String = Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".");
 		
@@ -120,7 +120,7 @@ class SourceControl {
 					return hxLine;
 				});
 		
-		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Sys.getCwd());
+		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Suid.getCwd());
 		
 		instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${haxe.io.Path.join([relPath, "GuiElements.xml"])}", "GuiElements");');
 		
@@ -129,7 +129,7 @@ class SourceControl {
 		rli++;
 		ili++;
 		
-		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Sys.getCwd()}"), "CWD", Sys.getCwd());');
+		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Suid.getCwd()}"), "CWD", Suid.getCwd());');
 		
 		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
 		var presetPath:String = '"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([preset.dir, preset.xml]))}"';
@@ -208,7 +208,7 @@ class SourceControl {
 					}
 				}
 				
-				File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+				File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 			}
 			else
 				result = false;
@@ -237,12 +237,12 @@ class SourceControl {
 				for (asset in inf.assets) {
 					var xa:Xml = Xml.createElement("assets");
 					xa.set("path", FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([inf.dir, asset])));
-					xa.set("rename", Path.join([inf.dir, asset]).replace(Path.addTrailingSlash(Sys.getCwd()), ""));
+					xa.set("rename", Path.join([inf.dir, asset]).replace(Path.addTrailingSlash(Suid.getCwd()), ""));
 					xa.set("guiUuid", System.guiSettings.guiUuid);
 					projXml.addChild(xa);
 				}
 		
-		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		
 		return true;
 	}
@@ -313,7 +313,7 @@ class SourceControl {
 			projXml.addChild(sx);
 		}
 		
-		File.saveContent(FileSystem.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
 		
 		return true;
 	}
