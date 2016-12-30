@@ -289,13 +289,16 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// load arguments
 		
-		for (arg in Sys.args())
+		for (arg in Sys.args()) {
+			arg = Suid.escPath(arg); // workaround for Windows
+			
 			if (FileSystem.exists(arg))
 				if (Path.extension(arg).toLowerCase() == "xml") {
 					if (System.loadUiFromFile(Suid.fullPath(arg)))
 						MainWindowInstance.tabDesigner.title.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
 					break;
 				}
+		}
 		
 		//-----------------------------------------------------------------------------------------------
 		// designer tabs
@@ -383,7 +386,7 @@ class MainWindow extends Sprite {
 		var oFiles:Array<String> = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", { count: 1,  descriptions: ["StablexUI XML files"], extensions: ["*.xml"] });
 		
 		if (oFiles != null)
-			if (System.loadUiFromFile(oFiles[0]))
+			if (System.loadUiFromFile(Suid.escPath(oFiles[0]))) // workaround for Windows
 				Dialogs.message("neko-systools", "UI was succefully loaded from Xml!", false);
 			else
 				Dialogs.message("neko-systools", "UI was not loaded from Xml!", true);
@@ -391,6 +394,8 @@ class MainWindow extends Sprite {
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
 		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd), { count: 1,  descriptions: ["XML files"], extensions: ["*.xml"] });
+		
+		sFile = Suid.escPath(sFile); // workaround for Windows
 		
 		if (sFile > "") {
 			if (Path.extension(sFile).toLowerCase() != "xml")
