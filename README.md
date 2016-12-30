@@ -2,8 +2,9 @@ StablexUI-Designer
 =========================
 
 Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) library [StablexUI](https://github.com/RealyUniqueName/StablexUI).<br/>
-
 Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
+
+wiki and the list of the plans will be soon...<br/>
 
 ###Current features:<br/>
 * generic
