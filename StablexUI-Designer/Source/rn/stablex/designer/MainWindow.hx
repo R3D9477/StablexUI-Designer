@@ -386,7 +386,7 @@ class MainWindow extends Sprite {
 		var oFiles:Array<String> = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", { count: 1,  descriptions: ["StablexUI XML files"], extensions: ["*.xml"] });
 		
 		if (oFiles != null)
-			if (System.loadUiFromFile(Suid.escPath(oFiles[0]))) // workaround for Windows
+			if (System.loadUiFromFile(Suid.escPath(oFiles[0])))
 				Dialogs.message("neko-systools", "UI was succefully loaded from Xml!", false);
 			else
 				Dialogs.message("neko-systools", "UI was not loaded from Xml!", true);
@@ -394,8 +394,7 @@ class MainWindow extends Sprite {
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
 		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd), { count: 1,  descriptions: ["XML files"], extensions: ["*.xml"] });
-		
-		sFile = Suid.escPath(sFile); // workaround for Windows
+		sFile = Suid.escPath(sFile);
 		
 		if (sFile > "") {
 			if (Path.extension(sFile).toLowerCase() != "xml")
@@ -458,13 +457,13 @@ class MainWindow extends Sprite {
 		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] });
 		
 		if (oFiles != null) {
-			MainWindowInstance.projectPath.text = oFiles[0];
+			MainWindowInstance.projectPath.text = Suid.escPath(oFiles[0]);
 			
 			var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
-			var firstSrc:String = projXml.getByXpath("//project/source").get("path");
+			var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
 			
 			if (!FileSystem.exists(firstSrc))
-				firstSrc = Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]);
+				firstSrc = Suid.escPath(Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]));
 			
 			if (MainWindowInstance.wgtSrcDirPath.text == "")
 				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
@@ -485,14 +484,14 @@ class MainWindow extends Sprite {
 		var srcDir:String = Dialogs.folder("Select sources dir", "Select directory of current OpenFL/Lime project");
 		
 		if (srcDir > "")
-			MainWindowInstance.wgtSrcDirPath.text = srcDir;
+			MainWindowInstance.wgtSrcDirPath.text = Suid.escPath(srcDir);
 	}
 	
 	function onChooseInstancePath (e:MouseEvent) : Void {
 		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] });
 		
 		if (oFiles != null)
-			MainWindowInstance.guiInstancePath.text = oFiles[0];
+			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFiles[0]);
 	}
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
