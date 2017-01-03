@@ -44,18 +44,23 @@ class MainWindow extends Sprite {
 		this.stage.scaleMode = StageScaleMode.NO_SCALE;
 		
 		//-----------------------------------------------------------------------------------------------
-		// workaround for haxe 3.2.1
+		// workaround for haxe < 3.4.0
 		
-		var programPath:String = switch (Sys.systemName().toLowerCase()) {
-			case "linux":
-				#if neko
-					Path.join([Suid.getCwd(), "StablexUI-Designer.n"]);
-				#elseif cpp
-					Sys.executablePath();
-				#end
-			default:
-				Sys.executablePath();
-		};
+		var programPath:String =
+			#if haxe_340
+				Sys.propgramPath();
+			#else
+				switch (Sys.systemName().toLowerCase()) {
+					case "linux":
+						#if neko
+							Path.join([Suid.getCwd(), "StablexUI-Designer.n"]);
+						#elseif cpp
+							Sys.executablePath();
+						#end
+					default:
+						Sys.executablePath();
+				};
+			#end
 		
 		this.origCwd = Suid.getCwd();
 		Sys.setCwd(Path.directory(programPath));
