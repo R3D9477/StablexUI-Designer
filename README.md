@@ -12,9 +12,9 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* load existing gui from [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 	* save gui to [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 * themes
-	* select [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [collection of presets](StablexUI-Designer/Assets/presets) "on the fly"
+	* select [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [collection](StablexUI-Designer/Assets/presets) "on the fly"
 * window's settings
-	* change the frame of the current window from [templates collection](StablexUI-Designer/Assets/frames) "on the fly"
+	* change the frame of the current window from [collection](StablexUI-Designer/Assets/frames) "on the fly"
 	* change size and other settings of current window (see description of tag `<window />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 * designing
 	* use all standard widgets from ["ru.stablex.ui.widgets.*"](https://github.com/RealyUniqueName/StablexUI/tree/master/src/ru/stablex/ui/widgets)
