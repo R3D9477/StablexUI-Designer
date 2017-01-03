@@ -29,8 +29,8 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 * easy integration with [openfl/lime project](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/)
 	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist)
 	* auto-registration of selected presets (defaults)
-	* auto-insertion of assets
-	* auto-insertion of sources path of custom widgets
+	* auto-insertion of assets (see description of tag `<assets />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
+	* auto-insertion of sources path of custom widgets (see description of tag `<source />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 	* auto-generation of file with declaration of objects for widgets with names (to easy access to widgets from source code)
 * allow to edit raw xml of current gui manually
 	* allow to run saved [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html) in external editor "on the fly"
