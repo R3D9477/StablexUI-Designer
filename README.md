@@ -9,8 +9,8 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 ###Current features:<br/>
 * generic
 	* build a new gui
-	* load existing gui from xml-file
-	* save gui to xml-file
+	* load existing gui from [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
+	* save gui to [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 * themes
 	* select [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [collection of presets](StablexUI-Designer/Assets/presets) "on the fly"
 * window's settings
@@ -33,8 +33,8 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* auto-insertion of sources path of custom widgets
 	* auto-generation of file with declaration of objects for widgets with names (to easy access to widgets from source code)
 * allow to edit raw xml of current gui manually
-	* allow to run saved xml file in external editor "on the fly"
-	* allow to force reload xml from saved file
+	* allow to run saved [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html) in external editor "on the fly"
+	* allow to force reload from saved [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 
 ###Available targets:<br/>
 * [neko](http://haxe.org/doc/start/neko)
