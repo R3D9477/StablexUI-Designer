@@ -13,7 +13,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* save gui to xml-file
 * themes
 	* select [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [collection of presets](StablexUI-Designer/Assets/presets) "on the fly"
-* windows settings
+* window's settings
 	* change frames of current window from templates collection
 	* change size and other settings of current window (see description of tag `<window />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 * designing
