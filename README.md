@@ -24,11 +24,11 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 * customizing
 	* allow to use custom templates of frame (root widget)
 	* allow to use custom widgets
-	* allow to use custom skins
-	* allow to use custom defaults
+	* allow to use custom [skins](http://ui.stablex.ru/doc/#manual/06_Skin_system.html)
+	* allow to use custom [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html)
 * easy integration with [openfl/lime project](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/)
 	* auto-insertion of instruction `<haxelib name="stablexui">` (if not exist)
-	* auto-registration of selected presets (defaults)
+	* auto-registration of selected presets ([defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html))
 	* auto-insertion of assets (see description of tag `<assets />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 	* auto-insertion of sources path of custom widgets (see description of tag `<source />` in [XML Format](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/))
 	* auto-generation of file with declaration of objects for widgets with names (to easy access to widgets from source code)
