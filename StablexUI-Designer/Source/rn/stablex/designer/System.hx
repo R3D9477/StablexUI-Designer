@@ -21,7 +21,6 @@ import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.layouts.Row;
 import ru.stablex.ui.events.WidgetEvent;
 
-import systools.Dialogs;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
 
@@ -243,7 +242,7 @@ class System {
 							dTargetWgt = dTargetWgt.parent;
 						
 						if (!Std.is(dTargetWgt, TabStack)) {
-							Dialogs.message("neko-systools", "Parent TabStack was not found!", true);
+							Dialogs.showMessage("Parent TabStack was not found!", true);
 							return;
 						}
 					}

@@ -19,7 +19,6 @@ import ru.stablex.ui.events.WidgetEvent;
 import com.hurlant.crypto.extra.UUID;
 import com.hurlant.crypto.prng.Random;
 
-import systools.Dialogs;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
 import rn.typext.hlp.FileSystemHelper;
@@ -388,20 +387,23 @@ class MainWindow extends Sprite {
 	}
 	
 	function onLoadXmlBtnClick (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", { count: 1,  descriptions: ["StablexUI XML files"], extensions: ["*.xml"] });
+		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
+		var oFile:String = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", defDir, ["StablexUI XML files"], ["*.xml"]);
 		
-		if (oFiles != null)
-			if (System.loadUiFromFile(Suid.escPath(oFiles[0])))
-				Dialogs.message("neko-systools", "UI was succefully loaded from Xml!", false);
+		if (oFile != null)
+			if (System.loadUiFromFile(Suid.escPath(oFile)))
+				Dialogs.showMessage("UI was succefully loaded from Xml!", false);
 			else
-				Dialogs.message("neko-systools", "UI was not loaded from Xml!", true);
+				Dialogs.showMessage("UI was not loaded from Xml!", true);
 	}
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
-		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd), { count: 1,  descriptions: ["XML files"], extensions: ["*.xml"] });
-		sFile = Suid.escPath(sFile);
+		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
+		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", defDir, ["XML files"], ["*.xml"]);
 		
 		if (sFile > "") {
+			sFile = Suid.escPath(sFile);
+			
 			if (Path.extension(sFile).toLowerCase() != "xml")
 				sFile += ".xml";
 			
@@ -410,7 +412,7 @@ class MainWindow extends Sprite {
 			if (System.saveUiToFile(sFile)) {
 				if (System.guiSettings.project > "")
 					if (!SourceControl.checkStablexUILib())
-						Dialogs.message("neko-systools", "StablexUI library was not defined in project!", true);
+						Dialogs.showMessage("StablexUI library was not defined in project!", true);
 				
 				if (System.guiSettings.makeInstance) {
 					SourceControl.clearWgtSources();
@@ -418,26 +420,26 @@ class MainWindow extends Sprite {
 					if (SourceControl.makeInstance())
 						SourceControl.setInstanceInitHxFlag(oldInstancePath);
 					else
-						Dialogs.message("neko-systools", "Instance was not generated!", true);
+						Dialogs.showMessage("Instance was not generated!", true);
 				}
 				
 				if (System.guiSettings.project > "") {
 					if (!SourceControl.setWindow())
-						Dialogs.message("neko-systools", "Some properties of window has not been set!", true);
+						Dialogs.showMessage("Some properties of window has not been set!", true);
 					
 					if (MainWindowInstance.embedAssets.selected)
 						if (!SourceControl.embedAssets())
-							Dialogs.message("neko-systools", "Some assets has not been embedded!", true);
+							Dialogs.showMessage("Some assets has not been embedded!", true);
 				}
 				
 				if (!MainWindowInstance.wgtSrcActNoth.selected)
 					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
-						Dialogs.message("neko-systools", "Some sources was not registered!", true);
+						Dialogs.showMessage("Some sources was not registered!", true);
 				
-				Dialogs.message("neko-systools", "UI was succefully saved to Xml!", false);
+				Dialogs.showMessage("UI was succefully saved to Xml!", false);
 			}
 			else
-				Dialogs.message("neko-systools", "UI was not saved to Xml!", true);
+				Dialogs.showMessage("UI was not saved to Xml!", true);
 		}
 	}
 	
@@ -459,10 +461,11 @@ class MainWindow extends Sprite {
 	// tab Project
 	
 	function onChooseOpenflProject (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select OpenFL/Lime project", "", { count: 1,  descriptions: ["OpenFL/Lime XML files"], extensions: ["*.xml"] });
+		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
+		var oFile:String = Dialogs.openFile("Select OpenFL/Lime project", "", defDir, ["OpenFL/Lime XML files"], ["*.xml"]);
 		
-		if (oFiles != null) {
-			MainWindowInstance.projectPath.text = Suid.escPath(oFiles[0]);
+		if (oFile != null) {
+			MainWindowInstance.projectPath.text = Suid.escPath(oFile);
 			
 			var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
 			var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
@@ -486,17 +489,19 @@ class MainWindow extends Sprite {
 	}
 	
 	function onChooseSrcDirPath (e:MouseEvent) : Void {
-		var srcDir:String = Dialogs.folder("Select sources dir", "Select directory of current OpenFL/Lime project");
+		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
+		var srcDir:String = Dialogs.openFolder("Select sources dir", "Select directory of current OpenFL/Lime project", defDir);
 		
 		if (srcDir > "")
 			MainWindowInstance.wgtSrcDirPath.text = Suid.escPath(srcDir);
 	}
 	
 	function onChooseInstancePath (e:MouseEvent) : Void {
-		var oFiles:Array<String> = Dialogs.openFile("Select instance file", "", { count: 1,  descriptions: ["Haxe Source Code"], extensions: ["*.hx"] });
+		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
+		var oFile:String = Dialogs.openFile("Select instance file", "", defDir, ["Haxe Source Code"], ["*.hx"]);
 		
-		if (oFiles != null)
-			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFiles[0]);
+		if (oFile != null)
+			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
 	}
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
@@ -732,7 +737,7 @@ class MainWindow extends Sprite {
 		if (FileSystem.exists(System.uiXmlPath.escNull()))
 			FileSystemHelper.execUrl(Suid.fullPath(System.uiXmlPath));
 		else
-			Dialogs.message("neko-systools", "UI must be saved to file!", true);
+			Dialogs.showMessage("UI must be saved to file!", true);
 	}
 	
 	function onXmlReloadFile (e:MouseEvent) : Void {
@@ -741,6 +746,6 @@ class MainWindow extends Sprite {
 			MainWindowInstance.xmlSource.text = System.printXml(xml.getByXpath("//GuiElements"), "   ");
 		}
 		else
-			Dialogs.message("neko-systools", "UI must be saved to file!", true);
+			Dialogs.showMessage("UI must be saved to file!", true);
 	}
 }
