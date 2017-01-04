@@ -388,59 +388,66 @@ class MainWindow extends Sprite {
 	
 	function onLoadXmlBtnClick (e:MouseEvent) : Void {
 		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
-		var oFile:String = Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", defDir, ["StablexUI XML files"], ["*.xml"]);
 		
-		if (oFile != null)
-			if (System.loadUiFromFile(Suid.escPath(oFile)))
-				Dialogs.showMessage("UI was succefully loaded from Xml!", false);
-			else
-				Dialogs.showMessage("UI was not loaded from Xml!", true);
+		Dialogs.openFile("Open Xml UI", "Load UI from exists Xml file.", defDir, ["StablexUI XML files"], ["*.xml"], function (oFile:String) {
+			if (oFile != null)
+				if (System.loadUiFromFile(Suid.escPath(oFile)))
+					Dialogs.showMessage("UI was succefully loaded from Xml!", false);
+				else
+					Dialogs.showMessage("UI was not loaded from Xml!", true);
+		});
 	}
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
 		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
-		var sFile:String = System.uiXmlPath > "" ? System.uiXmlPath : Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", defDir, ["XML files"], ["*.xml"]);
 		
-		if (sFile > "") {
-			sFile = Suid.escPath(sFile);
-			
-			if (Path.extension(sFile).toLowerCase() != "xml")
-				sFile += ".xml";
-			
-			var oldInstancePath:String = System.guiSettings.guiInstancePath;
-			
-			if (System.saveUiToFile(sFile)) {
-				if (System.guiSettings.project > "")
-					if (!SourceControl.checkStablexUILib())
-						Dialogs.showMessage("StablexUI library was not defined in project!", true);
+		var saveFunc:String->Void = function (sFile:String) {
+			if (sFile > "") {
+				sFile = Suid.escPath(sFile);
 				
-				if (System.guiSettings.makeInstance) {
-					SourceControl.clearWgtSources();
+				if (Path.extension(sFile).toLowerCase() != "xml")
+					sFile += ".xml";
+				
+				var oldInstancePath:String = System.guiSettings.guiInstancePath;
+				
+				if (System.saveUiToFile(sFile)) {
+					if (System.guiSettings.project > "")
+						if (!SourceControl.checkStablexUILib())
+							Dialogs.showMessage("StablexUI library was not defined in project!", true);
 					
-					if (SourceControl.makeInstance())
-						SourceControl.setInstanceInitHxFlag(oldInstancePath);
-					else
-						Dialogs.showMessage("Instance was not generated!", true);
-				}
-				
-				if (System.guiSettings.project > "") {
-					if (!SourceControl.setWindow())
-						Dialogs.showMessage("Some properties of window has not been set!", true);
+					if (System.guiSettings.makeInstance) {
+						SourceControl.clearWgtSources();
+						
+						if (SourceControl.makeInstance())
+							SourceControl.setInstanceInitHxFlag(oldInstancePath);
+						else
+							Dialogs.showMessage("Instance was not generated!", true);
+					}
 					
-					if (MainWindowInstance.embedAssets.selected)
-						if (!SourceControl.embedAssets())
-							Dialogs.showMessage("Some assets has not been embedded!", true);
+					if (System.guiSettings.project > "") {
+						if (!SourceControl.setWindow())
+							Dialogs.showMessage("Some properties of window has not been set!", true);
+						
+						if (MainWindowInstance.embedAssets.selected)
+							if (!SourceControl.embedAssets())
+								Dialogs.showMessage("Some assets has not been embedded!", true);
+					}
+					
+					if (!MainWindowInstance.wgtSrcActNoth.selected)
+						if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
+							Dialogs.showMessage("Some sources was not registered!", true);
+					
+					Dialogs.showMessage("UI was succefully saved to Xml!", false);
 				}
-				
-				if (!MainWindowInstance.wgtSrcActNoth.selected)
-					if (!SourceControl.registerWgtSources(MainWindowInstance.wgtSrcActCopy.selected, MainWindowInstance.wgtSrcDirPath.text))
-						Dialogs.showMessage("Some sources was not registered!", true);
-				
-				Dialogs.showMessage("UI was succefully saved to Xml!", false);
+				else
+					Dialogs.showMessage("UI was not saved to Xml!", true);
 			}
-			else
-				Dialogs.showMessage("UI was not saved to Xml!", true);
 		}
+		
+		if (System.uiXmlPath > "")
+			saveFunc(System.uiXmlPath);
+		else
+			Dialogs.saveFile("Save Xml UI", "Save UI to Xml file.", defDir, ["XML files"], ["*.xml"], saveFunc);
 	}
 	
 	//-----------------------------------------------------------------------------------------------
@@ -462,46 +469,49 @@ class MainWindow extends Sprite {
 	
 	function onChooseOpenflProject (e:MouseEvent) : Void {
 		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
-		var oFile:String = Dialogs.openFile("Select OpenFL/Lime project", "", defDir, ["OpenFL/Lime XML files"], ["*.xml"]);
 		
-		if (oFile != null) {
-			MainWindowInstance.projectPath.text = Suid.escPath(oFile);
-			
-			var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
-			var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
-			
-			if (!FileSystem.exists(firstSrc))
-				firstSrc = Suid.escPath(Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]));
-			
-			if (MainWindowInstance.wgtSrcDirPath.text == "")
-				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
-			
-			if (MainWindowInstance.guiInstancePath.text == "") {
-				MainWindowInstance.guiInstancePath.text = Path.join([
-					firstSrc,
-					Path.join(projXml.getByXpath("//project/app").get("main").split(".").slice(0, -1)),
-					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
-				]);
+		Dialogs.openFile("Select OpenFL/Lime project", "", defDir, ["OpenFL/Lime XML files"], ["*.xml"], function (oFile:String) {
+			if (oFile != null) {
+				MainWindowInstance.projectPath.text = Suid.escPath(oFile);
 				
-				MainWindowInstance.wgtMakeUiInst.selected = true;
+				var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
+				var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
+				
+				if (!FileSystem.exists(firstSrc))
+					firstSrc = Suid.escPath(Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]));
+				
+				if (MainWindowInstance.wgtSrcDirPath.text == "")
+					MainWindowInstance.wgtSrcDirPath.text = firstSrc;
+				
+				if (MainWindowInstance.guiInstancePath.text == "") {
+					MainWindowInstance.guiInstancePath.text = Path.join([
+						firstSrc,
+						Path.join(projXml.getByXpath("//project/app").get("main").split(".").slice(0, -1)),
+						MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
+					]);
+					
+					MainWindowInstance.wgtMakeUiInst.selected = true;
+				}
 			}
-		}
+		});
 	}
 	
 	function onChooseSrcDirPath (e:MouseEvent) : Void {
 		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
-		var srcDir:String = Dialogs.openFolder("Select sources dir", "Select directory of current OpenFL/Lime project", defDir);
 		
-		if (srcDir > "")
-			MainWindowInstance.wgtSrcDirPath.text = Suid.escPath(srcDir);
+		Dialogs.openFolder("Select sources dir", "Select directory of current OpenFL/Lime project", defDir, function (oDir:String) {
+			if (oDir > "")
+				MainWindowInstance.wgtSrcDirPath.text = Suid.escPath(oDir);
+		});
 	}
 	
 	function onChooseInstancePath (e:MouseEvent) : Void {
 		var defDir:String = Path.removeTrailingSlashes(System.uiDirPath > "" ? System.uiDirPath : this.origCwd);
-		var oFile:String = Dialogs.openFile("Select instance file", "", defDir, ["Haxe Source Code"], ["*.hx"]);
 		
-		if (oFile != null)
-			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
+		Dialogs.openFile("Select instance file", "", defDir, ["Haxe Source Code"], ["*.hx"], function (oFile:String) {
+			if (oFile != null)
+				MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
+		});
 	}
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
