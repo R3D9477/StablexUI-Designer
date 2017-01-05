@@ -42,8 +42,8 @@
 			format-size="13"
 			format-color="0x0AD49E"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/checkbox_unchecked.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/checkbox_checked.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/checkbox_unchecked.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/checkbox_checked.png']))"/>
 	</Checkbox>
 	<Clock>
 		<Default
@@ -108,8 +108,8 @@
 			format-size="13"
 			format-color="0x0AD49E"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/radio_unselected.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/radio_selected.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/radio_unselected.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/radio_selected.png']))"/>
 	</Radio>
 	<Scroll>
 		<Default
@@ -148,9 +148,9 @@
 			format-size="13"
 			format-color="0x0AD49E"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
-			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/statebutton_state1.png']))"
-			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/statebutton_state2.png']))"
-			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/statebutton_state3.png']))"/>
+			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/statebutton_state1.png']))"
+			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/statebutton_state2.png']))"
+			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/statebutton_state3.png']))"/>
 	</StateButton>
 	<Switch>
 		<Default
@@ -209,8 +209,8 @@
 			format-size="13"
 			format-color="0x0AD49E"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/toggle_off.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'fonts/img/toggle_on.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/toggle_off.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/dark/img/toggle_on.png']))"/>
 		<Option
 			format-size="13"
 			format-color="0x0AD49E"
