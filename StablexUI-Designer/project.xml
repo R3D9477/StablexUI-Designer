@@ -21,6 +21,7 @@
 	
 	<assets rename="graphics" path="Assets/graphics"/>
 	
+	<assets rename="fonts" path="Assets/fonts"/>
 	<assets rename="extcls" path="Assets/extcls"/>
 	<assets rename="presets" path="Assets/presets"/>
 	<assets rename="suits" path="Assets/suits"/>

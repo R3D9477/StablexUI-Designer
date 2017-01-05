@@ -23,7 +23,7 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
@@ -38,15 +38,15 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_unchecked.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/checkbox_checked.png']))"/>
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/checkbox_unchecked.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/checkbox_checked.png']))"/>
 	</Checkbox>
 	<Clock>
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
 			paddingLeft="5"
 			paddingRight="5"
 			paddingTop="2"
@@ -71,7 +71,7 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
@@ -80,7 +80,7 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"
@@ -105,9 +105,9 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_unselected.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/radio_selected.png']))"/>
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/radio_unselected.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/radio_selected.png']))"/>
 	</Radio>
 	<Scroll>
 		<Default
@@ -144,10 +144,10 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
-			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state1.png']))"
-			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state2.png']))"
-			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/statebutton_state3.png']))"/>
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
+			states-one-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/statebutton_state1.png']))"
+			states-two-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/statebutton_state2.png']))"
+			states-three-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/statebutton_state3.png']))"/>
 	</StateButton>
 	<Switch>
 		<Default
@@ -163,10 +163,10 @@
 			slider-skin:Gradient-colors="[0xAAAAAA, 0xFFFFFF]"
 			labelOn-format-size="13"
 			labelOn-format-color="0x000000"
-			labelOn-format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"
+			labelOn-format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"
 			labelOff-format-size="13"
 			labelOff-format-color="0x000000"
-			labelOff-format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"/>
+			labelOff-format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
 	</Switch>
 	<TabPage>
 		<Default
@@ -190,22 +190,22 @@
 		<Default
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"/>
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
 	</Text>
 	<Tip>
 		<Default
 			label-format-size="13"
 			label-format-color="0x000000"
-			label-format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"/>
+			label-format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
 	</Tip>
 	<Toggle>
 		<Default
-			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_off.png']))"
-			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'presets/default/img/toggle_on.png']))"/>
+			states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/toggle_off.png']))"
+			states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'img/toggle_on.png']))"/>
 		<Option
 			format-size="13"
 			format-color="0x000000"
-			format-font="$Path.join([%CWD, 'presets/default/fonts/default_DejaVuSans.ttf'])"/>
+			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
 	</Toggle>
 	<VBox>
 		<Default
