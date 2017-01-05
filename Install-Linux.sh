@@ -9,6 +9,10 @@ sudo apt-get update
 
 sudo apt-get install g++ git haxe neko-dev -y
 
+if [ ! -f ~/.haxelib ]; then
+	echo ~/.haxelib-repo > ~/.haxelib
+fi
+
 if [ $DESKTOP_SESSION = "ubuntu" ] || \
 	[ $DESKTOP_SESSION = "mate" ] || \
 	[ $DESKTOP_SESSION = "gnome" ] || \
