@@ -58,7 +58,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 
 ###Install:<br/>
 
-#####Linux (one-command installation):<br/>
+#####Ubuntu-based Linux (one-command installation):<br/>
 * run command in terminal:
 ```bash
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
