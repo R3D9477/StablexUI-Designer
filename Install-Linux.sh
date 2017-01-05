@@ -4,6 +4,9 @@
 # INSTALL NEEDED LINUX PACKAGES #
 #################################
 
+sudo add-apt-repository ppa:haxe/releases -y
+sudo apt-get update
+
 sudo apt-get install g++ git haxe neko-dev -y
 
 if [ $DESKTOP_SESSION = "ubuntu" ] || \
