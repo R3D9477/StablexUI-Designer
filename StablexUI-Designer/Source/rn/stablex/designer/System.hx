@@ -24,6 +24,8 @@ import ru.stablex.ui.events.WidgetEvent;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
 
+import rn.haxity.Haxity;
+
 using StringTools;
 using rn.typext.ext.XmlExtender;
 using rn.typext.ext.BoolExtender;
@@ -242,7 +244,7 @@ class System {
 							dTargetWgt = dTargetWgt.parent;
 						
 						if (!Std.is(dTargetWgt, TabStack)) {
-							Dialogs.showMessage("Parent TabStack was not found!", true);
+							Haxity.error("Add widget", "Parent TabStack was not found!");
 							return;
 						}
 					}

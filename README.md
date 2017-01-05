@@ -50,8 +50,8 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* [openfl](https://github.com/openfl/openfl)
 	* [hscript](https://github.com/HaxeFoundation/hscript)
 	* [stablexui](https://github.com/RealyUniqueName/StablexUI)
-	* [systools](https://github.com/waneck/systools.git)
 	* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
+	* [haxity](https://github.com/r3d9u11/haxe-haxity)
 	* [tjson](https://github.com/martamius/TJSON)
 	* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
 	* [typext](https://github.com/r3d9u11/haxe-typext)
@@ -66,5 +66,6 @@ curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/Stab
 
 #####Windows:<br/>
 * download and install [git-tools](https://git-scm.com/download/win)
+* download and install [zenity](https://github.com/kvaps/zenity-windows/#downloads)
 * download and install [haxe](https://haxe.org/download/)
 * download and run [installation script](https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Windows.bat)

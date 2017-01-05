@@ -6,6 +6,19 @@
 
 sudo apt-get install g++ git haxe neko-dev -y
 
+if [ $DESKTOP_SESSION = "ubuntu" ] || \
+	[ $DESKTOP_SESSION = "mate" ] || \
+	[ $DESKTOP_SESSION = "gnome" ] || \
+	[ $DESKTOP_SESSION = "cinnamon" ] || \
+	[ $DESKTOP_SESSION = "lxde" ] || \
+	[ $DESKTOP_SESSION = "xfce" ]; then
+	sudo apt-get install zenity
+elif [ $DESKTOP_SESSION = "kde" ]; then
+	sudo apt-get install kdialog
+elif [ $DESKTOP_SESSION = "" ]; then
+	sudo apt-get install dialog
+fi
+
 ###################################
 # INSTALL NEEDED HAXELIB PACKAGES #
 ###################################
@@ -30,10 +43,10 @@ bash -c 'echo "y" | haxelib run openfl setup'
 
 echo "y" | haxelib install tjson
 echo "y" | haxelib install haxe-crypto
-echo "y" | haxelib git systools https://github.com/waneck/systools.git
 
 echo "y" | haxelib git stablexui https://github.com/RealyUniqueName/StablexUI.git
 
+echo "y" | haxelib git haxity https://github.com/r3d9u11/haxe-haxity.git
 echo "y" | haxelib git typext https://github.com/r3d9u11/haxe-typext.git
 echo "y" | haxelib git tjsonStyleCl https://github.com/r3d9u11/haxe-tjsonStyleCl.git
 echo "y" | haxelib git dataTree https://github.com/r3d9u11/haxe-dataTree.git

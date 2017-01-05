@@ -11,8 +11,8 @@
 	<source path="Source"/>
 	
 	<haxelib name="openfl"/>
-	<haxelib name="systools"/>
 	<haxelib name="stablexui"/>
+	<haxelib name="haxity"/>
 	<haxelib name="typext"/>
 	<haxelib name="tjson"/>
 	<haxelib name="tjsonStyleCl"/>

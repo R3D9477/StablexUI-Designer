@@ -22,10 +22,10 @@ haxelib run openfl setup
 
 haxelib install tjson
 haxelib install haxe-crypto
-haxelib git systools https://github.com/waneck/systools.git
 
 haxelib git stablexui https://github.com/RealyUniqueName/StablexUI.git
 
+haxelib git haxity https://github.com/r3d9u11/haxe-haxity.git
 haxelib git typext https://github.com/r3d9u11/haxe-typext.git
 haxelib git tjsonStyleCl https://github.com/r3d9u11/haxe-tjsonStyleCl.git
 haxelib git dataTree https://github.com/r3d9u11/haxe-dataTree.git
