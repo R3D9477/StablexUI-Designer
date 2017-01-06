@@ -12,6 +12,7 @@
 	
 	<haxelib name="openfl"/>
 	<haxelib name="stablexui"/>
+	<haxelib name="systools"/>
 	<haxelib name="haxity"/>
 	<haxelib name="typext"/>
 	<haxelib name="tjson"/>
