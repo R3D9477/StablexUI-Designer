@@ -52,6 +52,7 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* [stablexui](https://github.com/RealyUniqueName/StablexUI)
 	* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
 	* [haxity](https://github.com/r3d9u11/haxe-haxity)
+		* for [Windows](https://en.wikipedia.org/wiki/Microsoft_Windows) also need [systools](https://github.com/waneck/systools)
 	* [tjson](https://github.com/martamius/TJSON)
 	* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
 	* [typext](https://github.com/r3d9u11/haxe-typext)
