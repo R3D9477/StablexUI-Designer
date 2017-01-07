@@ -13,16 +13,21 @@ if [ ! -f ~/.haxelib ]; then
 	echo ~/.haxelib-repo > ~/.haxelib
 fi
 
+DLG_BUILDER="unknown"
+
 if [ $DESKTOP_SESSION = "ubuntu" ] || \
 	[ $DESKTOP_SESSION = "mate" ] || \
 	[ $DESKTOP_SESSION = "gnome" ] || \
 	[ $DESKTOP_SESSION = "cinnamon" ] || \
 	[ $DESKTOP_SESSION = "lxde" ] || \
 	[ $DESKTOP_SESSION = "xfce" ]; then
+	DLG_BUILDER="zenity"
 	sudo apt-get install zenity
 elif [ $DESKTOP_SESSION = "kde" ]; then
+	DLG_BUILDER="kdialog"
 	sudo apt-get install kdialog
 elif [ $DESKTOP_SESSION = "" ]; then
+	DLG_BUILDER="dialog"
 	sudo apt-get install dialog
 fi
 
@@ -99,6 +104,7 @@ fi
 
 OUTDIR=$OUTDIR'/'$TARGET
 
+echo "DLG_BUILDER = ${DLG_BUILDER}"
 echo "PLATFORM = ${PLATFORM}"
 echo "TARGET = ${TARGET}"
 echo "OUTDIR = ${OUTDIR}"
