@@ -201,7 +201,10 @@ class MainWindow extends Sprite {
 		// load frames
 		
 		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
-		MainWindowInstance.framesList.options = [for (dir in FileSystem.readDirectory(Suid.fullPath("frames"))) [dir.toTitleCase(), dir]];
+		MainWindowInstance.framesList.options = [
+			for (dir in FileSystem.readDirectory(Suid.fullPath("frames")))
+				[TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), dir, "frame.json"]))).title, dir]
+		];
 		
 		//-----------------------------------------------------------------------------------------------
 		// load widget groups
@@ -358,7 +361,7 @@ class MainWindow extends Sprite {
 			preset: "default",
 			embedAssets: true,
 			
-			frameTemplate: "default",
+			frameTemplate: "main_window",
 			guiWidth: 0,
 			guiHeight: 0,
 			
@@ -542,7 +545,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSelectFrame (e:WidgetEvent) : Void {
-		System.frameData = TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, "window.json"])));
+		System.frameData = TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, "frame.json"])));
 		
 		MainWindowInstance.guiWidth.text = Std.string(System.frameData.width);
 		MainWindowInstance.guiHeight.text = Std.string(System.frameData.height);

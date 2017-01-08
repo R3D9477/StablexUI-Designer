@@ -1,7 +1,8 @@
 {
-	"xml": "window.xml",
-	"width": 640,
-	"height": 480,
+	"title": "Child Window",
+	"xml": "frame.xml",
+	"width": 300,
+	"height": 200,
 	"vsync": false,
 	"borderless": false,
 	"resizable": true,

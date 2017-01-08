@@ -1,0 +1,11 @@
+{
+	"title": "Widgets Section",
+	"xml": "frame.xml",
+	"width": 640,
+	"height": 480,
+	"vsync": false,
+	"borderless": false,
+	"resizable": true,
+	"fullscreen": false,
+	"orientation": 0
+}

@@ -1,6 +1,8 @@
 package rn.stablex.designer;
 
 typedef FrameInfo = {
+	var title:String;
+	
 	var xml:String;
 	
 	var width:Float;
