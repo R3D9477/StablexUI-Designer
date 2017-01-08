@@ -6,6 +6,7 @@ typedef WgtInfo = {
 	var xml:String;
 	var src:String;
 	var bin: {
+		parentClassName:String,
 		neko:String,
 		cpp:String
 	};

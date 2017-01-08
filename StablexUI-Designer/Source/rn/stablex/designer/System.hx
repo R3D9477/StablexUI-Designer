@@ -211,7 +211,7 @@ class System {
 					#if neko
 						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
 							var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin.neko).exportsTable().__classes, selWgtData.className);
-							untyped wgtBinCls.__super__ = Widget;
+							untyped wgtBinCls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
 							
 							RTXml.regClass(wgtBinCls);
 						}

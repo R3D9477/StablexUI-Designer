@@ -3,8 +3,10 @@
 	"xml": "widget.xml",
 	"ico": "ico.png",
 	"className": "rn.test.CustomWidget",
-	"parentClassName": "ru.stablex.ui.widgets.Widget",
-	"bin": "bin/CustomWidget.n",
+	"bin": {
+		"parentClassName": "ru.stablex.ui.widgets.Widget",
+		"neko": "bin/CustomWidget.n"
+	},
 	"properties": [
 		
 	]
