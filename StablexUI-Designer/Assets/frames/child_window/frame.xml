@@ -14,7 +14,8 @@
 			<Button
 				text="'X'"
 				skin:Paint-border="1"
-				skin:Paint-borderColor="0x000000"/>
+				skin:Paint-borderColor="0x000000"
+				on-click="$Suid.castType($this.parent.parent.parent, $Floating).hide();"/>
 		</HBox>
 		<GuiElements/>
 	</VBox>
