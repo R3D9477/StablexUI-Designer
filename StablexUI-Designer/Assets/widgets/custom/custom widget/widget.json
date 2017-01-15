@@ -2,7 +2,7 @@
 	"title": "Custom Widget",
 	"xml": "widget.xml",
 	"ico": "ico.png",
-	"className": "rn.test.CustomWidget",
+	"className": "CustomWidget",
 	"bin": {
 		"parentClassName": "ru.stablex.ui.widgets.Widget",
 		"neko": "bin/CustomWidget.n"

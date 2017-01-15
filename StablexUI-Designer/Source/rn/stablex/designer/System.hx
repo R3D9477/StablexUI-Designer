@@ -32,6 +32,8 @@ using rn.typext.ext.BoolExtender;
 using rn.typext.ext.StringExtender;
 
 class System {
+	public static var ccls:Class<Dynamic> = null;
+	
 	public static var guiSettings:GuiDataInfo;
 	
 	public static var extClsMap:Map<String, WgtPropInfo>; // <class name>, <set of external classes>
@@ -209,11 +211,13 @@ class System {
 			if (FileSystem.exists(System.selWgtData.xml.escNull())) {
 				if (System.selWgtData.bin != null) {
 					#if neko
-						if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
-							var wgtBinCls:Dynamic = Reflect.field(Loader.local().loadModule(System.selWgtData.bin.neko).exportsTable().__classes, selWgtData.className);
-							untyped wgtBinCls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
+						var binPath:String = Path.join([System.selWgtData.dir, System.selWgtData.bin.neko.escNull()]);
+						
+						if (FileSystem.exists(binPath)) {
+							System.ccls = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, selWgtData.className);
+							untyped System.ccls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
 							
-							RTXml.regClass(wgtBinCls);
+							RTXml.regClass(System.ccls);
 						}
 					#end
 				}
@@ -249,6 +253,7 @@ class System {
 						}
 					}
 					
+					cast(selWgt, Widget).applySkin();
 					targetWgt.addChild(selWgt);
 					
 					var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
@@ -382,7 +387,8 @@ class System {
 	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
-				StablexUIMod.applyDefaults(dWgt);
+				if (Type.getClassName(Type.getClass(dWgt)) != "CustomWidget")
+					StablexUIMod.applyDefaults(dWgt);
 				
 				var wgt:Widget = cast(dWgt, Widget);
 				

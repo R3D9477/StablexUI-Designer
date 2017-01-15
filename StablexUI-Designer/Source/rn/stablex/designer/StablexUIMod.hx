@@ -104,6 +104,13 @@ class StablexUIMod {
 		
 		Reflect.setField(RTXml, "processXml", function (node:Xml, interp:Interp = null) : RTXml {
 			try {
+				if (node.nodeName == "CustomWidget") {
+					var cache:RTXml = new RTXml(interp);
+					cache.cls = RTXml.getImportedClass("Widget");
+					
+					return cache;
+				}
+				
 				return origProcessXml(node, interp);
 			}
 			catch (ex:Dynamic) {

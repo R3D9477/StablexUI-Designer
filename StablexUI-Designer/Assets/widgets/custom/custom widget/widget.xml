@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomWidget
 	left="0"
-	top="0"/>
+	top="0"
+	w="100"
+	h="100"
+	skin:Paint-color="0x665544"/>
