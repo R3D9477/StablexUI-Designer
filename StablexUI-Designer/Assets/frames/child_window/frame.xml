@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Floating
-	widthPt="100"
-	heightPt="100">
-	<GuiElements/>
+	w="300"
+	h="200">
+	<VBox
+		widthPt="100"
+		heightPt="100"
+		layout:Row-rows="[20, -1]">
+		<HBox
+			layout:Column-cols="[-1, 20]"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000">
+			<Widget/>
+			<Button
+				text="'X'"
+				skin:Paint-border="1"
+				skin:Paint-borderColor="0x000000"/>
+		</HBox>
+		<GuiElements/>
+	</VBox>
 </Floating>

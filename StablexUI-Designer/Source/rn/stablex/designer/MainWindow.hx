@@ -451,7 +451,7 @@ class MainWindow extends Sprite {
 		if (System.uiXmlPath > "")
 			saveFunc(System.uiXmlPath);
 		else
-			Haxity.saveFile("Save Xml UI"); // ["XML files"], ["*.xml"]
+			saveFunc(Haxity.saveFile("Save Xml UI")); // ["XML files"], ["*.xml"]
 	}
 	
 	//-----------------------------------------------------------------------------------------------
