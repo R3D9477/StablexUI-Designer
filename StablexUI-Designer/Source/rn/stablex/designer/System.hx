@@ -387,8 +387,6 @@ class System {
 	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
-				StablexUIMod.applyDefaults(dWgt);
-				
 				var wgt:Widget = cast(dWgt, Widget);
 				
 				wgt.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) MainWindowInstance.mainWnd.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN)));

@@ -15,4 +15,7 @@ package rn.stablex.designer;
 	
 	public static function escPath (path:String) : String // workaround for Windows
 		return StringTools.replace(path, "\\", "/");
+	
+	public static function getSetting () : GuiDataInfo
+		return System.guiSettings;
 }

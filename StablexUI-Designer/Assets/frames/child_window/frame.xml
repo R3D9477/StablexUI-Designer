@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Floating>
+<Floating
+	w="$Suid.getSetting().guiWidth"
+	h="$Suid.getSetting().guiHeight">
 	<VBox
 		defaults="'Default, ChildWindow'">
 		<HBox

@@ -69,6 +69,8 @@
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
 		<ChildWindowHeader
+			widthPt="100"
+			heightPt="100"
 			layout:Column-cols="[-1, 20]"/>
 	</HBox>
 	<InputText>
@@ -219,7 +221,10 @@
 		<ChildWindow
 			widthPt="100"
 			heightPt="100"
-			layout:Row-rows="[20, -1]"/>
+			layout:Row-rows="[20, -1]"
+			skin:Paint-color="0xC0C0C0"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
 	</VBox>
 	<ViewStack>
 		<Default
