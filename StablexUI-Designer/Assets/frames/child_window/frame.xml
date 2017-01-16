@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Floating
-	w="300"
-	h="200">
+<Floating>
 	<VBox
-		widthPt="100"
-		heightPt="100"
-		layout:Row-rows="[20, -1]">
+		defaults="'Default, ChildWindow'">
 		<HBox
-			layout:Column-cols="[-1, 20]"
-			skin:Paint-border="1"
-			skin:Paint-borderColor="0x000000">
+			defaults="'Default, ChildWindowHeader'">
 			<Widget/>
 			<Button
-				text="'X'"
-				skin:Paint-border="1"
-				skin:Paint-borderColor="0x000000"
+				defaults="'Default, ChildWindowClose'"
 				on-click="$Suid.castType($this.parent.parent.parent, $Floating).hide();"/>
 		</HBox>
 		<GuiElements/>

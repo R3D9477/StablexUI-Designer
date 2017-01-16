@@ -387,8 +387,7 @@ class System {
 	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
-				if (Type.getClassName(Type.getClass(dWgt)) != "CustomWidget")
-					StablexUIMod.applyDefaults(dWgt);
+				StablexUIMod.applyDefaults(dWgt);
 				
 				var wgt:Widget = cast(dWgt, Widget);
 				
@@ -550,7 +549,7 @@ class System {
 			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
 			
 			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
-			System.setupEachWidget(System.guiElementsWgt);
+			System.setupEachWidget(System.frameWgt);
 			System.selectWgtFromList(0); // select first widget from list
 			
 			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");

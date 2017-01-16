@@ -54,7 +54,7 @@ class StablexUIMod {
 			wgt.defaults = "Default";
 		
 		for (defName in wgt.defaults.split(",")) {
-			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/$defName');
+			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/${defName.trim()}');
 			
 			if (defsXml != null) {
 				var wgtXml:Xml = System.wgtUiXmlMap.get(dWgt);
@@ -104,13 +104,6 @@ class StablexUIMod {
 		
 		Reflect.setField(RTXml, "processXml", function (node:Xml, interp:Interp = null) : RTXml {
 			try {
-				if (node.nodeName == "CustomWidget") {
-					var cache:RTXml = new RTXml(interp);
-					cache.cls = RTXml.getImportedClass("Widget");
-					
-					return cache;
-				}
-				
 				return origProcessXml(node, interp);
 			}
 			catch (ex:Dynamic) {
