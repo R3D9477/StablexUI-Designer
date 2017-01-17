@@ -53,12 +53,7 @@ class StablexUIMod {
 		if (!(wgt.defaults > ""))
 			wgt.defaults = "Default";
 		
-		//trace(Type.getClassName(Type.getClass(dWgt)), wgt.defaults);
-		
 		for (defName in wgt.defaults.split(",")) {
-			
-			//trace('   ', defName);
-			
 			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/${defName.trim()}');
 			
 			if (defsXml != null) {

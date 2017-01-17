@@ -1,9 +1,19 @@
 {
 	"title": "Child Window",
 	"xml": "frame.xml",
+	
 	"width": 300,
 	"height": 200,
+	
+	"background": 0xFFFFFF,
+	
 	"vsync": false,
+	"fps": 30,
+	"hardware": false,
+	"allowShaders": false,
+	"requireShaders": false,
+	"depthBuffer": false,
+	"stencilBuffer": false,
 	"borderless": false,
 	"resizable": true,
 	"fullscreen": false,

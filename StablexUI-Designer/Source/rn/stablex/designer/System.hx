@@ -27,6 +27,7 @@ import rn.TjsonStyleCl;
 import rn.haxity.Haxity;
 
 using StringTools;
+using rn.typext.ext.IterExtender;
 using rn.typext.ext.XmlExtender;
 using rn.typext.ext.BoolExtender;
 using rn.typext.ext.StringExtender;
@@ -794,8 +795,8 @@ class System {
 				for (cls in RTXml.imports.keys())
 					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
 				
-				for (flt in ["BitmapFilter", "BitmapFilterQuality", "BitmapFilterType", "BlurFilter", "ColorMatrixFilter", "DropShadowFilter", "GlowFilter"])
-					interp.variables.set(flt, 'openfl.filters.$flt');
+				for (extCls in System.extClsMap.keys().array())
+					interp.variables.set(extCls.split(".").pop(), extCls);
 				
 				dynValue = interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)));
 			}

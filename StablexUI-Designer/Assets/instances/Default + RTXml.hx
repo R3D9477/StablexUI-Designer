@@ -23,15 +23,29 @@ package %InstancePackage%;
 	
 	public static function escPath (path:String) : String // workaround for Windows
 		return StringTools.replace(path, "\\", "/");
+	
+	public static function getSettings (guiName:String) : Dynamic {
+		return switch (guiName) {
+			// switchers of guiSettings
+			default: null;
+		}
+	}
 }
 
 class %InstanceName% {
-	@:noCompletion macro public static function geInit () : Void // create source of GuiElements class
+	@:noCompletion macro public static function geInit () : Void {
+		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%Suid");
+		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
+		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
+		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
+		
+		// build sources from xml
+	}
 	
 	#if !macro
 	// fields of instances
 	
-	public static function load () {
+	public static function load () : Void {
 		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%Suid");
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");

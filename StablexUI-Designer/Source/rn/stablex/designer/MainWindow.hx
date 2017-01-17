@@ -198,6 +198,11 @@ class MainWindow extends Sprite {
 		MainWindowInstance.guiInstanceTemplate.options = [for (instTemplateFile in FileSystem.readDirectory(Suid.fullPath("instances"))) [Path.withoutExtension(instTemplateFile), instTemplateFile]];
 		
 		//-----------------------------------------------------------------------------------------------
+		// on change root widget
+		
+		MainWindowInstance.rootName.addEventListener(Event.CHANGE, this.onChangeRootName);
+		
+		//-----------------------------------------------------------------------------------------------
 		// load frames
 		
 		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
@@ -417,13 +422,17 @@ class MainWindow extends Sprite {
 				if (System.saveUiToFile(sFile)) {
 					if (System.guiSettings.project > "")
 						if (!SourceControl.checkStablexUILib())
-							Haxity.warning("Save UI", "StablexUI library was not defined in project!");
+							Haxity.warning("Save UI", "StablexUI library was not registered in project!");
 					
 					if (System.guiSettings.makeInstance) {
 						SourceControl.clearWgtSources();
 						
-						if (SourceControl.makeInstance())
-							SourceControl.setInstanceInitHxFlag(oldInstancePath);
+						if (SourceControl.makeInstance()) {
+							if (System.guiSettings.project > "")
+								SourceControl.setInstanceInitHxFlag(oldInstancePath);
+							else
+								Haxity.warning("Save UI", "Instance was generated but not registered in project!");
+						}
 						else
 							Haxity.warning("Save UI", "Instance was not generated!");
 					}
@@ -478,6 +487,8 @@ class MainWindow extends Sprite {
 		if (oFile > "") {
 			MainWindowInstance.projectPath.text = Suid.escPath(oFile);
 			
+			MainWindowInstance.wgtSrcActLink.selected = true;
+			
 			var projXml:Xml = Xml.parse(File.getContent(MainWindowInstance.projectPath.text));
 			var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
 			
@@ -523,6 +534,13 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.mainWnd.name = System.guiSettings.guiName;
 		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+	}
+	
+	function onChangeRootName (e:WidgetEvent) : Void {
+		MainWindowInstance.guiInstancePath.text = Path.join([
+			Path.directory(MainWindowInstance.guiInstancePath.text),
+			MainWindowInstance.rootName.text.toTitleCase() + "Instance.hx"
+		]);
 	}
 	
 	function onChangeMainWindowSize (e:Event) : Void {
