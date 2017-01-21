@@ -32,6 +32,9 @@ class MainWindowInstance {
 	public static var tabXml:TabPage;
 	
 	public static var guiName:InputText;
+	public static var parentGuiPath:InputText;
+	public static var chooseParentGui:Button;
+	public static var parentGuiAutoreg:Checkbox;
 	
 	public static var projScroll:Scroll;
 	
@@ -47,7 +50,7 @@ class MainWindowInstance {
 	public static var guiInstanceTemplate:Options;
 	public static var guiInstancePath:InputText;
 	public static var chooseInstancePath:Button;
-	public static var rootName:InputText;
+	public static var guiInstanceFunction:InputText;
 	
 	public static var presetsList:Options;
 	public static var embedAssets:Checkbox;
@@ -124,6 +127,9 @@ class MainWindowInstance {
 		MainWindowInstance.mainWnd = UIBuilder.buildFn("XmlGui/MainWindow.xml")();
 		
 		MainWindowInstance.guiName = cast(MainWindowInstance.mainWnd.getChild("guiName"), InputText);
+		MainWindowInstance.parentGuiPath = cast(MainWindowInstance.mainWnd.getChild("parentGuiPath"), InputText);
+		MainWindowInstance.chooseParentGui = cast(MainWindowInstance.mainWnd.getChild("chooseParentGui"), Button);
+		MainWindowInstance.parentGuiAutoreg = cast(MainWindowInstance.mainWnd.getChild("parentGuiAutoreg"), Checkbox);
 		
 		MainWindowInstance.newGuiBtn = cast(MainWindowInstance.mainWnd.getChild("newGuiBtn"), Button);
 		MainWindowInstance.loadGuiBtn = cast(MainWindowInstance.mainWnd.getChild("loadGuiBtn"), Button);
@@ -148,7 +154,7 @@ class MainWindowInstance {
 		MainWindowInstance.guiInstanceTemplate = cast(MainWindowInstance.mainWnd.getChild("guiInstanceTemplate"), Options);
 		MainWindowInstance.guiInstancePath = cast(MainWindowInstance.mainWnd.getChild("guiInstancePath"), InputText);
 		MainWindowInstance.chooseInstancePath = cast(MainWindowInstance.mainWnd.getChild("chooseInstancePath"), Button);
-		MainWindowInstance.rootName = cast(MainWindowInstance.mainWnd.getChild("rootName"), InputText);
+		MainWindowInstance.guiInstanceFunction = cast(MainWindowInstance.mainWnd.getChild("guiInstanceFunction"), InputText);
 		
 		MainWindowInstance.presetsList = cast(MainWindowInstance.mainWnd.getChild("presetsList"), Options);
 		MainWindowInstance.embedAssets = cast(MainWindowInstance.mainWnd.getChild("embedAssets"), Checkbox);

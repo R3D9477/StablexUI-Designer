@@ -26,12 +26,12 @@
 			layout:Row-paddingLeft="10"
 			layout:Row-paddingRight="20">
 			<VBox
-				h="65"
+				h="95"
 				align="'top,left'"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"
 				skin:Paint-borderColor="0xFFFFFF"
-				layout:Row-rows="[0, 0]"
+				layout:Row-rows="[0, 0, 0]"
 				layout:Row-cellPadding="10"
 				layout:Row-paddingLeft="10"
 				layout:Row-paddingRight="10"
@@ -61,6 +61,30 @@
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1, 0, 0]"
+					layout:Column-cellPadding="10">
+					<Text text="'Parent:'"/>
+					<InputText
+						name="'parentGuiPath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Button
+						name="'chooseParentGui'"
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Checkbox
+						name="'parentGuiAutoreg'"
+						text="'auto registration'"
+						label-visible="true"
+						align="'middle,left'"
+						selected="false"
+						states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
+						states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
 				</HBox>
 			</VBox>
 			<VBox
@@ -162,9 +186,9 @@
 				<HBox
 					layout:Column-cols="[0, -1]"
 					layout:Column-cellPadding="10">
-					<Text text="'Root widget name:'"/>
+					<Text text="'Instance function:'"/>
 					<InputText
-						name="'rootName'"
+						name="'guiInstanceFunction'"
 						skin:Paint-color="0xC0C0C0"
 						skin:Paint-border="1"
 						skin:Paint-borderColor="0x000000"/>
