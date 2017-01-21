@@ -9,6 +9,7 @@ using Lambda;
 using StringTools;
 using rn.typext.ext.XmlExtender;
 using rn.typext.ext.IterExtender;
+using rn.typext.ext.StringExtender;
 
 class StablexUIMod {
 	public static var namespaces:Array<String> = [
@@ -50,7 +51,7 @@ class StablexUIMod {
 	public static function applyDefaults (dWgt:Dynamic) : Void { // set defaults for widgets at runtime
 		var wgt:Widget = cast(dWgt, Widget);
 		
-		if (!(wgt.defaults > ""))
+		if (StringExtender.isNullOrEmpty(wgt.defaults))
 			wgt.defaults = "Default";
 		
 		for (defName in wgt.defaults.split(",")) {

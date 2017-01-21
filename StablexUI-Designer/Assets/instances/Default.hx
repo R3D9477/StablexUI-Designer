@@ -15,9 +15,6 @@ package %InstancePackage%;
 	public static function castType <T> (v:Dynamic, c:Class<T>) : T // needed for ViewStack
 		return Std.is(v, c) ? cast v : null;
 	
-	public static function getCwd () : String
-		return Suid.escPath(Sys.getCwd());
-	
 	public static function fullPath (path:String) : String
 		return Suid.escPath(sys.FileSystem.fullPath(path));
 	
@@ -30,6 +27,12 @@ package %InstancePackage%;
 			default: null;
 		}
 	}
+	
+	public static function getCwd () : String
+		return Suid.escPath(Sys.getCwd());
+	
+	public static function getSuidCwd () : String
+		return "%SuidCwd%";
 }
 
 class %InstanceName% {
@@ -40,13 +43,15 @@ class %InstanceName% {
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
 		
 		// build sources from xml
+		ru.stablex.ui.UIBuilder.buildClass(haxe.io.Path.join([Suid.getSuidCwd(), "GuiElements.xml"]), "GuiElements");
 	}
 	
 	#if !macro
 	// fields of instances
 	
 	public static function load () : Void {
-		// UIBuilder initialization
+		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Suid.getSuidCwd()), "CWD", Suid.getCwd());
+		ru.stablex.ui.UIBuilder.init("%DefaultsPath%");
 		
 		// skins registration
 		

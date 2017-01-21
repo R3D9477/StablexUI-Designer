@@ -3,6 +3,8 @@ package rn.stablex.designer;
 typedef GuiDataInfo = {
 	var guiUuid:String;
 	var guiName:String;
+	var parentGuiPath:String;
+	var parentGuiAutoreg:Bool;
 	
 	var wgtSrcAct:Int;
 	var project:String;
@@ -11,7 +13,7 @@ typedef GuiDataInfo = {
 	var makeInstance:Bool;
 	var guiInstanceTemplate:String;
 	var guiInstancePath:String;
-	var rootName:String;
+	var guiInstanceFunction:String;
 	
 	var preset:String;
 	var embedAssets:Bool;

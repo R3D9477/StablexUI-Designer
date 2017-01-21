@@ -20,73 +20,22 @@ using rn.typext.ext.StringExtender;
 class SourceControl {
 	public static var wgtSources:Array<String> = new Array<String>();
 	
-	public static function setInstanceInitHxFlag (oldInstancePath:String) : Void {
-		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
-		
-		var getInstance:String->String = function (instPath:String) : String
-			return
-				Path.withoutExtension(Suid.fullPath(instPath)
-					.replace(Path.addTrailingSlash(Path.join([
-						Path.directory(Suid.fullPath(System.guiSettings.project)),
-						projXml.getByXpath("//project/source").get("path")
-					])), ""))
-				.replace("/", ".")
-				.replace("\\", ".") + ".geInit()";
-		
-		if (oldInstancePath > "")
-			projXml.getByXpath('//project/haxeflag[@name="--macro" and @value="${getInstance(oldInstancePath)}"]').removeSelf();
-		
-		if (System.guiSettings.makeInstance)
-			if (System.guiSettings.guiInstancePath > "") {
-				var instance:String = getInstance(System.guiSettings.guiInstancePath);
-				
-				if (projXml.getByXpath('//project/haxeflag[@name="--macro" and @value="$instance"]') == null) {
-					var instXml:Xml = Xml.createElement("haxeflag");
-					instXml.set("name", "--macro");
-					instXml.set("value", getInstance(System.guiSettings.guiInstancePath));
-					instXml.set("guiUuid", System.guiSettings.guiUuid);
-					
-					projXml.addChild(instXml);
-				}
-			}
-		
-		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
-	}
-	
-	public static function checkStablexUILib () : Bool {
-		if (!FileSystem.exists(System.guiSettings.project.escNull()))
-			return false;
-		
-		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
-		
-		if (projXml.getByXpath("//project/haxelib[@name='stablexui']") == null) {
-			var hxnode:Xml = Xml.createElement("haxelib");
-			hxnode.set("name", "stablexui");
-			projXml.addChild(hxnode);
-			
-			File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
-		}
-		
-		return true;
-	}
+	//-----------------------------------------------------------------------------------------------
+	// instance generation
 	
 	public static function makeInstance () : Bool {
-		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiInstancePath > "") || !(System.guiSettings.guiUuid > ""))
+		if (
+				!FileSystem.exists(System.guiSettings.project.escNull()) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiInstancePath) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiUuid)
+			)
 			return false;
-		
-		var cli:Int = 0;
-		var sii:Int = -1;
-		var gii:Int = -1;
-		var fli:Int = -1;
-		var bii:Int = -1;
-		var rli:Int = -1;
-		var ili:Int = -1;
 		
 		var gUuidStr:String = 'guiUuid=${System.guiSettings.guiUuid}';
 		
 		var gXmlName:String = Path.withoutDirectory(System.uiXmlPath);
 		var gXmlRelPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath);
-		var rootWgtName:String = System.guiSettings.rootName > "" ? System.guiSettings.rootName : System.guiSettings.guiName;
+		var parentWgtName:String = System.getParentGuiWgtName();
 		var instanceName:String = Path.withoutExtension(Path.withoutDirectory(System.guiSettings.guiInstancePath));
 		
 		var instPath:String =
@@ -94,7 +43,19 @@ class SourceControl {
 			System.guiSettings.guiInstancePath :
 			Suid.fullPath(Path.join(["instances", System.guiSettings.guiInstanceTemplate]));
 		
-		var pack:String = Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".");
+		var pack:String = SourceControl.getProjectPackage();
+		var packDot:String = !StringExtender.isNullOrEmpty(pack) ? '$pack.' : "";
+		
+		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Suid.getCwd());
+		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
+		var presetPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([preset.dir, preset.xml]));
+		
+		var cli:Int = 0;
+		var sii:Int = -1;
+		var gii:Int = -1;
+		var fli:Int = -1;
+		var rli:Int = -1;
+		var ili:Int = -1;
 		
 		var instLines:Array<String> = File.getContent(instPath)
 			.split("\n")
@@ -102,28 +63,15 @@ class SourceControl {
 					return
 						hxLine.indexOf(gUuidStr) < 0 &&
 						hxLine.indexOf("UIBuilder.init") < 0 &&
-						hxLine.indexOf("UIBuilder.regSkins") < 0 &&
-						(
-							(
-								hxLine.indexOf("UIBuilder.buildClass") < 0 && hxLine.indexOf("UIBuilder.customStringReplace") < 0
-							)
-								||
-							(
-								(
-									hxLine.indexOf("UIBuilder.buildClass") >= 0 || hxLine.indexOf("UIBuilder.customStringReplace") >= 0
-								)
-								&&
-								(
-									System.guiSettings.rootName > "" && System.guiSettings.guiName != System.guiSettings.rootName
-								)
-							)
-						)
+						hxLine.indexOf("UIBuilder.regSkins") < 0
 				)
 				.map (function (hxLine:String) : String
 					return hxLine
 						.replace("%InstanceName%", instanceName)
 						.replace("%InstancePackage%", pack)
-						.replace("%InstancePackageDot%", pack > "" ? '$pack.' : "")
+						.replace("%InstancePackageDot%", packDot)
+						.replace("%DefaultsPath%", presetPath)
+						.replace("%SuidCwd%", relPath)
 				)
 				.map (function (hxLine:String) : String {
 					if (hxLine.indexOf("// switchers of guiSettings") >= 0)
@@ -132,8 +80,6 @@ class SourceControl {
 						gii = cli + 1;
 					else if (hxLine.indexOf("// fields of instances") >= 0)
 						fli = cli + 1;
-					else if (hxLine.indexOf("// UIBuilder initialization") >= 0)
-						bii = cli + 1;
 					else if (hxLine.indexOf("// skins registration") >= 0)
 						rli = cli + 1;
 					else if (hxLine.indexOf("// initialization of instances") >= 0)
@@ -148,42 +94,27 @@ class SourceControl {
 		
 		gii++;
 		fli++;
-		bii++;
 		rli++;
 		ili++;
 		
-		var relPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Suid.getCwd());
-		
-		if (System.guiSettings.guiName == System.guiSettings.rootName || !(System.guiSettings.rootName > ""))
-			instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${haxe.io.Path.join([relPath, "GuiElements.xml"])}", "GuiElements"); // $gUuidStr ($gXmlName)');
-		else if (System.guiSettings.guiName != System.guiSettings.rootName && System.guiSettings.rootName > "")
-			instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath)}", "${System.guiSettings.guiName.toTitleCase()}"); // $gUuidStr ($gXmlName)');
-		
-		fli++;
-		bii++;
-		rli++;
-		ili++;
-		
-		instLines.insert(bii, '		ru.stablex.ui.UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", "${Suid.getCwd()}"), "CWD", Suid.getCwd());');
-		
-		var preset:PresetInfo = System.wgtPresetsMap.get(System.guiSettings.preset);
-		var presetPath:String = '"${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), Path.join([preset.dir, preset.xml]))}"';
-		
-		instLines.insert(bii + 1, '		ru.stablex.ui.UIBuilder.init($presetPath, ${instLines[bii - 1].indexOf("RTXml") >= 0});');
-		
-		rli += 2;
-		ili += 2;
+		if (!StringExtender.isNullOrEmpty(parentWgtName)) {
+			instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath)}", "${SourceControl.fileNameToClassName(System.uiXmlPath)}"); // $gUuidStr ($gXmlName)');
+			
+			fli++;
+			rli++;
+			ili++;
+		}
 		
 		for (suite in System.wgtSuitsMap.keys()) {
-			instLines.insert(rli, '		ru.stablex.ui.UIBuilder.regSkins("${Path.join([relPath, "suits", suite, System.wgtSuitsMap[suite].xml])}");');
+			instLines.insert(rli, '		ru.stablex.ui.UIBuilder.regSkins(haxe.io.Path.join([${packDot}Suid.getSuidCwd(), "suits", "$suite", "${System.wgtSuitsMap[suite].xml}"]));');
 			
 			ili++;
 		}
 		
 		while (ili < instLines.length) {
 			if (instLines[ili].indexOf("}") >= 0 ||
-				(System.guiSettings.guiName == rootWgtName) ||
-				(System.guiSettings.guiName != rootWgtName && instLines.indexOf('$instanceName.$rootWgtName =') >= 0))
+				(System.guiSettings.guiName == parentWgtName) ||
+				(System.guiSettings.guiName != parentWgtName && instLines.indexOf('$instanceName.$parentWgtName =') >= 0))
 				break;
 			
 			ili++;
@@ -200,10 +131,10 @@ class SourceControl {
 				instLines.insert(fli, '	public static var $wgtName:$wgtClassName; // $gUuidStr ($gXmlName)');
 				
 				if (wgtName == System.guiSettings.guiName) {
-					if (wgtName == rootWgtName)
+					if (StringExtender.isNullOrEmpty(parentWgtName))
 						instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
 					else
-						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$rootWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
+						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$parentWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
 				}
 				else
 					instLines.insert(ili + wgtInd, '		$instanceName.$wgtName = cast($instanceName.${System.guiSettings.guiName}.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
@@ -217,9 +148,72 @@ class SourceControl {
 		return true;
 	}
 	
+	public static function generateInstanceFunction (instancePath:String) : String {
+		var projXml:Xml = SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.project))).firstElement();
+		
+		var ix:Xml = projXml.getByXpath('//project/haxeflag[@suid="instance"]');
+		var instFuncName:String = ix == null ? "geInit()" : ix.get("value").split(".").pop();
+		
+		var pack:String = SourceControl.getProjectPackage();
+		
+		return StringExtender.isNullOrEmpty(pack) ? instFuncName : '$pack.$instFuncName';
+	}
+	
+	public static function setInstanceInitHxFlag () : Bool {
+		if (
+				StringExtender.isNullOrEmpty(System.guiSettings.project) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiInstanceTemplate) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiInstancePath) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiInstanceFunction)
+			)
+			return false;
+		
+		var projXml:Xml = SuidXml.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		var oldInstFunc:Xml = projXml.getByXpath('//project/haxeflag[@suid="instance"]');
+		
+		if (oldInstFunc != null)
+			oldInstFunc.removeSelf();
+		
+		var instXml:Xml = Xml.createElement("haxeflag");
+		instXml.set("name", "--macro");
+		instXml.set("value", System.guiSettings.guiInstanceFunction);
+		instXml.set("suid", "instance");
+		instXml.set("guiUuid", System.guiSettings.guiUuid);
+		
+		projXml.addChild(instXml);
+		
+		File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
+		
+		return true;
+	}
+	
+	//-----------------------------------------------------------------------------------------------
+	// openfl/lime project integration
+	
+	public static function getProjectPackage () : String
+		return Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".");
+	
+	public static function checkStablexUILib () : Bool {
+		if (!FileSystem.exists(System.guiSettings.project.escNull()))
+			return false;
+		
+		var projXml:Xml = SuidXml.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		
+		if (projXml.getByXpath("//project/haxelib[@name='stablexui']") == null) {
+			var hxnode:Xml = Xml.createElement("haxelib");
+			hxnode.set("name", "stablexui");
+			projXml.addChild(hxnode);
+			
+			File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
+		}
+		
+		return true;
+	}
+	
 	public static function clearWgtSources () : Void {
 		if (FileSystem.exists(System.guiSettings.project.escNull())) {
-			var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+			var projXml:Xml = SuidXml.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 			
 			//for (clrNode in projXml.findByXpath('//project/source[@guiUuid="${System.guiSettings.guiUuid}"]'))
 			//	clrNode.removeSelf();
@@ -228,7 +222,7 @@ class SourceControl {
 			while ((clrNode = projXml.getByXpath('//project/source[@guiUuid="${System.guiSettings.guiUuid}"]')) != null)
 				clrNode.removeSelf();
 			
-			File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+			File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
 		}
 	}
 	
@@ -237,7 +231,7 @@ class SourceControl {
 		
 		if (!copy) {
 			if (FileSystem.exists(System.guiSettings.project.escNull())) {
-				var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+				var projXml:Xml = SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.project))).firstElement();
 				
 				for (src in wgtSources) {
 					var srcPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), src);
@@ -250,7 +244,7 @@ class SourceControl {
 					}
 				}
 				
-				File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+				File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
 			}
 			else
 				result = false;
@@ -266,10 +260,10 @@ class SourceControl {
 	}
 	
 	public static function embedAssets () : Bool {
-		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiUuid > ""))
+		if (!FileSystem.exists(System.guiSettings.project.escNull()) || StringExtender.isNullOrEmpty(System.guiSettings.guiUuid))
 			return false;
 		
-		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		var projXml:Xml = SuidXml.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 		
 		//for (clrNode in projXml.findByXpath('//project/assets[@guiUuid="${System.guiSettings.guiUuid}"]'))
 		//	clrNode.removeSelf();
@@ -288,20 +282,19 @@ class SourceControl {
 					projXml.addChild(xa);
 				}
 		
-		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
 		
 		return true;
 	}
 	
 	public static function setWindow () : Bool {
-		if (!FileSystem.exists(System.guiSettings.project.escNull()) || !(System.guiSettings.guiUuid > ""))
+		if (
+				!FileSystem.exists(System.guiSettings.project.escNull()) ||
+				StringExtender.isNullOrEmpty(System.guiSettings.guiUuid)
+			)
 			return false;
 		
-		if (System.guiSettings.rootName > "")
-			if (System.guiSettings.guiName != System.guiSettings.rootName)
-				return true;
-		
-		var projXml:Xml = System.parseXml(File.getContent(System.guiSettings.project)).firstElement();
+		var projXml:Xml = SuidXml.parseXml(File.getContent(System.guiSettings.project)).firstElement();
 		
 		//for (clrNode in projXml.findByXpath('//project/window[@guiUuid="${System.guiSettings.guiUuid}"]'))
 		//	clrNode.removeSelf();
@@ -368,8 +361,42 @@ class SourceControl {
 			projXml.addChild(sx);
 		}
 		
-		File.saveContent(Suid.fullPath(System.guiSettings.project), System.printXml(projXml, "	"));
+		File.saveContent(Suid.fullPath(System.guiSettings.project), SuidXml.printXml(projXml, "	"));
 		
 		return true;
+	}
+	
+	//-----------------------------------------------------------------------------------------------
+	// xml
+	
+	public static function registerParentXml () : Bool {
+		if (!FileSystem.exists(System.guiSettings.parentGuiPath.escNull()))
+			return false;
+		
+		var parentXml:Xml = SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.parentGuiPath))).firstElement();
+		var chXmlTag:String = SourceControl.fileNameToClassName(System.uiXmlPath);
+		var guiName:String = "'" + System.guiSettings.guiName + "'";
+		
+		var chXml:Xml = parentXml.getByXpath('//$chXmlTag[@name="$guiName"]');
+		
+		if (chXml == null) {
+			chXml = Xml.createElement(chXmlTag);
+			chXml.set("name", guiName);
+			
+			parentXml.addChild(chXml);
+			
+			File.saveContent(Suid.fullPath(System.guiSettings.parentGuiPath), SuidXml.printXml(parentXml, "	"));
+		}
+		
+		return true;
+	}
+	
+	public static function fileNameToClassName (filename:String) : String {
+		filename = Path.withoutExtension(Path.withoutDirectory(filename));
+		
+		for (symbol in ["-", "_", " ", "(", ")"])
+			filename = filename.split(symbol).map(function (s:String) return s.toTitleCase()).join("");
+		
+		return filename;
 	}
 }

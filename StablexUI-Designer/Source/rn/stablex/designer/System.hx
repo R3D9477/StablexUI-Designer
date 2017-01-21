@@ -5,8 +5,6 @@ package rn.stablex.designer;
 	import neko.vm.Module;
 #end
 
-import haxe.xml.Printer;
-
 import sys.io.File;
 import haxe.io.Path;
 import sys.FileSystem;
@@ -27,8 +25,8 @@ import rn.TjsonStyleCl;
 import rn.haxity.Haxity;
 
 using StringTools;
-using rn.typext.ext.IterExtender;
 using rn.typext.ext.XmlExtender;
+using rn.typext.ext.IterExtender;
 using rn.typext.ext.BoolExtender;
 using rn.typext.ext.StringExtender;
 
@@ -68,15 +66,6 @@ class System {
 	public static var uiXmlPath:String;
 	
 	//-----------------------------------------------------------------------------------------------
-	// additional xml-functions & workarounds for TextField
-	
-	public static function parseXml (xmlStr:String) : Xml
-		return Xml.parse((~/^ +</gm).replace((~/^	+</gm).replace(xmlStr, "<"), "<").replace("\n", ""));
-	
-	public static function printXml (xml:Xml, indent:String) : String
-		return Printer.print(xml, true).replace(">", ">\n").replace("	", indent).replace("   ", indent);
-	
-	//-----------------------------------------------------------------------------------------------
 	// gui settings
 	
 	public static function saveUiSettingsToXml (xml:Xml = null) : Void {
@@ -88,6 +77,9 @@ class System {
 				elem.removeSelf();
 		
 		System.guiSettings.guiName = MainWindowInstance.guiName.text;
+		System.guiSettings.project = MainWindowInstance.projectPath.text;
+		System.guiSettings.parentGuiPath = MainWindowInstance.parentGuiPath.text;
+		System.guiSettings.parentGuiAutoreg = MainWindowInstance.parentGuiAutoreg.selected;
 		
 		if (MainWindowInstance.wgtSrcActLink.selected)
 			System.guiSettings.wgtSrcAct = 1;
@@ -96,13 +88,12 @@ class System {
 		else
 			System.guiSettings.wgtSrcAct = 0;
 		
-		System.guiSettings.project = MainWindowInstance.projectPath.text;
 		System.guiSettings.srcDir = MainWindowInstance.wgtSrcDirPath.text;
 		
 		System.guiSettings.makeInstance = MainWindowInstance.wgtMakeUiInst.selected;
 		System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value;
 		System.guiSettings.guiInstancePath = MainWindowInstance.guiInstancePath.text;
-		System.guiSettings.rootName = MainWindowInstance.rootName.text;
+		System.guiSettings.guiInstanceFunction = MainWindowInstance.guiInstanceFunction.text;
 		
 		System.guiSettings.preset = MainWindowInstance.presetsList.value;
 		System.guiSettings.embedAssets = MainWindowInstance.embedAssets.selected;
@@ -133,14 +124,17 @@ class System {
 		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
 	}
 	
+	public static function getUiSettings (xml:Xml) : GuiDataInfo {
+		for(elem in xml)
+			if (elem.nodeType == Xml.XmlType.Comment)
+				return TJSON.parse(elem.nodeValue);
+		
+		return null;
+	}
+	
 	public static function loadUiSettingsFromXml (xml:Xml = null) : Void {
-		for(elem in (xml == null ? System.frameXml: xml))
-			if (elem.nodeType == Xml.XmlType.Comment) {
-				System.guiSettings = TJSON.parse(elem.nodeValue);
-				System.refreshGuiSettings();
-				
-				break;
-			}
+		System.guiSettings = System.getUiSettings(xml == null ? System.frameXml: xml);
+		System.refreshGuiSettings();
 	}
 	
 	public static function refreshGuiSettings () : Void {
@@ -154,13 +148,16 @@ class System {
 		}
 		
 		MainWindowInstance.projectPath.text = System.guiSettings.project.escNull();
+		MainWindowInstance.parentGuiPath.text = System.guiSettings.parentGuiPath.escNull();
+		MainWindowInstance.parentGuiAutoreg.selected = System.guiSettings.parentGuiAutoreg;
+		
 		MainWindowInstance.wgtSrcDirPath.text = System.guiSettings.srcDir.escNull();
 		
 		MainWindowInstance.wgtMakeUiInst.selected = System.guiSettings.makeInstance;
 		MainWindowInstance.guiInstanceTemplate.value = System.guiSettings.guiInstanceTemplate;
 		MainWindowInstance.guiInstanceTemplate.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		MainWindowInstance.guiInstancePath.text = System.guiSettings.guiInstancePath.escNull();
-		MainWindowInstance.rootName.text = System.guiSettings.rootName.escNull();
+		MainWindowInstance.guiInstanceFunction.text = System.guiSettings.guiInstanceFunction.escNull();
 		
 		MainWindowInstance.presetsList.value = System.guiSettings.preset;
 		MainWindowInstance.presetsList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
@@ -202,6 +199,12 @@ class System {
 		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
 	}
 	
+	public static function getParentGuiWgtName () : String
+		return
+			FileSystem.exists(System.guiSettings.parentGuiPath.escNull()) ?
+			HxExpr.evaluate(SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.parentGuiPath))).firstElement().get("name")) :
+			"";
+	
 	//-----------------------------------------------------------------------------------------------
 	// tab Designer: widget's movement
 	
@@ -223,7 +226,7 @@ class System {
 					#end
 				}
 				
-				var selXml:Xml = System.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
+				var selXml:Xml = SuidXml.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
 				
 				selWgt = RTXml.buildFn(selXml.toString())();
 				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
@@ -498,7 +501,7 @@ class System {
 			
 			System.wgtUiXmlMap = new Map<{}, Xml>();
 			
-			var wgtDyn:Dynamic = RTXml.buildFn(System.printXml(xml, "   "))();
+			var wgtDyn:Dynamic = RTXml.buildFn(SuidXml.printXml(xml, "   "))();
 			
 			if (Type.getClass(wgtDyn) == ru.stablex.ui.widgets.Floating)
 				cast(wgtDyn, Floating).show();
@@ -551,7 +554,7 @@ class System {
 			System.setupEachWidget(System.frameWgt);
 			System.selectWgtFromList(0); // select first widget from list
 			
-			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
+			MainWindowInstance.xmlSource.text = SuidXml.printXml(System.guiElementsXml, "   ");
 		//}
 		//catch (ex:Dynamic) {
 		//	this.newGuiBtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
@@ -568,7 +571,7 @@ class System {
 		System.uiDirPath = Path.directory(xmlPath);
 		System.uiXmlPath = xmlPath;
 		
-		var guiXml:Xml = System.parseXml(File.getContent(xmlPath)).firstElement();
+		var guiXml:Xml = SuidXml.parseXml(File.getContent(xmlPath)).firstElement();
 		System.loadUiSettingsFromXml(guiXml);
 		
 		return System.loadUiFromXml(guiXml);
@@ -576,15 +579,15 @@ class System {
 	
 	public static function saveUiToFile (xmlPath:String) : Bool {
 		if (MainWindowInstance.designerTabs.activeTab().name != "tabXml")
-			MainWindowInstance.xmlSource.text = System.printXml(System.guiElementsXml, "   ");
+			MainWindowInstance.xmlSource.text = SuidXml.printXml(System.guiElementsXml, "   ");
 		
 		System.saveUiSettingsToXml();
 		
-		if (System.loadUiFromXml(System.parseXml(MainWindowInstance.xmlSource.text).firstElement())) {
+		if (System.loadUiFromXml(SuidXml.parseXml(MainWindowInstance.xmlSource.text).firstElement())) {
 			System.uiDirPath = Path.directory(xmlPath);
 			System.uiXmlPath = xmlPath;
 			
-			File.saveContent(System.uiXmlPath, System.printXml(System.frameXml, "	"));
+			File.saveContent(System.uiXmlPath, SuidXml.printXml(System.frameXml, "	"));
 			
 			return true;
 		}
@@ -775,9 +778,6 @@ class System {
 	public static function setGuiObjProperties (obj:Dynamic, properies:Array<GuiObjPropInfo>) : Array<GuiObjPropOwnerInfo> {
 		var owners:Array<GuiObjPropOwnerInfo> = new Array<GuiObjPropOwnerInfo>();
 		
-		var parser = new hscript.Parser();
-		var interp = new hscript.Interp();
-		
 		for (propInfo in properies) {
 			var ownerInfo:GuiObjPropOwnerInfo = System.getPropertyOwner(obj, propInfo.name);
 			var prop:Dynamic = Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName);
@@ -790,15 +790,9 @@ class System {
 				
 				propInfo.value = propInfo.value.replace("%SUIDCWD", '"${Suid.getCwd()}"').replace("%CWD", '"${Suid.getCwd()}"');
 				
-				interp.variables.set("__ui__this", obj);
+				HxExpr.setVar("__ui__this", obj);
 				
-				for (cls in RTXml.imports.keys())
-					interp.variables.set("__ui__" + cls, RTXml.imports.get(cls));
-				
-				for (extCls in System.extClsMap.keys().array())
-					interp.variables.set(extCls.split(".").pop(), extCls);
-				
-				dynValue = interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(propInfo.value)));
+				dynValue = HxExpr.evaluate(propInfo.value);
 			}
 			else
 				dynValue = propInfo.value;

@@ -5,6 +5,7 @@ import ru.stablex.ui.widgets.*;
 
 using rn.typext.ext.IterExtender;
 using rn.typext.ext.ClassExtender;
+using rn.typext.ext.StringExtender;
 
 class PropertyBuilder {
 	public static var tmpPpRootCls:Class<Dynamic>;
@@ -66,8 +67,8 @@ class PropertyBuilder {
 		
 		var props:Array<Array<String>> = [ [ "Not Selected", null ] ];
 		
-		if (typeName > "") {
-			if (PropertyBuilder.tmpPpBuf > "")
+		if (!StringExtender.isNullOrEmpty(typeName)) {
+			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf))
 				PropertyBuilder.tmpPpBuf += ":" + typeName.split(".").pop();
 			
 			var nullToEmptyArr:WgtPropInfo->Dynamic = function (data:WgtPropInfo) : Dynamic return data == null ? { properties: new Array<String>() } : data;
@@ -89,13 +90,13 @@ class PropertyBuilder {
 		
 		PropertyBuilder.tmpPpBufRmName = true;
 		
-		if (selPropName > "") {
-			if (PropertyBuilder.tmpPpBuf > "")
+		if (!StringExtender.isNullOrEmpty(selPropName)) {
+			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf))
 				PropertyBuilder.tmpPpBuf += "-";
 			
 			PropertyBuilder.tmpPpBuf += selPropName;
 			
-			if (PropertyBuilder.tmpPpBuf > "") {
+			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf)) {
 				var propCls:Class<Dynamic> = System.rttiGetPropertyType(PropertyBuilder.tmpPpCurrCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 				
 				if (propCls != null && propCls != String) {
@@ -113,7 +114,7 @@ class PropertyBuilder {
 	public static function refreshPrototype (newPrototype:String) : Void {
 		PropertyBuilder.tmpPpBuf = newPrototype;
 		
-		if (PropertyBuilder.tmpPpBuf > "")
+		if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf))
 			PropertyBuilder.tmpPpCurrCls = System.rttiGetPropertyType(PropertyBuilder.tmpPpRootCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 		else
 			PropertyBuilder.tmpPpCurrCls = PropertyBuilder.tmpPpRootCls;
