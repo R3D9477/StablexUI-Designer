@@ -62,7 +62,6 @@ class SourceControl {
 				.filter(function (hxLine:String) : Bool
 					return
 						hxLine.indexOf(gUuidStr) < 0 &&
-						hxLine.indexOf("UIBuilder.init") < 0 &&
 						hxLine.indexOf("UIBuilder.regSkins") < 0
 				)
 				.map (function (hxLine:String) : String
@@ -106,15 +105,17 @@ class SourceControl {
 		}
 		
 		for (suite in System.wgtSuitsMap.keys()) {
-			instLines.insert(rli, '		ru.stablex.ui.UIBuilder.regSkins(haxe.io.Path.join([${packDot}Suid.getSuidCwd(), "suits", "$suite", "${System.wgtSuitsMap[suite].xml}"]));');
+			instLines.insert(rli, '		ru.stablex.ui.UIBuilder.regSkins("${Path.join([relPath, "suits", suite, System.wgtSuitsMap[suite].xml])}");');
 			
 			ili++;
 		}
 		
 		while (ili < instLines.length) {
-			if (instLines[ili].indexOf("}") >= 0 ||
-				(System.guiSettings.guiName == parentWgtName) ||
-				(System.guiSettings.guiName != parentWgtName && instLines.indexOf('$instanceName.$parentWgtName =') >= 0))
+			if (
+					instLines[ili].indexOf("}") >= 0 ||
+					StringExtender.isNullOrEmpty(parentWgtName) ||
+					(!StringExtender.isNullOrEmpty(parentWgtName) && instLines[ili].indexOf('$instanceName.$parentWgtName =') >= 0)
+				)
 				break;
 			
 			ili++;
@@ -134,7 +135,7 @@ class SourceControl {
 					if (StringExtender.isNullOrEmpty(parentWgtName))
 						instLines.insert(ili, '		$instanceName.$wgtName = ru.stablex.ui.UIBuilder.buildFn("$gXmlRelPath")(); // $gUuidStr ($gXmlName)');
 					else
-						instLines.insert(ili, '		$instanceName.$wgtName = cast($instanceName.$parentWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
+						instLines.insert(++ili, '		$instanceName.$wgtName = cast($instanceName.$parentWgtName.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
 				}
 				else
 					instLines.insert(ili + wgtInd, '		$instanceName.$wgtName = cast($instanceName.${System.guiSettings.guiName}.getChild("$wgtName"), $wgtClassName); // $gUuidStr ($gXmlName)');
