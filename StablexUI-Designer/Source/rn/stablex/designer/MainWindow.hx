@@ -553,16 +553,16 @@ class MainWindow extends Sprite {
 			MainWindowInstance.parentGuiPath.text = oFile;
 			
 			System.saveUiSettingsToXml();
+			
+			this.onChangeParentGuiPath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 		}
 	}
 	
 	function onChangeParentGuiPath (e:WidgetEvent) : Void {
 		if (FileSystem.exists(MainWindowInstance.parentGuiPath.text.escNull())) {
-			var parentUiSettings:GuiDataInfo = System.getUiSettings(SuidXml.parseXml(File.getContent(Suid.fullPath(MainWindowInstance.parentGuiPath.text))));
+			var parentUiSettings:GuiDataInfo = System.getUiSettings(SuidXml.parseXml(File.getContent(Suid.fullPath(MainWindowInstance.parentGuiPath.text))).firstElement());
 			
 			if (parentUiSettings != null) {
-				e.stopPropagation();
-				
 				MainWindowInstance.wgtMakeUiInst.selected = parentUiSettings.makeInstance;
 				MainWindowInstance.guiInstanceTemplate.value = parentUiSettings.guiInstanceTemplate;
 				MainWindowInstance.guiInstancePath.text = parentUiSettings.guiInstancePath;
@@ -594,6 +594,8 @@ class MainWindow extends Sprite {
 			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
 			
 			System.saveUiSettingsToXml();
+			
+			this.onChangeInstancePath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 		}
 	}
 	
