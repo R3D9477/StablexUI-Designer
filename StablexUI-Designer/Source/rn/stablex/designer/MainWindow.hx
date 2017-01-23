@@ -10,14 +10,10 @@ import openfl.events.Event;
 import openfl.events.MouseEvent;
 import openfl.events.KeyboardEvent;
 
-import ru.stablex.ui.RTXml;
 import ru.stablex.ui.UIBuilder;
 import ru.stablex.ui.skins.*;
 import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.events.WidgetEvent;
-
-import com.hurlant.crypto.extra.UUID;
-import com.hurlant.crypto.prng.Random;
 
 import tjson.TJSON;
 import rn.TjsonStyleCl;
@@ -99,9 +95,11 @@ class MainWindow extends Sprite {
 		);
 		
 		//-----------------------------------------------------------------------------------------------
-		// load designer's ui
+		// initialize system
 		
+		System.resetSettings();
 		MainWindowInstance.setupInstance();
+		StablexUIMod.setRtxmlMod();
 		
 		//-----------------------------------------------------------------------------------------------
 		// root
@@ -138,8 +136,8 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// load wgt. instances
 		
-		MainWindowInstance.guiInstanceTemplate.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) : Void System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value);
 		MainWindowInstance.guiInstanceTemplate.options = [for (instTemplateFile in FileSystem.readDirectory(Suid.fullPath("instances"))) [Path.withoutExtension(instTemplateFile), instTemplateFile]];
+		MainWindowInstance.guiInstanceTemplate.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) : Void System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value);
 		
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
 		MainWindowInstance.guiInstancePath.addEventListener(Event.CHANGE, this.onChangeInstancePath);
@@ -164,7 +162,6 @@ class MainWindow extends Sprite {
 		
 		System.wgtPresetsMap = new Map<String, PresetInfo>();
 		
-		MainWindowInstance.presetsList.addEventListener(WidgetEvent.CHANGE, this.onSelectPreset);
 		MainWindowInstance.presetsList.options = [
 			for (presetName in FileSystem.readDirectory(Suid.fullPath("presets"))) {
 				var dir:String = Path.join([Suid.fullPath("presets"), presetName]);
@@ -180,6 +177,8 @@ class MainWindow extends Sprite {
 				[presetName.toTitleCase(), presetName];
 			}
 		];
+		
+		MainWindowInstance.presetsList.addEventListener(WidgetEvent.CHANGE, this.onSelectPreset);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on change main window size
@@ -213,19 +212,20 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// load frames
 		
-		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
 		MainWindowInstance.framesList.options = [
 			for (dir in FileSystem.readDirectory(Suid.fullPath("frames")))
 				[TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), dir, "frame.json"]))).title, dir]
 		];
+		
+		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load widget groups
 		
 		MainWindowInstance.wlSelectBtn.addEventListener(WidgetEvent.CHANGE, function (e:MouseEvent) if (MainWindowInstance.wlSelectBtn.selected) System.selWgtData = null);
 		
-		MainWindowInstance.wgtGroupsLst.addEventListener(WidgetEvent.CHANGE, this.onSelectWgtsGroup);
 		MainWindowInstance.wgtGroupsLst.options = [for (dir in FileSystem.readDirectory(Suid.fullPath("widgets"))) [dir.toTitleCase(), dir]];
+		MainWindowInstance.wgtGroupsLst.addEventListener(WidgetEvent.CHANGE, this.onSelectWgtsGroup);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on select widget from widget's list on properties panel
@@ -304,7 +304,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.xmlReloadFile.addEventListener(MouseEvent.MOUSE_UP, this.onXmlReloadFile);
 		
 		//-----------------------------------------------------------------------------------------------
-		// initialize system
+		// initialize RT-system
 		
 		HxExpr.init();
 		
@@ -364,48 +364,7 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.xmlSource.text = "";
 		
-		System.guiSettings = {
-			guiUuid: UUID.generateRandom(new Random()).toString(),
-			
-			guiName: "",
-			project: "",
-			parentGuiPath: "",
-			parentGuiAutoreg: false,
-			
-			wgtSrcAct: 0,
-			srcDir: "",
-			makeInstance: false,
-			guiInstanceTemplate: "Default.hx",
-			guiInstancePath: "",
-			guiInstanceFunction: "",
-			
-			preset: "default",
-			embedAssets: true,
-			
-			frameTemplate: "main_window",
-			guiWidth: 0,
-			guiHeight: 0,
-			
-			wndBackground: 0xFFFFFF,
-			wndFps: 30,
-			wndVsync: false,
-			wndBorderless: false,
-			wndResizable: true,
-			wndFullscreen: false,
-			wndHardware: false,
-			wndAllowShaders: false,
-			wndRequireShaders: false,
-			wndDepthBuffer: false,
-			wndStencilBuffer: false,
-			wndOrientation: 'auto',
-			
-			useGrid: true,
-			gridSize: 10,
-			gridType: 1,
-			gridColor: 0xFFFFFF,
-			gridBorderSize: 1
-		}
-		
+		System.resetSettings();
 		System.refreshGuiSettings();
 		
 		MainWindowInstance.wgtGroupsLst.value = MainWindowInstance.wgtGroupsLst.options[0];
@@ -491,6 +450,7 @@ class MainWindow extends Sprite {
 			System.loadUiFromXml(SuidXml.parseXml(MainWindowInstance.xmlSource.text).firstElement());
 			System.selectWgtFromList(0); // select first widget from list
 		}
+		
 		if (MainWindowInstance.designerTabs.activeTab().name == "tabProject")
 			MainWindowInstance.projScroll.refresh();
 		
@@ -551,10 +511,9 @@ class MainWindow extends Sprite {
 		
 		if (!StringExtender.isNullOrEmpty(oFile)) {
 			MainWindowInstance.parentGuiPath.text = oFile;
+			this.onChangeParentGuiPath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 			
 			System.saveUiSettingsToXml();
-			
-			this.onChangeParentGuiPath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 		}
 	}
 	
@@ -592,10 +551,9 @@ class MainWindow extends Sprite {
 		
 		if (!StringExtender.isNullOrEmpty(oFile)) {
 			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
+			this.onChangeInstancePath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 			
 			System.saveUiSettingsToXml();
-			
-			this.onChangeInstancePath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 		}
 	}
 	

@@ -37,6 +37,7 @@ class SourceControl {
 		var gXmlRelPath:String = FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath);
 		var parentWgtName:String = System.getParentGuiWgtName();
 		var instanceName:String = Path.withoutExtension(Path.withoutDirectory(System.guiSettings.guiInstancePath));
+		var instanceFunctionName:String = System.guiSettings.guiInstanceFunction.split(".").pop().split("(").shift().trim();
 		
 		var instPath:String =
 			FileSystem.exists(System.guiSettings.guiInstancePath) ?
@@ -67,6 +68,7 @@ class SourceControl {
 				.map (function (hxLine:String) : String
 					return hxLine
 						.replace("%InstanceName%", instanceName)
+						.replace("%InstanceFunctionName%", instanceFunctionName)
 						.replace("%InstancePackage%", pack)
 						.replace("%InstancePackageDot%", packDot)
 						.replace("%DefaultsPath%", presetPath)
@@ -150,14 +152,16 @@ class SourceControl {
 	}
 	
 	public static function generateInstanceFunction (instancePath:String) : String {
-		var projXml:Xml = SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.project))).firstElement();
+		var funcName:String = "geInit()";
 		
-		var ix:Xml = projXml.getByXpath('//project/haxeflag[@suid="instance"]');
-		var instFuncName:String = ix == null ? "geInit()" : ix.get("value").split(".").pop();
+		if (FileSystem.exists(System.guiSettings.project.escNull())) {
+			var xi:Xml = SuidXml.parseXml(File.getContent(Suid.fullPath(System.guiSettings.project))).firstElement().getByXpath('//project/haxeflag[@suid="instance"]');
+			
+			if (xi != null)
+				funcName = xi.get("value").split(".").pop();
+		}
 		
-		var pack:String = SourceControl.getProjectPackage();
-		
-		return StringExtender.isNullOrEmpty(pack) ? instFuncName : '$pack.$instFuncName';
+		return SourceControl.getProjectPackage(true) + Path.withoutExtension(Path.withoutDirectory(instancePath)) + "." + funcName;
 	}
 	
 	public static function setInstanceInitHxFlag () : Bool {
@@ -192,8 +196,16 @@ class SourceControl {
 	//-----------------------------------------------------------------------------------------------
 	// openfl/lime project integration
 	
-	public static function getProjectPackage () : String
-		return Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".");
+	public static function getProjectPackage (withDot:Bool = false) : String {
+		var pack:String = FileSystem.exists(System.guiSettings.project.escNull()) ?
+			Xml.parse(File.getContent(System.guiSettings.project)).getByXpath("//project/app").get("main").split(".").slice(0, -1).join(".") :
+			"";
+		
+		if (withDot && !StringExtender.isNullOrEmpty(pack))
+			pack += ".";
+		
+		return pack;
+	}
 	
 	public static function checkStablexUILib () : Bool {
 		if (!FileSystem.exists(System.guiSettings.project.escNull()))

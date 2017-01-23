@@ -22,6 +22,9 @@ import ru.stablex.ui.events.WidgetEvent;
 import tjson.TJSON;
 import rn.TjsonStyleCl;
 
+import com.hurlant.crypto.extra.UUID;
+import com.hurlant.crypto.prng.Random;
+
 import rn.haxity.Haxity;
 
 using StringTools;
@@ -67,6 +70,50 @@ class System {
 	
 	//-----------------------------------------------------------------------------------------------
 	// gui settings
+	
+	public static function resetSettings () : Void {
+		System.guiSettings = {
+			guiUuid: UUID.generateRandom(new Random()).toString(),
+			
+			guiName: "",
+			project: "",
+			parentGuiPath: "",
+			parentGuiAutoreg: false,
+			
+			wgtSrcAct: 0,
+			srcDir: "",
+			makeInstance: false,
+			guiInstanceTemplate: "Default.hx",
+			guiInstancePath: "",
+			guiInstanceFunction: "",
+			
+			preset: "default",
+			embedAssets: true,
+			
+			frameTemplate: "main_window",
+			guiWidth: 0,
+			guiHeight: 0,
+			
+			wndBackground: 0xFFFFFF,
+			wndFps: 30,
+			wndVsync: false,
+			wndBorderless: false,
+			wndResizable: true,
+			wndFullscreen: false,
+			wndHardware: false,
+			wndAllowShaders: false,
+			wndRequireShaders: false,
+			wndDepthBuffer: false,
+			wndStencilBuffer: false,
+			wndOrientation: 'auto',
+			
+			useGrid: true,
+			gridSize: 10,
+			gridType: 1,
+			gridColor: 0xFFFFFF,
+			gridBorderSize: 1
+		}
+	}
 	
 	public static function saveUiSettingsToXml (xml:Xml = null) : Void {
 		if (System.guiSettings == null)

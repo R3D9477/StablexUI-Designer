@@ -22,7 +22,7 @@ package %InstancePackage%;
 		return StringTools.replace(path, "\\", "/");
 	
 	public static function getSettings (guiName:String) : Dynamic {
-		return switch (guiName) {
+		return switch (StringTools.replace(StringTools.replace(guiName, "'", ""), "&#039;", "")) {
 			// switchers of guiSettings
 			default: null;
 		}
@@ -36,8 +36,8 @@ package %InstancePackage%;
 }
 
 class %InstanceName% {
-	@:noCompletion macro public static function geInit () : Void {
-		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%Suid");
+	@:noCompletion macro public static function %InstanceFunctionName% () : Void {
+		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%%InstanceName%.Suid");
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");

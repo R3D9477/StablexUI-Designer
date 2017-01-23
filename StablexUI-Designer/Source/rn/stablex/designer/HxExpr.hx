@@ -6,14 +6,13 @@ using StringTools;
 using rn.typext.ext.IterExtender;
 
 class HxExpr {
-	private static var parser = new hscript.Parser();
 	private static var interp = new hscript.Interp();
 	
 	public static function setVar (varName:String, varVal:Dynamic) : Void
 		interp.variables.set(varName, varVal);
 	
 	public static function init () : Void {
-		parser = new hscript.Parser();
+		ru.stablex.ui.RTXml.parser = new hscript.Parser();
 		interp = new hscript.Interp();
 		
 		for (extCls in System.extClsMap.keys().array())
@@ -24,5 +23,5 @@ class HxExpr {
 	}
 	
 	public static function evaluate (hxExpr:String) : Dynamic
-		return interp.execute(parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(hxExpr)));
+		return interp.execute(ru.stablex.ui.RTXml.parser.parseString(ru.stablex.ui.RTXml.Attribute.fillShortcuts(hxExpr)));
 }

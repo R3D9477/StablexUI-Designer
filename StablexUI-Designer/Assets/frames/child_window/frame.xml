@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Floating
-	w="$Suid.getSetting($this.name).guiWidth"
-	h="$Suid.getSetting($this.name).guiHeight">
+	on-create="
+		var wgt = $Suid.castType($this, ru.stablex.ui.widgets.Widget);
+		wgt.w = $Suid.getSettings(wgt.name).guiWidth;
+		wgt.h = $Suid.getSettings(wgt.name).guiHeight;">
 	<VBox
-		defaults="'Default, ChildWindow'">
+		defaults="'Default,ChildWindow'">
 		<HBox
-			defaults="'Default, ChildWindowHeader'">
+			defaults="'Default,ChildWindowHeader'">
 			<Widget/>
 			<Button
-				defaults="'Default, ChildWindowClose'"
-				on-click="$Suid.castType($this.parent.parent.parent, $Floating).hide();"/>
+				defaults="'Default,ChildWindowClose'"
+				on-click="$Suid.castType($Suid.castType($this, ru.stablex.ui.widgets.Button).parent.parent.parent, ru.stablex.ui.widgets.Floating).hide();"/>
 		</HBox>
 		<GuiElements/>
 	</VBox>
