@@ -20,6 +20,9 @@ class HxExpr {
 		
 		for (cls in RTXml.imports.keys())
 			setVar("__ui__" + cls, RTXml.imports.get(cls));
+		
+		for (shortcut in RTXml.events)
+			setVar(shortcut, RTXml.events.get(shortcut));
 	}
 	
 	public static function evaluate (hxExpr:String) : Dynamic
