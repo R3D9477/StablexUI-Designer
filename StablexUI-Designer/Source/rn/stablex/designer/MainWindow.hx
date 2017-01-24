@@ -371,6 +371,7 @@ class MainWindow extends Sprite {
 		
 		System.selWgt = null;
 		
+		System.selWgtProps = null;
 		System.selWgtProp = null;
 		System.selPropName = "";
 		

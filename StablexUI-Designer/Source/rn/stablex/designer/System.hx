@@ -197,9 +197,6 @@ class System {
 				MainWindowInstance.wgtSrcActNoth.selected = true;
 		}
 		
-		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
-		MainWindowInstance.guiName.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
-		
 		MainWindowInstance.projectPath.text = System.guiSettings.project.escNull();
 		MainWindowInstance.parentGuiPath.text = System.guiSettings.parentGuiPath.escNull();
 		MainWindowInstance.parentGuiAutoreg.selected = System.guiSettings.parentGuiAutoreg;
@@ -218,6 +215,9 @@ class System {
 		
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		
+		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
+		MainWindowInstance.guiName.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		
 		if (System.guiSettings.guiWidth > 0)
 			MainWindowInstance.guiWidth.text = Std.string(System.guiSettings.guiWidth);
