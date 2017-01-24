@@ -116,10 +116,13 @@ class System {
 	}
 	
 	public static function saveUiSettingsToXml (xml:Xml = null) : Void {
-		if (System.guiSettings == null)
+		if (xml == null)
+			xml = System.frameXml;
+		
+		if (System.guiSettings == null || xml == null)
 			return;
 		
-		for(elem in (xml == null ? System.frameXml: xml))
+		for(elem in xml)
 			if (elem.nodeType == Xml.XmlType.Comment)
 				elem.removeSelf();
 		

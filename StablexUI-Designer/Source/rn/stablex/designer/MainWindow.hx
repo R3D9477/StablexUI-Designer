@@ -119,19 +119,19 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// on change current gui name
 		
-		MainWindowInstance.guiName.addEventListener(Event.CHANGE, this.onChangeGuiName);
+		MainWindowInstance.guiName.addEventListener(WidgetEvent.CHANGE, this.onChangeGuiName);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on choose openfl project
 		
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
-		MainWindowInstance.projectPath.addEventListener(Event.CHANGE, this.onChangeOpenflProject);
+		MainWindowInstance.projectPath.addEventListener(WidgetEvent.CHANGE, this.onChangeOpenflProject);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on change parent widget
 		
 		MainWindowInstance.chooseParentGui.addEventListener(MouseEvent.CLICK, this.onChooseParentGuiPath);
-		MainWindowInstance.parentGuiPath.addEventListener(Event.CHANGE, this.onChangeParentGuiPath);
+		MainWindowInstance.parentGuiPath.addEventListener(WidgetEvent.CHANGE, this.onChangeParentGuiPath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load wgt. instances
@@ -140,7 +140,7 @@ class MainWindow extends Sprite {
 		MainWindowInstance.guiInstanceTemplate.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) : Void System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value);
 		
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
-		MainWindowInstance.guiInstancePath.addEventListener(Event.CHANGE, this.onChangeInstancePath);
+		MainWindowInstance.guiInstancePath.addEventListener(WidgetEvent.CHANGE, this.onChangeInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on choose src directory
@@ -183,8 +183,8 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// on change main window size
 		
-		MainWindowInstance.guiWidth.addEventListener(Event.CHANGE, this.onChangeMainWindowSize);
-		MainWindowInstance.guiHeight.addEventListener(Event.CHANGE, this.onChangeMainWindowSize);
+		MainWindowInstance.guiWidth.addEventListener(WidgetEvent.CHANGE, this.onChangeMainWindowSize);
+		MainWindowInstance.guiHeight.addEventListener(WidgetEvent.CHANGE, this.onChangeMainWindowSize);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load suits
@@ -480,10 +480,12 @@ class MainWindow extends Sprite {
 	
 	function onChangeOpenflProject (e:WidgetEvent) : Void {
 		if (FileSystem.exists(MainWindowInstance.projectPath.text.escNull())) {
-			MainWindowInstance.wgtSrcActLink.selected = true;
+			System.guiSettings.project = MainWindowInstance.projectPath.text;
 			
 			var projXml:Xml = Xml.parse(File.getContent(Suid.fullPath(System.guiSettings.project)));
 			var firstSrc:String = Suid.escPath(projXml.getByXpath("//project/source").get("path"));
+			
+			MainWindowInstance.wgtSrcActLink.selected = true;
 			
 			if (!FileSystem.exists(firstSrc))
 				firstSrc = Suid.escPath(Path.join([Path.directory(MainWindowInstance.projectPath.text), firstSrc]));
@@ -511,7 +513,6 @@ class MainWindow extends Sprite {
 		
 		if (!StringExtender.isNullOrEmpty(oFile)) {
 			MainWindowInstance.parentGuiPath.text = oFile;
-			this.onChangeParentGuiPath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 			
 			System.saveUiSettingsToXml();
 		}
@@ -551,7 +552,6 @@ class MainWindow extends Sprite {
 		
 		if (!StringExtender.isNullOrEmpty(oFile)) {
 			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
-			this.onChangeInstancePath(null); // https://github.com/RealyUniqueName/StablexUI/issues/258
 			
 			System.saveUiSettingsToXml();
 		}
@@ -587,7 +587,7 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.guiWidth.text = Std.string(System.frameData.width);
 		MainWindowInstance.guiHeight.text = Std.string(System.frameData.height);
-		MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
+		MainWindowInstance.guiHeight.dispatchEvent(new Event(WidgetEvent.CHANGE));
 		
 		MainWindowInstance.wndBackground.text = Std.string(System.frameData.background);
 		MainWindowInstance.wndFps.text = Std.string(System.frameData.fps);
