@@ -37,13 +37,17 @@
 					}
 					
 					event.stopPropagation();">
-				<Text name="'Title'" text="''"/>
+				<Text
+					name="'Title'"
+					defaults="'Default, ChildWindowHeader'"
+					text="''"/>
 			</Widget>
 			<Button
 				defaults="'Default, ChildWindowClose'"
 				on-click="$Suid.castType($Suid.castType($this, $Button).parent.parent.parent, $Floating).hide();"/>
 		</HBox>
 		<GuiElements
+			defaults="'Default, ChildWindow'"
 			on-mouseMove="
 				$Suid.delVariable('mvX');
 				$Suid.delVariable('mvY');"/>

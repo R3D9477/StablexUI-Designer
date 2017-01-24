@@ -6,6 +6,9 @@
 			widthPt="100"
 			heightPt="100"
 			skin:Paint-color="0xC0C0C0"/>
+		<ChildWindow
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0x000000"/>
 	</GuiElements>
 	<Bmp>
 		<Default
@@ -197,6 +200,9 @@
 			format-size="13"
 			format-color="0x000000"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
+		<ChildWindowHeader
+			format-bold="true"
+			label-selectable="false"/>
 	</Text>
 	<Tip>
 		<Default
@@ -222,6 +228,10 @@
 			widthPt="100"
 			heightPt="100"
 			layout:Row-rows="[20, -1]"
+			layout:Row-paddingTop="2"
+			layout:Row-paddingLeft="2"
+			layout:Row-paddingRight="2"
+			layout:Row-paddingBottom="2"
 			skin:Paint-color="0xC0C0C0"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x000000"/>
