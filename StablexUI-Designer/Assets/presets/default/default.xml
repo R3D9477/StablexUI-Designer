@@ -201,7 +201,6 @@
 			format-color="0x000000"
 			format-font="$Path.join([%CWD, 'fonts/DejaVuSans.ttf'])"/>
 		<ChildWindowHeader
-			format-bold="true"
 			label-selectable="false"/>
 	</Text>
 	<Tip>
