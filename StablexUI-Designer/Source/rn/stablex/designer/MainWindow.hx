@@ -117,21 +117,14 @@ class MainWindow extends Sprite {
 		MainWindowInstance.saveGuiBtn.addEventListener(MouseEvent.CLICK, this.onSaveXmlBtnClick);
 		
 		//-----------------------------------------------------------------------------------------------
-		// on change current gui name
-		
-		MainWindowInstance.guiName.addEventListener(WidgetEvent.CHANGE, this.onChangeGuiName);
-		
-		//-----------------------------------------------------------------------------------------------
 		// on choose openfl project
 		
 		MainWindowInstance.chooseProject.addEventListener(MouseEvent.CLICK, this.onChooseOpenflProject);
-		MainWindowInstance.projectPath.addEventListener(WidgetEvent.CHANGE, this.onChangeOpenflProject);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on change parent widget
 		
 		MainWindowInstance.chooseParentGui.addEventListener(MouseEvent.CLICK, this.onChooseParentGuiPath);
-		MainWindowInstance.parentGuiPath.addEventListener(WidgetEvent.CHANGE, this.onChangeParentGuiPath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load wgt. instances
@@ -140,7 +133,6 @@ class MainWindow extends Sprite {
 		MainWindowInstance.guiInstanceTemplate.addEventListener(WidgetEvent.CHANGE, function (e:WidgetEvent) : Void System.guiSettings.guiInstanceTemplate = MainWindowInstance.guiInstanceTemplate.value);
 		
 		MainWindowInstance.chooseInstancePath.addEventListener(MouseEvent.CLICK, this.onChooseInstancePath);
-		MainWindowInstance.guiInstancePath.addEventListener(WidgetEvent.CHANGE, this.onChangeInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// on choose src directory
@@ -328,7 +320,27 @@ class MainWindow extends Sprite {
 		}
 		
 		//-----------------------------------------------------------------------------------------------
-		// designer tabs
+		// addition events for tab:Project
+		
+		MainWindowInstance.guiName.addEventListener(Event.CHANGE, this.onChangeGuiName);
+		MainWindowInstance.guiName.addEventListener(WidgetEvent.CHANGE, this.onChangeGuiName);
+		
+		MainWindowInstance.projectPath.addEventListener(Event.CHANGE, this.onChangeOpenflProject);
+		MainWindowInstance.projectPath.addEventListener(WidgetEvent.CHANGE, this.onChangeOpenflProject);
+		
+		MainWindowInstance.parentGuiPath.addEventListener(Event.CHANGE, this.onChangeParentGuiPath);
+		MainWindowInstance.parentGuiPath.addEventListener(WidgetEvent.CHANGE, this.onChangeParentGuiPath);
+		
+		MainWindowInstance.guiInstancePath.addEventListener(Event.CHANGE, this.onChangeInstancePath);
+		MainWindowInstance.guiInstancePath.addEventListener(WidgetEvent.CHANGE, this.onChangeInstancePath);
+		
+		//-----------------------------------------------------------------------------------------------
+		// refresh settings after load
+		
+		System.refreshGuiSettings();
+		
+		//-----------------------------------------------------------------------------------------------
+		// on select designer's tab
 		
 		MainWindowInstance.designerTabs.addEventListener(WidgetEvent.CHANGE, this.onSelectTab);
 		
@@ -464,10 +476,32 @@ class MainWindow extends Sprite {
 		if (MainWindowInstance.guiName.text == "")
 			MainWindowInstance.guiName.text = 'main_${MainWindowInstance.mainWnd.name}';
 		
-		System.guiSettings.guiName = MainWindowInstance.guiName.text;
-		
-		MainWindowInstance.mainWnd.name = System.guiSettings.guiName;
+		System.frameWgt.name = MainWindowInstance.guiName.text;
 		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+	}
+	
+	function onChooseParentGuiPath (e:MouseEvent) : Void {
+		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
+		var oFile:String = Haxity.openFile("Open Xml UI"); // ["StablexUI XML files"], ["*.xml"]
+		
+		if (!StringExtender.isNullOrEmpty(oFile))
+			MainWindowInstance.parentGuiPath.text = oFile;
+	}
+	
+	function onChangeParentGuiPath (e:WidgetEvent) : Void {
+		if (FileSystem.exists(MainWindowInstance.parentGuiPath.text.escNull())) {
+			var parentUiSettings:GuiDataInfo = System.getUiSettings(SuidXml.parseXml(File.getContent(Suid.fullPath(MainWindowInstance.parentGuiPath.text))).firstElement());
+			
+			if (parentUiSettings != null) {
+				MainWindowInstance.projectPath.text = parentUiSettings.project;
+				MainWindowInstance.wgtMakeUiInst.selected = parentUiSettings.makeInstance;
+				MainWindowInstance.guiInstanceTemplate.value = parentUiSettings.guiInstanceTemplate;
+				MainWindowInstance.guiInstancePath.text = parentUiSettings.guiInstancePath;
+				MainWindowInstance.guiInstanceFunction.text = parentUiSettings.guiInstanceFunction;
+			}
+			
+			MainWindowInstance.parentGuiAutoreg.selected = true;
+		}
 	}
 	
 	function onChooseOpenflProject (e:MouseEvent) : Void {
@@ -493,8 +527,6 @@ class MainWindow extends Sprite {
 			if (StringExtender.isNullOrEmpty(MainWindowInstance.wgtSrcDirPath.text))
 				MainWindowInstance.wgtSrcDirPath.text = firstSrc;
 			
-			System.saveUiSettingsToXml();
-			
 			if (StringExtender.isNullOrEmpty(MainWindowInstance.guiInstancePath.text)) {
 				MainWindowInstance.guiInstancePath.text = Path.join([
 					firstSrc,
@@ -507,60 +539,24 @@ class MainWindow extends Sprite {
 		}
 	}
 	
-	function onChooseParentGuiPath (e:MouseEvent) : Void {
-		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
-		var oFile:String = Haxity.openFile("Open Xml UI"); // ["StablexUI XML files"], ["*.xml"]
-		
-		if (!StringExtender.isNullOrEmpty(oFile)) {
-			MainWindowInstance.parentGuiPath.text = oFile;
-			
-			System.saveUiSettingsToXml();
-		}
-	}
-	
-	function onChangeParentGuiPath (e:WidgetEvent) : Void {
-		if (FileSystem.exists(MainWindowInstance.parentGuiPath.text.escNull())) {
-			var parentUiSettings:GuiDataInfo = System.getUiSettings(SuidXml.parseXml(File.getContent(Suid.fullPath(MainWindowInstance.parentGuiPath.text))).firstElement());
-			
-			if (parentUiSettings != null) {
-				MainWindowInstance.wgtMakeUiInst.selected = parentUiSettings.makeInstance;
-				MainWindowInstance.guiInstanceTemplate.value = parentUiSettings.guiInstanceTemplate;
-				MainWindowInstance.guiInstancePath.text = parentUiSettings.guiInstancePath;
-				MainWindowInstance.guiInstanceFunction.text = parentUiSettings.guiInstanceFunction;
-				
-				System.saveUiSettingsToXml();
-			}
-			
-			MainWindowInstance.parentGuiAutoreg.selected = true;
-		}
-	}
-	
 	function onChooseSrcDirPath (e:MouseEvent) : Void {
 		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
 		var oDir:String = Haxity.openDirectory("Select sources dir");
 		
-		if (!StringExtender.isNullOrEmpty(oDir)) {
+		if (!StringExtender.isNullOrEmpty(oDir))
 			MainWindowInstance.wgtSrcDirPath.text = Suid.escPath(oDir);
-			
-			System.saveUiSettingsToXml();
-		}
 	}
 	
 	function onChooseInstancePath (e:MouseEvent) : Void {
 		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
 		var oFile:String = Haxity.saveFile("Select instance file");
 		
-		if (!StringExtender.isNullOrEmpty(oFile)) {
+		if (!StringExtender.isNullOrEmpty(oFile))
 			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
-			
-			System.saveUiSettingsToXml();
-		}
 	}
 	
 	function onChangeInstancePath (e:WidgetEvent) : Void {
 		MainWindowInstance.guiInstanceFunction.text = SourceControl.generateInstanceFunction(MainWindowInstance.guiInstancePath.text);
-		
-		System.saveUiSettingsToXml();
 	}
 	
 	function onChangeMainWindowSize (e:Event) : Void {

@@ -197,6 +197,9 @@ class System {
 				MainWindowInstance.wgtSrcActNoth.selected = true;
 		}
 		
+		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
+		MainWindowInstance.guiName.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
+		
 		MainWindowInstance.projectPath.text = System.guiSettings.project.escNull();
 		MainWindowInstance.parentGuiPath.text = System.guiSettings.parentGuiPath.escNull();
 		MainWindowInstance.parentGuiAutoreg.selected = System.guiSettings.parentGuiAutoreg;
@@ -216,15 +219,11 @@ class System {
 		MainWindowInstance.framesList.value = System.guiSettings.frameTemplate;
 		MainWindowInstance.framesList.dispatchEvent(new WidgetEvent(WidgetEvent.CHANGE));
 		
-		if (System.guiSettings.guiWidth > 0) {
+		if (System.guiSettings.guiWidth > 0)
 			MainWindowInstance.guiWidth.text = Std.string(System.guiSettings.guiWidth);
-			MainWindowInstance.guiWidth.dispatchEvent(new Event(Event.CHANGE));
-		}
 		
-		if (System.guiSettings.guiHeight > 0) {
+		if (System.guiSettings.guiHeight > 0)
 			MainWindowInstance.guiHeight.text = Std.string(System.guiSettings.guiHeight);
-			MainWindowInstance.guiHeight.dispatchEvent(new Event(Event.CHANGE));
-		}
 		
 		MainWindowInstance.wndBackground.text = '0x${System.guiSettings.wndBackground.hex()}';
 		MainWindowInstance.wndFps.text = Std.string(System.guiSettings.wndFps);
@@ -244,9 +243,6 @@ class System {
 		MainWindowInstance.gridType.value = System.guiSettings.gridType;
 		MainWindowInstance.gridColor.text = '0x${System.guiSettings.gridColor.hex()}';
 		MainWindowInstance.gridBorderSize.text = Std.string(System.guiSettings.gridBorderSize);
-		
-		MainWindowInstance.guiName.text = System.guiSettings.guiName.escNull();
-		MainWindowInstance.guiName.dispatchEvent(new Event(Event.CHANGE));
 	}
 	
 	public static function getParentGuiWgtName () : String
@@ -559,6 +555,7 @@ class System {
 			System.frameWgt = cast(wgtDyn, Widget);
 			System.frameXml = xml;
 			
+			System.frameWgt.name = System.guiSettings.guiName;
 			System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
 			
 			if (savedGuiElemsWgt != null && savedGuiElemsXml != null) {

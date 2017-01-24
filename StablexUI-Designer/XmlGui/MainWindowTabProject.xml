@@ -47,22 +47,6 @@
 						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 				<HBox
-					layout:Column-cols="[0, -1, 0]"
-					layout:Column-cellPadding="10">
-					<Text text="'OpenFL/Lime project:'"/>
-					<InputText
-						name="'projectPath'"
-						skin:Paint-color="0xC0C0C0"
-						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000"/>
-					<Button
-						name="'chooseProject'"
-						text="'Choose'"
-						skin:Paint-color="0xC0C0C0"
-						skin:Paint-border="1"
-						skin:Paint-borderColor="0x000000"/>
-				</HBox>
-				<HBox
 					layout:Column-cols="[0, -1, 0, 0]"
 					layout:Column-cellPadding="10">
 					<Text text="'Parent:'"/>
@@ -85,6 +69,22 @@
 						selected="false"
 						states-up-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_up.png']))"
 						states-down-ico-skin:Img-bitmapData="$BitmapData.fromFile($Path.join([%CWD, 'graphics/tools/check_down.png']))"/>
+				</HBox>
+				<HBox
+					layout:Column-cols="[0, -1, 0]"
+					layout:Column-cellPadding="10">
+					<Text text="'OpenFL/Lime project:'"/>
+					<InputText
+						name="'projectPath'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
+					<Button
+						name="'chooseProject'"
+						text="'Choose'"
+						skin:Paint-color="0xC0C0C0"
+						skin:Paint-border="1"
+						skin:Paint-borderColor="0x000000"/>
 				</HBox>
 			</VBox>
 			<VBox
