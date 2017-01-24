@@ -7,6 +7,7 @@
 			heightPt="100"
 			skin:Paint-color="0x272727"/>
 		<ChildWindow
+			skin:Paint-corners="[5]"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
 	</GuiElements>
@@ -242,6 +243,7 @@
 			layout:Row-paddingLeft="2"
 			layout:Row-paddingRight="2"
 			layout:Row-paddingBottom="2"
+			skin:Paint-corners="[5]"
 			skin:Paint-color="0x272727"
 			skin:Paint-border="1"
 			skin:Paint-borderColor="0x04D9EB"/>
