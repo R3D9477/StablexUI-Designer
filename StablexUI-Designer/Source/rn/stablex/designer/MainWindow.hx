@@ -496,6 +496,7 @@ class MainWindow extends Sprite {
 			if (parentUiSettings != null) {
 				MainWindowInstance.projectPath.text = parentUiSettings.project;
 				MainWindowInstance.wgtMakeUiInst.selected = parentUiSettings.makeInstance;
+				MainWindowInstance.presetsList.value = parentUiSettings.preset;
 				MainWindowInstance.guiInstanceTemplate.value = parentUiSettings.guiInstanceTemplate;
 				MainWindowInstance.guiInstancePath.text = parentUiSettings.guiInstancePath;
 				MainWindowInstance.guiInstanceFunction.text = parentUiSettings.guiInstanceFunction;
