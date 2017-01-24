@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Floating
-	on-create="var wgt = $Suid.castType($this, $Widget); wgt.w = $Suid.getSettings(wgt.name).guiWidth; wgt.h = $Suid.getSettings(wgt.name).guiHeight;">
+	on-create="
+		var chWnd = $Suid.castType($this, $Floating);
+		
+		chWnd.w = $Suid.getSettings(chWnd.name).guiWidth;
+		chWnd.h = $Suid.getSettings(chWnd.name).guiHeight;
+		
+		chWnd.top = ($Lib.application.window.height - chWnd.h) / 2;
+		chWnd.left = ($Lib.application.window.width - chWnd.w) / 2;"
+	on-mouseMove="
+		$Suid.delVariable('mvX');
+		$Suid.delVariable('mvY');">
 	<VBox
 		defaults="'Default, ChildWindow'">
 		<HBox
 			defaults="'Default, ChildWindowHeader'">
-			<Widget/>
+			<Widget
+				defaults="'Default, ChildWindowHeader'"
+				on-mouseDown="
+					$Suid.setVariable('mvX', event.stageX);
+					$Suid.setVariable('mvY', event.stageY);"
+				on-mouseUp="
+					$Suid.delVariable('mvX');
+					$Suid.delVariable('mvY');"
+				on-mouseMove="
+					var chWnd = $Suid.castType($Suid.castType($this, $Widget).parent.parent.parent, $Floating);
+					
+					if ($Suid.getVariable('mvX') != null) {
+						chWnd.left += event.stageX - $Suid.getVariable('mvX');
+						$Suid.setVariable('mvX', event.stageX);
+					}
+					
+					if ($Suid.getVariable('mvY') != null) {
+						chWnd.top += event.stageY - $Suid.getVariable('mvY');
+						$Suid.setVariable('mvY', event.stageY);
+					}
+					
+					event.stopPropagation();">
+				<Text name="'Title'" text="''"/>
+			</Widget>
 			<Button
 				defaults="'Default, ChildWindowClose'"
 				on-click="$Suid.castType($Suid.castType($this, $Button).parent.parent.parent, $Floating).hide();"/>
 		</HBox>
-		<GuiElements/>
+		<GuiElements
+			on-mouseMove="
+				$Suid.delVariable('mvX');
+				$Suid.delVariable('mvY');"/>
 	</VBox>
 </Floating>

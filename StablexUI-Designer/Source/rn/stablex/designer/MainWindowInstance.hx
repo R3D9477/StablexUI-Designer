@@ -119,6 +119,8 @@ class MainWindowInstance {
 		UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		UIBuilder.regClass("openfl.display.BitmapData");
 		
+		UIBuilder.regEvent('mouseMove', 'openfl.events.MouseEvent.MOUSE_MOVE', 'openfl.events.MouseEvent');
+		
 		UIBuilder.customStringReplace = function (strValue:String) : String return StringTools.replace(StringTools.replace(strValue, "SUIDCWD", Suid.getCwd()), "CWD", Suid.getCwd());
 		UIBuilder.init(null, true);
 		

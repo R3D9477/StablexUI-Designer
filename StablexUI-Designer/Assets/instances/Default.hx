@@ -9,11 +9,25 @@
 package %InstancePackage%;
 
 @:noCompletion class Suid {
+	private static var vars:Map<String, {}> = new Map<String, {}>();
+	
+	public static function setVariable (name:String, value:Dynamic) : Void
+		vars.set(name, value);
+	
+	public static function getVariable (name:String) : Dynamic
+		return vars.exists(name) ? vars.get(name) : null;
+	
+	public static function delVariable (name:String) : Void
+		if (vars.exists(name)) vars.remove(name);
+	
+	
 	public static function getCurrSeconds () : Int // workaround for https://github.com/RealyUniqueName/StablexUI/issues/235
 		return Date.now().getHours() * 60 * 60 + Date.now().getMinutes() * 60 + Date.now().getSeconds();
 	
+	
 	public static function castType <T> (v:Dynamic, c:Class<T>) : T // needed for ViewStack
 		return Std.is(v, c) ? cast v : null;
+	
 	
 	public static function fullPath (path:String) : String
 		return Suid.escPath(sys.FileSystem.fullPath(path));
@@ -37,10 +51,14 @@ package %InstancePackage%;
 
 class %InstanceName% {
 	@:noCompletion macro public static function %InstanceFunctionName% () : Void {
+		// reg classes
 		ru.stablex.ui.UIBuilder.regClass("%InstancePackageDot%%InstanceName%.Suid");
 		ru.stablex.ui.UIBuilder.regClass("haxe.io.Path");
 		ru.stablex.ui.UIBuilder.regClass("ru.stablex.ui.skins.Skin");
 		ru.stablex.ui.UIBuilder.regClass("openfl.display.BitmapData");
+		
+		// reg events
+		ru.stablex.ui.UIBuilder.regEvent('mouseMove', 'openfl.events.MouseEvent.MOUSE_MOVE', 'openfl.events.MouseEvent');
 		
 		// build sources from xml
 		ru.stablex.ui.UIBuilder.buildClass(haxe.io.Path.join([Suid.getSuidCwd(), "GuiElements.xml"]), "GuiElements");

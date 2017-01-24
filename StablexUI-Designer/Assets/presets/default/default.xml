@@ -239,5 +239,9 @@
 			skin:Paint-borderColor="0x000000"/>
 		<ScrollWidget
 			skin:Paint-color="0xFFFFFF"/>
+		<ChildWindowHeader
+			widthPt="100"
+			heightPt="100"
+			skin:Paint-color="0xFFFFFF"/>
 	</Widget>
 </Defaults>
