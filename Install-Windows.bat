@@ -29,7 +29,6 @@ haxelib git systools https://github.com/waneck/systools.git
 haxelib git haxity https://github.com/r3d9u11/haxe-haxity.git
 
 haxelib git typext https://github.com/r3d9u11/haxe-typext.git
-haxelib git tjsonStyleCl https://github.com/r3d9u11/haxe-tjsonStyleCl.git
 haxelib git dataTree https://github.com/r3d9u11/haxe-dataTree.git
 
 ::::::::::::::::::::::::::::::::::::::::
