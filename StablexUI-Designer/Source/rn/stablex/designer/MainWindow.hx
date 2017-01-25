@@ -15,8 +15,6 @@ import ru.stablex.ui.skins.*;
 import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.events.WidgetEvent;
 
-import tjson.TJSON;
-import rn.TjsonStyleCl;
 import rn.typext.hlp.FileSystemHelper;
 
 import rn.haxity.Haxity;
@@ -91,7 +89,7 @@ class MainWindow extends Sprite {
 		});
 		
 		Lib.current.stage.application.onExit.add(function (code:Int)
-			File.saveContent(configPath, TJSON.encode(configData, new TjsonStyleCl()))
+			File.saveContent(configPath, SuidJson.encode(configData))
 		);
 		
 		//-----------------------------------------------------------------------------------------------
@@ -145,7 +143,7 @@ class MainWindow extends Sprite {
 		System.extClsMap = new Map<String, WgtPropInfo>();
 		
 		for (clsFile in FileSystem.readDirectory(Suid.fullPath("extcls"))) {
-			var extClsData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("extcls"), clsFile])));
+			var extClsData:Dynamic = SuidJson.parse(File.getContent(Path.join([Suid.fullPath("extcls"), clsFile])));
 			System.extClsMap.set(extClsData.className, { name: extClsData.title, properties: extClsData.properties });
 		}
 		
@@ -158,7 +156,7 @@ class MainWindow extends Sprite {
 			for (presetName in FileSystem.readDirectory(Suid.fullPath("presets"))) {
 				var dir:String = Path.join([Suid.fullPath("presets"), presetName]);
 				
-				var presetData:PresetInfo = TJSON.parse(File.getContent(Path.join([dir, "preset.json"])));
+				var presetData:PresetInfo = SuidJson.parse(File.getContent(Path.join([dir, "preset.json"])));
 				presetData.dir = dir;
 				
 				var presetXml:Xml = SuidXml.parseXml(File.getContent(Path.join([dir, presetData.xml]))).getByXpath("//Defaults");
@@ -186,7 +184,7 @@ class MainWindow extends Sprite {
 		for (suitName in FileSystem.readDirectory(Suid.fullPath("suits"))) {
 			var dir:String = Path.join([Suid.fullPath("suits"), suitName]);
 			
-			var suitData:SuitInfo = TJSON.parse(File.getContent(Path.join([dir, "suit.json"])));
+			var suitData:SuitInfo = SuidJson.parse(File.getContent(Path.join([dir, "suit.json"])));
 			suitData.dir = dir;
 			
 			var suitXml:Xml = SuidXml.parseXml(File.getContent(Path.join([dir, suitData.xml]))).getByXpath("//Skins");
@@ -206,7 +204,7 @@ class MainWindow extends Sprite {
 		
 		MainWindowInstance.framesList.options = [
 			for (dir in FileSystem.readDirectory(Suid.fullPath("frames")))
-				[TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), dir, "frame.json"]))).title, dir]
+				[SuidJson.parse(File.getContent(Path.join([Suid.fullPath("frames"), dir, "frame.json"]))).title, dir]
 		];
 		
 		MainWindowInstance.framesList.addEventListener(WidgetEvent.CHANGE, this.onSelectFrame);
@@ -231,7 +229,7 @@ class MainWindow extends Sprite {
 		
 		for (wgtGrpDir in FileSystem.readDirectory(Suid.fullPath("widgets")))
 			for (dir in FileSystem.readDirectory(Path.join([Suid.fullPath("widgets"), wgtGrpDir]))) {
-				var wgtData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("widgets"), wgtGrpDir, dir, "widget.json"])));
+				var wgtData:Dynamic = SuidJson.parse(File.getContent(Path.join([Suid.fullPath("widgets"), wgtGrpDir, dir, "widget.json"])));
 				
 				if (wgtData.properties != null)
 					if (wgtData.properties.length > 0)
@@ -244,7 +242,7 @@ class MainWindow extends Sprite {
 		System.wgtSkinsMap = new Map<String, WgtPropInfo>();
 		
 		for (skinDir in FileSystem.readDirectory(Suid.fullPath("skins"))) {
-			var skinData:Dynamic = TJSON.parse(File.getContent(Path.join([Suid.fullPath("skins"), skinDir, "skin.json"])));
+			var skinData:Dynamic = SuidJson.parse(File.getContent(Path.join([Suid.fullPath("skins"), skinDir, "skin.json"])));
 			
 			if (skinData.properties != null)
 				if (skinData.properties.length > 0)
@@ -581,7 +579,7 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSelectFrame (e:WidgetEvent) : Void {
-		System.frameData = TJSON.parse(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, "frame.json"])));
+		System.frameData = SuidJson.parse(File.getContent(Path.join([Suid.fullPath("frames"), MainWindowInstance.framesList.value, "frame.json"])));
 		
 		MainWindowInstance.guiWidth.text = Std.string(System.frameData.width);
 		MainWindowInstance.guiHeight.text = Std.string(System.frameData.height);
@@ -613,7 +611,7 @@ class MainWindow extends Sprite {
 		for (dir in FileSystem.readDirectory(Suid.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value])))) {
 			dir = Suid.fullPath(Path.join(["widgets", MainWindowInstance.wgtGroupsLst.value, dir]));
 			
-			var wgtData:WgtInfo = TJSON.parse(File.getContent(Path.join([dir, "widget.json"])));
+			var wgtData:WgtInfo = SuidJson.parse(File.getContent(Path.join([dir, "widget.json"])));
 			wgtData.dir = dir;
 			wgtData.ico = Path.join([dir, wgtData.ico]);
 			

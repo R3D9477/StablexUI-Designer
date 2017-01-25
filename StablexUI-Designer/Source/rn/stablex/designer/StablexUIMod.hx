@@ -54,11 +54,20 @@ class StablexUIMod {
 		if (StringExtender.isNullOrEmpty(wgt.defaults))
 			wgt.defaults = "Default";
 		
+		#if debug
+			trace("");
+			trace("ApplyDefaults for: ", Type.getClassName(Type.getClass(dWgt)), wgt.defaults);
+		#end
+		
 		for (defName in wgt.defaults.split(",")) {
 			var defsXml:Xml = StablexUIMod.rtDefaults.getByXpath('//Defaults/${Type.getClassName(Type.getClass(dWgt)).split(".").pop()}/${defName.trim()}');
 			
 			if (defsXml != null) {
 				var wgtXml:Xml = System.wgtUiXmlMap.get(dWgt);
+				
+				#if debug
+					trace("   > Before System.setGuiObjProperties");
+				#end
 				
 				System.setGuiObjProperties(
 					dWgt,
@@ -78,6 +87,10 @@ class StablexUIMod {
 						})
 						.map(function (attr:String) : Dynamic return { name: attr, value: defsXml.get(attr) })
 				);
+				
+				#if debug
+					trace("   > After System.setGuiObjProperties");
+				#end
 				
 				if (Std.is(dWgt, Options)) {
 					Reflect.callMethod(dWgt, Reflect.field(dWgt, "_buildList"), []);
@@ -105,13 +118,6 @@ class StablexUIMod {
 		
 		Reflect.setField(RTXml, "processXml", function (node:Xml, interp:Interp = null) : RTXml {
 			try {
-				if (node.nodeName == "CustomWidget") {
-					var cache:RTXml = new RTXml(interp);
-					cache.cls = RTXml.getImportedClass("Widget");
-					
-					return cache;
-				}
-				
 				return origProcessXml(node, interp);
 			}
 			catch (ex:Dynamic) {

@@ -16,7 +16,6 @@
 	<haxelib name="haxity"/>
 	<haxelib name="typext"/>
 	<haxelib name="tjson"/>
-	<haxelib name="tjsonStyleCl"/>
 	<haxelib name="haxe-crypto"/>
 	<haxelib name="hscript"/>
 	

@@ -19,9 +19,6 @@ import ru.stablex.ui.widgets.*;
 import ru.stablex.ui.layouts.Row;
 import ru.stablex.ui.events.WidgetEvent;
 
-import tjson.TJSON;
-import rn.TjsonStyleCl;
-
 import com.hurlant.crypto.extra.UUID;
 import com.hurlant.crypto.prng.Random;
 
@@ -34,8 +31,6 @@ using rn.typext.ext.BoolExtender;
 using rn.typext.ext.StringExtender;
 
 class System {
-	public static var ccls:Class<Dynamic> = null;
-	
 	public static var guiSettings:GuiDataInfo;
 	
 	public static var extClsMap:Map<String, WgtPropInfo>; // <class name>, <set of external classes>
@@ -171,13 +166,13 @@ class System {
 		System.guiSettings.gridColor = Std.parseInt(MainWindowInstance.gridColor.text);
 		System.guiSettings.gridBorderSize = Std.parseInt(MainWindowInstance.gridBorderSize.text);
 		
-		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(TJSON.encode(System.guiSettings, new TjsonStyleCl())));
+		(xml == null ? System.frameXml: xml).addChild(Xml.createComment(SuidJson.encode(System.guiSettings)));
 	}
 	
 	public static function getUiSettings (xml:Xml) : GuiDataInfo {
 		for(elem in xml)
 			if (elem.nodeType == Xml.XmlType.Comment)
-				return TJSON.parse(elem.nodeValue);
+				return SuidJson.parse(elem.nodeValue);
 		
 		return null;
 	}
@@ -264,10 +259,16 @@ class System {
 						var binPath:String = Path.join([System.selWgtData.dir, System.selWgtData.bin.neko.escNull()]);
 						
 						if (FileSystem.exists(binPath)) {
-							System.ccls = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, selWgtData.className);
-							untyped System.ccls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
+							#if debug
+								trace("");
+								trace("BinWgt SuperClsPath: ", System.selWgtData.bin.parentClassName);
+								trace("BinWgt SuperClsName: ", Type.getClassName(Type.resolveClass(System.selWgtData.bin.parentClassName)));
+							#end
 							
-							RTXml.regClass(System.ccls);
+							var ccls:Class<Dynamic> = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, selWgtData.className);
+							untyped ccls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
+							
+							RTXml.regClass(ccls);
 						}
 					#end
 				}
@@ -305,6 +306,10 @@ class System {
 					
 					cast(selWgt, Widget).applySkin();
 					targetWgt.addChild(selWgt);
+					
+					#if debug
+						StablexUIMod.applyDefaults(targetWgt);
+					#end
 					
 					var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
 					targetXml.addChild(selXml);
@@ -844,7 +849,29 @@ class System {
 			else
 				dynValue = propInfo.value;
 			
-			Reflect.setProperty(ownerInfo.propOwner, ownerInfo.propName, dynValue);
+			try {
+				Reflect.setProperty(ownerInfo.propOwner, ownerInfo.propName, dynValue);
+			}
+			catch (ex:Dynamic) {
+				#if debug
+					trace("");
+					trace("      owner class: ", Type.getClassName(Type.getClass(ownerInfo.propOwner)));
+					trace("      prop name: ", ownerInfo.propName);
+					trace("");
+					
+					trace("      prop type: ", Type.typeof(Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName)));
+					trace("      prop cls name: ", Type.getClassName(Type.getClass(Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName))));
+					trace("      prop value: ", Reflect.getProperty(ownerInfo.propOwner, ownerInfo.propName));
+					trace("");
+					
+					trace("      new type: ", Type.typeof(dynValue));
+					trace("      new cls name: ", Type.getClassName(Type.getClass(dynValue)));
+					trace("      new value: ", dynValue);
+					trace("");
+				#end
+				
+				throw ex;
+			}
 			
 			owners.push(ownerInfo);
 		}

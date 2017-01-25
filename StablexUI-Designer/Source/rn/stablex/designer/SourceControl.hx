@@ -4,9 +4,6 @@ import sys.io.File;
 import haxe.io.Path;
 import sys.FileSystem;
 
-import tjson.TJSON;
-import rn.TjsonStyleCl;
-
 import ru.stablex.ui.widgets.*;
 
 import rn.typext.hlp.FileSystemHelper;
@@ -91,7 +88,7 @@ class SourceControl {
 					return hxLine;
 				});
 		
-		instLines.insert(sii, '			case "${System.guiSettings.guiName}": ${TJSON.encode(System.guiSettings)}; // $gUuidStr ($gXmlName)');
+		instLines.insert(sii, '			case "${System.guiSettings.guiName}": ${SuidJson.encode(System.guiSettings)}; // $gUuidStr ($gXmlName)');
 		
 		gii++;
 		fli++;

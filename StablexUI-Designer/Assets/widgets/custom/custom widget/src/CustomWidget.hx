@@ -24,23 +24,23 @@ class CustomWidget extends Widget {
 		this.skin = skin;
 	}
 	
-	override public function onCreate() : Void {
+	/*override public function onCreate() : Void {
 		trace('Wgt onCreate');
 		super.onCreate();
 	}
 	override public function free (recursive:Bool = true) : Void {
 		trace('Wgt free');
 		super.free(recursive);
-	}
+	}*/
 	override public function applySkin () : Void {
 		//var d = null;
 		//d.qwe();
-		trace('Wgt applySkin');
+		//trace('Wgt applySkin');
 		trace(this.initialized);
 		trace(this.skin != null);
 		super.applySkin();
 	}
-	override public function applyLayout () : Void {
+	/*override public function applyLayout () : Void {
 		trace('Wgt applyLayout');
 		super.applyLayout();
 	}
@@ -59,5 +59,5 @@ class CustomWidget extends Widget {
 	override public function onResize() : Void {
 		trace('Wgt onResize');
 		super.onResize();
-	}
+	}*/
 }
