@@ -53,7 +53,6 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* [haxe-crypto](https://github.com/soywiz/haxe-crypto)
 	* [haxity](https://github.com/r3d9u11/haxe-haxity)
 	* [systools](https://github.com/waneck/systools)
-	* [tjson](https://github.com/martamius/TJSON)
 	* [typext](https://github.com/r3d9u11/haxe-typext)
 
 ###Install:<br/>

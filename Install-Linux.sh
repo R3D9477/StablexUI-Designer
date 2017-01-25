@@ -53,7 +53,6 @@ echo "y" | haxelib install openfl-samples
 echo "y" | haxelib install openfl-native
 bash -c 'echo "y" | haxelib run openfl setup'
 
-echo "y" | haxelib install tjson
 echo "y" | haxelib install haxe-crypto
 
 echo "y" | haxelib git stablexui https://github.com/RealyUniqueName/StablexUI.git

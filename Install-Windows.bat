@@ -20,7 +20,6 @@ haxelib install openfl-samples
 haxelib install openfl-native
 haxelib run openfl setup
 
-haxelib install tjson
 haxelib install haxe-crypto
 
 haxelib git stablexui https://github.com/RealyUniqueName/StablexUI.git
