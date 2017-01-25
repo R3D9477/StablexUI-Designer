@@ -21,7 +21,7 @@ typedef GuiDataInfo = {
 	var frameTemplate:String;
 	var guiWidth:Float;
 	var guiHeight:Float;
-	var wndBackground:Int;
+	var wndBackground:String;
 	var wndFps:Int;
 	var wndVsync:Bool;
 	var wndBorderless:Bool;

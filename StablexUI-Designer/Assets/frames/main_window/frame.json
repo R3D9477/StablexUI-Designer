@@ -5,7 +5,7 @@
 	"width": 640,
 	"height": 480,
 	
-	"background": 0xFFFFFF,
+	"background": "0xFFFFFF",
 	
 	"vsync": false,
 	"fps": 30,

@@ -84,7 +84,7 @@ class System {
 			guiWidth: 0,
 			guiHeight: 0,
 			
-			wndBackground: 0xFFFFFF,
+			wndBackground: "0xFFFFFF",
 			wndFps: 30,
 			wndVsync: false,
 			wndBorderless: false,
@@ -142,7 +142,7 @@ class System {
 		System.guiSettings.guiWidth = Std.parseInt(MainWindowInstance.guiWidth.text);
 		System.guiSettings.guiHeight = Std.parseInt(MainWindowInstance.guiHeight.text);
 		
-		System.guiSettings.wndBackground = Std.parseInt(MainWindowInstance.wndBackground.text);
+		System.guiSettings.wndBackground = MainWindowInstance.wndBackground.text;
 		System.guiSettings.wndFps = Std.parseInt(MainWindowInstance.wndFps.text);
 		System.guiSettings.wndVsync = MainWindowInstance.wndVsync.selected;
 		System.guiSettings.wndBorderless = MainWindowInstance.wndBorderless.selected;
@@ -215,7 +215,7 @@ class System {
 		if (System.guiSettings.guiHeight > 0)
 			MainWindowInstance.guiHeight.text = Std.string(System.guiSettings.guiHeight);
 		
-		MainWindowInstance.wndBackground.text = '0x${System.guiSettings.wndBackground.hex()}';
+		MainWindowInstance.wndBackground.text = System.guiSettings.wndBackground;
 		MainWindowInstance.wndFps.text = Std.string(System.guiSettings.wndFps);
 		MainWindowInstance.wndVsync.selected = System.guiSettings.wndVsync;
 		MainWindowInstance.wndBorderless.selected = System.guiSettings.wndBorderless;

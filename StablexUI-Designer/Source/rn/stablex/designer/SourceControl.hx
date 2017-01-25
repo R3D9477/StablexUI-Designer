@@ -317,7 +317,7 @@ class SourceControl {
 			x.set("width", Std.string(System.guiSettings.guiWidth));
 			x.set("height", Std.string(System.guiSettings.guiHeight));
 			
-			x.set("background", '#${System.guiSettings.wndBackground.hex()}');
+			x.set("background", System.guiSettings.wndBackground);
 			x.set("fps", Std.string(System.guiSettings.wndFps));
 			x.set("vsync", Std.string(System.guiSettings.wndVsync));
 			x.set("borderless", Std.string(System.guiSettings.wndBorderless));

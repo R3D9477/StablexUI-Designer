@@ -15,7 +15,6 @@
 	<haxelib name="systools"/>
 	<haxelib name="haxity"/>
 	<haxelib name="typext"/>
-	<haxelib name="tjson"/>
 	<haxelib name="haxe-crypto"/>
 	<haxelib name="hscript"/>
 	
