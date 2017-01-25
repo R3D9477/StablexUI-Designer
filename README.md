@@ -54,7 +54,6 @@ Demo-video available [here](https://youtu.be/8SPn3NZE8T4).<br/>
 	* [haxity](https://github.com/r3d9u11/haxe-haxity)
 	* [systools](https://github.com/waneck/systools)
 	* [tjson](https://github.com/martamius/TJSON)
-	* [tjsonStyleCl](https://github.com/r3d9u11/haxe-tjsonStyleCl)
 	* [typext](https://github.com/r3d9u11/haxe-typext)
 
 ###Install:<br/>
