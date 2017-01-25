@@ -93,11 +93,9 @@ class MainWindow extends Sprite {
 		);
 		
 		//-----------------------------------------------------------------------------------------------
-		// initialize system
+		// initialize instance of StableUI-Designer
 		
-		System.resetSettings();
 		MainWindowInstance.setupInstance();
-		StablexUIMod.setRtxmlMod();
 		
 		//-----------------------------------------------------------------------------------------------
 		// root
@@ -294,8 +292,11 @@ class MainWindow extends Sprite {
 		MainWindowInstance.xmlReloadFile.addEventListener(MouseEvent.MOUSE_UP, this.onXmlReloadFile);
 		
 		//-----------------------------------------------------------------------------------------------
-		// initialize RT-system
+		// initialize system
 		
+		System.resetSettings();
+		StablexUIMod.setRtxmlMod();
+		StablexUIMod.setRtxmlBinClasses();
 		HxExpr.init();
 		
 		//-----------------------------------------------------------------------------------------------

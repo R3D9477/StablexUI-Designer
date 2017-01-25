@@ -1,9 +1,19 @@
 package rn.stablex.designer;
 
+#if neko
+	import neko.vm.Loader;
+	import neko.vm.Module;
+#end
+
 import hscript.Interp;
 
 import ru.stablex.ui.*;
 import ru.stablex.ui.widgets.*;
+
+import sys.io.File;
+import haxe.io.Path;
+import sys.FileSystem;
+import rn.typext.hlp.FileSystemHelper;
 
 using Lambda;
 using StringTools;
@@ -125,6 +135,34 @@ class StablexUIMod {
 				cache.cls = RTXml.getImportedClass("Widget");
 				
 				return cache;
+			}
+		});
+	}
+	
+	public static function setRtxmlBinClasses () : Void {
+		FileSystemHelper.iterateFilesTree(Suid.fullPath("widgets"), function (path:String) : Void {
+			if (Path.withoutDirectory(path) == "widget.json") {
+				var wi:WgtInfo = SuidJson.parse(File.getContent(Suid.fullPath(path)));
+				wi.dir = Path.directory(Suid.fullPath(path));
+				
+				if (wi.bin != null) {
+					#if neko
+						var binPath:String = Path.join([wi.dir, wi.bin.neko.escNull()]);
+						
+						if (FileSystem.exists(binPath)) {
+							#if debug
+								trace("");
+								trace("BinWgt SuperClsPath: ", wi.bin.parentClassName);
+								trace("BinWgt SuperClsName: ", Type.getClassName(Type.resolveClass(wi.bin.parentClassName)));
+							#end
+							
+							var ccls:Class<Dynamic> = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, wi.className);
+							untyped ccls.__super__ = Type.resolveClass(wi.bin.parentClassName);
+							
+							RTXml.regClass(ccls);
+						}
+					#end
+				}
 			}
 		});
 	}

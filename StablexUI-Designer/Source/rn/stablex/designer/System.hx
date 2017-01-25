@@ -1,10 +1,5 @@
 package rn.stablex.designer;
 
-#if neko
-	import neko.vm.Loader;
-	import neko.vm.Module;
-#end
-
 import sys.io.File;
 import haxe.io.Path;
 import sys.FileSystem;
@@ -254,25 +249,6 @@ class System {
 		
 		if (System.selWgtData != null)
 			if (FileSystem.exists(System.selWgtData.xml.escNull())) {
-				if (System.selWgtData.bin != null) {
-					#if neko
-						var binPath:String = Path.join([System.selWgtData.dir, System.selWgtData.bin.neko.escNull()]);
-						
-						if (FileSystem.exists(binPath)) {
-							#if debug
-								trace("");
-								trace("BinWgt SuperClsPath: ", System.selWgtData.bin.parentClassName);
-								trace("BinWgt SuperClsName: ", Type.getClassName(Type.resolveClass(System.selWgtData.bin.parentClassName)));
-							#end
-							
-							var ccls:Class<Dynamic> = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, selWgtData.className);
-							untyped ccls.__super__ = Type.resolveClass(System.selWgtData.bin.parentClassName);
-							
-							RTXml.regClass(ccls);
-						}
-					#end
-				}
-				
 				var selXml:Xml = SuidXml.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
 				
 				selWgt = RTXml.buildFn(selXml.toString())();
@@ -306,10 +282,6 @@ class System {
 					
 					cast(selWgt, Widget).applySkin();
 					targetWgt.addChild(selWgt);
-					
-					#if debug
-						StablexUIMod.applyDefaults(targetWgt);
-					#end
 					
 					var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
 					targetXml.addChild(selXml);
