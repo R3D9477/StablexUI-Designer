@@ -253,4 +253,12 @@
 			heightPt="100"
 			skin:Paint-color="0xFFFFFF"/>
 	</Widget>
+	<CustomWidget>
+		<Default
+			w="100"
+			h="100"
+			skin:Paint-color="0x665544"
+			skin:Paint-border="1"
+			skin:Paint-borderColor="0xFFFFFF"/>
+	</CustomWidget>
 </Defaults>
