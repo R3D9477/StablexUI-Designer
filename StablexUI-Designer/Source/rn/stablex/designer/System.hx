@@ -252,7 +252,6 @@ class System {
 				var selXml:Xml = SuidXml.parseXml(File.getContent(System.selWgtData.xml)).firstElement();
 				
 				selWgt = RTXml.buildFn(selXml.toString())();
-				selWgt.applySkin(); // workaround for http://disq.us/p/1crbq7g
 				
 				var dTargetWgt:Dynamic = e.currentTarget;
 				var targetWgt:Widget = cast(dTargetWgt, Widget);
@@ -280,7 +279,6 @@ class System {
 						}
 					}
 					
-					cast(selWgt, Widget).applySkin();
 					targetWgt.addChild(selWgt);
 					
 					var targetXml:Xml = System.wgtUiXmlMap.get(targetWgt);
@@ -288,17 +286,6 @@ class System {
 					
 					System.wgtUiXmlMap.set(selWgt, selXml);
 					System.setupEachWidget(selWgt);
-					
-					if (System.selWgtData.bin != null) {
-						#if neko
-							if (FileSystem.exists(System.selWgtData.bin.neko.escNull())) {
-								var wgtSrc:String = Path.join([System.selWgtData.dir, System.selWgtData.src]);
-								
-								if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
-									SourceControl.wgtSources.push(wgtSrc);
-							}
-						#end
-					}
 					
 					if (!Std.is(e.currentTarget, Box) && !Std.is(e.currentTarget, TabStack)) {
 						System.setWgtProperty(selWgt, "top", Std.string(Std.int(e.localY)));
@@ -414,6 +401,15 @@ class System {
 	public static function setupEachWidget (rWgt:Dynamic) : Void {
 		System.iterateWidgets(rWgt,
 			function (dWgt:Dynamic) {
+				#if debug
+					trace("");
+					trace("setupEachWidget:onBefore");
+					trace("   dWgt class: ", Type.getClassName(Type.getClass(dWgt)));
+					trace("   dWgt super class: ", Type.getClassName(untyped Type.getClass(dWgt).__super__));
+					trace("   dWgt parent class: ", Type.getClassName(Type.getClass(cast(dWgt, Widget).parent)));
+					trace("   dWgt exists: ", System.wgtUiXmlMap.exists(dWgt));
+				#end
+				
 				var wgt:Widget = cast(dWgt, Widget);
 				
 				wgt.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) MainWindowInstance.mainWnd.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_DOWN)));
@@ -486,6 +482,14 @@ class System {
 				}
 			},
 			function (dParentWgt:Dynamic, dChildWgt:Dynamic, cInd:Int) {
+				#if debug
+					trace("");
+					trace("setupEachWidget:onChild");
+					trace("   parent:", Type.getClassName(Type.getClass(dParentWgt)));
+					trace("   child:", Type.getClassName(Type.getClass(dChildWgt)));
+					trace("   cInd:", cInd);
+				#end
+				
 				if (System.wgtUiXmlMap.get(dChildWgt) == null) {
 					var chXml:Xml = System.wgtUiXmlMap.get(dParentWgt).getChildAt(cInd);
 					
@@ -504,86 +508,81 @@ class System {
 	}
 	
 	public static function loadUiFromXml (xml:Xml) : Bool {
-		//try {
-			if (xml.nodeName == "GuiElements") {
-				System.guiElementsWgt = null;
-				System.guiElementsXml = System.guiElementsXml.replaceWith(xml);
-				
-				xml = System.frameXml;
+		if (xml.nodeName == "GuiElements") {
+			System.guiElementsWgt = null;
+			System.guiElementsXml = System.guiElementsXml.replaceWith(xml);
+			
+			xml = System.frameXml;
+		}
+		
+		var savedGuiElemsWgt = (System.guiElementsWgt != null ? System.guiElementsWgt.numChildren > 0 : false) ? System.guiElementsWgt : null;
+		var savedGuiElemsXml = System.guiElementsXml != null ? System.guiElementsXml.clone() : null;
+		
+		if (savedGuiElemsWgt != null)
+			savedGuiElemsWgt.parent.removeChild(savedGuiElemsWgt);
+		
+		MainWindowInstance.wgtMainWndContainer.freeChildren(true);
+		MainWindowInstance.guiWgtsList.options = [ ["", null] ];
+		MainWindowInstance.wgtsPropsLst.freeChildren(true);
+		
+		System.wgtUiXmlMap = new Map<{}, Xml>();
+		
+		var wgtDyn:Dynamic = RTXml.buildFn(SuidXml.printXml(xml, "   "))();
+		
+		if (Type.getClass(wgtDyn) == ru.stablex.ui.widgets.Floating)
+			cast(wgtDyn, Floating).show();
+		
+		System.frameWgt = cast(wgtDyn, Widget);
+		System.frameXml = xml;
+		
+		System.frameWgt.name = System.guiSettings.guiName;
+		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+		
+		if (savedGuiElemsWgt != null && savedGuiElemsXml != null) { // allow to save widgets after frame changed
+			System.guiElementsWgt = savedGuiElemsWgt;
+			
+			var parent:Widget = cast(System.frameWgt.getChild("guiElements").parent, Widget);
+			parent.removeChild(parent.getChild("guiElements"));
+			parent.addChild(System.guiElementsWgt);
+			
+			for (elem in System.guiElementsXml.elements())
+				System.guiElementsXml.removeChild(elem);
+			
+			for (elem in savedGuiElemsXml.elements()) {
+				savedGuiElemsXml.removeChild(elem);
+				System.guiElementsXml.addChild(elem);
 			}
 			
-			var savedGuiElemsWgt = (System.guiElementsWgt != null ? System.guiElementsWgt.numChildren > 0 : false) ? System.guiElementsWgt : null;
-			var savedGuiElemsXml = System.guiElementsXml != null ? System.guiElementsXml.clone() : null;
+			System.guiElementsXml = System.frameXml.getByXpath("//GuiElements").replaceWith(System.guiElementsXml);
+		}
+		else {
+			var geDyn:Dynamic = System.frameWgt.getChild("guiElements");
 			
-			if (savedGuiElemsWgt != null)
-				savedGuiElemsWgt.parent.removeChild(savedGuiElemsWgt);
-			
-			MainWindowInstance.wgtMainWndContainer.freeChildren(true);
-			MainWindowInstance.guiWgtsList.options = [ ["", null] ];
-			MainWindowInstance.wgtsPropsLst.freeChildren(true);
-			
-			System.wgtUiXmlMap = new Map<{}, Xml>();
-			
-			var wgtDyn:Dynamic = RTXml.buildFn(SuidXml.printXml(xml, "   "))();
-			
-			if (Type.getClass(wgtDyn) == ru.stablex.ui.widgets.Floating)
-				cast(wgtDyn, Floating).show();
-			
-			System.frameWgt = cast(wgtDyn, Widget);
-			System.frameXml = xml;
-			
-			System.frameWgt.name = System.guiSettings.guiName;
-			System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
-			
-			if (savedGuiElemsWgt != null && savedGuiElemsXml != null) {
-				System.guiElementsWgt = savedGuiElemsWgt;
-				
-				var parent:Widget = cast(System.frameWgt.getChild("guiElements").parent, Widget);
-				parent.removeChild(parent.getChild("guiElements"));
-				parent.addChild(System.guiElementsWgt);
-				
-				for (elem in System.guiElementsXml.elements())
-					System.guiElementsXml.removeChild(elem);
-				
-				for (elem in savedGuiElemsXml.elements()) {
-					savedGuiElemsXml.removeChild(elem);
-					System.guiElementsXml.addChild(elem);
-				}
-				
-				System.guiElementsXml = System.frameXml.getByXpath("//GuiElements").replaceWith(System.guiElementsXml);
-			}
-			else {
-				var geDyn:Dynamic = System.frameWgt.getChild("guiElements");
-				
-				if (geDyn == null) {
-					geDyn = new GuiElements();
-					System.frameWgt.addChild(geDyn);
-				}
-				
-				System.guiElementsWgt = cast(geDyn, Widget);
-				
-				var geXml:Xml = System.frameXml.getByXpath("//GuiElements");
-				
-				if (geXml == null) {
-					geXml = Xml.createElement("GuiElements");
-					System.frameXml.addChild(geXml);
-				}
-				
-				System.guiElementsXml = geXml;
+			if (geDyn == null) {
+				geDyn = new GuiElements();
+				System.frameWgt.addChild(geDyn);
 			}
 			
-			MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
+			System.guiElementsWgt = cast(geDyn, Widget);
 			
-			System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
-			System.setupEachWidget(System.frameWgt);
-			System.selectWgtFromList(0); // select first widget from list
+			var geXml:Xml = System.frameXml.getByXpath("//GuiElements");
 			
-			MainWindowInstance.xmlSource.text = SuidXml.printXml(System.guiElementsXml, "   ");
-		//}
-		//catch (ex:Dynamic) {
-		//	this.newGuiBtn.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
-		//	return false;
-		//}
+			if (geXml == null) {
+				geXml = Xml.createElement("GuiElements");
+				System.frameXml.addChild(geXml);
+			}
+			
+			System.guiElementsXml = geXml;
+		}
+		
+		MainWindowInstance.wgtMainWndContainer.addChild(System.frameWgt);
+		
+		System.wgtUiXmlMap.set(System.guiElementsWgt, System.guiElementsXml);
+		System.setupEachWidget(System.frameWgt);
+		
+		System.selectWgtFromList(0); // select first widget from list
+		
+		MainWindowInstance.xmlSource.text = SuidXml.printXml(System.guiElementsXml, "   ");
 		
 		return true;
 	}

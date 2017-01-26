@@ -49,11 +49,12 @@ class StablexUIMod {
 	public static function resolveClass (className:String) : Class<Dynamic> {
 		className = StablexUIMod.remapNamespace(className);
 		
-		var resCls:Class<Dynamic> = null;
+		var resCls:Class<Dynamic> = RTXml.imports.get(className);
 		
-		for (nmspc in StablexUIMod.namespaces)
-			if ((resCls = Type.resolveClass(nmspc + className)) != null)
-				break;
+		if (resCls == null)
+			for (nmspc in StablexUIMod.namespaces)
+				if ((resCls = Type.resolveClass(nmspc + className)) != null)
+					break;
 		
 		return resCls;
 	}
@@ -118,6 +119,7 @@ class StablexUIMod {
 				if (wgt.tip != null)
 					StablexUIMod.applyDefaults(wgt.tip);
 				
+				wgt.applySkin(); // needed for binary classes
 				wgt.refresh();
 			}
 		}
@@ -160,6 +162,11 @@ class StablexUIMod {
 							untyped ccls.__super__ = Type.resolveClass(wi.bin.parentClassName);
 							
 							RTXml.regClass(ccls);
+							
+							var wgtSrc:String = Path.join([wi.dir, wi.src]);
+							
+							if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
+								SourceControl.wgtSources.push(wgtSrc);
 						}
 					#end
 				}
