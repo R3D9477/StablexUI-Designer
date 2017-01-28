@@ -8,6 +8,8 @@ using rn.typext.ext.ClassExtender;
 using rn.typext.ext.StringExtender;
 
 class PropertyBuilder {
+	public static var simpleTypes:Array<String> = ["Int", "Float", "Bool", "String"];
+	
 	public static var tmpPpRootCls:Class<Dynamic>;
 	public static var tmpPpCurrCls:Class<Dynamic>;
 	
@@ -98,8 +100,9 @@ class PropertyBuilder {
 			
 			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf)) {
 				var propCls:Class<Dynamic> = System.rttiGetPropertyType(PropertyBuilder.tmpPpCurrCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
+				var propClsName:String = Type.getClassName(propCls);
 				
-				if (propCls != null && propCls != String) {
+				if (!StringExtender.isNullOrEmpty(propClsName) && PropertyBuilder.simpleTypes.indexOf(propClsName) < 0) {
 					PropertyBuilder.tmpPpCurrCls = propCls;
 					PropertyBuilder.rebuildPropTypesList();
 					
