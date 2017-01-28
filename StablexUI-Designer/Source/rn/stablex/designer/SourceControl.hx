@@ -16,6 +16,7 @@ using rn.typext.ext.StringExtender;
 
 class SourceControl {
 	public static var wgtSources:Array<String> = new Array<String>();
+	public static var extClasses:Array<String> = new Array<String>();
 	
 	//-----------------------------------------------------------------------------------------------
 	// instance generation
@@ -50,6 +51,8 @@ class SourceControl {
 		
 		var cli:Int = 0;
 		var sii:Int = -1;
+		var cri:Int = -1;
+		var eri:Int = -1;
 		var gii:Int = -1;
 		var fli:Int = -1;
 		var rli:Int = -1;
@@ -74,6 +77,10 @@ class SourceControl {
 				.map (function (hxLine:String) : String {
 					if (hxLine.indexOf("// switchers of guiSettings") >= 0)
 						sii = cli + 1;
+					else if (hxLine.indexOf("// reg classes") >= 0)
+						cri = cli + 1;
+					else if (hxLine.indexOf("// reg events") >= 0)
+						eri = cli + 1;
 					else if (hxLine.indexOf("// build sources from xml") >= 0)
 						gii = cli + 1;
 					else if (hxLine.indexOf("// fields of instances") >= 0)
@@ -90,10 +97,31 @@ class SourceControl {
 		
 		instLines.insert(sii, '			case "${System.guiSettings.guiName}": ${SuidJson.encode(System.guiSettings)}; // $gUuidStr ($gXmlName)');
 		
+		cri++;
+		eri++;
 		gii++;
 		fli++;
 		rli++;
 		ili++;
+		
+		for (rc in SourceControl.extClasses)
+			for (i in 0...instLines.length) {
+				var cl:String = instLines[cri + i].trim();
+				
+				if (cl.length == 0 || cl == "}") {
+					cl = '		ru.stablex.ui.UIBuilder.regClass("$rc");';
+					instLines.insert(cri + i, cl);
+					
+					eri++;
+					gii++;
+					fli++;
+					rli++;
+					ili++;
+				}
+				
+				if (cl.indexOf('UIBuilder.regClass("$rc")') >= 0)
+					break;
+			}
 		
 		if (!StringExtender.isNullOrEmpty(parentWgtName)) {
 			instLines.insert(gii, '		ru.stablex.ui.UIBuilder.buildClass("${FileSystemHelper.getRelativePath(Path.directory(System.guiSettings.project), System.uiXmlPath)}", "${SourceControl.fileNameToClassName(System.uiXmlPath)}"); // $gUuidStr ($gXmlName)');

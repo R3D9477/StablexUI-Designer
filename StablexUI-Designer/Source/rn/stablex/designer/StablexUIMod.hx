@@ -167,6 +167,9 @@ class StablexUIMod {
 							
 							if (SourceControl.wgtSources.indexOf(wgtSrc) < 0)
 								SourceControl.wgtSources.push(wgtSrc);
+							
+							if (SourceControl.extClasses.indexOf(Type.getClassName(ccls)) < 0)
+								SourceControl.extClasses.push(Type.getClassName(ccls));
 						}
 					#end
 				}
