@@ -473,11 +473,10 @@ class MainWindow extends Sprite {
 	// tab Project
 	
 	function onChangeGuiName (e:WidgetEvent) : Void {
-		if (MainWindowInstance.guiName.text == "")
-			MainWindowInstance.guiName.text = 'main_${MainWindowInstance.mainWnd.name}';
-		
-		System.frameWgt.name = MainWindowInstance.guiName.text;
-		System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+		if (MainWindowInstance.guiName.text > "") {
+			System.frameWgt.name = MainWindowInstance.guiName.text;
+			System.frameXml.set("name", "'" + System.guiSettings.guiName + "'");
+		}
 	}
 	
 	function onChooseParentGuiPath (e:MouseEvent) : Void {
