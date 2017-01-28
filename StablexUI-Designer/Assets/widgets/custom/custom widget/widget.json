@@ -1,0 +1,14 @@
+{
+	"title": "Custom Widget",
+	"xml": "widget.xml",
+	"ico": "ico.png",
+	"className": "CustomWidget",
+	"src": "src",
+	"bin": {
+		"parentClassName": "ru.stablex.ui.widgets.Widget",
+		"neko": "bin/CustomWidget.n"
+	},
+	"properties": [
+		
+	]
+}
