@@ -79,7 +79,7 @@
 			skin:Paint-borderColor="0xFFFFFF">
 			<Text text="'Prototype:'"/>
 			<InputText
-				name="'wgtPropCustom'"
+				name="'wgtPropPrototype'"
 				label-wordWrap="true"
 				skin:Paint-color="0xC0C0C0"
 				skin:Paint-border="1"

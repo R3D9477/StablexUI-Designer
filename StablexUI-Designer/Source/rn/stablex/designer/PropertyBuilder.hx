@@ -98,7 +98,7 @@ class PropertyBuilder {
 			
 			PropertyBuilder.tmpPpBuf += selPropName;
 			
-			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf)) {
+			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf) && !StringExtender.isNullOrEmpty(selPropName)) {
 				var propCls:Class<Dynamic> = System.rttiGetPropertyType(PropertyBuilder.tmpPpCurrCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
 				var propClsName:String = Type.getClassName(propCls);
 				

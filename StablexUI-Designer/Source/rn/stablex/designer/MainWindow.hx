@@ -673,48 +673,52 @@ class MainWindow extends Sprite {
 		e.stopPropagation();
 	}
 	
+	/// property builder
+	
 	function wgtAddPropTypeChanged (e:Event) : Void {
 		MainWindowInstance.wgtPropNamesLst.options = PropertyBuilder.rebuildPropNamesList(MainWindowInstance.wgtPropTypesLst.value);
-		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
+		MainWindowInstance.wgtPropPrototype.text = PropertyBuilder.tmpPpBuf;
 		
-		e.stopPropagation();
+		//e.stopPropagation();
 	}
 	
 	function wgtAddPropNameChanged (e:Event) : Void {
 		if (PropertyBuilder.rebuildPrototype(MainWindowInstance.wgtPropNamesLst.value))
 			MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
 		
-		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
+		MainWindowInstance.wgtPropPrototype.text = PropertyBuilder.tmpPpBuf;
 		
-		e.stopPropagation();
+		//e.stopPropagation();
 	}
 	
 	function wgtAddPropRefresh (e:MouseEvent) : Void {
-		PropertyBuilder.refreshPrototype(MainWindowInstance.wgtPropCustom.text);
+		PropertyBuilder.refreshPrototype(MainWindowInstance.wgtPropPrototype.text);
 		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
-		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
+		MainWindowInstance.wgtPropPrototype.text = PropertyBuilder.tmpPpBuf;
 		
-		e.stopPropagation();
+		//e.stopPropagation();
 	}
 	
 	function wgtAddPropBack (e:MouseEvent) : Void {
 		PropertyBuilder.backPrototype();
 		MainWindowInstance.wgtPropTypesLst.options = PropertyBuilder.propTypesList;
-		MainWindowInstance.wgtPropCustom.text = PropertyBuilder.tmpPpBuf;
+		MainWindowInstance.wgtPropPrototype.text = PropertyBuilder.tmpPpBuf;
 		
-		e.stopPropagation();
+		//e.stopPropagation();
 	}
 	
+	///
+	
 	function wgtAddPropBtnClick (e:MouseEvent) : Void {
-		if (System.selWgt != null && !StringExtender.isNullOrEmpty(MainWindowInstance.wgtPropCustom.text)) {
-			var prop:Dynamic = Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropCustom.text);
+		if (System.selWgt != null && !StringExtender.isNullOrEmpty(MainWindowInstance.wgtPropPrototype.text)) {
+			var prop:Dynamic = Reflect.getProperty(System.selWgt, MainWindowInstance.wgtPropPrototype.text);
 			var value:String = Std.string(prop).replace(",", ".");
 			
 			if (Std.is(prop, String))
 				value = "'" + value + "'";
 			
-			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropCustom.text, value);
-			System.addPropRow(MainWindowInstance.wgtPropCustom.text, value);
+			System.wgtUiXmlMap.get(System.selWgt).set(MainWindowInstance.wgtPropPrototype.text, value);
+			System.addPropRow(MainWindowInstance.wgtPropPrototype.text, value);
 		}
 		
 		e.stopPropagation();

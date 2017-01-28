@@ -96,7 +96,7 @@ class MainWindowInstance {
 	public static var wgtPropNamesLst:Options;
 	public static var wgtAddPropRefresh:Button;
 	public static var wgtAddPropBack:Button;
-	public static var wgtPropCustom:InputText;
+	public static var wgtPropPrototype:InputText;
 	public static var wgtAddPropBtn:Button;
 	
 	public static var wgtEditPropWnd:Floating;
@@ -200,7 +200,7 @@ class MainWindowInstance {
 		MainWindowInstance.wgtPropNamesLst = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropNamesLst"), Options);
 		MainWindowInstance.wgtAddPropRefresh = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropRefresh"), Button);
 		MainWindowInstance.wgtAddPropBack = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropBack"), Button);
-		MainWindowInstance.wgtPropCustom = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropCustom"), InputText);
+		MainWindowInstance.wgtPropPrototype = cast(MainWindowInstance.wgtPropWnd.getChild("wgtPropPrototype"), InputText);
 		MainWindowInstance.wgtAddPropBtn = cast(MainWindowInstance.wgtPropWnd.getChild("wgtAddPropBtn"), Button);
 		
 		MainWindowInstance.wgtEditPropWnd = UIBuilder.buildFn("XmlGui/EditPropWindow.xml")();
