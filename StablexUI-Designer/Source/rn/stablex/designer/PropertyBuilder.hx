@@ -61,6 +61,9 @@ class PropertyBuilder {
 	}
 	
 	public static function rebuildPropNamesList (typeName:String) : Array<Array<String>> {
+		if (!StringExtender.isNullOrEmpty(typeName))
+			PropertyBuilder.tmpPpCurrCls = StablexUIMod.resolveClass(typeName);
+		
 		if (PropertyBuilder.tmpPpBufRmType)
 			PropertyBuilder.tmpPpBuf = PropertyBuilder.removeLastType(PropertyBuilder.tmpPpBuf);
 		
@@ -100,6 +103,7 @@ class PropertyBuilder {
 			
 			if (!StringExtender.isNullOrEmpty(PropertyBuilder.tmpPpBuf) && !StringExtender.isNullOrEmpty(selPropName)) {
 				var propCls:Class<Dynamic> = System.rttiGetPropertyType(PropertyBuilder.tmpPpCurrCls, PropertyBuilder.tmpPpBuf); // must be used RTTI, becuse property can be null (without Class)
+				
 				var propClsName:String = Type.getClassName(propCls);
 				
 				if (!StringExtender.isNullOrEmpty(propClsName) && PropertyBuilder.simpleTypes.indexOf(propClsName) < 0) {
