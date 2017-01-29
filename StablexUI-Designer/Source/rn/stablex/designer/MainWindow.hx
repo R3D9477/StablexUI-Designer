@@ -395,7 +395,12 @@ class MainWindow extends Sprite {
 	}
 	
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
-		var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
+		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
+		
+		if (StringExtender.isNullOrEmpty(System.guiSettings.guiName)) {
+			Haxity.error("Save UI", "The root widget must be named!");
+			return;
+		}
 		
 		var saveFunc:String->Void = function (sFile:String) {
 			if (!StringExtender.isNullOrEmpty(sFile)) {
@@ -551,8 +556,12 @@ class MainWindow extends Sprite {
 		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
 		var oFile:String = Haxity.saveFile("Select instance file");
 		
-		if (!StringExtender.isNullOrEmpty(oFile))
+		if (!StringExtender.isNullOrEmpty(oFile)) {
+			if (Path.extension(oFile).toLowerCase() != "hx")
+				oFile += ".xml";
+			
 			MainWindowInstance.guiInstancePath.text = Suid.escPath(oFile);
+		}
 	}
 	
 	function onChangeInstancePath (e:WidgetEvent) : Void {
