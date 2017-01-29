@@ -397,7 +397,7 @@ class MainWindow extends Sprite {
 	function onSaveXmlBtnClick (e:MouseEvent) : Void {
 		//var defDir:String = Path.removeTrailingSlashes(StringExtender.isNullOrEmpty(System.uiDirPath) ? this.origCwd : System.uiDirPath);
 		
-		if (StringExtender.isNullOrEmpty(System.guiSettings.guiName)) {
+		if (StringExtender.isNullOrEmpty(MainWindowInstance.guiName.text)) {
 			Haxity.error("Save UI", "The root widget must be named!");
 			return;
 		}
@@ -536,7 +536,7 @@ class MainWindow extends Sprite {
 				MainWindowInstance.guiInstancePath.text = Path.join([
 					firstSrc,
 					Path.join(projXml.getByXpath("//project/app").get("main").split(".").slice(0, -1)),
-					MainWindowInstance.guiName.text.toTitleCase() + "Instance.hx"
+					"UI.hx"
 				]);
 				
 				MainWindowInstance.wgtMakeUiInst.selected = true;
