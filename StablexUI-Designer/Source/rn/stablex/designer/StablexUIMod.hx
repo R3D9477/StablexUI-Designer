@@ -152,13 +152,18 @@ class StablexUIMod {
 						var binPath:String = Path.join([wi.dir, wi.bin.neko.escNull()]);
 						
 						if (FileSystem.exists(binPath)) {
+							var cl:Dynamic = Loader.local().loadModule(binPath).exportsTable().__classes;
+							
 							#if debug
 								trace("");
 								trace("BinWgt SuperClsPath: ", wi.bin.parentClassName);
 								trace("BinWgt SuperClsName: ", Type.getClassName(Type.resolveClass(wi.bin.parentClassName)));
 							#end
 							
-							var ccls:Class<Dynamic> = Reflect.field(Loader.local().loadModule(binPath).exportsTable().__classes, wi.className);
+							for (cn in wi.className.split("."))
+								cl = Reflect.field(cl,cn);
+							
+							var ccls:Class<Dynamic> = cast(cl, Class<Dynamic>);
 							untyped ccls.__super__ = Type.resolveClass(wi.bin.parentClassName);
 							
 							RTXml.regClass(ccls);
