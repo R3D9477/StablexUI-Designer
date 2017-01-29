@@ -1,4 +1,4 @@
-package;
+package rn.stablex.widgets;
 
 import ru.stablex.ui.*;
 import ru.stablex.ui.skins.*;

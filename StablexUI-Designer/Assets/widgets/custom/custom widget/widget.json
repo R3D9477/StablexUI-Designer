@@ -2,7 +2,7 @@
 	"title": "Custom Widget",
 	"xml": "widget.xml",
 	"ico": "ico.png",
-	"className": "CustomWidget",
+	"className": "rn.stablex.widgets.CustomWidget",
 	"src": "src",
 	"bin": {
 		"parentClassName": "ru.stablex.ui.widgets.Widget",
