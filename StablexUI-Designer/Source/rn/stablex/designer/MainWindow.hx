@@ -171,8 +171,8 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// on change main window size
 		
-		MainWindowInstance.guiWidth.addEventListener(WidgetEvent.CHANGE, this.onChangeMainWindowSize);
-		MainWindowInstance.guiHeight.addEventListener(WidgetEvent.CHANGE, this.onChangeMainWindowSize);
+		MainWindowInstance.guiWidth.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeMainWindowSize);
+		MainWindowInstance.guiHeight.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeMainWindowSize);
 		
 		//-----------------------------------------------------------------------------------------------
 		// load suits
@@ -280,10 +280,10 @@ class MainWindow extends Sprite {
 		if (MainWindowInstance.xmlSource.label.multiline)
 			MainWindowInstance.xmlSource.addEventListener(KeyboardEvent.KEY_UP, this.onXmlSourceChange);
 		
-		MainWindowInstance.xmlSource.addEventListener(MouseEvent.CLICK, function (e:MouseEvent) e.stopPropagation());
-		MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_UP, function (e:MouseEvent) e.stopPropagation());
-		MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) e.stopPropagation());
-		MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_MOVE, function (e:MouseEvent) e.stopPropagation());
+		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.CLICK, function (e:MouseEvent) e.stopPropagation());
+		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_UP, function (e:MouseEvent) e.stopPropagation());
+		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) e.stopPropagation());
+		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_MOVE, function (e:MouseEvent) e.stopPropagation());
 		
 		MainWindowInstance.xmlSource.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_UP));
 		
@@ -321,17 +321,10 @@ class MainWindow extends Sprite {
 		//-----------------------------------------------------------------------------------------------
 		// addition events for tab:Project
 		
-		MainWindowInstance.guiName.addEventListener(Event.CHANGE, this.onChangeGuiName);
-		MainWindowInstance.guiName.addEventListener(WidgetEvent.CHANGE, this.onChangeGuiName);
-		
-		MainWindowInstance.projectPath.addEventListener(Event.CHANGE, this.onChangeOpenflProject);
-		MainWindowInstance.projectPath.addEventListener(WidgetEvent.CHANGE, this.onChangeOpenflProject);
-		
-		MainWindowInstance.parentGuiPath.addEventListener(Event.CHANGE, this.onChangeParentGuiPath);
-		MainWindowInstance.parentGuiPath.addEventListener(WidgetEvent.CHANGE, this.onChangeParentGuiPath);
-		
-		MainWindowInstance.guiInstancePath.addEventListener(Event.CHANGE, this.onChangeInstancePath);
-		MainWindowInstance.guiInstancePath.addEventListener(WidgetEvent.CHANGE, this.onChangeInstancePath);
+		MainWindowInstance.guiName.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeGuiName);
+		MainWindowInstance.projectPath.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeOpenflProject);
+		MainWindowInstance.parentGuiPath.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeParentGuiPath);
+		MainWindowInstance.guiInstancePath.addEventListener(WidgetEvent.TEXT_CHANGE, this.onChangeInstancePath);
 		
 		//-----------------------------------------------------------------------------------------------
 		// refresh settings after load
