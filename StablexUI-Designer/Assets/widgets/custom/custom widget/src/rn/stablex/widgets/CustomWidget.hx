@@ -73,6 +73,9 @@ class CustomWidget extends Widget {
 		trace("CustomWidget:onParentResize");
 		trace('target: ${Type.getClassName(Type.getClass(e.currentTarget))}');
 		
+		// Warning, e.currentTarget can't be casted to <CustomWindget.n>.Widget!
+		// Because for neko (ru.stablex.ui.widgets.Widget from module CustomWindget.n) != (ru.stablex.ui.widgets.Widget from module of object "e.currentTarget")
+		
 		super.applySkin();
 		
 		//...
