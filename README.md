@@ -21,7 +21,7 @@ Demo video and other information is available in a [wiki](https://github.com/r3d
 	* allow to use an alignment of widgets to grid
 * customizing
 	* allow to use custom templates of frame (root widget)
-	* allow to use custom widgets
+	* allow to use [custom widgets](StablexUI-Designer/Assets/widgets/custom/custom widget/src/rn/stablex/widgets/CustomWidget.hx)
 	* allow to use custom [skins](http://ui.stablex.ru/doc/#manual/06_Skin_system.html)
 	* allow to use custom [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html)
 * easy integration with [openfl/lime project](http://www.openfl.org/learn/docs/command-line-tools/project-files/xml-format/)
