@@ -9,7 +9,7 @@ Demo video, information for users and developers is available in a [wiki](https:
 	* build a new gui
 	* load existing gui from [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 	* save gui to [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
-* themes
+* appearance
 	* select [defaults](http://ui.stablex.ru/doc/#manual/07_Presets(Defaults).html) from [collection](StablexUI-Designer/Assets/presets) "on the fly"
 * window's settings
 	* select the frame (root widget) of the current window from [collection](StablexUI-Designer/Assets/frames) "on the fly"
