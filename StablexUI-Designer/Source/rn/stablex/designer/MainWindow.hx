@@ -276,15 +276,7 @@ class MainWindow extends Sprite {
 		// xml source
 		
 		MainWindowInstance.xmlSource.parent.addEventListener(WidgetEvent.RESIZE, this.onXmlSourceResize);
-		
-		if (MainWindowInstance.xmlSource.label.multiline)
-			MainWindowInstance.xmlSource.addEventListener(KeyboardEvent.KEY_UP, this.onXmlSourceChange);
-		
-		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.CLICK, function (e:MouseEvent) e.stopPropagation());
-		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_UP, function (e:MouseEvent) e.stopPropagation());
-		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_DOWN, function (e:MouseEvent) e.stopPropagation());
-		//MainWindowInstance.xmlSource.addEventListener(MouseEvent.MOUSE_MOVE, function (e:MouseEvent) e.stopPropagation());
-		
+		MainWindowInstance.xmlSource.addEventListener(KeyboardEvent.KEY_UP, this.onXmlSourceChange);
 		MainWindowInstance.xmlSource.dispatchEvent(new KeyboardEvent(KeyboardEvent.KEY_UP));
 		
 		MainWindowInstance.xmlWrap.addEventListener(MouseEvent.CLICK, this.onXmlWrapChange);

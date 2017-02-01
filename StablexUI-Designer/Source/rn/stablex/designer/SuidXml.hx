@@ -10,8 +10,8 @@ class SuidXml {
 	// additional xml-functions & workarounds for TextField
 	
 	public static function parseXml (xmlStr:String) : Xml
-		return Xml.parse((~/^ +</gm).replace((~/^	+</gm).replace(xmlStr, "<"), "<").replace("\n", ""));
+		return Xml.parse((~/^ +</gm).replace((~/^	+</gm).replace(xmlStr, "<"), "<").replace("\n", "").htmlUnescape());
 	
 	public static function printXml (xml:Xml, indent:String) : String
-		return Printer.print(xml, true).replace(">", ">\n").replace("	", indent).replace("   ", indent);
+		return Printer.print(xml, true).replace(">", ">\n").replace("	", indent).replace("   ", indent).htmlUnescape();
 }
