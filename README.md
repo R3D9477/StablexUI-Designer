@@ -54,6 +54,7 @@ Demo video, information for users and developers is available in a [wiki](https:
 	* [typext](https://github.com/r3d9u11/haxe-typext)
 
 ###Install:<br/>
+<br/>
 WARNING! The automatic installation will upgrade your stuff to latest version of packages!<br/>
 
 #####Ubuntu-based Linux (one-command installation):<br/>
