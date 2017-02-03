@@ -365,30 +365,31 @@ class SourceControl {
 		var exists:Bool = false;
 		
 		for (x in projXml.iterator())
-			if (x.nodeName == "window") {
-				var valid:Bool = true;
-				
-				if (x.exists("if"))
-					valid = x.get("if").indexOf("flash") < 0 && x.get("if").indexOf("html5") < 0;
-				
-				x.remove("background");
-				x.remove("fps");
-				x.remove("vsync");
-				x.remove("borderless");
-				x.remove("resizable");
-				x.remove("fullscreen");
-				x.remove("hardware");
-				x.remove("allow-shaders");
-				x.remove("require-shaders");
-				x.remove("depth-buffer");
-				x.remove("stencil-buffer");
-				x.remove("orientation");
-				
-				if (valid && (x.exists("width") || x.exists("height"))) {
-					setWndInfo(x);
-					exists = true;
+			if (x.nodeType == Xml.XmlType.Element)
+				if (x.nodeName == "window") {
+					var valid:Bool = true;
+					
+					if (x.exists("if"))
+						valid = x.get("if").indexOf("flash") < 0 && x.get("if").indexOf("html5") < 0;
+					
+					x.remove("background");
+					x.remove("fps");
+					x.remove("vsync");
+					x.remove("borderless");
+					x.remove("resizable");
+					x.remove("fullscreen");
+					x.remove("hardware");
+					x.remove("allow-shaders");
+					x.remove("require-shaders");
+					x.remove("depth-buffer");
+					x.remove("stencil-buffer");
+					x.remove("orientation");
+					
+					if (valid && (x.exists("width") || x.exists("height"))) {
+						setWndInfo(x);
+						exists = true;
+					}
 				}
-			}
 		
 		if (!exists) {
 			var sx:Xml = Xml.createElement("window");
