@@ -107,7 +107,8 @@ echo "PLATFORM = ${PLATFORM}"
 echo "TARGET = ${TARGET}"
 echo "OUTDIR = ${OUTDIR}"
 
-cd "./StablexUI-Designer/StablexUI-Designer"
-rm -rf "./Export"
+cd "./StablexUI-Designer/StablexUI-Designer/Assets/widgets/custom/custom widget"
+haxe compile.hxml
 
+cd "../../../StablexUI-Designer/StablexUI-Designer"
 openfl test linux -$PLATFORM -$TARGET
