@@ -43,5 +43,5 @@ git clone https://github.com/r3d9u11/StablexUI-Designer.git
 cd ".\StablexUI-Designer\StablexUI-Designer\Assets\widgets\custom\custom widget"
 haxe compile.hxml
 
-cd "..\..\..\StablexUI-Designer\StablexUI-Designer"
+cd "..\..\..\.."
 openfl test windows -neko
