@@ -31,16 +31,10 @@ haxelib -notimeout git typext https://github.com/r3d9u11/haxe-typext.git
 haxelib -notimeout git dataTree https://github.com/r3d9u11/haxe-dataTree.git
 
 ::::::::::::::::::::::::::::::::::::::::
-:: DOWNLOAD LATEST STABLEXUI-DESIGNER ::
-::::::::::::::::::::::::::::::::::::::::
-
-git clone https://github.com/r3d9u11/StablexUI-Designer.git
-
-::::::::::::::::::::::::::::::::::::::::
 :: COMPILE AND RUN STABLEXUI-DESIGNER ::
 ::::::::::::::::::::::::::::::::::::::::
 
-cd ".\StablexUI-Designer\StablexUI-Designer\Assets\widgets\custom\custom widget"
+cd ".\StablexUI-Designer\Assets\widgets\custom\custom widget"
 haxe compile.hxml
 
 cd "..\..\..\.."
