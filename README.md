@@ -66,5 +66,5 @@ curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/Stab
 * download and install [git-tools](https://git-scm.com/download/win)
 * download and install [zenity](https://github.com/kvaps/zenity-windows/#downloads)
 * download and install [haxe](https://haxe.org/download/)
-* clone this repo: `git clone https://github.com/r3d9u11/StablexUI-Designer`
+* clone this repo: `git clone https://github.com/r3d9u11/StablexUI-Designer.git`
 * go to directory `StablexUI-Designer` and run `Install-Windows.bat`
