@@ -4,7 +4,7 @@ StablexUI-Designer
 Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) library [StablexUI](https://github.com/RealyUniqueName/StablexUI).<br/>
 [Quick Start](https://github.com/r3d9u11/StablexUI-Designer/wiki/Quick-Start) and other information for [users](https://github.com/r3d9u11/StablexUI-Designer/wiki/User's-Guide) and [developers](https://github.com/r3d9u11/StablexUI-Designer/wiki/Developer's-Guide) is available in a [wiki](https://github.com/r3d9u11/StablexUI-Designer/wiki).
 
-###Current features:<br/>
+### Current features:<br/>
 * generic
 	* build a new gui
 	* load existing gui from [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
@@ -34,11 +34,11 @@ Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_u
 	* allow to run saved [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html) in external editor "on the fly"
 	* allow to force reload from saved [xml-file](http://ui.stablex.ru/doc/#manual/12_XML_based_classes.html)
 
-###Available targets:<br/>
+### Available targets:<br/>
 * [neko](http://haxe.org/doc/start/neko)
 * [cpp](http://haxe.org/doc/start/cpp) (restricted)
 
-###Requirements:<br/>
+### Requirements:<br/>
 * [git-tools](https://git-scm.com/downloads)
 * [haxe](https://haxe.org) 3.2.1 or later
 * [neko-vm](http://nekovm.org) 2.1.0 or later
@@ -53,16 +53,16 @@ Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_u
 	* [systools](https://github.com/waneck/systools)
 	* [typext](https://github.com/r3d9u11/haxe-typext)
 
-###Install:<br/>
+### Install:<br/>
 > WARNING! The automatic installation will upgrade your stuff to latest version of packages!
 
-#####Ubuntu-based Linux (one-command installation):<br/>
+##### Ubuntu-based Linux (one-command installation):<br/>
 * run command in terminal:
 ```bash
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/StablexUI-Designer/master/Install-Linux.sh | bash
 ```
 
-#####Windows:<br/>
+##### Windows:<br/>
 * download and install [git-tools](https://git-scm.com/download/win)
 * download and install [zenity](https://github.com/kvaps/zenity-windows/#downloads)
 * download and install [haxe](https://haxe.org/download/)
