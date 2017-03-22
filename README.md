@@ -1,5 +1,5 @@
 StablexUI-Designer
-=========================
+==========================
 
 Graphical designer (builder) for [GUI](https://en.wikipedia.org/wiki/Graphical_user_interface) library [StablexUI](https://github.com/RealyUniqueName/StablexUI).<br/>
 [Quick Start](https://github.com/r3d9u11/StablexUI-Designer/wiki/Quick-Start) and other information for [users](https://github.com/r3d9u11/StablexUI-Designer/wiki/User's-Guide) and [developers](https://github.com/r3d9u11/StablexUI-Designer/wiki/Developer's-Guide) is available in a [wiki](https://github.com/r3d9u11/StablexUI-Designer/wiki).
