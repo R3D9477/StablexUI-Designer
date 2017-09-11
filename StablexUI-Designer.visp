@@ -104,7 +104,7 @@
 			⦑ custom ⦒
 				⦑ custom widget ⦒
 					⦑ bin ⦒
-						 CustomWidget.n
+						  CustomWidget.n
 					⦑ src ⦒
 						⦑ rn ⦒
 							⦑ stablex ⦒
@@ -212,232 +212,232 @@
 	⦑ Export ⦒
 		⦑ linux64 ⦒
 			⦑ neko ⦒
-				⦑ debug ⦒
-					⦑ bin ⦒
-						⦑ extcls ⦒
-							 BitmapFilter.json
-							 BitmapFilterQuality.json
-							 BitmapFilterType.json
-							 BlurFilter.json
-							 ColorMatrixFilter.json
-							 DropShadowFilter.json
-							 GlowFilter.json
-							 TextField.json
-							 TextFormat.json
-						⦑ fonts ⦒
-							 DejaVuSans.ttf
-							 source.url
-						⦑ frames ⦒
-							⦑ child_window ⦒
-								 frame.json
-								 frame.xml
-							⦑ main_window ⦒
-								 frame.json
-								 frame.xml
-							⦑ widgets_section ⦒
-								 frame.json
-								 frame.xml
-						⦑ graphics ⦒
-							⦑ tools ⦒
-								 check_down.png
-								 check_up.png
-								 delete.png
-								 load.png
-								 new.png
-								 radio_down.png
-								 radio_up.png
-								 save.png
-								 select.png
-						⦑ instances ⦒
-							 Default.hx
-						⦑ presets ⦒
-							⦑ dark ⦒
-								⦑ img ⦒
-									 checkbox_checked.png
-									 checkbox_unchecked.png
-									 radio_selected.png
-									 radio_unselected.png
-									 statebutton_state1.png
-									 statebutton_state2.png
-									 statebutton_state3.png
-									 toggle_off.png
-									 toggle_on.png
-								 dark.xml
-								 preset.json
-							⦑ default ⦒
-								⦑ img ⦒
-									 checkbox_checked.png
-									 checkbox_unchecked.png
-									 radio_selected.png
-									 radio_unselected.png
-									 statebutton_state1.png
-									 statebutton_state2.png
-									 statebutton_state3.png
-									 toggle_off.png
-									 toggle_on.png
-								 default.xml
-								 preset.json
-						⦑ skins ⦒
-							⦑ aswing ⦒
-								 skin.json
-							⦑ gradient ⦒
-								 skin.json
-							⦑ img ⦒
-								 skin.json
-							⦑ layer ⦒
-								 skin.json
-							⦑ paint ⦒
-								 skin.json
-							⦑ rect ⦒
-								 skin.json
-							⦑ skin ⦒
-								 skin.json
-							⦑ slice3 ⦒
-								 skin.json
-							⦑ slice9 ⦒
-								 skin.json
-							⦑ textFormat ⦒
-								 skin.json
-							⦑ tile ⦒
-								 skin.json
-							⦑ tiledSlice3 ⦒
-								 skin.json
-							⦑ tiledSlice9 ⦒
-								 skin.json
-						⦑ suits ⦒
-							⦑ default containers ⦒
-								 suit.json
-								 suit.xml
-							⦑ default indicators ⦒
-								 suit.json
-								 suit.xml
-							⦑ default inputs ⦒
-								 suit.json
-								 suit.xml
-						⦑ widgets ⦒
-							⦑ custom ⦒
-								⦑ custom widget ⦒
-									⦑ bin ⦒
-										 CustomWidget.n
-									⦑ src ⦒
-										⦑ rn ⦒
-											⦑ stablex ⦒
-												⦑ widgets ⦒
-													 CustomWidget.hx
-									 compile.hxml
-									 ico.png
-									 widget.json
-									 widget.xml
-							⦑ default containers ⦒
-								⦑ box ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ floating ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ hbox ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ scroll ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ tabpage ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ tabstack ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ vbox ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ viewstack ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ widget ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-							⦑ default indicators ⦒
-								⦑ clock ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ progress ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ text ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ tip ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-							⦑ default inputs ⦒
-								⦑ bmp ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ button ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ checkbox ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ input text ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ options ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ radio ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ slider ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ statebutton ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ switch ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-								⦑ toggle ⦒
-									 ico.png
-									 widget.json
-									 widget.xml
-						 GuiElements.xml
-						 StablexUI-Designer
-						 StablexUI-Designer.json
-						 lime.ndll
-						 manifest
-						 systools.ndll
-					⦑ haxe ⦒
-						 ApplicationMain.hx
-						 DefaultAssetLibrary.hx
-						 debug.hxml
-						 final.hxml
-						 release.hxml
-					⦑ obj ⦒
-						 ApplicationMain
-						 ApplicationMain.n
+				⦑  debug ⦒
+					⦑  bin ⦒
+						⦑  extcls ⦒
+							  BitmapFilter.json
+							  BitmapFilterQuality.json
+							  BitmapFilterType.json
+							  BlurFilter.json
+							  ColorMatrixFilter.json
+							  DropShadowFilter.json
+							  GlowFilter.json
+							  TextField.json
+							  TextFormat.json
+						⦑  fonts ⦒
+							  DejaVuSans.ttf
+							  source.url
+						⦑  frames ⦒
+							⦑  child_window ⦒
+								  frame.json
+								  frame.xml
+							⦑  main_window ⦒
+								  frame.json
+								  frame.xml
+							⦑  widgets_section ⦒
+								  frame.json
+								  frame.xml
+						⦑  graphics ⦒
+							⦑  tools ⦒
+								  check_down.png
+								  check_up.png
+								  delete.png
+								  load.png
+								  new.png
+								  radio_down.png
+								  radio_up.png
+								  save.png
+								  select.png
+						⦑  instances ⦒
+							  Default.hx
+						⦑  presets ⦒
+							⦑  dark ⦒
+								⦑  img ⦒
+									  checkbox_checked.png
+									  checkbox_unchecked.png
+									  radio_selected.png
+									  radio_unselected.png
+									  statebutton_state1.png
+									  statebutton_state2.png
+									  statebutton_state3.png
+									  toggle_off.png
+									  toggle_on.png
+								  dark.xml
+								  preset.json
+							⦑  default ⦒
+								⦑  img ⦒
+									  checkbox_checked.png
+									  checkbox_unchecked.png
+									  radio_selected.png
+									  radio_unselected.png
+									  statebutton_state1.png
+									  statebutton_state2.png
+									  statebutton_state3.png
+									  toggle_off.png
+									  toggle_on.png
+								  default.xml
+								  preset.json
+						⦑  skins ⦒
+							⦑  aswing ⦒
+								  skin.json
+							⦑  gradient ⦒
+								  skin.json
+							⦑  img ⦒
+								  skin.json
+							⦑  layer ⦒
+								  skin.json
+							⦑  paint ⦒
+								  skin.json
+							⦑  rect ⦒
+								  skin.json
+							⦑  skin ⦒
+								  skin.json
+							⦑  slice3 ⦒
+								  skin.json
+							⦑  slice9 ⦒
+								  skin.json
+							⦑  textFormat ⦒
+								  skin.json
+							⦑  tile ⦒
+								  skin.json
+							⦑  tiledSlice3 ⦒
+								  skin.json
+							⦑  tiledSlice9 ⦒
+								  skin.json
+						⦑  suits ⦒
+							⦑  default containers ⦒
+								  suit.json
+								  suit.xml
+							⦑  default indicators ⦒
+								  suit.json
+								  suit.xml
+							⦑  default inputs ⦒
+								  suit.json
+								  suit.xml
+						⦑  widgets ⦒
+							⦑  custom ⦒
+								⦑  custom widget ⦒
+									⦑  bin ⦒
+										  CustomWidget.n
+									⦑  src ⦒
+										⦑  rn ⦒
+											⦑  stablex ⦒
+												⦑  widgets ⦒
+													  CustomWidget.hx
+									  compile.hxml
+									  ico.png
+									  widget.json
+									  widget.xml
+							⦑  default containers ⦒
+								⦑  box ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  floating ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  hbox ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  scroll ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  tabpage ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  tabstack ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  vbox ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  viewstack ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  widget ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+							⦑  default indicators ⦒
+								⦑  clock ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  progress ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  text ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  tip ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+							⦑  default inputs ⦒
+								⦑  bmp ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  button ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  checkbox ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  input text ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  options ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  radio ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  slider ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  statebutton ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  switch ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+								⦑  toggle ⦒
+									  ico.png
+									  widget.json
+									  widget.xml
+						  GuiElements.xml
+						  StablexUI-Designer
+						  StablexUI-Designer.json
+						  lime.ndll
+						  manifest
+						  systools.ndll
+					⦑  haxe ⦒
+						  ApplicationMain.hx
+						  DefaultAssetLibrary.hx
+						  debug.hxml
+						  final.hxml
+						  release.hxml
+					⦑  obj ⦒
+						  ApplicationMain
+						  ApplicationMain.n
 				⦑ release ⦒
 					⦑ bin ⦒
 						⦑ extcls ⦒
@@ -543,8 +543,8 @@
 						⦑ widgets ⦒
 							⦑ custom ⦒
 								⦑ custom widget ⦒
-									⦑ bin ⦒
-										 CustomWidget.n
+									⦑  bin ⦒
+										  CustomWidget.n
 									⦑ src ⦒
 										⦑ rn ⦒
 											⦑ stablex ⦒
@@ -657,7 +657,7 @@
 						 systools.ndll
 					⦑ haxe ⦒
 						 ApplicationMain.hx
-						 DefaultAssetLibrary.hx
+						  DefaultAssetLibrary.hx
 						 debug.hxml
 						 final.hxml
 						 release.hxml
