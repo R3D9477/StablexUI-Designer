@@ -68,3 +68,8 @@ curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/r3d9u11/Stab
 * download and install [haxe](https://haxe.org/download/)
 * clone this repo: `git clone https://github.com/r3d9u11/StablexUI-Designer.git`
 * go to directory `StablexUI-Designer` and run `Install-Windows.bat`
+
+---
+
+### If you like that repo, you can support me, I'm really appreciate it :heart:
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R3D9477)
